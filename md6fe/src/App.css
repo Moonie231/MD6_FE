@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+.btn-user {
+  border-radius: 5px;
+  background-color: #b41212;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  font-family:"Montserrat", sans-serif;
+}
+
+.btn-user:hover {
+  background-color: #16a085;
+}
