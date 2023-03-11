@@ -2,8 +2,6 @@ export default function Home(){
     return(
         <>
             <body>
-
-
             <section className="hero">
                 <div className="">
                     <div className="hero__item set-bg" style={{backgroundImage:'url(img/hero/hero-1.jpg)'}}>

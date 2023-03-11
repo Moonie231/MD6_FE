@@ -8,8 +8,7 @@ import Register from "./Page/merchant/register";
 function App() {
   return (
 <>
-  <Header></Header>
-  <Footer></Footer>
+  <Home></Home>
 </>
   );
 }
