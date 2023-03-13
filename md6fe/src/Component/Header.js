@@ -11,10 +11,6 @@ export default function Header(){
 
     return(
         <>
-            <div id="preloder">
-                <div className="loader"></div>
-            </div>
-
             <div className="offcanvas-menu-overlay"></div>
             <div className="offcanvas-menu-wrapper">
                 <div className="offcanvas__cart">
@@ -118,6 +114,8 @@ export default function Header(){
                                         </li>
                                     </>}
                                     <li><a href="">Contact</a></li>
+                                    <li><Link to={'/admin/merchant-active'}>Merchant Active</Link></li>
+                                    <li><Link to={'/admin/merchant-pending'}>Merchant Pending</Link></li>
                                 </ul>
                             </nav>
                         </div>
