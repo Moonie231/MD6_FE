@@ -1,29 +1,29 @@
-
 import {useDispatch, useSelector} from "react-redux";
-import {deleteFood, getFood} from "../../service/foodsService";
 import {useEffect} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import swal from 'sweetalert'
+import {deleteFood, getFood} from "../../service/foodsService";
 
-export default function ShopMerchant(){
+
+
+export default function ListFood(){
+    // const navigate = useNavigate();
+
     const dispatch = useDispatch();
+
     const foods = useSelector(state => {
         return state.foods.foods
     });
+
     useEffect(()=>{
         dispatch(getFood())
     },[]);
 
     return(
         <>
-            <div>
-                <Link className="btn btn-outline-dark" style={{marginTop: 50}} to={`/add-food`}>
-                    Create Food
-                </Link>
-            </div>
             <div className="row">
                 <div className="col-12">
-                    <table className="table" style={{marginTop:20}}>
+                    <table className="table">
                         <thead>
                         <tr>
                             <th scope="col">STT</th>
@@ -31,8 +31,7 @@ export default function ShopMerchant(){
                             <th scope="col">Description</th>
                             <th scope="col">Price</th>
                             <th scope="col">Img</th>
-                            <th scope="col">Category</th>
-                            <th scope="col">Merchant</th>
+                            <th scope="col">nameMerchant</th>
                             <th colSpan={2}>Action</th>
                         </tr>
                         </thead>
@@ -44,13 +43,12 @@ export default function ShopMerchant(){
                                 <th scope="col">{item.description}</th>
                                 <th scope="col">{item.price}</th>
                                 <th scope="col"><img src={item.img} style={{height:100}} alt=""/></th>
-                                <th scope="col">{item.nameCategory}</th>
                                 <th scope="col">{item.nameMerchant}</th>
                                 <th>
-                                    <Link className="btn btn-outline-success" to={`/edit-food/${item.idFood}`}>
-                                        Edit
-                                    </Link>
-                                    <button className="btn btn-outline-danger" style={{marginLeft: 30}} onClick={() => {
+                                    <Link to={`edit-food/${item.idFood}`}><button className="btn btn-outline-success" style={{marginRight: 10}}>
+                                        <i className="fa-solid fa-pen-to-square"></i></button></Link>
+                                    <button className="btn btn-outline-danger" onClick={() => {
+
                                         swal({
                                             title: "Are you sure?",
                                             text: "Once deleted, you will not be able to recover this imaginary file!",
@@ -78,10 +76,12 @@ export default function ShopMerchant(){
 
                             </tr>
                         ))}
+
                         </tbody>
                     </table>
                 </div>
             </div>
+
         </>
     )
 }

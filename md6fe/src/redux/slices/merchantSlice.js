@@ -3,8 +3,8 @@ import {
     editProfile,
     getMerchantActive,
     getMerchantPending,
-    getProfile, lockMerchant,
-    login, logout 
+    getProfile, setStatus,
+    login, logout ,
     register
 } from "../../service/merchantService";
 

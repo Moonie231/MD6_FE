@@ -10,7 +10,7 @@ export default function Home(){
                     <div className="hero__item set-bg" style={{backgroundImage:'url(img/hero/hero-1.jpg)'}}>
                         <div className="container">
                             <div className="row d-flex justify-content-center">
-                               
+
                             </div>
                         </div>
                     </div>
