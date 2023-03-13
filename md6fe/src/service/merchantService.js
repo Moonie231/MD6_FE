@@ -3,7 +3,6 @@ import customAxios from "./api";
 
 export const login = createAsyncThunk("merchant/login", async (data) => {
     const res = await customAxios.post("merchants/login", data);
-    console.log(res.data)
     return res.data;
 });
 
@@ -15,16 +14,23 @@ export const register = createAsyncThunk("merchant/register", async (data) => {
 export const editProfile = createAsyncThunk(
     "merchant/editProfile",
     async (data) => {
-        const res = await customAxios.put('/merchants/' + data[1], data[0])
-        return res.data
+       await customAxios.put('merchants/edit/' + data[1], data[0])
+        const response = await customAxios.get('merchants/my-profile/'+data[1]);
+        console.log(response.data)
+        return response.data;
     }
 )
 
 export const getProfile = createAsyncThunk(
     'merchant/getProfile',
     async (data) => {
-        const res = await customAxios.get('/merchants/my-profile/' + data)
-        console.log(res.data)
+        const res = await customAxios.get('merchants/my-profile/' + data)
         return res.data
+    }
+)
+export const logout = createAsyncThunk (
+    'merchant/logout',
+    async () => {
+        return false
     }
 )

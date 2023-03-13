@@ -8,6 +8,7 @@ import RegisterMerchant from "./Page/merchant/register";
 import LoginUser from "./Page/user/login";
 import RegisterUser from "./Page/user/register";
 import VerifyEmail from "./Page/user/verifyEmail";
+import Profile from "./Page/merchant/profile";
 import ShopMerchant from "./Page/shopMerchant/shopMerchant";
 
 function App() {
@@ -22,6 +23,9 @@ function App() {
     <Route path={'register-merchant'} element={<RegisterMerchant/>}></Route>
     <Route path={'login-user'} element={<LoginUser/>}></Route>
     <Route path={'register-user'} element={<RegisterUser/>}></Route>
+    <Route path={'merchants'}>
+        <Route path={`edit/:idMerchant`} element={<Profile></Profile>}></Route>
+    </Route>
     <Route path={'my-shop'} element={<ShopMerchant/>}></Route>
   </Routes>
   <Footer></Footer>
