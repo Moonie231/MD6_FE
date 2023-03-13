@@ -1,7 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {getMerchantActive, getMerchantPending, lockMerchant} from "../service/merchantService";
+import {getMerchantActive, getMerchantPending, setStatus} from "../service/merchantService";
 import swal from "sweetalert";
 
 export default function MerchantPending() {
@@ -53,11 +53,11 @@ export default function MerchantPending() {
                                             })
                                                 .then(async (willActive) => {
                                                     if (willActive) {
-                                                        // await dispatch(lockMerchant(item.idMerchant)).then(async () => {
-                                                        //     await dispatch(getMerchantActive()).then(() => {
-                                                        //         navigate('/admin/merchant-active')
-                                                        //     })
-                                                        // })
+                                                        await dispatch(setStatus(item.idMerchant)).then(async () => {
+                                                            await dispatch(getMerchantPending()).then(() => {
+                                                                navigate('/admin/merchant-pending')
+                                                            })
+                                                        })
                                                         swal("Poof! Your imaginary file has been deleted!", {
                                                             icon: "success",
                                                         });

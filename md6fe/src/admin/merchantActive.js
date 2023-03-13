@@ -1,7 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {getMerchantActive, lockMerchant} from "../service/merchantService";
+import {getMerchantActive, setStatus} from "../service/merchantService";
 import swal from "sweetalert";
 
 export default function MerchantActive() {
@@ -54,7 +54,7 @@ export default function MerchantActive() {
                                             })
                                                 .then( async (willActive) => {
                                                     if (willActive) {
-                                                       await dispatch(lockMerchant(item.idMerchant)).then(async ()=>{
+                                                       await dispatch(setStatus(item.idMerchant)).then(async ()=>{
                                                           await  dispatch(getMerchantActive()).then(()=>{
                                                                 navigate('/admin/merchant-active')
                                                             })
@@ -84,7 +84,7 @@ export default function MerchantActive() {
                                             })
                                                 .then( async (willLock) => {
                                                     if (willLock) {
-                                                       await dispatch(lockMerchant(item.idMerchant)).then(async ()=>{
+                                                       await dispatch(setStatus(item.idMerchant)).then(async ()=>{
                                                            await dispatch(getMerchantActive()).then(()=>{
                                                                 navigate('/admin/merchant-active')
                                                             })

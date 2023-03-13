@@ -46,12 +46,19 @@ export const getMerchantPending = createAsyncThunk(
     }
 )
 
-export const lockMerchant = createAsyncThunk(
+export const setStatus = createAsyncThunk(
     'merchant/lockMerchant',
     async (data) => {
-        const res = await customAxios.put('admin/lock/' + data)
+        const res = await customAxios.put('admin/status/' + data)
         return res.data
 })
+
+export const logout = createAsyncThunk (
+    'merchant/logout',
+    async () => {
+        return false
+    }
+    )
 
 export const logout = createAsyncThunk (
     'merchant/logout',
