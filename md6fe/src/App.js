@@ -10,6 +10,8 @@ import RegisterUser from "./Page/user/register";
 import VerifyEmail from "./Page/user/verifyEmail";
 import Profile from "./Page/merchant/profile";
 import ShopMerchant from "./Page/shopMerchant/shopMerchant";
+import MerchantActive from "./admin/merchantActive";
+import MerchantPending from "./admin/merchantPending";
 
 function App() {
 
@@ -27,6 +29,11 @@ function App() {
         <Route path={`edit/:idMerchant`} element={<Profile></Profile>}></Route>
     </Route>
     <Route path={'my-shop'} element={<ShopMerchant/>}></Route>
+    <Route path={'admin'}>
+      <Route path={'merchant-active'} element={<MerchantActive></MerchantActive>}></Route>
+      <Route path={'merchant-pending'} element={<MerchantPending></MerchantPending>}></Route>
+    </Route>
+
   </Routes>
   <Footer></Footer>
 
