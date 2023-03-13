@@ -18,7 +18,7 @@ const foodsSlice = createSlice({
         reducers: {},
         extraReducers: builder => {
             builder.addCase(getFood.fulfilled, (state, action) => {
-                state.foods = action.payload
+                state.foods = action.payload;
             });
             builder.addCase(addFood.fulfilled, (state, action) => {
                 state.foods = action.payload

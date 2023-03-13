@@ -4,18 +4,17 @@ import customAxios from "./api";
 export const getFood = createAsyncThunk(
     'foods/getFoods',
     async ()=>{
-        const res = await customAxios.get('foods');
+        const res = await customAxios.get('foods/merchants');
         return res.data;
     }
 )
 export const findByIdFood = createAsyncThunk(
     'foods/findByIdFood',
     async (data)=>{
-        const res = await customAxios.get('foods/findByIdFood/'+data);
+        const res = await customAxios.get('foods/find-by-id/'+data);
         return res.data
     }
 )
-
 
 export const addFood = createAsyncThunk(
     'foods/addFood',
@@ -33,12 +32,11 @@ export const deleteFood = createAsyncThunk(
     }
 )
 export const editFood = createAsyncThunk(
-    'foods/editFood',
-    async (data)=>{
-        const res = await customAxios.put('foods/'+ data.idFood,data);
-        return data
-    }
-)
+    "foods/editFood",
+    async (data) => {
+        const res = await customAxios.put("foods/" + data[1], data[0]);
+        return res.data;
+    });
 export const searchNameFood = createAsyncThunk(
     "foods/searchNameFood",
     async (data) => {

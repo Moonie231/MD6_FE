@@ -14,7 +14,7 @@ export default function AddFood() {
     const handleAdd = async (values) => {
         let data = {...values};
         dispatch(addFood(data));
-        navigate('/')
+        navigate('/my-shop')
     }
     const [images, setImages] = useState([]);
     const [urls, setUrls] = useState([]);
@@ -29,9 +29,9 @@ export default function AddFood() {
     const handleUpload = () => {
         const promises = [];
         if (images.length > 0) {
-            images.map((image) => {
-                const storageRef = ref(storage, `images/${image.name}`);
-                const uploadTask = uploadBytesResumable(storageRef, image);
+            images.map((img) => {
+                const storageRef = ref(storage, `images/${img.name}`);
+                const uploadTask = uploadBytesResumable(storageRef, img);
                 promises.push(uploadTask);
                 uploadTask.on(
                     "state_changed",
@@ -74,7 +74,7 @@ export default function AddFood() {
 
                         }}
                         onSubmit={(values) => {
-                            values.image= urls[0]
+                            values.img= urls[0]
                             handleAdd(values)
                         }}>
                         <Form>

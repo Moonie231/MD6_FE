@@ -12,12 +12,14 @@ import RegisterMerchant from "./Page/merchant/register";
 import LoginUser from "./Page/user/login";
 import RegisterUser from "./Page/user/register";
 import VerifyEmail from "./Page/user/verifyEmail";
+import ShopMerchant from "./Page/shopMerchant/shopMerchant";
 
 
 
 function App() {
   return (
 <>
+  <Header></Header>
   <Routes>
     <Route path={''} element={<Home/>}></Route>
     <Route path={'login-merchant'} element={<LoginMerchant/>}></Route>
@@ -25,10 +27,13 @@ function App() {
     <Route path={'register-merchant'} element={<RegisterMerchant/>}></Route>
     <Route path={'login-user'} element={<LoginUser/>}></Route>
     <Route path={'register-user'} element={<RegisterUser/>}></Route>
-    <Route path={'/'} element={<ListFood/>}/>
     <Route path={'add-food'} element={<AddFood/>}/>
     <Route path={`edit-food/:idFood`} element={<EditFood/>}/>
+    <Route path={'my-shop'} element={<ShopMerchant/>}>
+    </Route>
   </Routes>
+  <Footer></Footer>
+
 </>
   )
 }
