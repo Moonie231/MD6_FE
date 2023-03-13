@@ -49,7 +49,7 @@ const merchantSlice = createSlice({
         builder.addCase(getMerchantPending.fulfilled, (state, action) => {
             state.merchant = action.payload;
         });
-        builder.addCase(lockMerchant.fulfilled, (state, action) => {
+        builder.addCase(setStatus.fulfilled, (state, action) => {
         });
     }
 })
