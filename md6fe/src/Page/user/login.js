@@ -4,7 +4,6 @@ import {useDispatch} from "react-redux";
 import swal from "sweetalert";
 import {Link, useNavigate} from "react-router-dom";
 import {login} from "../../service/userService";
-import {useEffect} from "react";
 
 const validateSchema = Yup.object().shape({
     email: Yup.string()
@@ -34,8 +33,6 @@ export default function LoginUser() {
         });
     };
 
-    useEffect(() => {
-    }, []);
     return (
         <>
             <body>

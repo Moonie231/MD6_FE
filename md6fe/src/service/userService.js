@@ -2,8 +2,13 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import customAxios from "./api";
 
 export const login = createAsyncThunk("user/login", async (data) => {
-    const res = await customAxios.post("users/login", data);
-    return res.data;
+    try {
+        const res = await customAxios.post("users/login", data);
+        return res.data;
+    }catch (e) {
+        console.log(e)
+    }
+
 });
 
 export const register = createAsyncThunk("user/register", async (data) => {
