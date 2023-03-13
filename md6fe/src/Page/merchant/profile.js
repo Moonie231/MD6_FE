@@ -27,10 +27,9 @@ export default function Profile() {
     const merchant = useSelector((state) => {
         return state.merchant.profile
     })
-    const handleEdit = (values) => {
-        console.log(values)
+    const handleEdit = async (values) => {
         let data = [{...values}, idMerchant];
-        dispatch(editProfile(data)).then((value) => {
+        await dispatch(editProfile(data)).then(() => {
             swal("Edit Success !!!");
             navigate("/");
         });
