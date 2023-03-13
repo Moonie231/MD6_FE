@@ -1,6 +1,12 @@
 import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 export default function Header(){
+    const merchant = useSelector((state) =>{
+        console.log(state)
+         return state.merchant.currentMerchant
+    } );
+
     return(
         <>
             <div id="preloder">
@@ -64,8 +70,8 @@ export default function Header(){
                                             </li>
                                             <li>Login <span className="arrow_carrot-down"></span>
                                                 <ul>
-                                                    <li><Link to={'/login-merchant'}>Sign in as a Merchant</Link></li>
-                                                    <li><Link to={'/login-user'}>Sign in as a User</Link></li>
+                                                    <li><Link to={'/login-merchant'} style={{color: "white"}}>Merchant</Link></li>
+                                                    <li><Link to={'/login-user'} style={{color: "white"}}>Buyer</Link></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -82,6 +88,7 @@ export default function Header(){
                                             <a href="#"><img src="/img/icon/cart.png" alt=""/> <span>0</span></a>
                                             <div className="cart__price">Cart: <span>$0.00</span></div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -97,17 +104,13 @@ export default function Header(){
                                     <li className="active"><a href="">Home</a></li>
                                     <li><a href="">About</a></li>
                                     <li><a href="">Shop</a></li>
-                                    <li><a href="#">Pages</a>
-                                        <ul className="dropdown">
-                                            <li><a href="">Shop Details</a></li>
-                                            <li><a href="">Shoping Cart</a></li>
-                                            <li><a href="">Check Out</a></li>
-                                            <li><a href="">Wisslist</a></li>
-                                            <li><a href="">Class</a></li>
-                                            <li><a href="">Blog Details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="">Contact</a></li>
+                                    {/*<li><a href="#">{merchant.nameMerchant}</a>*/}
+                                    {/*    <ul className="dropdown">*/}
+                                    {/*        <li><Link to={`/merchants/edit/${merchant.idMerchant}`}>Profile</Link></li>*/}
+                                    {/*        <li><a href="">Log Out</a></li>*/}
+                                    {/*    </ul>*/}
+                                    {/*</li>*/}
+                                    {/*<li><a href="">Contact</a></li>*/}
                                     <li><a href="">SignIn With Merchant</a></li>
                                     <li><a href="">SignIn With Buyer</a></li>
                                 </ul>
