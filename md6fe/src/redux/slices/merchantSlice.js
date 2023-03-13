@@ -4,7 +4,7 @@ import {
     getMerchantActive,
     getMerchantPending,
     getProfile, lockMerchant,
-    login, logout 
+    login, logout ,
     register
 } from "../../service/merchantService";
 
