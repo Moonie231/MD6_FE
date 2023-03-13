@@ -69,11 +69,7 @@ export default function Header(){
                                             </li>
                                             <li> Login <span className="arrow_carrot-down" ></span>
                                                 <ul>
-<<<<<<< HEAD
                                                     <li ><Link to={'/login-merchant'} style={{color: "white"}}>Merchant</Link></li>
-=======
-                                                    <li><Link to={'/login-merchant'} style={{color: "white"}}>Merchant</Link></li>
->>>>>>> 5376cbafe58be6921cf1d776cf8163ba29dcbb07
                                                     <li><Link to={'/login-user'} style={{color: "white"}}>Buyer</Link></li>
                                                 </ul>
                                             </li>

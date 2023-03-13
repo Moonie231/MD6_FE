@@ -12,16 +12,10 @@ import RegisterMerchant from "./Page/merchant/register";
 import LoginUser from "./Page/user/login";
 import RegisterUser from "./Page/user/register";
 import VerifyEmail from "./Page/user/verifyEmail";
-<<<<<<< HEAD
 import ShopMerchant from "./Page/shopMerchant/shopMerchant";
-
-
-=======
 import Profile from "./Page/merchant/profile";
-import ShopMerchant from "./Page/shopMerchant/shopMerchant";
 import MerchantActive from "./admin/merchantActive";
 import MerchantPending from "./admin/merchantPending";
->>>>>>> 5376cbafe58be6921cf1d776cf8163ba29dcbb07
 
 function App() {
   return (
@@ -34,22 +28,16 @@ function App() {
     <Route path={'register-merchant'} element={<RegisterMerchant/>}></Route>
     <Route path={'login-user'} element={<LoginUser/>}></Route>
     <Route path={'register-user'} element={<RegisterUser/>}></Route>
-<<<<<<< HEAD
     <Route path={'add-food'} element={<AddFood/>}/>
     <Route path={`edit-food/:idFood`} element={<EditFood/>}/>
-    <Route path={'my-shop'} element={<ShopMerchant/>}>
-    </Route>
-=======
+    <Route path={'my-shop'} element={<ShopMerchant/>}></Route>
     <Route path={'merchants'}>
         <Route path={`edit/:idMerchant`} element={<Profile></Profile>}></Route>
     </Route>
-    <Route path={'my-shop'} element={<ShopMerchant/>}></Route>
     <Route path={'admin'}>
       <Route path={'merchant-active'} element={<MerchantActive></MerchantActive>}></Route>
       <Route path={'merchant-pending'} element={<MerchantPending></MerchantPending>}></Route>
     </Route>
-
->>>>>>> 5376cbafe58be6921cf1d776cf8163ba29dcbb07
   </Routes>
   <Footer></Footer>
 
