@@ -51,6 +51,12 @@ export const setStatus = createAsyncThunk(
     async (data) => {
         const res = await customAxios.put('admin/status/' + data)
         return res.data
+})
+
+export const logout = createAsyncThunk (
+    'merchant/logout',
+    async () => {
+        return false
     }
     )
 

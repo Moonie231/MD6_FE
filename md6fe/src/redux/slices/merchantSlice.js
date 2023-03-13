@@ -4,9 +4,8 @@ import {
     getMerchantActive,
     getMerchantPending,
     getProfile, lockMerchant,
-    login,
-    logout,
-    register, setStatus
+    login, logout 
+    register
 } from "../../service/merchantService";
 
 const initialState = {
