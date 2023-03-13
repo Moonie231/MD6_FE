@@ -62,10 +62,10 @@ export default function Header(){
                                                     <li>ENG</li>
                                                 </ul>
                                             </li>
-                                            <li>Login <span className="arrow_carrot-down"></span>
+                                            <li>Login <span className="arrow_carrot-down" ></span>
                                                 <ul>
-                                                    <li><Link to={'/login-merchant'}>Sign in as a Merchant</Link></li>
-                                                    <li><Link to={'/login-user'}>Sign in as a User</Link></li>
+                                                    <li ><Link to={'/login-merchant'} >Sign in as a Merchant</Link></li>
+                                                    <li><Link to={'/login-user'} >Sign in as a User</Link></li>
                                                 </ul>
                                             </li>
                                         </ul>
