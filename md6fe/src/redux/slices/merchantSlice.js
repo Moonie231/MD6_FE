@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { editProfile, getProfile, login, register} from "../../service/merchantService";
+import {editProfile, getProfile, login, logout, register} from "../../service/merchantService";
 
 const initialState = {
     currentMerchant: JSON.parse(localStorage.getItem('merchant')) ,
     merchant: [],
     profile: {},
+    status:false
 }
 
 const merchantSlice = createSlice({
@@ -14,10 +15,10 @@ const merchantSlice = createSlice({
     extraReducers: builder => {
         builder.addCase(login.fulfilled, (state, action) => {
             state.currentMerchant = action.payload
+            state.status=true
             localStorage.setItem("merchant", JSON.stringify(action.payload))
-            console.log(localStorage.getItem('merchant'))
-            console.log(1)
             localStorage.setItem("access-token", action.payload.token)
+            localStorage.setItem("NameStatus",state.status )
         });
         builder.addCase(register.fulfilled, (state, action) => {
             state.merchant.push(action.payload)
@@ -27,7 +28,12 @@ const merchantSlice = createSlice({
         });
         builder.addCase(getProfile.fulfilled, (state, action) => {
             state.profile = action.payload;
-            console.log(action.payload)
+            localStorage.setItem("merchant", JSON.stringify(action.payload))
+        });
+        builder.addCase(logout.fulfilled, (state, action) => {
+            state.status=false
+            localStorage.clear()
+            localStorage.setItem('NameStatus',state.status)
         });
     }
 })

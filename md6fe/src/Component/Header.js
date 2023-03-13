@@ -1,8 +1,12 @@
-import {Link} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {Link, useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {logout} from "../service/merchantService";
 
 export default function Header(){
+    const navigate=useNavigate()
+    const dispatch=useDispatch()
     const user = useSelector((state) =>{
+        console.log(state.merchant.currentMerchant)
          return state.merchant.currentMerchant
     } );
 
@@ -103,15 +107,18 @@ export default function Header(){
                                     <li className="active"><a href="">Home</a></li>
                                     <li><a href="">About</a></li>
                                     <li><a href="">Shop</a></li>
-                                    <li><a href="#">{user.nameMerchant}</a>
-                                        <ul className="dropdown">
-                                            <li><Link to={`/merchants/edit/${user.idMerchant}`}>Profile</Link></li>
-                                            <li><a href="">Log Out</a></li>
-                                        </ul>
-                                    </li>
+                                    {localStorage.getItem('NameStatus')===true || localStorage.getItem('NameStatus')==='true' && <>
+                                        <li><a href="#">{user.nameMerchant}</a>
+                                            <ul className="dropdown">
+                                                <li><Link to={`/merchants/edit/${user.idMerchant}`}>Profile</Link></li>
+                                                <li><a href="" onClick={(e)=>{
+                                                    dispatch(logout())
+                                                    navigate('/')
+                                                }}>Log Out</a></li>
+                                            </ul>
+                                        </li>
+                                    </>}
                                     <li><a href="">Contact</a></li>
-                                    <li><a href="">SignIn With Merchant</a></li>
-                                    <li><a href="">SignIn With Buyer</a></li>
                                 </ul>
                             </nav>
                         </div>
