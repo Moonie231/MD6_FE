@@ -1,5 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { editProfile, getProfile, login, register} from "../../service/merchantService";
+import {
+    editProfile,
+    getMerchantActive,
+    getMerchantPending,
+    getProfile, lockMerchant,
+    login,
+    register
+} from "../../service/merchantService";
 
 const initialState = {
     currentMerchant: JSON.parse(localStorage.getItem('merchant')) ,
@@ -28,6 +35,15 @@ const merchantSlice = createSlice({
         builder.addCase(getProfile.fulfilled, (state, action) => {
             state.profile = action.payload;
             console.log(action.payload)
+        });
+        builder.addCase(getMerchantActive.fulfilled, (state, action) => {
+            console.log(1)
+            state.merchant = action.payload;
+        });
+        builder.addCase(getMerchantPending.fulfilled, (state, action) => {
+            state.merchant = action.payload;
+        });
+        builder.addCase(lockMerchant.fulfilled, (state, action) => {
         });
     }
 })
