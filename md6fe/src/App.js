@@ -9,11 +9,13 @@ import LoginUser from "./Page/user/login";
 import RegisterUser from "./Page/user/register";
 import VerifyEmail from "./Page/user/verifyEmail";
 import Profile from "./Page/merchant/profile";
+import ShopMerchant from "./Page/shopMerchant/shopMerchant";
 
 function App() {
 
   return (
 <>
+  <Header></Header>
   <Routes>
     <Route path={''} element={<Home/>}></Route>
     <Route path={'login-merchant'} element={<LoginMerchant/>}></Route>
@@ -24,7 +26,10 @@ function App() {
     <Route path={'merchants'}>
         <Route path={`edit/:idMerchant`} element={<Profile></Profile>}></Route>
     </Route>
+    <Route path={'my-shop'} element={<ShopMerchant/>}></Route>
   </Routes>
+  <Footer></Footer>
+
 </>
   );
 }
