@@ -2,8 +2,7 @@ import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
 
 export default function Header(){
-    const merchant = useSelector((state) =>{
-        console.log(state)
+    const user = useSelector((state) =>{
          return state.merchant.currentMerchant
     } );
 
@@ -68,7 +67,7 @@ export default function Header(){
                                                     <li>ENG</li>
                                                 </ul>
                                             </li>
-                                            <li>Login <span className="arrow_carrot-down"></span>
+                                            <li>Login <span className="arrow_carrot-down" ></span>
                                                 <ul>
                                                     <li><Link to={'/login-merchant'} style={{color: "white"}}>Merchant</Link></li>
                                                     <li><Link to={'/login-user'} style={{color: "white"}}>Buyer</Link></li>
@@ -104,13 +103,13 @@ export default function Header(){
                                     <li className="active"><a href="">Home</a></li>
                                     <li><a href="">About</a></li>
                                     <li><a href="">Shop</a></li>
-                                    {/*<li><a href="#">{merchant.nameMerchant}</a>*/}
-                                    {/*    <ul className="dropdown">*/}
-                                    {/*        <li><Link to={`/merchants/edit/${merchant.idMerchant}`}>Profile</Link></li>*/}
-                                    {/*        <li><a href="">Log Out</a></li>*/}
-                                    {/*    </ul>*/}
-                                    {/*</li>*/}
-                                    {/*<li><a href="">Contact</a></li>*/}
+                                    <li><a href="#">{user.nameMerchant}</a>
+                                        <ul className="dropdown">
+                                            <li><Link to={`/merchants/edit/${user.idMerchant}`}>Profile</Link></li>
+                                            <li><a href="">Log Out</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="">Contact</a></li>
                                     <li><a href="">SignIn With Merchant</a></li>
                                     <li><a href="">SignIn With Buyer</a></li>
                                 </ul>

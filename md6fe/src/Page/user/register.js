@@ -17,19 +17,12 @@ const validateSchema = Yup.object().shape({
         .min(2, "Too short!")
         .max(50, "Too long!")
         .required("Required"),
-    address:Yup.string()
-        .min(2, "Too short!")
-        .max(50, "Too long!")
-        .required("Required"),
-    phone:Yup.string()
-        .min(2, "Too short!")
-        .max(50, "Too long!")
-        .required("Required"),
 });
 
 export default function RegisterUser(){
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
 
     const handleRegister = (values) => {
         let data = { ...values};
@@ -38,7 +31,7 @@ export default function RegisterUser(){
                 swal("Email already registered");
                 navigate("/register-user");
             } else {
-                swal("Register successfully")
+                swal("Register successfully, Please confirm email")
                 navigate("/login-user");
             }
         });
@@ -64,9 +57,6 @@ export default function RegisterUser(){
                                                 username: "",
                                                 userPassword: "",
                                                 email: "",
-                                                address: "",
-                                                phone: "",
-                                                avatar: "",
                                             }}
                                                     validationSchema={validateSchema}
                                                     onSubmit={(values) => {
@@ -79,7 +69,6 @@ export default function RegisterUser(){
                                                     <div className="form-outline mb-4">
                                                         <Field type="text" id="username" className="form-control" name = {'username'}
                                                                placeholder="Username"/>
-                                                        <label className="form-label" htmlFor="username">Username</label>
                                                         <alert className="text-danger">
                                                             <ErrorMessage name={"username"}></ErrorMessage>
                                                         </alert>
@@ -88,7 +77,6 @@ export default function RegisterUser(){
                                                     <div className="form-outline mb-4">
                                                         <Field type="password" id="password" className="form-control" name ={'userPassword'}
                                                                placeholder="Password"/>
-                                                        <label className="form-label" htmlFor="password">Password</label>
                                                         <alert className="text-danger">
                                                             <ErrorMessage name={"userPassword"}></ErrorMessage>
                                                         </alert>
@@ -97,33 +85,9 @@ export default function RegisterUser(){
                                                     <div className="form-outline mb-4">
                                                         <Field type="text" id="name" className="form-control" name = {'email'}
                                                                placeholder="Email"/>
-                                                        <label className="form-label" htmlFor="name">Email</label>
                                                         <alert className="text-danger">
                                                             <ErrorMessage name={"email"}></ErrorMessage>
                                                         </alert>
-                                                    </div>
-
-                                                    <div className="form-outline mb-4">
-                                                        <Field type="text" id="address" className="form-control" name = {'address'}
-                                                               placeholder="Address"/>
-                                                        <label className="form-label" htmlFor="address">Address</label>
-                                                        <alert className="text-danger">
-                                                            <ErrorMessage name={"address"}></ErrorMessage>
-                                                        </alert>
-                                                    </div>
-
-                                                    <div className="form-outline mb-4">
-                                                        <Field type="tel" id="phone" className="form-control" name = {'phone'}
-                                                               placeholder="Phone number"/>
-                                                        <label className="form-label" htmlFor="phone">Phone number</label>
-                                                        <alert className="text-danger">
-                                                            <ErrorMessage name={"phone"}></ErrorMessage>
-                                                        </alert>
-                                                    </div>
-                                                    <div className="form-outline mb-4">
-                                                        <Field type="tel" id="phone" className="form-control" name = {'avatar'}
-                                                               placeholder="Avatar"/>
-                                                        <label className="form-label" htmlFor="phone">Avatar</label>
                                                     </div>
 
                                                     <div className="text-center pt-1 mb-5 pb-1">

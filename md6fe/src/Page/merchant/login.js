@@ -4,15 +4,14 @@ import {useDispatch} from "react-redux";
 import swal from "sweetalert";
 import {Link, useNavigate} from "react-router-dom";
 import {login} from "../../service/merchantService";
-import {useEffect} from "react";
 
 const validateSchema = Yup.object().shape({
     email: Yup.string()
         .email("Invalid email format")
         .required("Required"),
-    password: Yup.string()
-        .min(2, "Too short!")
-        .max(50, "Too long!")
+    merchantPassword: Yup.string()
+        .min(1, "Too short!")
+        .max(18, "Too long!")
         .required("Required"),
 });
 
@@ -20,8 +19,8 @@ export default function LoginMerchant() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const handleLogin = async (values) => {
-        await dispatch(login(values)).then((e) => {
-            console.log(e.payload)
+     await dispatch(login(values))
+            .then((e) => {
             if (e.payload === "Account not ready") {
                 swal("Account not ready");
             } else if (e.payload === "Merchant not found") {
@@ -34,9 +33,6 @@ export default function LoginMerchant() {
         });
     };
 
-    useEffect(() => {
-        localStorage.clear();
-    }, []);
     return (
         <>
             <body>
@@ -55,12 +51,10 @@ export default function LoginMerchant() {
                                             </div>
                                             <Formik initialValues={{
                                                 email: "",
-                                                password: ""
+                                                merchantPassword: ""
                                             }}
                                             validationSchema={validateSchema}
-                                            onSubmit={(values) => {
-                                                handleLogin(values)
-                                            }}>
+                                            onSubmit={handleLogin}>
                                                 <Form>
                                                     <p>Please login to your account merchant</p>
                                                     <div className="form-outline mb-4">
@@ -74,13 +68,12 @@ export default function LoginMerchant() {
                                                         </alert>
                                                     </div>
                                                     <div className="form-outline mb-4">
-                                                        <Field type="password" id="form2Example22" name={'password'}
+                                                        <Field type="password" id="form2Example22" name={'merchantPassword'}
                                                                placeholder="Password"
                                                                className="form-control"/>
-                                                        <label className="form-label"
-                                                               htmlFor="form2Example22">Password</label>
+
                                                         <alert className="text-danger">
-                                                            <ErrorMessage name={"password"}></ErrorMessage>
+                                                            <ErrorMessage name={"merchantPassword"}></ErrorMessage>
                                                         </alert>
                                                     </div>
                                                     <div className="text-center pt-1 mb-5 pb-1">
@@ -98,7 +91,7 @@ export default function LoginMerchant() {
                                         </div>
                                     </div>
                                     <div className="col-lg-6 d-flex align-items-center gradient-custom-2">
-                                        <img style={{width: '459px', height: '100%'}} src="img/fish-and-chips.jpeg" alt=""/>
+                                        <img style={{width: '459px', height: '100%'}} src="/img/fish-and-chips.jpeg" alt=""/>
                                         <div className="text-white px-3 py-4 p-md-5 mx-md-4">
                                         </div>
                                     </div>

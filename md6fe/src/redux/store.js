@@ -1,5 +1,5 @@
 import userReducer from "./slices/userSlice";
-import merchantReducer from "./slices/userSlice";
+import merchantReducer from "./slices/merchantSlice";
 
 import { configureStore } from "@reduxjs/toolkit";
 

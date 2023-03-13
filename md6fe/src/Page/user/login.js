@@ -4,7 +4,6 @@ import {useDispatch} from "react-redux";
 import swal from "sweetalert";
 import {Link, useNavigate} from "react-router-dom";
 import {login} from "../../service/userService";
-import {useEffect} from "react";
 
 const validateSchema = Yup.object().shape({
     email: Yup.string()
@@ -34,9 +33,7 @@ export default function LoginUser() {
         });
     };
 
-    useEffect(() => {
-        localStorage.clear();
-    }, []);
+
     return (
         <>
             <body>
@@ -98,7 +95,7 @@ export default function LoginUser() {
                                         </div>
                                     </div>
                                     <div className="col-lg-6 d-flex align-items-center gradient-custom-2">
-                                        <img style={{width: '459px', height: '100%'}} src="img/fish-and-chips.jpeg" alt=""/>
+                                        <img style={{width: '459px', height: '100%'}} src="/img/fish-and-chips.jpeg" alt=""/>
                                         <div className="text-white px-3 py-4 p-md-5 mx-md-4">
                                         </div>
                                     </div>
