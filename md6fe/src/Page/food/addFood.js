@@ -11,14 +11,10 @@ export default function AddFood() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const user = useSelector(state=>{
-        return state.users.currentUser
-    })
-
     const handleAdd = async (values) => {
         let data = {...values};
         dispatch(addFood(data));
-        navigate('/home')
+        navigate('/')
     }
     const [images, setImages] = useState([]);
     const [urls, setUrls] = useState([]);
@@ -78,7 +74,7 @@ export default function AddFood() {
 
                         }}
                         onSubmit={(values) => {
-                            values.img= urls[0]
+                            values.image= urls[0]
                             handleAdd(values)
                         }}>
                         <Form>
@@ -111,11 +107,11 @@ export default function AddFood() {
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="exampleInput" className="form-label">Category</label>
-                                <Field type="text" className="form-control" id="exampleInput" name={'id_Category'}/>
+                                <Field type="number" className="form-control" id="exampleInput" name={'id_Category'}/>
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="exampleInput" className="form-label">Merchant</label>
-                                <Field type="text" className="form-control" id="exampleInput" name={'id_Merchant'}/>
+                                <Field type="number" className="form-control" id="exampleInput" name={'id_Merchant'}/>
                             </div>
                             <button type="submit" className="btn btn-primary">Add</button>
                         </Form>

@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import {useDispatch} from "react-redux";
 import swal from "sweetalert";
 import {Link, useNavigate} from "react-router-dom";
-import {login} from "../../service/merchantService";
+import {login} from "../../service/userService";
 import {useEffect} from "react";
 
 const validateSchema = Yup.object().shape({
@@ -16,7 +16,7 @@ const validateSchema = Yup.object().shape({
         .required("Required"),
 });
 
-export default function LoginMerchant() {
+export default function LoginUser() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const handleLogin = async (values) => {
@@ -24,8 +24,8 @@ export default function LoginMerchant() {
             console.log(e.payload)
             if (e.payload === "Account not ready") {
                 swal("Account not ready");
-            } else if (e.payload === "Merchant not found") {
-                swal("Merchant not found");
+            } else if (e.payload === "User not found") {
+                swal("User not found");
             } else if (e.payload === "Wrong password") {
                 swal("Wrong password");
             }else {
@@ -35,7 +35,6 @@ export default function LoginMerchant() {
     };
 
     useEffect(() => {
-        localStorage.clear();
     }, []);
     return (
         <>
@@ -57,10 +56,10 @@ export default function LoginMerchant() {
                                                 email: "",
                                                 password: ""
                                             }}
-                                            validationSchema={validateSchema}
-                                            onSubmit={(values) => {
-                                                handleLogin(values)
-                                            }}>
+                                                    validationSchema={validateSchema}
+                                                    onSubmit={(values) => {
+                                                        handleLogin(values)
+                                                    }}>
                                                 <Form>
                                                     <p>Please login to your account merchant</p>
                                                     <div className="form-outline mb-4">
@@ -91,7 +90,7 @@ export default function LoginMerchant() {
                                                     </div>
                                                     <div className="d-flex align-items-center justify-content-center pb-4">
                                                         <p className="mb-0 me-2">Don't have an account?</p>
-                                                        <Link to={"/register-merchant"}><button type="button" className="btn btn-outline-danger">Create new</button></Link>
+                                                        <Link to={"/register-user"}><button type="button" className="btn btn-outline-danger">Create new</button></Link>
                                                     </div>
                                                 </Form>
                                             </Formik>

@@ -12,7 +12,7 @@ const initialState = {
     foods: [],
     food: {}
 }
-const postsSlice = createSlice({
+const foodsSlice = createSlice({
         name: 'foods',
         initialState,
         reducers: {},

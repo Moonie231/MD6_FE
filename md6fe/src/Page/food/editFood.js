@@ -14,9 +14,9 @@ export default function EditFood() {
 
     const navigate = useNavigate();
 
-    const user = useSelector(state => {
-        return state.users.currentUser
-    })
+    // const user = useSelector(state => {
+    //     return state.users.currentUser
+    // })
 
     useEffect(() => {
         dispatch(findByIdFood(idFood)).then((value) => {
@@ -47,9 +47,9 @@ export default function EditFood() {
     const handleUpload = () => {
         const promises = [];
         if (images.length > 0) {
-            images.map((image) => {
-                const storageRef = ref(storage, `images/${image.name}`);
-                const uploadTask = uploadBytesResumable(storageRef, image);
+            images.map((img) => {
+                const storageRef = ref(storage, `images/${img.name}`);
+                const uploadTask = uploadBytesResumable(storageRef, img);
                 promises.push(uploadTask);
                 uploadTask.on(
                     "state_changed",
@@ -103,11 +103,11 @@ export default function EditFood() {
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="exampleInput" className="form-label">Description</label>
-                                <Field type="text" className="form-control" id="exampleInput" name={'role'}/>
+                                <Field type="text" className="form-control" id="exampleInput" name={'description'}/>
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="exampleInput" className="form-label">Price</label>
-                                <Field type="text" className="form-control" id="exampleInput" name={'time'}/>
+                                <Field type="text" className="form-control" id="exampleInput" name={'price'}/>
                             </div>
                             <div className="ml-3 form-group">
                                 <label htmlFor="exampleInputPassword">Img</label>

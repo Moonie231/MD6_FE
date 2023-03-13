@@ -1,6 +1,10 @@
+import Header from "../Component/Header";
+import Footer from "../Component/Footer";
+
 export default function Home(){
     return(
         <>
+            <Header></Header>
             <body>
             <section className="hero">
                 <div className="">
@@ -568,7 +572,7 @@ export default function Home(){
             </div>
 
             </body>
-
+            <Footer></Footer>
         </>
     )
 }

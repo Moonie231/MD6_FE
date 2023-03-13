@@ -1,5 +1,10 @@
+
 import axios from 'axios'
 const customAxios = axios.create({
-    baseURL: 'http://localhost:3000/'
+    baseURL: 'http://localhost:8000/',
+    headers: {
+        'Content-Type': 'application/json',
+        authorization: 'Bearer ' + localStorage.getItem("access-token"),
+    }
 })
 export default customAxios;
