@@ -1,14 +1,19 @@
 import {Link, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {logout} from "../service/merchantService";
+import {getProfile, logout} from "../service/merchantService";
 import {logoutUser} from "../service/userService";
+import {useEffect} from "react";
 
 export default function Header(){
     const navigate=useNavigate()
     const dispatch=useDispatch()
     const user = useSelector((state) =>{
-         return state.merchant.currentMerchant
-    } );
+        console.log(1,state.merchant.profile)
+         return state.merchant.profile
+    });
+    useEffect(()=>{
+        dispatch(getProfile(localStorage.getItem('idMerchant'))).then()
+    },[])
     const admin=useSelector((state) =>{
         return state.user.role
     })

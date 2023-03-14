@@ -27,7 +27,9 @@ export default function LoginMerchant() {
                     swal("Merchant not found");
                 } else if (e.payload === "Wrong password") {
                     swal("Wrong password");
-                } else {
+                } else if (e.payload === "Account locked") {
+                    swal("Account locked");
+                }else {
                     navigate("/")
                 }
             });
