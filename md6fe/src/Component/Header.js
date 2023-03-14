@@ -1,6 +1,7 @@
 import {Link, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {logout} from "../service/merchantService";
+import {logoutUser} from "../service/userService";
 
 export default function Header(){
     const navigate=useNavigate()
@@ -9,6 +10,9 @@ export default function Header(){
         console.log(state.merchant.currentMerchant)
          return state.merchant.currentMerchant
     } );
+    const admin=useSelector((state) =>{
+        return state.user.role
+    })
 
     return(
         <>
@@ -119,9 +123,16 @@ export default function Header(){
                                             </ul>
                                         </li>
                                     </>}
+                                    {admin &&<>
+                                        <li><Link to={'/admin/merchant-active'}>Merchant Active</Link></li>
+                                        <li><Link to={'/admin/merchant-pending'}>Merchant Pending</Link></li>
+                                        <li><a href="" onClick={(e)=>{
+                                            dispatch(logoutUser())
+                                            navigate('/')
+                                        }}>Log Out</a></li>
+                                    </>}
                                     <li><a href="">Contact</a></li>
-                                    <li><Link to={'/admin/merchant-active'}>Merchant Active</Link></li>
-                                    <li><Link to={'/admin/merchant-pending'}>Merchant Pending</Link></li>
+
                                 </ul>
                             </nav>
                         </div>

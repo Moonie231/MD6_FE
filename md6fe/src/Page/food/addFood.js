@@ -16,7 +16,7 @@ export default function AddFood() {
         let data = {...values};
         console.log(values,16)
         dispatch(addFood(data));
-        navigate('/')
+        navigate('/merchants/my-shop/'+localStorage.getItem('idMerchant'))
     }
     const categories = useSelector((state) => {
         console.log(state.categories,22)
@@ -79,7 +79,7 @@ export default function AddFood() {
                             description: '',
                             price: "",
                             id_Category:"",
-                            id_Merchant: ""
+                            id_Merchant: localStorage.getItem('idMerchant')
 
                         }}
                         onSubmit={(values) => {
@@ -131,10 +131,6 @@ export default function AddFood() {
                                         ))}
 
                                 </Field>
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="exampleInput" className="form-label">Merchant</label>
-                                <Field type="number" className="form-control" id="exampleInput" name={'id_Merchant'}/>
                             </div>
                             <button type="submit" className="btn btn-outline-dark">Add</button>
                         </Form>
