@@ -47,7 +47,6 @@ export default function MerchantActive() {
                                         onClick={() => {
                                             swal({
                                                 title: "Are you sure?",
-                                                text: "Once deleted, you will not be able to recover this imaginary file!",
                                                 icon: "warning",
                                                 buttons: true,
                                                 dangerMode: true,
@@ -59,11 +58,11 @@ export default function MerchantActive() {
                                                                 navigate('/admin/merchant-active')
                                                             })
                                                         })
-                                                        swal("Poof! Your imaginary file has been deleted!", {
+                                                        swal("Your account has been active!", {
                                                             icon: "success",
                                                         });
                                                     } else {
-                                                        swal("Your imaginary file is safe!");
+                                                        swal("Your account is safe!");
                                                     }
                                                 });
                                         }}
@@ -77,7 +76,6 @@ export default function MerchantActive() {
                                         onClick={() => {
                                             swal({
                                                 title: "Are you sure?",
-                                                text: "Once deleted, you will not be able to recover this imaginary file!",
                                                 icon: "warning",
                                                 buttons: true,
                                                 dangerMode: true,
@@ -89,11 +87,11 @@ export default function MerchantActive() {
                                                                 navigate('/admin/merchant-active')
                                                             })
                                                         })
-                                                        swal("Poof! Your imaginary file has been deleted!", {
+                                                        swal("Your account has been locked!", {
                                                             icon: "success",
                                                         });
                                                     } else {
-                                                        swal("Your imaginary file is safe!");
+                                                        swal("Your account is safe!");
                                                     }
                                                 });
                                         }}

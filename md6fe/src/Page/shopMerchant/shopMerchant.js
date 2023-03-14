@@ -44,13 +44,13 @@ export default function ShopMerchant(){
                         {foods.map((item,ind)=>(
                             <tr>
                                 <th scope="col">{ind + 1}</th>
-                                <th scope="col">{item.nameFood}</th>
-                                <th scope="col">{item.description}</th>
-                                <th scope="col">{item.price}</th>
-                                <th scope="col"><img src={item.img} style={{height:100}} alt=""/></th>
-                                <th scope="col">{item.nameCategory}</th>
-                                <th scope="col">{item.nameMerchant}</th>
-                                <th>
+                                <td scope="col">{item.nameFood}</td>
+                                <td scope="col">{item.description}</td>
+                                <td scope="col">{item.price}</td>
+                                <td scope="col"><img src={item.img} style={{height:100}} alt=""/></td>
+                                <td scope="col">{item.nameCategory}</td>
+                                <td scope="col">{item.nameMerchant}</td>
+                                <td>
                                     <Link className="btn btn-outline-success" to={`/edit-food/${item.idFood}`}>
                                         <i className="fa-solid fa-pen-to-square"></i>
                                     </Link>
@@ -79,7 +79,7 @@ export default function ShopMerchant(){
                                                 }
                                             });
                                     }}><i className="fa-solid fa-trash"></i></button>
-                                </th>
+                                </td>
 
                             </tr>
                         ))}
