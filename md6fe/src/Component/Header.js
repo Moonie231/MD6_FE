@@ -1,6 +1,7 @@
 import {Link, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {logout} from "../service/merchantService";
+import {logoutUser} from "../service/userService";
 
 export default function Header(){
     const navigate=useNavigate()
@@ -8,6 +9,12 @@ export default function Header(){
     const user = useSelector((state) =>{
          return state.merchant.currentMerchant
     } );
+    const admin=useSelector((state)=>{
+        if(state.user.role){
+            console.log(state.user.role)
+            return state.user.role
+        }
+    })
 
     return(
         <>
@@ -66,9 +73,9 @@ export default function Header(){
                                                     <li>ENG</li>
                                                 </ul>
                                             </li>
-                                            <li>Login <span className="arrow_carrot-down" ></span>
+                                            <li> Login <span className="arrow_carrot-down" ></span>
                                                 <ul>
-                                                    <li><Link to={'/login-merchant'} style={{color: "white"}}>Merchant</Link></li>
+                                                    <li ><Link to={'/login-merchant'} style={{color: "white"}}>Merchant</Link></li>
                                                     <li><Link to={'/login-user'} style={{color: "white"}}>Buyer</Link></li>
                                                 </ul>
                                             </li>
@@ -102,8 +109,17 @@ export default function Header(){
                                     <li className="active"><a href="">Home</a></li>
                                     <li><a href="">About</a></li>
                                     <li><a href="">Shop</a></li>
+
+                                    <li><a href="">Contact</a></li>
+                                    {admin &&<>
+                                        <li><Link to={'/admin/merchant-active'}>Merchant Active</Link></li>
+                                        <li><Link to={'/admin/merchant-pending'}>Merchant Pending</Link></li>
+                                        <li><a href="" onClick={()=>{
+                                            dispatch(logoutUser())
+                                        }}>LogOut</a></li>
+                                    </> }
                                     {localStorage.getItem('NameStatus')===true || localStorage.getItem('NameStatus')==='true' && <>
-                                        <li><a href="#">{user.nameMerchant}</a>
+                                        <li><a href="#" >{user.nameMerchant}</a>
                                             <ul className="dropdown">
                                                 <li><Link to={`/merchants/edit/${user.idMerchant}`}>Profile</Link></li>
                                                 <li><a href="" onClick={(e)=>{
@@ -113,9 +129,6 @@ export default function Header(){
                                             </ul>
                                         </li>
                                     </>}
-                                    <li><a href="">Contact</a></li>
-                                    <li><Link to={'/admin/merchant-active'}>Merchant Active</Link></li>
-                                    <li><Link to={'/admin/merchant-pending'}>Merchant Pending</Link></li>
                                 </ul>
                             </nav>
                         </div>

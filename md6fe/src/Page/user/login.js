@@ -27,6 +27,8 @@ export default function LoginUser() {
                 swal("User not found");
             } else if (e.payload === "Wrong password") {
                 swal("Wrong password");
+            }else if (e.payload.status === false ||e.payload.status ==='false'){
+                swal('Account not verified')
             }else {
                 navigate("/")
             }

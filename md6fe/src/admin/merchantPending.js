@@ -1,7 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {getMerchantActive, getMerchantPending, setStatus} from "../../service/merchantService";
+import {getMerchantActive, getMerchantPending, setStatus} from "../service/merchantService";
 import swal from "sweetalert";
 
 export default function MerchantPending() {

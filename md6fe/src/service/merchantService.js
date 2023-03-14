@@ -17,6 +17,7 @@ export const editProfile = createAsyncThunk(
     async (data) => {
        await customAxios.put('merchants/edit/' + data[1], data[0])
         const response = await customAxios.get('merchants/my-profile/'+data[1]);
+        console.log(response.data)
         return response.data;
     }
 )
@@ -57,5 +58,5 @@ export const logout = createAsyncThunk (
     async () => {
         return false
     }
-    )
+)
 
