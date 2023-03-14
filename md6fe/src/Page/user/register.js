@@ -29,9 +29,9 @@ export default function RegisterUser(){
         dispatch(register(data)).then((value) => {
             if (value.payload === "Email already registered") {
                 swal("Email already registered");
-                navigate("/register");
+                navigate("/register-user");
             } else {
-                swal("Register successfully")
+                swal("Register successfully, Please confirm email")
                 navigate("/login-user");
             }
         });
