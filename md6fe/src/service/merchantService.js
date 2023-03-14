@@ -59,4 +59,3 @@ export const logout = createAsyncThunk (
         return false
     }
 )
-

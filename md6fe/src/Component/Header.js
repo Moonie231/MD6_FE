@@ -69,7 +69,9 @@ export default function Header(){
                                             </li>
                                             <li> Login <span className="arrow_carrot-down" ></span>
                                                 <ul>
+
                                                     <li ><Link to={'/login-merchant'} style={{color: "white"}}>Merchant</Link></li>
+
                                                     <li><Link to={'/login-user'} style={{color: "white"}}>Buyer</Link></li>
                                                 </ul>
                                             </li>
@@ -102,7 +104,12 @@ export default function Header(){
                                 <ul>
                                     <li className="active"><a href="">Home</a></li>
                                     <li><a href="">About</a></li>
-                                    <li><a href="">Shop</a></li>
+                                    {localStorage.getItem('NameStatus')===true || localStorage.getItem('NameStatus')==='true'&&   <li><a href="">Shop</a>
+                                        <ul className="dropdown">
+                                            <li><Link to={'/merchants/my-shop/'+user.idMerchant}>My Shop</Link></li>
+                                        </ul>
+                                    </li>}
+
                                     {localStorage.getItem('NameStatus')===true || localStorage.getItem('NameStatus')==='true' && <>
                                         <li><a href="#">{user.nameMerchant}</a>
                                             <ul className="dropdown">

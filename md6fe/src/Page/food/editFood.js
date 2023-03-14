@@ -7,6 +7,7 @@ import {Field, Form, Formik} from "formik";
 import {useEffect} from "react";
 import {editFood, findByIdFood} from "../../service/foodsService";
 import swal from "sweetalert";
+import {getCategories} from "../../service/categoryService";
 
 
 export default function EditFood() {
@@ -22,6 +23,9 @@ export default function EditFood() {
     const foods = useSelector(state => {
         return state.foods.food
     })
+    const categories = useSelector((state) => {
+        return state.categories.categories;
+    });
 
     const [images, setImages] = useState([]);
     const [urls, setUrls] = useState([]);
@@ -71,9 +75,12 @@ export default function EditFood() {
         let data = [{ ...values,img: urls},idFood];
         dispatch(editFood(data)).then((value) => {
             swal("Edit Success !!!");
-            navigate("/my-shop");
+            navigate("/");
         });
     };
+    useEffect(() => {
+        dispatch(getCategories());
+    }, []);
 
     return (
         <>
@@ -86,6 +93,7 @@ export default function EditFood() {
                             nameFood: foods.nameFood,
                             description: foods.description,
                             price: foods.price,
+                            id_Category: foods.id_Category,
                         }}
                         onSubmit={(values) => {
                             values.img = urls[0]
@@ -118,9 +126,24 @@ export default function EditFood() {
                                 <button className="btn btn-outline-dark" style={{marginRight: 10}} type='button'
                                         onClick={handleUpload}>Up
                                 </button>
-
                             </div>
-                            <button type="submit" className="btn btn-outline-dark">Save</button>
+                            <div className="col-12">
+                                <Field
+                                    as="select"
+                                    name={"id_Category"}
+                                    className="form-control"
+                                    id="id_Category"
+                                >
+                                    <option selected>Category</option>
+                                    {categories !== undefined &&
+                                        categories.map((item, index) => (
+                                            <option value={item.idCategory}>
+                                                {item.nameCategory}
+                                            </option>
+                                        ))}
+                                </Field>
+                            </div>
+                            <button type="submit" className="btn btn-outline-dark" style={{marginTop: 20}}>Save</button>
                         </Form>
                     </Formik>
                 </div>
