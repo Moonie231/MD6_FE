@@ -64,7 +64,7 @@ export default function RegisterUser(){
                                                     }}
                                             >
                                                 <Form>
-                                                    <p>Please register to create an account merchant</p>
+                                                    <p>Please register to create an account buyer</p>
 
                                                     <div className="form-outline mb-4">
                                                         <label for="username">Username</label>
