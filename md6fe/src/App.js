@@ -12,13 +12,12 @@ import RegisterMerchant from "./Page/merchant/register";
 import LoginUser from "./Page/user/login";
 import RegisterUser from "./Page/user/register";
 import VerifyEmail from "./Page/user/verifyEmail";
-import Profile from "./Page/merchant/profile";
 import ShopMerchant from "./Page/shopMerchant/shopMerchant";
+import Profile from "./Page/merchant/profile";
 import MerchantActive from "./admin/merchantActive";
 import MerchantPending from "./admin/merchantPending";
 
 function App() {
-
   return (
 <>
   <Header></Header>
@@ -39,12 +38,11 @@ function App() {
       <Route path={'merchant-active'} element={<MerchantActive></MerchantActive>}></Route>
       <Route path={'merchant-pending'} element={<MerchantPending></MerchantPending>}></Route>
     </Route>
-
   </Routes>
   <Footer></Footer>
 
 </>
-  );
+  )
 }
 
 export default App;
