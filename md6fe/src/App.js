@@ -12,10 +12,10 @@ import RegisterMerchant from "./Page/merchant/register";
 import LoginUser from "./Page/user/login";
 import RegisterUser from "./Page/user/register";
 import VerifyEmail from "./Page/user/verifyEmail";
-import ShopMerchant from "./Page/shopMerchant/shopMerchant";
 import Profile from "./Page/merchant/profile";
-import MerchantActive from "./admin/merchantActive";
-import MerchantPending from "./admin/merchantPending";
+import ShopMerchant from "./Page/shopMerchant/shopMerchant";
+import MerchantActive from "./Page/admin/merchantActive";
+import MerchantPending from "./Page/admin/merchantPending";
 
 function App() {
   return (
@@ -30,14 +30,16 @@ function App() {
     <Route path={'register-user'} element={<RegisterUser/>}></Route>
     <Route path={'add-food'} element={<AddFood/>}/>
     <Route path={`edit-food/:idFood`} element={<EditFood/>}/>
-    <Route path={'my-shop'} element={<ShopMerchant/>}></Route>
     <Route path={'merchants'}>
         <Route path={`edit/:idMerchant`} element={<Profile></Profile>}></Route>
+        <Route path={'my-shop/:idMerchant'} element={<ShopMerchant/>}>
+        </Route>
     </Route>
     <Route path={'admin'}>
       <Route path={'merchant-active'} element={<MerchantActive></MerchantActive>}></Route>
       <Route path={'merchant-pending'} element={<MerchantPending></MerchantPending>}></Route>
     </Route>
+
   </Routes>
   <Footer></Footer>
 
