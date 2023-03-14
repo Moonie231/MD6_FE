@@ -75,7 +75,7 @@ export default function EditFood() {
         let data = [{ ...values,img: urls},idFood];
         dispatch(editFood(data)).then((value) => {
             swal("Edit Success !!!");
-            navigate("/");
+            navigate('/merchants/my-shop/'+localStorage.getItem('idMerchant'))
         });
     };
     useEffect(() => {

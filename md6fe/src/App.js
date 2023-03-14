@@ -16,9 +16,6 @@ import Profile from "./Page/merchant/profile";
 import ShopMerchant from "./Page/shopMerchant/shopMerchant";
 import MerchantActive from "./Page/admin/merchantActive";
 import MerchantPending from "./Page/admin/merchantPending";
-import Profile from "./Page/merchant/profile";
-import MerchantActive from "./admin/merchantActive";
-import MerchantPending from "./admin/merchantPending";
 
 function App() {
   return (

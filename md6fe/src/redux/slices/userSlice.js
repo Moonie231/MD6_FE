@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {editProfile, getProfile, login, register, verifyEmail} from "../../service/userService";
+import {editProfile, getProfile, login, logoutUser, register, verifyEmail} from "../../service/userService";
 
 const initialState = {
     currentUser: JSON.parse(localStorage.getItem('user')),
     user: [],
-    profile: []
+    profile: [],
+    role:false
 }
 
 const userSlice = createSlice({
@@ -17,9 +18,13 @@ const userSlice = createSlice({
             localStorage.setItem("username", action.payload.username);
             localStorage.setItem("idUser", action.payload.idUser);
             localStorage.setItem("access-token", action.payload.token)
+            if(action.payload.role===2||action.payload.role==='2'){
+                state.role=true
+            }
         });
         builder.addCase(register.fulfilled, (state, action) => {
             state.user.push(action.payload)
+            console.log(1)
             localStorage.setItem("email-token", action.payload.tokenEmail)
             localStorage.setItem("name", action.payload.username)
         });
@@ -32,6 +37,10 @@ const userSlice = createSlice({
         builder.addCase(verifyEmail.fulfilled, (state, action) => {
 
         })
+        builder.addCase(logoutUser.fulfilled, (state, action) => {
+            localStorage.clear()
+            state.role=false
+        });
     }
 })
 
