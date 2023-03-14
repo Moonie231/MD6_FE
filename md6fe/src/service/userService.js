@@ -34,3 +34,9 @@ export const getProfile = createAsyncThunk('user/getProfile', async (data) => {
     console.log(res.data)
     return res.data
 })
+export const logoutUser = createAsyncThunk (
+    'user/logoutUser',
+    async () => {
+        return false
+    }
+)

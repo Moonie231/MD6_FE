@@ -23,15 +23,15 @@ const merchantSlice = createSlice({
         builder.addCase(login.fulfilled, (state, action) => {
             state.currentMerchant = action.payload
             state.status=true
-            localStorage.setItem("merchant", JSON.stringify(action.payload))
             localStorage.setItem("access-token", action.payload.token)
             localStorage.setItem("NameStatus",state.status )
+            localStorage.setItem("idMerchant",action.payload.idMerchant)
         });
         builder.addCase(register.fulfilled, (state, action) => {
             state.merchant.push(action.payload)
         });
         builder.addCase(editProfile.fulfilled, (state, action) => {
-            state.currentMerchant = action.payload;
+            state.currentMerchant = action.payload
         });
         builder.addCase(getProfile.fulfilled, (state, action) => {
             state.profile = action.payload;

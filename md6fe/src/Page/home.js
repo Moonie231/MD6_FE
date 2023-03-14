@@ -7,17 +7,15 @@ export default function Home(){
             <body>
             <section className="hero">
                 <div className="">
-                    <div className="hero__item set-bg" style={{backgroundImage:'url(img/hero/hero-1.jpg)'}}>
+                    <div className="hero__item set-bg" style={{backgroundImage:'url(https://chupanhmonan.com/wp-content/uploads/2017/09/%C4%91%E1%BA%A7u-t%C6%B0-h%C3%ACnh-%E1%BA%A3nh-m%C3%B3n-%C4%83n-%C4%91%E1%BB%83-thu-h%C3%BAt-kh%C3%A1ch-h%C3%A0ng-1024x796.jpg)'}}>
                         <div className="container">
                             <div className="row d-flex justify-content-center">
 
                             </div>
                         </div>
                     </div>
-
                 </div>
             </section>
-
             <section className="about spad">
                 <div className="container">
                     <div className="row">
@@ -273,7 +271,7 @@ export default function Home(){
                         <div className="col-lg-7 col-md-7 col-sm-7">
                             <div className="section-title">
                                 <span>Our team</span>
-                                <h2>Sweet Baker </h2>
+                                <h2>Developer</h2>
                             </div>
                         </div>
                         <div className="col-lg-5 col-md-5 col-sm-5">
@@ -283,11 +281,11 @@ export default function Home(){
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-lg-3 col-md-6 col-sm-6">
-                            <div className="team__item set-bg"  style={{backgroundImage:'url(img/team/team-1.jpg)'}}>
+                        <div className="col-lg-3 col-md-6 col-sm-6" style={{marginLeft:'150px'}}>
+                            <div className="team__item set-bg" style={{backgroundImage:'url(img/team/team-1.jpg)'}}>
                                 <div className="team__item__text">
-                                    <h6>Randy Butler</h6>
-                                    <span>Decorater</span>
+                                    <h6>Nguyễn Duy Tùng</h6>
+                                    <span>Leader</span>
                                     <div className="team__item__social">
                                         <a href="#"><i className="fa fa-facebook"></i></a>
                                         <a href="#"><i className="fa fa-twitter"></i></a>
@@ -298,12 +296,12 @@ export default function Home(){
                             </div>
                         </div>
                         <div className="col-lg-3 col-md-6 col-sm-6">
-                            <div className="team__item set-bg" style={{backgroundImage:'url(img/team/team-1.jpg)'}}>
+                            <div className="team__item set-bg" style={{backgroundImage:'url(img/team/team-2.jpg)'}}>
                                 <div className="team__item__text">
-                                    <h6>Randy Butler</h6>
-                                    <span>Decorater</span>
+                                    <h6>Đỗ Minh Trang</h6>
+                                    <span>Member</span>
                                     <div className="team__item__social">
-                                        <a href="#"><i className="fa fa-facebook"></i></a>
+                                        <a href="https://www.facebook.com/moonie2301"><i className="fa fa-facebook"></i></a>
                                         <a href="#"><i className="fa fa-twitter"></i></a>
                                         <a href="#"><i className="fa fa-instagram"></i></a>
                                         <a href="#"><i className="fa fa-youtube-play"></i></a>
@@ -312,26 +310,12 @@ export default function Home(){
                             </div>
                         </div>
                         <div className="col-lg-3 col-md-6 col-sm-6">
-                            <div className="team__item set-bg" style={{backgroundImage:'url(img/team/team-1.jpg)'}}>
+                            <div className="team__item set-bg" style={{backgroundImage:'url(img/team/team-3.jpg)'}}>
                                 <div className="team__item__text">
-                                    <h6>Randy Butler</h6>
-                                    <span>Decorater</span>
+                                    <h6>Đàm Thanh Tùng</h6>
+                                    <span>Member</span>
                                     <div className="team__item__social">
-                                        <a href="#"><i className="fa fa-facebook"></i></a>
-                                        <a href="#"><i className="fa fa-twitter"></i></a>
-                                        <a href="#"><i className="fa fa-instagram"></i></a>
-                                        <a href="#"><i className="fa fa-youtube-play"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-3 col-md-6 col-sm-6">
-                            <div className="team__item set-bg" style={{backgroundImage:'url(img/team/team-1.jpg)'}}>
-                                <div className="team__item__text">
-                                    <h6>Randy Butler</h6>
-                                    <span>Decorater</span>
-                                    <div className="team__item__social">
-                                        <a href="#"><i className="fa fa-facebook"></i></a>
+                                        <a href="https://www.facebook.com/thanhtung871998"><i className="fa fa-facebook"></i></a>
                                         <a href="#"><i className="fa fa-twitter"></i></a>
                                         <a href="#"><i className="fa fa-instagram"></i></a>
                                         <a href="#"><i className="fa fa-youtube-play"></i></a>
@@ -514,32 +498,32 @@ export default function Home(){
                             <div className="row">
                                 <div className="col-lg-4 col-md-4 col-sm-4 col-6">
                                     <div className="instagram__pic">
-                                        <img src="/img/instagram/instagram-1.jpg" alt=""/>
+                                        <img style={{width: "229.98px", height: "229.98px"}} src="https://images.squarespace-cdn.com/content/v1/53883795e4b016c956b8d243/1550052451758-LL5DACGHWUM1MEAI6HOA/chup-anh-mon-an-com-ga-thuong-hai-8.jpg" alt=""/>
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col-md-4 col-sm-4 col-6">
                                     <div className="instagram__pic middle__pic">
-                                        <img src="/img/instagram/instagram-2.jpg" alt=""/>
+                                        <img style={{width: "229.98px", height: "229.98px"}} src="https://znews-photo.zingcdn.me/w660/Uploaded/spivpdiv/2020_11_24/IMG_0485.jpg" alt=""/>
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col-md-4 col-sm-4 col-6">
                                     <div className="instagram__pic">
-                                        <img src="/img/instagram/instagram-3.jpg" alt=""/>
+                                        <img style={{width: "229.98px", height: "229.98px"}} src="https://statics.vntrip.vn/data-v2/data-guide/img_content/1462768514_banh-mi-1.jpg" alt=""/>
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col-md-4 col-sm-4 col-6">
                                     <div className="instagram__pic">
-                                        <img src="/img/instagram/instagram-4.jpg" alt=""/>
+                                        <img style={{width: "229.98px", height: "229.98px"}} src="https://afamilycdn.com/150157425591193600/2022/5/8/12xoibatsg-165198796742293443585.jpg" alt=""/>
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col-md-4 col-sm-4 col-6">
                                     <div className="instagram__pic middle__pic">
-                                        <img src="/img/instagram/instagram-5.jpg" alt=""/>
+                                        <img style={{width: "229.98px", height: "229.98px"}} src="https://img5.thuthuatphanmem.vn/uploads/2021/12/08/hinh-anh-mi-cay-hai-san_084809323.jpg" alt=""/>
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col-md-4 col-sm-4 col-6">
                                     <div className="instagram__pic">
-                                        <img src="/img/instagram/instagram-3.jpg" alt=""/>
+                                        <img style={{width: "229.98px", height: "229.98px"}} src="https://beenut.net/wp-content/uploads/2021/05/salad-rau-c%E1%BB%A7.jpg" alt=""/>
                                     </div>
                                 </div>
                             </div>
