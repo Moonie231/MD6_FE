@@ -60,23 +60,23 @@ export default function LoginUser() {
                                                         handleLogin(values)
                                                     }}>
                                                 <Form>
-                                                    <p>Please login to your account merchant</p>
+                                                    <p>Please login to your account buyer</p>
                                                     <div className="form-outline mb-4">
+                                                        <label className="form-label"
+                                                               htmlFor="form2Example11">Email</label>
                                                         <Field type="email" id="form2Example11" name={'email'}
                                                                className="form-control"
                                                                placeholder="Email"/>
-                                                        <label className="form-label"
-                                                               htmlFor="form2Example11">Email</label>
                                                         <alert className="text-danger">
                                                             <ErrorMessage name={"email"}></ErrorMessage>
                                                         </alert>
                                                     </div>
                                                     <div className="form-outline mb-4">
+                                                        <label className="form-label"
+                                                               htmlFor="form2Example22">Password</label>
                                                         <Field type="password" id="form2Example22" name={'password'}
                                                                placeholder="Password"
                                                                className="form-control"/>
-                                                        <label className="form-label"
-                                                               htmlFor="form2Example22">Password</label>
                                                         <alert className="text-danger">
                                                             <ErrorMessage name={"password"}></ErrorMessage>
                                                         </alert>

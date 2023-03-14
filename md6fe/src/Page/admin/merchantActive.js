@@ -38,7 +38,7 @@ export default function MerchantActive() {
                             <td>{item.address}</td>
                             <td>{item.phone}</td>
                             <td>{item.status}</td>
-                            <td>{item.image}</td>
+                            <td><img style={{height:100,width:100}} src={item.image} alt=""/></td>
                             <td>{item.email}</td>
                             <td>
                                 {item.status === 'locked' && <>

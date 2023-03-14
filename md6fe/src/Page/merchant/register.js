@@ -13,18 +13,18 @@ const validateSchema = Yup.object().shape({
         .min(2, "Too short!")
         .max(50, "Too long!")
         .required("Required"),
-    nameMerchant:Yup.string()
+    nameMerchant: Yup.string()
         .min(2, "Too short!")
         .max(50, "Too long!")
         .required("Required"),
 });
 
-export default function RegisterMerchant(){
+export default function RegisterMerchant() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const handleRegister = (values) => {
-        let data = { ...values};
+        let data = {...values};
         dispatch(register(data)).then((value) => {
             if (value.payload === "Email already registered") {
                 swal("Email already registered");
@@ -36,10 +36,10 @@ export default function RegisterMerchant(){
         });
     };
 
-    return(
+    return (
         <>
             <body>
-            <section className="h-100 gradient-form" style={{backgroundColor:''}}>
+            <section className="h-100 gradient-form" style={{backgroundColor: ''}}>
                 <div className="container py-5 h-100">
                     <div className="row d-flex justify-content-center align-items-center h-100">
                         <div className="col-xl-10">
@@ -57,57 +57,67 @@ export default function RegisterMerchant(){
                                                 merchantPassword: "",
                                                 email: ""
                                             }}
-                                            validationSchema={validateSchema}
-                                            onSubmit={(values) => {
-                                                handleRegister(values);
-                                            }}
+                                                    validationSchema={validateSchema}
+                                                    onSubmit={(values) => {
+                                                        handleRegister(values);
+                                                    }}
                                             >
-                                            <Form>
-                                                <p>Please register to create an account merchant</p>
+                                                <Form>
+                                                    <p>Please register to create an account merchant</p>
 
-                                                <div className="form-outline mb-4">
-                                                    <Field type="text" id="username" className="form-control" name = {'nameMerchant'}
-                                                           placeholder="Username"/>
-                                                    <label className="form-label" htmlFor="username">Name Merchant</label>
-                                                    <alert className="text-danger">
-                                                        <ErrorMessage name={"nameMerchant"}></ErrorMessage>
-                                                    </alert>
-                                                </div>
+                                                    <div className="form-outline mb-4">
+                                                        <label className="form-label"
+                                                               htmlFor="username">Name Merchant</label>
+                                                        <Field type="text" id="username" className="form-control"
+                                                               name={'nameMerchant'}
+                                                               placeholder="Username"/>
+                                                        <alert className="text-danger">
+                                                            <ErrorMessage name={"nameMerchant"}></ErrorMessage>
+                                                        </alert>
+                                                    </div>
+                                                    <div className="form-outline mb-4">
+                                                        <label className="form-label"
+                                                               htmlFor="password">Password</label>
+                                                        <Field type="password" id="password" className="form-control"
+                                                               name={'merchantPassword'}
+                                                               placeholder="Password"/>
+                                                        <alert className="text-danger">
+                                                            <ErrorMessage name={"merchantPassword"}></ErrorMessage>
+                                                        </alert>
+                                                    </div>
 
-                                                <div className="form-outline mb-4">
-                                                    <Field type="password" id="password" className="form-control" name ={'merchantPassword'}
-                                                           placeholder="Password"/>
-                                                    <label className="form-label" htmlFor="password">Password</label>
-                                                    <alert className="text-danger">
-                                                        <ErrorMessage name={"merchantPassword"}></ErrorMessage>
-                                                    </alert>
-                                                </div>
-
-                                                <div className="form-outline mb-4">
-                                                    <Field type="text" id="name" className="form-control" name = {'email'}
-                                                           placeholder="Email"/>
-                                                    <label className="form-label" htmlFor="name">Email</label>
-                                                    <alert className="text-danger">
-                                                        <ErrorMessage name={"email"}></ErrorMessage>
-                                                    </alert>
-                                                </div>
-                                                <div className="text-center pt-1 mb-5 pb-1">
-                                                    <button className="btn btn-outline-primary btn-block fa-lg gradient-custom-2 mb-3"
+                                                    <div className="form-outline mb-4">
+                                                        <label className="form-label" htmlFor="name">Email</label>
+                                                        <Field type="text" id="name" className="form-control"
+                                                               name={'email'}
+                                                               placeholder="Email"/>
+                                                        <alert className="text-danger">
+                                                            <ErrorMessage name={"email"}></ErrorMessage>
+                                                        </alert>
+                                                    </div>
+                                                    <div className="text-center pt-1 mb-5 pb-1">
+                                                        <button
+                                                            className="btn btn-outline-primary btn-block fa-lg gradient-custom-2 mb-3"
                                                             type="submit">Register
-                                                    </button>
-                                                </div>
+                                                        </button>
+                                                    </div>
 
-                                                <div className="d-flex align-items-center justify-content-center pb-4">
-                                                    <p className="mb-0 me-2">Already have an account?</p>
-                                                    <Link to={'/login-merchant'}><button type="button" className="btn btn-outline-danger">Log in</button></Link>
-                                                </div>
+                                                    <div
+                                                        className="d-flex align-items-center justify-content-center pb-4">
+                                                        <p className="mb-0 me-2">Already have an account?</p>
+                                                        <Link to={'/login-merchant'}>
+                                                            <button type="button" className="btn btn-outline-danger">Log
+                                                                in
+                                                            </button>
+                                                        </Link>
+                                                    </div>
 
-                                            </Form>
+                                                </Form>
                                             </Formik>
                                         </div>
                                     </div>
                                     <div className="col-lg-6 d-flex align-items-center gradient-custom-2">
-                                        <img style={{width:'460px',height:'100%'}} src="/img/food.jpg" alt=""/>
+                                        <img style={{width: '460px', height: '100%'}} src="/img/food.jpg" alt=""/>
                                         <div className="text-white px-3 py-4 p-md-5 mx-md-4">
                                         </div>
                                     </div>
@@ -118,6 +128,6 @@ export default function RegisterMerchant(){
                 </div>
             </section>
             </body>
-     </>
+        </>
     )
 }
