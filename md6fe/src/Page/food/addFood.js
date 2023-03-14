@@ -104,7 +104,7 @@ export default function AddFood() {
                                 <br/>
                                 {urls.map(item=>(
                                     <>
-                                        <img src={item} alt="" style={{width:50}}/>
+                                        <img src={item} alt="" style={{width:400, height: 400}}/>
                                     </>
                                 ))}
 
