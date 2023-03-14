@@ -25,6 +25,7 @@ const merchantSlice = createSlice({
             console.log(action.payload)
             localStorage.setItem("access-token", action.payload.token)
             localStorage.setItem("idMerchant",action.payload.idMerchant)
+            localStorage.setItem("merchant", JSON.stringify(action.payload))
             if(action.payload !== 'Account not ready'||action.payload !== 'Merchant not found'|| action.payload !== 'Wrong password'|| action.payload !== 'Account locked'){
                 state.status=true
                 localStorage.setItem("NameStatus",state.status )
@@ -35,6 +36,7 @@ const merchantSlice = createSlice({
         });
         builder.addCase(editProfile.fulfilled, (state, action) => {
             state.currentMerchant = action.payload
+            localStorage.setItem("merchant", JSON.stringify(action.payload))
         });
         builder.addCase(getProfile.fulfilled, (state, action) => {
             state.profile = action.payload;

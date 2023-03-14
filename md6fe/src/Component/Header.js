@@ -8,18 +8,20 @@ export default function Header(){
     const navigate=useNavigate()
     const dispatch=useDispatch()
     const user = useSelector((state) =>{
-        console.log(1,state.merchant.profile)
-         return state.merchant.profile
+            return state.merchant.currentMerchant
+
     });
-    useEffect(()=>{
-        dispatch(getProfile(localStorage.getItem('idMerchant'))).then()
-    },[])
+    // useEffect(()=>{
+    //     dispatch(getProfile(localStorage.getItem('idMerchant'))).then()
+    // },[])
     const admin=useSelector((state) =>{
         return state.user.role
     })
 
     return(
         <>
+            {user!=null &&<>
+            </>}
             <header className="header">
                 <div className="header__top">
                     <div className="container">
