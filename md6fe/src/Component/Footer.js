@@ -1,7 +1,7 @@
-export default function Footer(){
-    return(
+export default function Footer() {
+    return (
         <>
-            <footer className="footer set-bg" data-setbg="/img/footer-bg.jpg">
+            <footer className="footer set-bg" data-setbg="/img/footer-bg.jpg" style={{backgroundColor:'dimgray'}} >
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-4 col-md-6 col-sm-6">
@@ -17,11 +17,9 @@ export default function Footer(){
                         <div className="col-lg-4 col-md-6 col-sm-6">
                             <div className="footer__about">
                                 <div className="footer__logo">
-                                    <a href="#"><img src="/img/footer-logo.png" alt=""/></a>
+                                    <a href="#"><img style={{height: 150}} src="/img/logo.png" alt=""/></a>
                                 </div>
-                                <p>Lorem ipsum dolor amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                    ut
-                                    labore dolore magna aliqua.</p>
+                                <p>Chọn món theo cách của bạn và tính tiền theo cách của chúng tôi</p>
                                 <div className="footer__social">
                                     <a href="#"><i className="fa fa-facebook"></i></a>
                                     <a href="#"><i className="fa fa-twitter"></i></a>

@@ -67,6 +67,7 @@ export default function RegisterUser(){
                                                     <p>Please register to create an account merchant</p>
 
                                                     <div className="form-outline mb-4">
+                                                        <label for="username">Username</label>
                                                         <Field type="text" id="username" className="form-control" name = {'username'}
                                                                placeholder="Username"/>
                                                         <alert className="text-danger">
@@ -75,6 +76,7 @@ export default function RegisterUser(){
                                                     </div>
 
                                                     <div className="form-outline mb-4">
+                                                        <label htmlFor="password">Password</label>
                                                         <Field type="password" id="password" className="form-control" name ={'userPassword'}
                                                                placeholder="Password"/>
                                                         <alert className="text-danger">
@@ -83,6 +85,7 @@ export default function RegisterUser(){
                                                     </div>
 
                                                     <div className="form-outline mb-4">
+                                                        <label htmlFor="email">Email</label>
                                                         <Field type="text" id="name" className="form-control" name = {'email'}
                                                                placeholder="Email"/>
                                                         <alert className="text-danger">
@@ -95,7 +98,6 @@ export default function RegisterUser(){
                                                                 type="submit">Register
                                                         </button>
                                                     </div>
-
                                                     <div className="d-flex align-items-center justify-content-center pb-4">
                                                         <p className="mb-0 me-2">Already have an account?</p>
                                                         <Link to={'/login-user'}><button type="button" className="btn btn-outline-danger">Log in</button></Link>

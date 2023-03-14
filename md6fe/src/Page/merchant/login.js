@@ -19,18 +19,18 @@ export default function LoginMerchant() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const handleLogin = async (values) => {
-     await dispatch(login(values))
+        await dispatch(login(values))
             .then((e) => {
-            if (e.payload === "Account not ready") {
-                swal("Account not ready");
-            } else if (e.payload === "Merchant not found") {
-                swal("Merchant not found");
-            } else if (e.payload === "Wrong password") {
-                swal("Wrong password");
-            }else {
-                navigate("/")
-            }
-        });
+                if (e.payload === "Account not ready") {
+                    swal("Account not ready");
+                } else if (e.payload === "Merchant not found") {
+                    swal("Merchant not found");
+                } else if (e.payload === "Wrong password") {
+                    swal("Wrong password");
+                } else {
+                    navigate("/")
+                }
+            });
     };
 
     return (
@@ -53,25 +53,28 @@ export default function LoginMerchant() {
                                                 email: "",
                                                 merchantPassword: ""
                                             }}
-                                            validationSchema={validateSchema}
-                                            onSubmit={handleLogin}>
+                                                    validationSchema={validateSchema}
+                                                    onSubmit={handleLogin}>
                                                 <Form>
                                                     <p>Please login to your account merchant</p>
                                                     <div className="form-outline mb-4">
+                                                        <label className="form-label"
+                                                               htmlFor="form2Example11">Email</label>
                                                         <Field type="email" id="form2Example11" name={'email'}
                                                                className="form-control"
                                                                placeholder="Email"/>
-                                                        <label className="form-label"
-                                                               htmlFor="form2Example11">Email</label>
+
                                                         <alert className="text-danger">
                                                             <ErrorMessage name={"email"}></ErrorMessage>
                                                         </alert>
                                                     </div>
                                                     <div className="form-outline mb-4">
-                                                        <Field type="password" id="form2Example22" name={'merchantPassword'}
+                                                        <label className="form-label"
+                                                               htmlFor="form2Example">Password</label>
+                                                        <Field type="password" id="form2Example22"
+                                                               name={'merchantPassword'}
                                                                placeholder="Password"
                                                                className="form-control"/>
-
                                                         <alert className="text-danger">
                                                             <ErrorMessage name={"merchantPassword"}></ErrorMessage>
                                                         </alert>
@@ -82,16 +85,22 @@ export default function LoginMerchant() {
                                                             type="submit">Login
                                                         </button>
                                                     </div>
-                                                    <div className="d-flex align-items-center justify-content-center pb-4">
+                                                    <div
+                                                        className="d-flex align-items-center justify-content-center pb-4">
                                                         <p className="mb-0 me-2">Don't have an account?</p>
-                                                        <Link to={"/register-merchant"}><button type="button" className="btn btn-outline-danger">Create new</button></Link>
+                                                        <Link to={"/register-merchant"}>
+                                                            <button type="button"
+                                                                    className="btn btn-outline-danger">Create new
+                                                            </button>
+                                                        </Link>
                                                     </div>
                                                 </Form>
                                             </Formik>
                                         </div>
                                     </div>
                                     <div className="col-lg-6 d-flex align-items-center gradient-custom-2">
-                                        <img style={{width: '459px', height: '100%'}} src="/img/fish-and-chips.jpeg" alt=""/>
+                                        <img style={{width: '459px', height: '100%'}} src="/img/fish-and-chips.jpeg"
+                                             alt=""/>
                                         <div className="text-white px-3 py-4 p-md-5 mx-md-4">
                                         </div>
                                     </div>
