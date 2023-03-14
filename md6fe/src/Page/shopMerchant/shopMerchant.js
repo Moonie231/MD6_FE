@@ -7,6 +7,7 @@ import swal from 'sweetalert'
 export default function ShopMerchant(){
     const {idMerchant} = useParams()
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const foods = useSelector(state => {
         return state.foods.myFood
     });
@@ -65,6 +66,7 @@ export default function ShopMerchant(){
                                                         icon: "success",
                                                     });
                                                     dispatch(deleteFood(item.idFood)).then(()=>{
+                                                        navigate('/merchants/my-shop')
                                                         dispatch(getFood()).then(()=>{
                                                         })
 
