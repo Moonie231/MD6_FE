@@ -52,7 +52,7 @@ export default function ShopMerchant(){
                                 <th scope="col">{item.nameMerchant}</th>
                                 <th>
                                     <Link className="btn btn-outline-success" to={`/edit-food/${item.idFood}`}>
-                                        Edit
+                                        <i className="fa-solid fa-pen-to-square"></i>
                                     </Link>
                                     <button className="btn btn-outline-danger" style={{marginLeft: 30}} onClick={() => {
                                         swal({

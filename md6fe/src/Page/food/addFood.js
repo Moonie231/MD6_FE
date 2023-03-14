@@ -132,7 +132,7 @@ export default function AddFood() {
 
                                 </Field>
                             </div>
-                            <button type="submit" className="btn btn-outline-dark">Add</button>
+                            <button type="submit" className="btn btn-outline-dark" style={{marginTop: 10}}>Add</button>
                         </Form>
                     </Formik>
                 </div>
