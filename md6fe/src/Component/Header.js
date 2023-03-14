@@ -6,7 +6,6 @@ export default function Header(){
     const navigate=useNavigate()
     const dispatch=useDispatch()
     const user = useSelector((state) =>{
-        console.log(state.merchant.currentMerchant)
          return state.merchant.currentMerchant
     } );
 

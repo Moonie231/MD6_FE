@@ -14,8 +14,8 @@ import RegisterUser from "./Page/user/register";
 import VerifyEmail from "./Page/user/verifyEmail";
 import ShopMerchant from "./Page/shopMerchant/shopMerchant";
 import Profile from "./Page/merchant/profile";
-import MerchantActive from "./admin/merchantActive";
-import MerchantPending from "./admin/merchantPending";
+import MerchantActive from "./Page/admin/merchantActive";
+import MerchantPending from "./Page/admin/merchantPending";
 
 function App() {
   return (
