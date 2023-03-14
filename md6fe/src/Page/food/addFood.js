@@ -22,6 +22,7 @@ export default function AddFood() {
         console.log(state.categories,22)
         return state.categories.categories;
     });
+
     const [images, setImages] = useState([]);
     const [urls, setUrls] = useState([]);
     const [progress, setProgress] = useState(0);
