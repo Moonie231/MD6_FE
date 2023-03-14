@@ -38,37 +38,36 @@ export default function MerchantPending() {
                             <td>{item.address}</td>
                             <td>{item.phone}</td>
                             <td>{item.status}</td>
-                            <td><img style={{height:100,width:100}} src={item.image} alt=""/></td>
+                            <td><img style={{height: 100, width: 100}} src={item.image} alt=""/></td>
                             <td>{item.email}</td>
                             <td>
-                                    <button
-                                        className="btn-danger rounded text-white position-absolute start-0 top-0 m-1 py-1 px-2"
-                                        onClick={() => {
-                                            swal({
-                                                title: "Are you sure?",
-                                                text: "Once deleted, you will not be able to recover this imaginary file!",
-                                                icon: "warning",
-                                                buttons: true,
-                                                dangerMode: true,
-                                            })
-                                                .then(async (willActive) => {
-                                                    if (willActive) {
-                                                        await dispatch(setStatus(item.idMerchant)).then(async () => {
-                                                            await dispatch(getMerchantPending()).then(() => {
-                                                                navigate('/admin/merchant-pending')
-                                                            })
+                                <button
+                                    className="btn-danger rounded text-white position-absolute start-0 top-0 m-1 py-1 px-2"
+                                    onClick={() => {
+                                        swal({
+                                            title: "Are you sure?",
+                                            icon: "warning",
+                                            buttons: true,
+                                            dangerMode: true,
+                                        })
+                                            .then(async (willActive) => {
+                                                if (willActive) {
+                                                    await dispatch(setStatus(item.idMerchant)).then(async () => {
+                                                        await dispatch(getMerchantPending()).then(() => {
+                                                            navigate('/admin/merchant-pending')
                                                         })
-                                                        swal("Poof! Your imaginary file has been deleted!", {
-                                                            icon: "success",
-                                                        });
-                                                    } else {
-                                                        swal("Your imaginary file is safe!");
-                                                    }
-                                                });
-                                        }}
-                                    >
-                                        Pending
-                                    </button>
+                                                    })
+                                                    swal("Your account has been active!", {
+                                                        icon: "success",
+                                                    });
+                                                } else {
+                                                    swal("Your account is safe!");
+                                                }
+                                            });
+                                    }}
+                                >
+                                    Pending
+                                </button>
                             </td>
                         </tr>
                     </>
