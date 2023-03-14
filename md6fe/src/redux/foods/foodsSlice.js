@@ -4,12 +4,13 @@ import {
     deleteFood,
     editFood,
     findByIdFood,
-    getFood,
+    getFood, myFood,
     searchNameFood
 } from "../../service/foodsService";
 
 const initialState = {
     foods: [],
+    myFood: [],
     food: {}
 }
 const foodsSlice = createSlice({
@@ -20,15 +21,18 @@ const foodsSlice = createSlice({
             builder.addCase(getFood.fulfilled, (state, action) => {
                 state.foods = action.payload;
             });
+            builder.addCase(myFood.fulfilled, (state, action) => {
+                state.myFood = action.payload;
+            });
             builder.addCase(addFood.fulfilled, (state, action) => {
-                state.foods = action.payload
+                state.myFood.push(action.payload)
             })
             builder.addCase(findByIdFood.fulfilled, (state, action) => {
                 state.food = action.payload
             })
 
             builder.addCase(deleteFood.fulfilled, (state, action) => {
-                state.foods.splice(action.payload)
+                state.myFood.splice(action.payload)
             })
             builder.addCase(editFood.fulfilled, (state, action) => {
                 for (let i =0; i<state.foods.length; i++) {

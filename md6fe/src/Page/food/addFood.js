@@ -1,10 +1,11 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import {storage} from "../../service/firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import {useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {Field, Form, Formik} from "formik";
 import {addFood} from "../../service/foodsService";
+import {getCategories} from "../../service/categoryService";
 
 export default function AddFood() {
 
@@ -13,9 +14,14 @@ export default function AddFood() {
 
     const handleAdd = async (values) => {
         let data = {...values};
+        console.log(values,16)
         dispatch(addFood(data));
-        navigate('/my-shop')
+        navigate('/merchants/my-shop/'+localStorage.getItem('idMerchant'))
     }
+    const categories = useSelector((state) => {
+        console.log(state.categories,22)
+        return state.categories.categories;
+    });
     const [images, setImages] = useState([]);
     const [urls, setUrls] = useState([]);
     const [progress, setProgress] = useState(0);
@@ -57,6 +63,10 @@ export default function AddFood() {
             .then(() => alert("All images uploaded"))
             .catch((err) => console.log(err));
     }
+    useEffect(() => {
+        dispatch(getCategories());
+    }, []);
+
 
     return (
         <>
@@ -67,10 +77,9 @@ export default function AddFood() {
                         initialValues={{
                             nameFood: '',
                             description: '',
-                            price: '',
-                            id_Category:'',
-                            id_Merchant: ''
-
+                            price: "",
+                            id_Category:"",
+                            id_Merchant: localStorage.getItem('idMerchant')
 
                         }}
                         onSubmit={(values) => {
@@ -91,7 +100,7 @@ export default function AddFood() {
                                 <Field type="text" className="form-control" id="exampleInput" name={'price'}/>
                             </div>
                             <div className="ml-3 form-group">
-                                <label htmlFor="exampleInputPassword">Img</label>
+                                <label htmlFor="exampleInputPassword">Image</label>
                                 <br/>
                                 {urls.map(item=>(
                                     <>
@@ -102,18 +111,28 @@ export default function AddFood() {
                                 <br/>
                                 <input type='file'  onChange={handleChange}>
                                 </input>
-                                <button className="btn btn-outline-success" style={{marginRight:10}} type='button' onClick={handleUpload}>Up</button>
+                                <button className="btn btn-outline-dark" style={{marginRight:10}} type='button' onClick={handleUpload}>Up</button>
 
                             </div>
-                            <div className="mb-3">
-                                <label htmlFor="exampleInput" className="form-label">Category</label>
-                                <Field type="number" className="form-control" id="exampleInput" name={'id_Category'}/>
+                            <div className="col-12">
+                                <Field
+                                    as="select"
+                                    name={"id_Category"}
+                                    className="form-control"
+                                    id="id_Category"
+                                >
+                                    <option selected>Category</option>
+                                    {categories !== undefined &&
+                                        categories.map((item, index) => (
+
+                                            <option value={item.idCategory}>
+                                                {item.nameCategory}
+                                            </option>
+                                        ))}
+
+                                </Field>
                             </div>
-                            <div className="mb-3">
-                                <label htmlFor="exampleInput" className="form-label">Merchant</label>
-                                <Field type="number" className="form-control" id="exampleInput" name={'id_Merchant'}/>
-                            </div>
-                            <button type="submit" className="btn btn-primary">Add</button>
+                            <button type="submit" className="btn btn-outline-dark">Add</button>
                         </Form>
                     </Formik>
                 </div>

@@ -1,17 +1,19 @@
 
 import {useDispatch, useSelector} from "react-redux";
-import {deleteFood, getFood} from "../../service/foodsService";
+import {deleteFood, getFood, myFood} from "../../service/foodsService";
 import {useEffect} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import swal from 'sweetalert'
 
 export default function ShopMerchant(){
+    const {idMerchant} = useParams()
     const dispatch = useDispatch();
+    const navigate=useNavigate()
     const foods = useSelector(state => {
-        return state.foods.foods
+        return state.foods.myFood
     });
     useEffect(()=>{
-        dispatch(getFood())
+        dispatch(myFood(idMerchant))
     },[]);
 
     return(
@@ -65,6 +67,7 @@ export default function ShopMerchant(){
                                                         icon: "success",
                                                     });
                                                     dispatch(deleteFood(item.idFood)).then(()=>{
+                                                        navigate('/')
                                                         dispatch(getFood()).then(()=>{
                                                         })
 
@@ -82,6 +85,7 @@ export default function ShopMerchant(){
                     </table>
                 </div>
             </div>
+
         </>
     )
 }

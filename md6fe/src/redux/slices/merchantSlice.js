@@ -4,7 +4,7 @@ import {
     getMerchantActive,
     getMerchantPending,
     getProfile, setStatus,
-    login, logout ,
+    login, logout,
     register
 } from "../../service/merchantService";
 
@@ -23,9 +23,9 @@ const merchantSlice = createSlice({
         builder.addCase(login.fulfilled, (state, action) => {
             state.currentMerchant = action.payload
             state.status=true
-            localStorage.setItem("merchant", JSON.stringify(action.payload))
             localStorage.setItem("access-token", action.payload.token)
             localStorage.setItem("NameStatus",state.status )
+            localStorage.setItem("idMerchant",action.payload.idMerchant)
         });
         builder.addCase(register.fulfilled, (state, action) => {
             state.merchant.push(action.payload)
