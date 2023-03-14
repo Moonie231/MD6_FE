@@ -31,7 +31,7 @@ const merchantSlice = createSlice({
             state.merchant.push(action.payload)
         });
         builder.addCase(editProfile.fulfilled, (state, action) => {
-            state.currentMerchant = action.payload;
+            state.currentMerchant = action.payload
         });
         builder.addCase(getProfile.fulfilled, (state, action) => {
             state.profile = action.payload;

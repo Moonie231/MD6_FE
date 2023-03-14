@@ -4,7 +4,9 @@ import {editProfile, getProfile} from "../../service/merchantService";
 import swal from "sweetalert";
 import * as Yup from "yup";
 import {ErrorMessage, Field, Form, Formik} from "formik";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
+import {getDownloadURL, ref, uploadBytesResumable} from "firebase/storage";
+import {storage} from "../../service/firebase";
 
 const validateSchema = Yup.object().shape({
     nameMerchant: Yup.string()
@@ -24,19 +26,72 @@ export default function Profile() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     let {idMerchant} = useParams()
+    const [urls, setUrls] = useState("");
+    useEffect(() => {
+        dispatch(getProfile(idMerchant)).then((e) => {
+            console.log(e.payload.image)
+            setUrls(e.payload.image)
+        })
+    }, [])
+
     const merchant = useSelector((state) => {
         return state.merchant.profile
     })
+
+    const [images, setImages] = useState([]);
+
+    const [progress, setProgress] = useState(0);
+    const handleChange = (e) => {
+        for (let i = 0; i < e.target.files.length; i++) {
+            const newImage = e.target.files[i];
+            newImage["id"] = Math.random();
+            setImages((prevState) => [...prevState, newImage]);
+        }
+    };
+
+    const handleUpload = () => {
+        const promises = [];
+        if (images.length > 0) {
+            images.map((img) => {
+                const storageRef = ref(storage, `images/${img.name}`);
+                const uploadTask = uploadBytesResumable(storageRef, img);
+                promises.push(uploadTask);
+                uploadTask.on(
+                    "state_changed",
+                    (snapshot) => {
+                        const progress = Math.round(
+                            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                        );
+                        setProgress(progress);
+                    },
+                    (error) => {
+                        console.log(error);
+                    },
+                    async () => {
+                        await getDownloadURL(uploadTask.snapshot.ref).then(
+                            (downloadURLs) => {
+                                console.log(downloadURLs)
+                                setUrls(downloadURLs);
+                            }
+                        );
+                    }
+                );
+            });
+        }
+        Promise.all(promises)
+            .then(() => swal("All images uploaded"))
+            .catch((err) => console.log(err));
+    };
+
     const handleEdit = async (values) => {
-        let data = [{...values}, idMerchant];
-        await dispatch(editProfile(data)).then(() => {
+        let data = [{...values, image: urls}, idMerchant];
+        console.log(data)
+        await dispatch(editProfile(data)).then((value) => {
             swal("Edit Success !!!");
             navigate("/");
         });
     };
-    useEffect(() => {
-        dispatch(getProfile(idMerchant))
-    }, [])
+
     return (
         <>
             <section className="h-100 gradient-form" style={{backgroundColor: ''}}>
@@ -61,8 +116,8 @@ export default function Profile() {
                                                 }}
                                                 validationSchema={validateSchema}
                                                 onSubmit={(values) => {
-                                                    handleEdit(values).then(
-                                                        navigate("/"));
+                                                    values.image = urls[0]
+                                                    handleEdit(values)
                                                 }}
                                                 enableReinitialize={true}
                                             >
@@ -70,6 +125,7 @@ export default function Profile() {
                                                     <div className="row g-3">
                                                         <div className="col-12">
                                                             <div className="form-floating">
+                                                                <label for="nameMerchant">Name Merchant</label>
                                                                 <Field type="text" class="form-control"
                                                                        name={'nameMerchant'} id="nameMerchant"
                                                                        placeholder="Name"/>
@@ -78,25 +134,42 @@ export default function Profile() {
                                                                 </alert>
                                                             </div>
                                                             <div className="form-floating">
+                                                                <label htmlFor="address">Address</label>
                                                                 <Field type="text" class="form-control" name={'address'}
                                                                        id="address" placeholder="Address"/>
                                                             </div>
                                                             <div className="form-floating">
+                                                                <label htmlFor="phone">Phone</label>
                                                                 <Field type="text" class="form-control" name={'phone'}
                                                                        id="phone" placeholder="Phone"/>
                                                                 <alert className="text-danger">
                                                                     <ErrorMessage name={"phone"}></ErrorMessage>
                                                                 </alert>
                                                             </div>
-                                                            <div className="form-floating">
-                                                                <Field type="text" class="form-control" name={'image'}
-                                                                       id="image" placeholder="Image"/>
-                                                                <alert className="text-danger">
-                                                                    <ErrorMessage name={"image"}></ErrorMessage>
-                                                                </alert>
+                                                            <div className="col-md-12">
+                                                                <div>
+                                                                    <label htmlFor="exampleFormControlFile1">
+                                                                        <strong>Upload Image Here</strong>
+                                                                    </label>
+                                                                    <input
+                                                                        type="file"
+                                                                        className="form-control-file"
+                                                                        id="exampleFormControlFile1"
+                                                                        multiple
+                                                                        onChange={handleChange}
+                                                                    />
+                                                                </div>
+                                                                <div>
+                                                                    <button
+                                                                        type="button"
+                                                                        className="btn btn-outline-secondary w-100 py-3"
+                                                                        onClick={handleUpload}
+                                                                    >
+                                                                        Up
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                         </div>
-
                                                         <div className="col-12">
                                                             <button className="btn btn-outline-primary w-100 py-3"
                                                                     type="submit">Save changes
@@ -107,11 +180,11 @@ export default function Profile() {
                                             </Formik>
                                         </div>
                                     </div>
-                                    {/*<div className="col-lg-6 d-flex align-items-center gradient-custom-2">*/}
-                                    {/*    <img style={{width: '460px', height: '100%'}} src="src={urls} alt={urls}" alt=""/>*/}
-                                    {/*    <div className="text-white px-3 py-4 p-md-5 mx-md-4">*/}
-                                    {/*    </div>*/}
-                                    {/*</div>*/}
+                                    <div className="col-lg-6 d-flex align-items-center gradient-custom-2">
+                                        <img style={{width: '460px', height: '100%'}} src={urls} alt={urls}/>
+                                        <div className="text-white px-3 py-4 p-md-5 mx-md-4">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

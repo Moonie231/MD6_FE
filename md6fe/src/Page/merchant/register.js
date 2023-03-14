@@ -17,14 +17,6 @@ const validateSchema = Yup.object().shape({
         .min(2, "Too short!")
         .max(50, "Too long!")
         .required("Required"),
-    address:Yup.string()
-        .min(2, "Too short!")
-        .max(50, "Too long!")
-        .required("Required"),
-    phone:Yup.string()
-        .min(2, "Too short!")
-        .max(50, "Too long!")
-        .required("Required"),
 });
 
 export default function RegisterMerchant(){
@@ -63,10 +55,7 @@ export default function RegisterMerchant(){
                                             <Formik initialValues={{
                                                 nameMerchant: "",
                                                 merchantPassword: "",
-                                                email: "",
-                                                address: "",
-                                                phone: "",
-                                                image: "",
+                                                email: ""
                                             }}
                                             validationSchema={validateSchema}
                                             onSubmit={(values) => {
@@ -102,30 +91,6 @@ export default function RegisterMerchant(){
                                                         <ErrorMessage name={"email"}></ErrorMessage>
                                                     </alert>
                                                 </div>
-
-                                                <div className="form-outline mb-4">
-                                                    <Field type="text" id="address" className="form-control" name = {'address'}
-                                                           placeholder="Address"/>
-                                                    <label className="form-label" htmlFor="address">Address</label>
-                                                    <alert className="text-danger">
-                                                        <ErrorMessage name={"address"}></ErrorMessage>
-                                                    </alert>
-                                                </div>
-
-                                                <div className="form-outline mb-4">
-                                                    <Field type="tel" id="phone" className="form-control" name = {'phone'}
-                                                           placeholder="Phone number"/>
-                                                    <label className="form-label" htmlFor="phone">Phone number</label>
-                                                    <alert className="text-danger">
-                                                        <ErrorMessage name={"phone"}></ErrorMessage>
-                                                    </alert>
-                                                </div>
-                                                <div className="form-outline mb-4">
-                                                    <Field type="tel" id="phone" className="form-control" name = {'image'}
-                                                           placeholder="Image"/>
-                                                    <label className="form-label" htmlFor="phone">Image</label>
-                                                </div>
-
                                                 <div className="text-center pt-1 mb-5 pb-1">
                                                     <button className="btn btn-outline-primary btn-block fa-lg gradient-custom-2 mb-3"
                                                             type="submit">Register
@@ -142,7 +107,7 @@ export default function RegisterMerchant(){
                                         </div>
                                     </div>
                                     <div className="col-lg-6 d-flex align-items-center gradient-custom-2">
-                                        <img style={{width:'460px',height:'100%'}} src="" alt=""/>
+                                        <img style={{width:'460px',height:'100%'}} src="/img/food.jpg" alt=""/>
                                         <div className="text-white px-3 py-4 p-md-5 mx-md-4">
                                         </div>
                                     </div>

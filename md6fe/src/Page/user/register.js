@@ -106,7 +106,7 @@ export default function RegisterUser(){
                                         </div>
                                     </div>
                                     <div className="col-lg-6 d-flex align-items-center gradient-custom-2">
-                                        <img style={{width:'460px',height:'100%'}} src="" alt=""/>
+                                        <img style={{width:'460px',height:'100%'}} src="/img/food.jpg" alt=""/>
                                         <div className="text-white px-3 py-4 p-md-5 mx-md-4">
                                         </div>
                                     </div>
