@@ -44,7 +44,7 @@ export default function Shop() {
                                 <div className="col-lg-7 col-md-7">
                                     <div className="shop__option__search">
                                         <Formik initialValues={{
-                                            nameFood: " "
+                                            nameFood: ""
                                         }} onSubmit={(values) =>{
                                             handleSearch(values)
                                         }
