@@ -10,10 +10,12 @@ const validateSchema = Yup.object().shape({
         .email("Invalid email format")
         .required("Required"),
     userPassword: Yup.string()
-        .min(2, "Too short!")
+        .matches(/^[a-zA-Z0-9]/)
+        .min(6, "Too short!")
         .max(50, "Too long!")
         .required("Required"),
     username:Yup.string()
+        .matches(/^[a-zA-Z0-9]/, "Username must have characters")
         .min(2, "Too short!")
         .max(50, "Too long!")
         .required("Required"),

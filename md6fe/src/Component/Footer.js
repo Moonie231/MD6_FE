@@ -19,7 +19,7 @@ export default function Footer() {
                                 <div className="footer__logo">
                                     <a href="#"><img style={{height: 150}} src="/img/logo.png" alt=""/></a>
                                 </div>
-                                <p>Chọn món theo cách của bạn và tính tiền theo cách của chúng tôi</p>
+                                <p>Choose your way and pay our way</p>
                                 <div className="footer__social">
                                     <a href="#"><i className="fa fa-facebook"></i></a>
                                     <a href="#"><i className="fa fa-twitter"></i></a>

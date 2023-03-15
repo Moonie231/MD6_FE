@@ -6,6 +6,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {Field, Form, Formik} from "formik";
 import {addFood} from "../../service/foodsService";
 import {getCategories} from "../../service/categoryService";
+import swal from "sweetalert";
 
 export default function AddFood() {
 
@@ -61,7 +62,7 @@ export default function AddFood() {
             });
         }
         Promise.all(promises)
-            .then(() => alert("All images uploaded"))
+            .then(() => swal("All images uploaded"))
             .catch((err) => console.log(err));
     }
     useEffect(() => {
