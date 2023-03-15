@@ -123,7 +123,7 @@ export default function EditFood() {
                                 <br/>
                                 <input type='file' onChange={handleChange}>
                                 </input>
-                                <button className="btn btn-outline-dark" style={{marginRight: 10}} type='button'
+                                <button className="btn btn-dark" style={{marginRight: 10}} type='button'
                                         onClick={handleUpload}>Up
                                 </button>
                             </div>
@@ -143,7 +143,7 @@ export default function EditFood() {
                                         ))}
                                 </Field>
                             </div>
-                            <button type="submit" className="btn btn-outline-dark" style={{marginTop: 20}}>Save</button>
+                            <button type="submit" className="btn btn-dark" style={{marginTop: 20}}>Save</button>
                         </Form>
                     </Formik>
                 </div>

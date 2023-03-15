@@ -19,76 +19,90 @@ export default function ShopMerchant() {
     return (
         <>
             <div>
-                <Link className="btn btn-outline-dark" style={{marginTop: 50}} to={`/add-food`}>
+                <Link className="btn btn-warning" style={{marginTop: 50}} to={`/add-food`}>
                     Create Food
                 </Link>
             </div>
-            <section className="ftco-section ftco-cart" style={{marginTop: 30}}>
-                <div className="row">
-                    <div className="col-md-12 ftco-animate">
-                        <div className="cart-list">
-                            <table className="table">
-                                <thead className="thead-primary">
-                                <tr className="text-center" >
-                                    <th>#</th>
-                                    <th>Image</th>
-                                    <th>Name Food</th>
-                                    <th>Price</th>
-                                    <th>Description</th>
-                                    <th>Category</th>
-                                    <th colSpan={2}>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {foods.map((item, ind) => (
+
+            <section className="wishlist spad">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <div className="wishlist__cart__table">
+                                <table>
+                                    <thead>
                                     <tr>
-                                        <th scope="col">{ind + 1}</th>
-                                        <th scope="col"><img src={item.img} style={{height: 150, width: 150}} alt=""/></th>
-                                        <td scope="col">{item.nameFood}</td>
-                                        <td scope="col">{item.price}</td>
-                                        <td scope="col">{item.description}</td>
-                                        <td scope="col">{item.nameCategory}</td>
-                                        <td>
-                                            <Link className="btn btn-outline-success" to={`/edit-food/${item.idFood}`}>
-                                                <i className="fa-solid fa-pen-to-square"></i>
-                                            </Link>
-                                            <button className="btn btn-outline-danger" style={{marginLeft: 30}}
-                                                    onClick={() => {
-                                                        swal({
-                                                            title: "Are you sure?",
-                                                            text: "Once deleted, you will not be able to recover this imaginary file!",
-                                                            icon: "warning",
-                                                            buttons: true,
-                                                            dangerMode: true,
-                                                        })
-                                                            .then((willDelete) => {
-                                                                if (willDelete) {
-
-                                                                    swal("Poof! Your imaginary file has been deleted!", {
-                                                                        icon: "success",
-                                                                    });
-                                                                    dispatch(deleteFood(item.idFood)).then(() => {
-                                                                        navigate('/')
-                                                                        dispatch(getFood()).then(() => {
-                                                                        })
-
-                                                                    })
-                                                                } else {
-                                                                    swal("Your imaginary file is safe!");
-                                                                }
-                                                            });
-                                                    }}><i className="fa-solid fa-trash"></i></button>
-                                        </td>
+                                        <th>Product</th>
+                                        <th>Price</th>
+                                        <th>Description</th>
+                                        <th></th>
+                                        <th>Category</th>
+                                        <th></th>
+                                        <th></th>
 
                                     </tr>
-                                ))}
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                    {  foods.map((item) => (
+                                        <tr>
+                                            <td className="product__cart__item">
+                                                <div className="product__cart__item__pic">
+                                                    <img style={{height:100,width:150}} src={item.img} alt=""/>
+                                                </div>
+                                                <div className="product__cart__item__text">
+                                                    <h6>{item.nameFood}</h6>
+                                                </div>
+                                            </td>
+                                            <td className="cart__price">$ {item.price}</td>
+                                            <td className="cart__stock">{item.description}</td>
+                                            <td className="cart__stock"></td>
+                                            <td className="cart__stock">{item.nameCategory}</td>
+                                            <td className="cart__btn">
+                                                <Link  to={`/edit-food/${item.idFood}`}>
+                                                    <a href="#" className="btn btn-dark">
+                                                    Edit</a>
+                                                </Link>
+                                            </td>
+                                            <td className="cart__close">
+                                                <span className="icon_close"
+                                                        onClick={() => {
+                                                            swal({
+                                                                title: "Are you sure?",
+                                                                text: "Once deleted, you will not be able to recover this imaginary file!",
+                                                                icon: "warning",
+                                                                buttons: true,
+                                                                dangerMode: true,
+                                                            })
+                                                                .then((willDelete) => {
+                                                                    if (willDelete) {
+
+                                                                        swal("Poof! Your imaginary file has been deleted!", {
+                                                                            icon: "success",
+                                                                        });
+                                                                        dispatch(deleteFood(item.idFood)).then(() => {
+                                                                            navigate('/')
+                                                                            dispatch(getFood()).then(() => {
+                                                                            })
+
+                                                                        })
+                                                                    } else {
+                                                                        swal("Your imaginary file is safe!");
+                                                                    }
+                                                                });
+                                                        }}></span>
+                                                </td>
+                                        </tr>
+                                        )
+                                    )}
+
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
-
             </section>
+
         </>
     )
 }

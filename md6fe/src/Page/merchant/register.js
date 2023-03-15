@@ -99,7 +99,7 @@ export default function RegisterMerchant() {
                                                     </div>
                                                     <div className="text-center pt-1 mb-5 pb-1">
                                                         <button
-                                                            className="btn btn-outline-primary btn-block fa-lg gradient-custom-2 mb-3"
+                                                            className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
                                                             type="submit">Register
                                                         </button>
                                                     </div>
@@ -108,7 +108,7 @@ export default function RegisterMerchant() {
                                                         className="d-flex align-items-center justify-content-center pb-4">
                                                         <p className="mb-0 me-2">Already have an account?</p>
                                                         <Link to={'/login-merchant'}>
-                                                            <button type="button" className="btn btn-outline-danger">Log
+                                                            <button type="button" className="btn btn-danger">Log
                                                                 in
                                                             </button>
                                                         </Link>
