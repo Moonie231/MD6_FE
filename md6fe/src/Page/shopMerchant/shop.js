@@ -69,7 +69,7 @@ export default function Shop() {
                                 </div>
                                 <div className="col-lg-5 col-md-5">
                                     <div className="shop__option__right">
-                                        <select>
+                                        <select >
                                             <option value="">Default sorting</option>
                                             <option value="">A to Z</option>
                                             <option value="">1 - 8</option>
