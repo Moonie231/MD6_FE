@@ -1,6 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {getFood} from "../service/foodsService";
+import {getCategories} from "../service/categoryService";
 
 
 export default function Home() {
@@ -11,6 +12,10 @@ export default function Home() {
     })
     useEffect(() => {
         dispatch(getFood())
+    },[])
+
+    useEffect(() => {
+        dispatch(getCategories())
     },[])
     return (
         <>
@@ -77,37 +82,37 @@ export default function Home() {
                             <div className="categories__item" style={{float: 'left'}}>
                                 <div className="categories__item__icon">
                                     <span className="flaticon-029-cupcake-3"></span>
-                                    <h5>Cupcake</h5>
+                                    <h5>Bread</h5>
                                 </div>
                             </div>
                             <div className="categories__item" style={{float: 'left'}}>
                                 <div className="categories__item__icon">
                                     <span className="flaticon-034-chocolate-roll"></span>
-                                    <h5>Butter</h5>
+                                    <h5>Rice</h5>
                                 </div>
                             </div>
                             <div className="categories__item" style={{float: 'left'}}>
                                 <div className="categories__item__icon">
                                     <span className="flaticon-005-pancake"></span>
-                                    <h5>Red Velvet</h5>
+                                    <h5>Milktea</h5>
                                 </div>
                             </div>
                             <div className="categories__item" style={{float: 'left'}}>
                                 <div className="categories__item__icon">
                                     <span className="flaticon-030-cupcake-2"></span>
-                                    <h5>Biscuit</h5>
+                                    <h5>Hot pot</h5>
                                 </div>
                             </div>
                             <div className="categories__item" style={{float: 'left'}}>
                                 <div className="categories__item__icon">
                                     <span className="flaticon-006-macarons"></span>
-                                    <h5>Donut</h5>
+                                    <h5>Noodle</h5>
                                 </div>
                             </div>
                             <div className="categories__item" style={{float: 'left'}}>
                                 <div className="categories__item__icon">
                                     <span className="flaticon-006-macarons"></span>
-                                    <h5>Cupcake</h5>
+                                    <h5>Vegetable</h5>
                                 </div>
                             </div>
                         </div>
@@ -148,18 +153,12 @@ export default function Home() {
                     <div className="row">
                         <div className="col-lg-6">
                             <div className="class__form">
-                                <div className="section-title">
-                                    <span>Class cakes</span>
-                                    <h2>Made from your <br/>own hands</h2>
+                                <div className="section-title" >
+                                    <h2> <br/></h2>
                                 </div>
                                 <form action="#">
                                     <input type="text" placeholder="Name"/>
                                     <input type="text" placeholder="Phone"/>
-                                    <select>
-                                        <option value="">Studying Class</option>
-                                        <option value="">Writting Class</option>
-                                        <option value="">Reading Class</option>
-                                    </select>
                                     <input type="text" placeholder="Type your requirements"/>
                                     <button type="submit" className="site-btn">registration</button>
                                 </form>

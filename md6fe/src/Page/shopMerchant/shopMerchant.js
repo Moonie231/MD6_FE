@@ -43,7 +43,7 @@ export default function ShopMerchant() {
                                     <tr>
                                         <td className="product__cart__item">
                                             <div className="product__cart__item__pic">
-                                                <img style={{height: 100, width: 150}} src={item.img} alt=""/>
+                                                <img style={{height: 70, width: 70}} src={item.img} alt=""/>
                                             </div>
                                             <div className="product__cart__item__text">
                                                 <h6>{item.nameFood}</h6>

@@ -2,15 +2,25 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {getFoods, searchNameFood} from "../../service/foodsService";
 import {Field, Form, Formik} from "formik";
+import {useNavigate, useSearchParams} from "react-router-dom";
 
 export default function Shop() {
+    const navigate=useNavigate()
     const dispatch = useDispatch()
     const foods = useSelector((state) => {
-        return state.foods.search
+        return state.foods.search.foods
+    })
+    const [page, setPage] = useSearchParams()
+    const page1 = page.get('page') || 1;
+    const totalPages = useSelector(state => {
+        if (state.foods.search !== undefined) {
+            return state.foods.search.totalPage;
+        }
     })
     useEffect(() => {
-        dispatch(getFoods()).then()
+        dispatch(getFoods(page1)).then()
     }, [])
+
     const handleSearch = (values) => {
         dispatch(searchNameFood(values)).then((res)=>{
             }
@@ -59,11 +69,11 @@ export default function Shop() {
                                 </div>
                                 <div className="col-lg-5 col-md-5">
                                     <div className="shop__option__right">
-                                        <select>
-                                            <option value="">Default sorting</option>
-                                            <option value="">A to Z</option>
-                                            <option value="">1 - 8</option>
-                                            <option value="">Name</option>
+                                        <select className="nice-select">
+                                            <option className="option selected focus" value="">Default sorting</option>
+                                            <option className="option" value="">A to Z</option>
+                                            <option className="option" value="">1 - 8</option>
+                                            <option className="option" value="">Name</option>
                                         </select>
                                         <a href="#"><i className="fa fa-list"></i></a>
                                         <a href="#"><i className="fa fa-reorder"></i></a>
@@ -94,23 +104,42 @@ export default function Shop() {
                             )}
 
                         </div>
-                        <div className="shop__last__option">
-                            <div className="row">
-                                <div className="col-lg-6 col-md-6 col-sm-6">
-                                    <div className="shop__pagination">
-                                        <a href="#">1</a>
-                                        <a href="#">2</a>
-                                        <a href="#">3</a>
-                                        <a href="#"><span className="arrow_carrot-right"></span></a>
-                                    </div>
-                                </div>
-                                <div className="col-lg-6 col-md-6 col-sm-6">
-                                    <div className="shop__last__text">
-                                        <p>Showing 1-9 of 10 results</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <nav aria-label="Page navigation example">
+                            <ul className="pagination justify-content-center">
+                                <li className="page-item">
+                                    {(page1 === 1) ?
+                                        <>
+                                            <div className="page-link"><span aria-hidden="true" style={{color:'black'}}>&laquo;</span></div>
+                                        </>
+                                        :
+                                        <>
+                                            <div  className="page-link" onClick={() => {
+                                                dispatch(getFoods(page1 - 1));
+                                                navigate('/shop?page='+(page1-1))
+                                            }
+                                            }> <span aria-hidden="true">&laquo;</span>
+                                            </div>
+                                        </>
+                                    }
+                                </li>
+                                <li className="page-item"><a className="page-link">{page1}/{totalPages}</a></li>
+                                <li className="page-item">
+                                    {(page1 === totalPages) ?
+                                        <><div className="page-link"><span aria-hidden="true" style={{color:'black'}}>&raquo;</span></div>
+                                        </>
+                                        :
+                                        <>
+                                            <div  className="page-link" onClick={() => {
+                                                dispatch(getFoods(Number(page1) + 1));
+                                                navigate('/shop?page='+(Number(page1)+1))
+                                            }
+                                            }> <span aria-hidden="true">&raquo;</span>
+                                            </div>
+                                        </>
+                                    }
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </section>
             </>}
