@@ -7,7 +7,6 @@ import {getCategories} from "../service/categoryService";
 export default function Home() {
     const dispatch = useDispatch()
     const foods = useSelector((state) => {
-        console.log(state.foods)
         return state.foods.foods
     })
     useEffect(() => {
@@ -20,60 +19,6 @@ export default function Home() {
     return (
         <>
             <body>
-            <section className="hero">
-                <div className="">
-                    <div className="hero__item set-bg"
-                         style={{backgroundImage: 'url(https://chupanhmonan.com/wp-content/uploads/2017/09/%C4%91%E1%BA%A7u-t%C6%B0-h%C3%ACnh-%E1%BA%A3nh-m%C3%B3n-%C4%83n-%C4%91%E1%BB%83-thu-h%C3%BAt-kh%C3%A1ch-h%C3%A0ng-1024x796.jpg)'}}>
-                        <div className="container">
-                            <div className="row d-flex justify-content-center">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section className="about spad">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-6 col-md-6">
-                            <div className="about__text">
-                                <div className="section-title">
-                                    <span>About Cake shop</span>
-                                    <h2>Cakes and bakes from the house of Queens!</h2>
-                                </div>
-                                <p>The "Cake Shop" is a Jordanian Brand that started as a small family business. The
-                                    owners are
-                                    Dr. Iyad Sultan and Dr. Sereen Sharabati, supported by a staff of 80 employees.</p>
-                            </div>
-                        </div>
-                        <div className="col-lg-6 col-md-6">
-                            <div className="about__bar">
-                                <div className="about__bar__item">
-                                    <p>Cake design</p>
-                                    <div id="bar1" className="barfiller">
-                                        <div className="tipWrap"><span className="tip"></span></div>
-                                        <span className="fill" data-percentage="95"></span>
-                                    </div>
-                                </div>
-                                <div className="about__bar__item">
-                                    <p>Cake Class</p>
-                                    <div id="bar2" className="barfiller">
-                                        <div className="tipWrap"><span className="tip"></span></div>
-                                        <span className="fill" data-percentage="80"></span>
-                                    </div>
-                                </div>
-                                <div className="about__bar__item">
-                                    <p>Cake Recipes</p>
-                                    <div id="bar3" className="barfiller">
-                                        <div className="tipWrap"><span className="tip"></span></div>
-                                        <span className="fill" data-percentage="90"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
             <div className="categories">
                 <div className="container">

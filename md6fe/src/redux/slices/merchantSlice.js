@@ -22,12 +22,13 @@ const merchantSlice = createSlice({
     extraReducers: builder => {
         builder.addCase(login.fulfilled, (state, action) => {
             state.currentMerchant = action.payload
-            console.log(action.payload)
+            console.log(typeof action.payload)
             localStorage.setItem("access-token", action.payload.token)
             localStorage.setItem("idMerchant",action.payload.idMerchant)
             localStorage.setItem("merchant", JSON.stringify(action.payload))
-            if(action.payload !== 'Account not ready'||action.payload !== 'Merchant not found'|| action.payload !== 'Wrong password'|| action.payload !== 'Account locked'){
+            if(typeof action.payload !=='string'){
                 state.status=true
+                console.log(1)
                 localStorage.setItem("NameStatus",state.status )
             }
         });
@@ -46,7 +47,6 @@ const merchantSlice = createSlice({
         builder.addCase(logout.fulfilled, (state, action) => {
             state.status=false
             localStorage.clear()
-            localStorage.setItem('NameStatus',state.status)
         });
         builder.addCase(getMerchantActive.fulfilled, (state, action) => {
             console.log(1)

@@ -44,9 +44,7 @@ const userSlice = createSlice({
         builder.addCase(logoutUser.fulfilled, (state, action) => {
             localStorage.clear()
             state.role=false
-            localStorage.setItem("role", state.role)
             state.status = false
-            localStorage.setItem("status", state.status)
         });
     }
 })
