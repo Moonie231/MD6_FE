@@ -18,16 +18,16 @@ export default function ShopMerchant() {
     return (
         <>
             <div>
-                <Link className="btn btn-outline-dark" style={{marginTop: 50}} to={`/add-food`}>
+                <Link className="btn btn-warning" style={{marginTop: 50}} to={`/add-food`}>
                     Create Food
                 </Link>
             </div>
             <section className="wishlist spad">
-                <div className="container">
+
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="wishlist__cart__table">
-                                <table>
+                                <table style={{marginLeft:60}}>
                                     <thead>
                                     <tr>
                                         <th>Product</th>
@@ -54,14 +54,14 @@ export default function ShopMerchant() {
                                             <td className="cart__stock">{item.description}</td>
                                             <td className="cart__stock"></td>
                                             <td className="cart__stock">{item.nameCategory}</td>
-                                            <td className="cart__btn">
+                                            <td className="cart__btn" >
                                                 <Link  to={`/edit-food/${item.idFood}`}>
-                                                    <a href="#" className="btn btn-outline-dark">
+                                                    <a href="#" className="btn btn-dark" style={{fontSize: 20, width: 100}}>
                                                     Edit</a>
                                                 </Link>
                                             </td>
-                                            <td className="cart__close">
-                                                <span className="icon_close"
+                                            <td >
+                                                <span className="icon_close " style={{fontSize: 30}}
                                                         onClick={() => {
                                                             swal({
                                                                 title: "Are you sure?",
@@ -97,7 +97,7 @@ export default function ShopMerchant() {
                             </div>
                         </div>
                     </div>
-                </div>
+
             </section>
 
         </>
