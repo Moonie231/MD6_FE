@@ -16,6 +16,7 @@ import Profile from "./Page/merchant/profile";
 import ShopMerchant from "./Page/shopMerchant/shopMerchant";
 import MerchantActive from "./Page/admin/merchantActive";
 import MerchantPending from "./Page/admin/merchantPending";
+import Shop from "./Page/shopMerchant/shop";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
     <Route path={'login-user'} element={<LoginUser/>}></Route>
     <Route path={'register-user'} element={<RegisterUser/>}></Route>
     <Route path={'add-food'} element={<AddFood/>}/>
+    <Route path={'shop'} element={<Shop/>}/>
     <Route path={`edit-food/:idFood`} element={<EditFood/>}/>
     <Route path={'merchants'}>
         <Route path={`edit/:idMerchant`} element={<Profile></Profile>}></Route>
