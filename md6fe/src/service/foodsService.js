@@ -2,9 +2,16 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import customAxios from "./api";
 
 export const getFood = createAsyncThunk(
-    'foods/getFoods',
+    'foods/getFood',
     async ()=>{
         const res = await customAxios.get('foods/merchants');
+        return res.data;
+    }
+)
+export const getFoods = createAsyncThunk(
+    'foods/getFoods',
+    async ()=>{
+        const res = await customAxios.get('foods');
         return res.data;
     }
 )
@@ -47,7 +54,9 @@ export const editFood = createAsyncThunk(
 export const searchNameFood = createAsyncThunk(
     "foods/searchNameFood",
     async (data) => {
-        const res = await customAxios.get('/foods/find-by-nameFood?nameFood' + data)
+        console.log(data)
+        const res = await customAxios.post('/foods/find-by-nameFood' , data)
+        console.log(res.data)
         return res.data;
     })
 

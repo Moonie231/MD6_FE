@@ -14,9 +14,6 @@ export default function Header(){
     // useEffect(()=>{
     //     dispatch(getProfile(localStorage.getItem('idMerchant'))).then()
     // },[])
-    const admin=useSelector((state) =>{
-        return state.user.role
-    })
 
     return(
         <>
@@ -81,6 +78,7 @@ export default function Header(){
                                             <li><Link to={'/merchants/my-shop/'+user.idMerchant}>My Shop</Link></li>
                                         </ul>
                                     </li>}
+                                    <li><Link to={'/shop'}>Foods</Link></li>
 
                                     {localStorage.getItem('NameStatus')===true || localStorage.getItem('NameStatus')==='true' && <>
                                         <li><a href="#">{user.nameMerchant}</a>
@@ -88,17 +86,23 @@ export default function Header(){
                                                 <li><Link to={`/merchants/edit/${user.idMerchant}`}>Profile</Link></li>
                                                 <li><a href="" onClick={(e)=>{
                                                     dispatch(logout())
-                                                    navigate('/')
+                                                    navigate('/login-merchant')
                                                 }}>Log Out</a></li>
                                             </ul>
                                         </li>
                                     </>}
-                                    {admin &&<>
+                                    {localStorage.getItem('role')===true||localStorage.getItem('role')==='true' &&<>
                                         <li><Link to={'/admin/merchant-active'}>Merchant Active</Link></li>
                                         <li><Link to={'/admin/merchant-pending'}>Merchant Pending</Link></li>
                                         <li><a href="" onClick={(e)=>{
                                             dispatch(logoutUser())
-                                            navigate('/')
+                                            navigate('/login-user')
+                                        }}>Log Out</a></li>
+                                    </>}
+                                    {localStorage.getItem('status')===true||localStorage.getItem('status')==='true' && <>
+                                        <li><a href="" onClick={(e)=>{
+                                            dispatch(logoutUser())
+                                            navigate('/login-user')
                                         }}>Log Out</a></li>
                                     </>}
                                     <li><a href="">Contact</a></li>

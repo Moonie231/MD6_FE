@@ -10,10 +10,12 @@ const validateSchema = Yup.object().shape({
         .email("Invalid email format")
         .required("Required"),
     merchantPassword: Yup.string()
-        .min(2, "Too short!")
+        .matches(/^[a-zA-Z0-9]/)
+        .min(6, "Too short!")
         .max(50, "Too long!")
         .required("Required"),
     nameMerchant: Yup.string()
+        .matches(/^[a-zA-Z0-9]/, 'Username must have characters')
         .min(2, "Too short!")
         .max(50, "Too long!")
         .required("Required"),
@@ -28,7 +30,7 @@ export default function RegisterMerchant() {
         dispatch(register(data)).then((value) => {
             if (value.payload === "Email already registered") {
                 swal("Email already registered");
-                navigate("/register");
+                navigate("/register-merchant");
             } else {
                 swal("Register successfully")
                 navigate("/login-merchant");
