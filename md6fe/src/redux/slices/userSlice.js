@@ -5,7 +5,8 @@ const initialState = {
     currentUser: JSON.parse(localStorage.getItem('user')),
     user: [],
     profile: [],
-    role:false
+    role:false,
+    status:false
 }
 
 const userSlice = createSlice({
@@ -18,8 +19,11 @@ const userSlice = createSlice({
             localStorage.setItem("username", action.payload.username);
             localStorage.setItem("idUser", action.payload.idUser);
             localStorage.setItem("access-token", action.payload.token)
+            state.status = true
+            localStorage.setItem("status", state.status)
             if(action.payload.role===2||action.payload.role==='2'){
                 state.role=true
+                localStorage.setItem("role", state.role)
             }
         });
         builder.addCase(register.fulfilled, (state, action) => {
@@ -40,6 +44,9 @@ const userSlice = createSlice({
         builder.addCase(logoutUser.fulfilled, (state, action) => {
             localStorage.clear()
             state.role=false
+            localStorage.setItem("role", state.role)
+            state.status = false
+            localStorage.setItem("status", state.status)
         });
     }
 })
