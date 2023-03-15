@@ -162,7 +162,7 @@ export default function Profile() {
                                                                 <div>
                                                                     <button
                                                                         type="button"
-                                                                        className="btn btn-outline-secondary w-100 py-3"
+                                                                        className="btn btn-secondary w-100 py-3"
                                                                         onClick={handleUpload}
                                                                     >
                                                                         Up
@@ -171,7 +171,7 @@ export default function Profile() {
                                                             </div>
                                                         </div>
                                                         <div className="col-12">
-                                                            <button className="btn btn-outline-primary w-100 py-3"
+                                                            <button className="btn btn-primary w-100 py-3"
                                                                     type="submit">Save changes
                                                             </button>
                                                         </div>
