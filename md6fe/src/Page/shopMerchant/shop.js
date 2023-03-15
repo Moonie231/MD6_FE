@@ -69,11 +69,11 @@ export default function Shop() {
                                 </div>
                                 <div className="col-lg-5 col-md-5">
                                     <div className="shop__option__right">
-                                        <select>
-                                            <option value="">Default sorting</option>
-                                            <option value="">A to Z</option>
-                                            <option value="">1 - 8</option>
-                                            <option value="">Name</option>
+                                        <select className="nice-select">
+                                            <option className="option selected focus" value="">Default sorting</option>
+                                            <option className="option" value="">A to Z</option>
+                                            <option className="option" value="">1 - 8</option>
+                                            <option className="option" value="">Name</option>
                                         </select>
                                         <a href="#"><i className="fa fa-list"></i></a>
                                         <a href="#"><i className="fa fa-reorder"></i></a>
