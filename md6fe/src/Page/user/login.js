@@ -83,13 +83,13 @@ export default function LoginUser() {
                                                     </div>
                                                     <div className="text-center pt-1 mb-5 pb-1">
                                                         <button
-                                                            className="btn btn-outline-primary btn-block fa-lg gradient-custom-2 mb-3"
+                                                            className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
                                                             type="submit">Login
                                                         </button>
                                                     </div>
                                                     <div className="d-flex align-items-center justify-content-center pb-4">
                                                         <p className="mb-0 me-2">Don't have an account?</p>
-                                                        <Link to={"/register-user"}><button type="button" className="btn btn-outline-danger">Create new</button></Link>
+                                                        <Link to={"/register-user"}><button type="button" className="btn btn-danger">Create new</button></Link>
                                                     </div>
                                                 </Form>
                                             </Formik>

@@ -83,7 +83,7 @@ export default function LoginMerchant() {
                                                     </div>
                                                     <div className="text-center pt-1 mb-5 pb-1">
                                                         <button
-                                                            className="btn btn-outline-primary btn-block fa-lg gradient-custom-2 mb-3"
+                                                            className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
                                                             type="submit">Login
                                                         </button>
                                                     </div>
@@ -92,7 +92,7 @@ export default function LoginMerchant() {
                                                         <p className="mb-0 me-2">Don't have an account?</p>
                                                         <Link to={"/register-merchant"}>
                                                             <button type="button"
-                                                                    className="btn btn-outline-danger">Create new
+                                                                    className="btn btn-danger">Create new
                                                             </button>
                                                         </Link>
                                                     </div>
