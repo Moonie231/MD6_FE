@@ -19,7 +19,6 @@ export default function AddFood() {
         navigate('/merchants/my-shop/'+localStorage.getItem('idMerchant'))
     }
     const categories = useSelector((state) => {
-        console.log(state.categories,22)
         return state.categories.categories;
     });
 
