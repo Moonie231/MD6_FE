@@ -19,6 +19,12 @@ import MerchantPending from "./Page/admin/merchantPending";
 import Shop from "./Page/shopMerchant/shop";
 
 function App() {
+  localStorage.getItem('NameStatus')
+  localStorage.getItem('role')
+  localStorage.getItem('status')
+  console.log(  localStorage.getItem('NameStatus'),
+  localStorage.getItem('role'),
+  localStorage.getItem('status'))
   return (
 <>
   <Header></Header>
@@ -41,7 +47,7 @@ function App() {
       <Route path={'merchant-active'} element={<MerchantActive></MerchantActive>}></Route>
       <Route path={'merchant-pending'} element={<MerchantPending></MerchantPending>}></Route>
     </Route>
-
+    <Route path={'*'} element={<Home/>}></Route>
   </Routes>
   <Footer></Footer>
 

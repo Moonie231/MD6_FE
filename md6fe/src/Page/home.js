@@ -1,74 +1,24 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {getFood} from "../service/foodsService";
+import {getCategories} from "../service/categoryService";
 
 
 export default function Home() {
     const dispatch = useDispatch()
     const foods = useSelector((state) => {
-        console.log(state.foods)
         return state.foods.foods
     })
     useEffect(() => {
         dispatch(getFood())
     },[])
+
+    useEffect(() => {
+        dispatch(getCategories())
+    },[])
     return (
         <>
             <body>
-            <section className="hero">
-                <div className="">
-                    <div className="hero__item set-bg"
-                         style={{backgroundImage: 'url(https://chupanhmonan.com/wp-content/uploads/2017/09/%C4%91%E1%BA%A7u-t%C6%B0-h%C3%ACnh-%E1%BA%A3nh-m%C3%B3n-%C4%83n-%C4%91%E1%BB%83-thu-h%C3%BAt-kh%C3%A1ch-h%C3%A0ng-1024x796.jpg)'}}>
-                        <div className="container">
-                            <div className="row d-flex justify-content-center">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section className="about spad">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-6 col-md-6">
-                            <div className="about__text">
-                                <div className="section-title">
-                                    <span>About Cake shop</span>
-                                    <h2>Cakes and bakes from the house of Queens!</h2>
-                                </div>
-                                <p>The "Cake Shop" is a Jordanian Brand that started as a small family business. The
-                                    owners are
-                                    Dr. Iyad Sultan and Dr. Sereen Sharabati, supported by a staff of 80 employees.</p>
-                            </div>
-                        </div>
-                        <div className="col-lg-6 col-md-6">
-                            <div className="about__bar">
-                                <div className="about__bar__item">
-                                    <p>Cake design</p>
-                                    <div id="bar1" className="barfiller">
-                                        <div className="tipWrap"><span className="tip"></span></div>
-                                        <span className="fill" data-percentage="95"></span>
-                                    </div>
-                                </div>
-                                <div className="about__bar__item">
-                                    <p>Cake Class</p>
-                                    <div id="bar2" className="barfiller">
-                                        <div className="tipWrap"><span className="tip"></span></div>
-                                        <span className="fill" data-percentage="80"></span>
-                                    </div>
-                                </div>
-                                <div className="about__bar__item">
-                                    <p>Cake Recipes</p>
-                                    <div id="bar3" className="barfiller">
-                                        <div className="tipWrap"><span className="tip"></span></div>
-                                        <span className="fill" data-percentage="90"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
             <div className="categories">
                 <div className="container">
@@ -77,37 +27,37 @@ export default function Home() {
                             <div className="categories__item" style={{float: 'left'}}>
                                 <div className="categories__item__icon">
                                     <span className="flaticon-029-cupcake-3"></span>
-                                    <h5>Cupcake</h5>
+                                    <h5>Bread</h5>
                                 </div>
                             </div>
                             <div className="categories__item" style={{float: 'left'}}>
                                 <div className="categories__item__icon">
                                     <span className="flaticon-034-chocolate-roll"></span>
-                                    <h5>Butter</h5>
+                                    <h5>Rice</h5>
                                 </div>
                             </div>
                             <div className="categories__item" style={{float: 'left'}}>
                                 <div className="categories__item__icon">
                                     <span className="flaticon-005-pancake"></span>
-                                    <h5>Red Velvet</h5>
+                                    <h5>Milktea</h5>
                                 </div>
                             </div>
                             <div className="categories__item" style={{float: 'left'}}>
                                 <div className="categories__item__icon">
                                     <span className="flaticon-030-cupcake-2"></span>
-                                    <h5>Biscuit</h5>
+                                    <h5>Hot pot</h5>
                                 </div>
                             </div>
                             <div className="categories__item" style={{float: 'left'}}>
                                 <div className="categories__item__icon">
                                     <span className="flaticon-006-macarons"></span>
-                                    <h5>Donut</h5>
+                                    <h5>Noodle</h5>
                                 </div>
                             </div>
                             <div className="categories__item" style={{float: 'left'}}>
                                 <div className="categories__item__icon">
                                     <span className="flaticon-006-macarons"></span>
-                                    <h5>Cupcake</h5>
+                                    <h5>Vegetable</h5>
                                 </div>
                             </div>
                         </div>
@@ -148,18 +98,12 @@ export default function Home() {
                     <div className="row">
                         <div className="col-lg-6">
                             <div className="class__form">
-                                <div className="section-title">
-                                    <span>Class cakes</span>
-                                    <h2>Made from your <br/>own hands</h2>
+                                <div className="section-title" >
+                                    <h2> <br/></h2>
                                 </div>
                                 <form action="#">
                                     <input type="text" placeholder="Name"/>
                                     <input type="text" placeholder="Phone"/>
-                                    <select>
-                                        <option value="">Studying Class</option>
-                                        <option value="">Writting Class</option>
-                                        <option value="">Reading Class</option>
-                                    </select>
                                     <input type="text" placeholder="Type your requirements"/>
                                     <button type="submit" className="site-btn">registration</button>
                                 </form>
