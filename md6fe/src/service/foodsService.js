@@ -10,8 +10,8 @@ export const getFood = createAsyncThunk(
 )
 export const getFoods = createAsyncThunk(
     'foods/getFoods',
-    async ()=>{
-        const res = await customAxios.get('foods');
+    async (data)=>{
+        const res = await customAxios.get('foods?page='+data);
         return res.data;
     }
 )
