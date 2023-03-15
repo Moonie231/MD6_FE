@@ -118,12 +118,12 @@ export default function EditFood() {
                             <div className="ml-3 form-group">
                                 <label htmlFor="exampleInputPassword">Image</label>
                                 <br/>
-                                        <img src={urls} alt={urls} style={{width: 50}}/>
+                                        <img src={urls} alt={urls} style={{width:400, height: 400}}/>
 
                                 <br/>
                                 <input type='file' onChange={handleChange}>
                                 </input>
-                                <button className="btn btn-dark" style={{marginRight: 10}} type='button'
+                                <button className="btn btn-info" style={{marginLeft: 10}} type='button'
                                         onClick={handleUpload}>Up
                                 </button>
                             </div>
@@ -143,7 +143,7 @@ export default function EditFood() {
                                         ))}
                                 </Field>
                             </div>
-                            <button type="submit" className="btn btn-dark" style={{marginTop: 20}}>Save</button>
+                            <button type="submit" className="btn btn-info" style={{marginLeft: "40%"}}>Save</button>
                         </Form>
                     </Formik>
                 </div>
