@@ -49,7 +49,7 @@ export default function Footer() {
                                     <script>document.write(new Date().getFullYear());</script>
                                     All rights reserved | This template is made with <i className="fa fa-heart"
                                                                                         aria-hidden="true"></i> by <a
-                                    href="https://colorlib.com" target="_blank">Colorlib</a>
+                                    href="\" target="_blank">TUNG</a>
                                 </p>
                             </div>
                             <div className="col-lg-5">
@@ -65,15 +65,6 @@ export default function Footer() {
                     </div>
                 </div>
             </footer>
-
-            <div className="search-model">
-                <div className="h-100 d-flex align-items-center justify-content-center">
-                    <div className="search-close-switch">+</div>
-                    <form className="search-model-form">
-                        <input type="text" id="search-input" placeholder="Search here....."/>
-                    </form>
-                </div>
-            </div>
         </>
     )
 }

@@ -56,6 +56,7 @@ export default function Shop() {
                                         <Formik initialValues={{
                                             nameFood: ""
                                         }} onSubmit={(values) =>{
+                                            console.log(values,59)
                                             handleSearch(values)
                                         }
                                         }>

@@ -4,20 +4,21 @@ import {getProfile, logout} from "../service/merchantService";
 import {logoutUser} from "../service/userService";
 import {useEffect} from "react";
 
-export default function Header(){
-    const navigate=useNavigate()
-    const dispatch=useDispatch()
-    const user = useSelector((state) =>{
-            return state.merchant.currentMerchant
+export default function Header() {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const user = useSelector((state) => {
+        return state.merchant.currentMerchant
 
     });
+
     // useEffect(()=>{
     //     dispatch(getProfile(localStorage.getItem('idMerchant'))).then()
     // },[])
 
-    return(
+    return (
         <>
-            {user!=null &&<>
+            {user != null && <>
             </>}
             <header className="header">
                 <div className="header__top">
@@ -39,12 +40,6 @@ export default function Header(){
                                                     <li>ENG</li>
                                                 </ul>
                                             </li>
-                                            <li> Login <span className="arrow_carrot-down" ></span>
-                                                <ul>
-                                                    <li ><Link to={'/login-merchant'} style={{color: "white"}}>Merchant</Link></li>
-                                                    <li><Link to={'/login-user'} style={{color: "white"}}>Buyer</Link></li>
-                                                </ul>
-                                            </li>
                                         </ul>
                                     </div>
                                     <div className="header__logo">
@@ -52,7 +47,8 @@ export default function Header(){
                                     </div>
                                     <div className="header__top__right">
                                         <div className="header__top__right__links">
-                                            <a href="#" className="search-switch"><img src="/img/icon/search.png" alt=""/></a>
+                                            <a href="#" className="search-switch"><img src="/img/icon/search.png"
+                                                                                       alt=""/></a>
                                             <a href="#"><img src="/img/icon/heart.png" alt=""/></a>
                                         </div>
                                         <div className="header__top__right__cart">
@@ -73,40 +69,46 @@ export default function Header(){
                             <nav className="header__menu mobile-menu">
                                 <ul>
                                     <li><Link to={'/'}>Home</Link></li>
-                                    {localStorage.getItem('NameStatus')===true || localStorage.getItem('NameStatus')==='true'&&   <li><a href="">Shop</a>
-                                        <ul className="dropdown">
-                                            <li><Link to={'/merchants/my-shop/'+user.idMerchant}>My Shop</Link></li>
-                                        </ul>
-                                    </li>}
+                                    {localStorage.getItem('NameStatus') === true || localStorage.getItem('NameStatus') === 'true' &&
+                                        <li><a href="">Shop</a>
+                                            <ul className="dropdown">
+                                                <li><Link to={'/merchants/my-shop/' + user.idMerchant}>My Shop</Link>
+                                                </li>
+                                            </ul>
+                                        </li>}
                                     <li><Link to={'/shop'}>Foods</Link></li>
+                                    {console.log(localStorage.getItem('NameStatus'))}
+                                    {((localStorage.getItem('NameStatus')===null && localStorage.getItem('role')===null && localStorage.getItem('status')===null) || (localStorage.getItem('NameStatus') === false && localStorage.getItem('role') === false && localStorage.getItem('status') === false))&& <>
+                                        <li><a href="">Login</a>
+                                            <ul className="dropdown">
+                                                <li><Link to={'/login-merchant'}
+                                                          style={{color: "white"}}>Merchant</Link></li>
+                                                <li><Link to={'/login-user'} style={{color: "white"}}>Buyer</Link></li>
+                                            </ul>
+                                        </li>
+                                    </>}
 
-                                    {localStorage.getItem('NameStatus')===true || localStorage.getItem('NameStatus')==='true' && <>
+                                    {localStorage.getItem('NameStatus') === true || localStorage.getItem('NameStatus') === 'true' && <>
                                         <li><a href="#">{user.nameMerchant}</a>
                                             <ul className="dropdown">
                                                 <li><Link to={`/merchants/edit/${user.idMerchant}`}>Profile</Link></li>
-                                                <li><a href="" onClick={(e)=>{
+                                                <li><a href="" onClick={(e) => {
                                                     dispatch(logout())
                                                     navigate('/login-merchant')
                                                 }}>Log Out</a></li>
                                             </ul>
                                         </li>
                                     </>}
-                                    {localStorage.getItem('role')===true||localStorage.getItem('role')==='true' &&<>
+                                    {localStorage.getItem('role') === true || localStorage.getItem('role') === 'true' && <>
                                         <li><Link to={'/admin/merchant-active'}>Merchant Active</Link></li>
                                         <li><Link to={'/admin/merchant-pending'}>Merchant Pending</Link></li>
-                                        <li><a href="" onClick={(e)=>{
+                                    </>}
+                                    {localStorage.getItem('status') === true || localStorage.getItem('status') === 'true' && <>
+                                        <li><a href="" onClick={(e) => {
                                             dispatch(logoutUser())
                                             navigate('/login-user')
                                         }}>Log Out</a></li>
                                     </>}
-                                    {localStorage.getItem('status')===true||localStorage.getItem('status')==='true' && <>
-                                        <li><a href="" onClick={(e)=>{
-                                            dispatch(logoutUser())
-                                            navigate('/login-user')
-                                        }}>Log Out</a></li>
-                                    </>}
-                                    <li><a href="">Contact</a></li>
-
                                 </ul>
                             </nav>
                         </div>

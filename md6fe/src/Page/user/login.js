@@ -60,7 +60,7 @@ export default function LoginUser() {
                                                         handleLogin(values)
                                                     }}>
                                                 <Form>
-                                                    <p>Please login to your account buyer</p>
+                                                    <p>Please login to your account <a href="" style={{color:'rgb(240,134,40)'}} target="_blank">Buyer</a></p>
                                                     <div className="form-outline mb-4">
                                                         <label className="form-label"
                                                                htmlFor="form2Example11">Email</label>
@@ -83,13 +83,12 @@ export default function LoginUser() {
                                                     </div>
                                                     <div className="text-center pt-1 mb-5 pb-1">
                                                         <button
-                                                            className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
-                                                            type="submit">Login
+                                                            style={{backgroundColor:"rgb(240,134,40)",border:'none',color:"white",width:300}}                                                            type="submit">Login
                                                         </button>
                                                     </div>
                                                     <div className="d-flex align-items-center justify-content-center pb-4">
                                                         <p className="mb-0 me-2">Don't have an account?</p>
-                                                        <Link to={"/register-user"}><button type="button" className="btn btn-danger">Create new</button></Link>
+                                                        <Link to={"/register-user"}><button type="button" style={{backgroundColor:"rgb(240,134,40)",border:'none',color:"white",width:150}}>Create new</button></Link>
                                                     </div>
                                                 </Form>
                                             </Formik>

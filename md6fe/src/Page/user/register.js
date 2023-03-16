@@ -96,13 +96,14 @@ export default function RegisterUser(){
                                                     </div>
 
                                                     <div className="text-center pt-1 mb-5 pb-1">
-                                                        <button className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
+                                                        <button  style={{backgroundColor:"rgb(240,134,40)",border:'none',color:"white",width:300}}
+
                                                                 type="submit">Register
                                                         </button>
                                                     </div>
                                                     <div className="d-flex align-items-center justify-content-center pb-4">
                                                         <p className="mb-0 me-2">Already have an account?</p>
-                                                        <Link to={'/login-user'}><button type="button" className="btn btn-danger">Log in</button></Link>
+                                                        <Link to={'/login-user'}><button type="button"  style={{backgroundColor:"rgb(240,134,40)",border:'none',color:"white",width:150}}>Log in</button></Link>
                                                     </div>
 
                                                 </Form>
