@@ -91,7 +91,7 @@ export default function Header() {
                                     {localStorage.getItem('NameStatus') === true || localStorage.getItem('NameStatus') === 'true' && <>
                                         <li><a href="#">{user.nameMerchant}</a>
                                             <ul className="dropdown">
-                                                <li><Link to={`/merchants/edit/${user.idMerchant}`}>Profile</Link></li>
+                                                <li><Link to={`/merchants/${user.idMerchant}`}>Profile</Link></li>
                                                 <li><a href="" onClick={(e) => {
                                                     dispatch(logout())
                                                     navigate('/login-merchant')

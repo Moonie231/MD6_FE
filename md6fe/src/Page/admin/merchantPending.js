@@ -26,7 +26,7 @@ export default function MerchantPending() {
                     <th scope="col">Status</th>
                     <th scope="col">Image</th>
                     <th scope="col">Email</th>
-                    <th scope="col"></th>
+                    <th scope="col">Active</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -41,7 +41,7 @@ export default function MerchantPending() {
                             <td><img style={{height: 100, width: 100}} src={item.image} alt=""/></td>
                             <td>{item.email}</td>
                             <td>
-                                <button
+                                <button style={{backgroundColor:"rgb(240,134,40)", border: "none"}}
                                     className="btn-danger rounded text-white position-absolute start-0 top-0 m-1 py-1 px-2"
                                     onClick={() => {
                                         swal({
