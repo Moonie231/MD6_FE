@@ -2,7 +2,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {getFoods, searchNameFood} from "../../service/foodsService";
 import {Field, Form, Formik} from "formik";
-import {useNavigate, useSearchParams} from "react-router-dom";
+import {Link, useNavigate, useSearchParams} from "react-router-dom";
 
 export default function Shop() {
     const navigate=useNavigate()
@@ -39,7 +39,7 @@ export default function Shop() {
                             </div>
                             <div className="col-lg-6 col-md-6 col-sm-6">
                                 <div className="breadcrumb__links">
-                                    <a href="./index.html">Home</a>
+                                    <Link to={'/'}>Home</Link>
                                     <span>Shop</span>
                                 </div>
                             </div>
