@@ -41,7 +41,6 @@ const merchantSlice = createSlice({
         });
         builder.addCase(getProfile.fulfilled, (state, action) => {
             state.profile = action.payload;
-            console.log(1)
             localStorage.setItem("merchant", JSON.stringify(action.payload))
         });
         builder.addCase(logout.fulfilled, (state, action) => {
