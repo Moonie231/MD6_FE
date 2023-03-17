@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate, useParams} from "react-router-dom";
-import {editProfile, getProfile} from "../../service/merchantService";
+import {editProfile, getProfile} from "../../service/userService";
 import swal from "sweetalert";
 import * as Yup from "yup";
 import {ErrorMessage, Field, Form, Formik} from "formik";
@@ -9,11 +9,7 @@ import {getDownloadURL, ref, uploadBytesResumable} from "firebase/storage";
 import {storage} from "../../service/firebase";
 
 const validateSchema = Yup.object().shape({
-    nameMerchant: Yup.string()
-        .min(2, "Too short!")
-        .max(50, "Too long!")
-        .required("Required"),
-    address: Yup.string()
+    username: Yup.string()
         .min(2, "Too short!")
         .max(50, "Too long!")
         .required("Required"),
@@ -22,37 +18,39 @@ const validateSchema = Yup.object().shape({
         .max(50, "Too long!")
         .required("Required"),
 })
-export default function ProfileMerchant() {
+export default function ProfileUser() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    let {idMerchant} = useParams()
+    let {idUser} = useParams()
     const [urls, setUrls] = useState("");
     useEffect(() => {
-        dispatch(getProfile(idMerchant)).then((e) => {
-            console.log(e.payload.image)
-            setUrls(e.payload.image)
+        dispatch(getProfile(idUser)).then((e) => {
+            console.log(e.payload.avatar)
+            setUrls(e.payload.avatar)
         })
     }, [])
 
-    const merchant = useSelector((state) => {
-        return state.merchant.profile
+    const user = useSelector((state) => {
+        console.log(state.user.profile)
+        return state.user.profile
     })
 
-    const [images, setImages] = useState([]);
+
+    const [avatar, setAvatar] = useState([]);
 
     const [progress, setProgress] = useState(0);
     const handleChange = (e) => {
         for (let i = 0; i < e.target.files.length; i++) {
             const newImage = e.target.files[i];
             newImage["id"] = Math.random();
-            setImages((prevState) => [...prevState, newImage]);
+            setAvatar((prevState) => [...prevState, newImage]);
         }
     };
 
     const handleUpload = () => {
         const promises = [];
-        if (images.length > 0) {
-            images.map((img) => {
+        if (avatar.length > 0) {
+            avatar.map((img) => {
                 const storageRef = ref(storage, `images/${img.name}`);
                 const uploadTask = uploadBytesResumable(storageRef, img);
                 promises.push(uploadTask);
@@ -70,7 +68,6 @@ export default function ProfileMerchant() {
                     async () => {
                         await getDownloadURL(uploadTask.snapshot.ref).then(
                             (downloadURLs) => {
-                                console.log(downloadURLs)
                                 setUrls(downloadURLs);
                             }
                         );
@@ -79,12 +76,12 @@ export default function ProfileMerchant() {
             });
         }
         Promise.all(promises)
-            .then(() => swal("All images uploaded"))
+            .then(() => swal("All avatar uploaded"))
             .catch((err) => console.log(err));
     };
 
     const handleEdit = async (values) => {
-        let data = [{...values, image: urls}, idMerchant];
+        let data = [{...values, avatar: urls}, idUser];
         console.log(data)
         await dispatch(editProfile(data)).then((value) => {
             swal("Edit Success !!!");
@@ -130,14 +127,13 @@ export default function ProfileMerchant() {
                                 <div className="contact__form">
                                     <Formik
                                         initialValues={{
-                                            nameMerchant: merchant.nameMerchant,
-                                            address: merchant.address,
-                                            phone: merchant.phone,
-                                            image: merchant.image
+                                            username: user.username,
+                                            email: user.email,
+                                            phone: user.phone,
                                         }}
                                         validationSchema={validateSchema}
                                         onSubmit={(values) => {
-                                            values.image = urls[0]
+                                            values.avatar = urls[0]
                                             handleEdit(values)
                                         }}
                                         enableReinitialize={true}
@@ -145,18 +141,19 @@ export default function ProfileMerchant() {
                                         <Form>
                                             <div className="row">
                                                 <div className="col-lg-12">
-                                                    <label for="nameMerchant">Name Merchant</label>
+                                                    <label htmlFor="email">Email</label>
                                                     <Field type="text" class="form-control"
-                                                           name={'nameMerchant'} id="nameMerchant"
-                                                           placeholder="Name"/>
-                                                    <alert className="text-danger">
-                                                        <ErrorMessage name={"nameMerchant"}></ErrorMessage>
-                                                    </alert>
+                                                           name={'email'} id="email"
+                                                           placeholder="email" disabled/>
                                                 </div>
                                                 <div className="col-lg-12">
-                                                    <label htmlFor="address">Address</label>
-                                                    <Field type="text" class="form-control" name={'address'}
-                                                           id="address" placeholder="Address"/>
+                                                    <label for="username">Name Merchant</label>
+                                                    <Field type="text" class="form-control"
+                                                           name={'username'} id="username"
+                                                           placeholder="Name"/>
+                                                    <alert className="text-danger">
+                                                        <ErrorMessage name={"username"}></ErrorMessage>
+                                                    </alert>
                                                 </div>
                                                 <div className="col-lg-12">
                                                     <label htmlFor="phone">Phone</label>
@@ -166,10 +163,9 @@ export default function ProfileMerchant() {
                                                         <ErrorMessage name={"phone"}></ErrorMessage>
                                                     </alert>
                                                 </div>
-
                                                 <div className="col-lg-12">
                                                     <button type="submit" className="site-btn"
-                                                            style={{backgroundColor: "rgb(240,134,40)"}}>Send Us
+                                                            style={{backgroundColor: "rgb(240,134,40)"}}>Save
                                                     </button>
                                                 </div>
                                             </div>

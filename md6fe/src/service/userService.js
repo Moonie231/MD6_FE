@@ -24,13 +24,15 @@ export const verifyEmail = createAsyncThunk("user/verifyEmail", async () => {
     return res.data;
 });
 
-export const editProfile = createAsyncThunk("user/editProfile", async (data) => {
-    const res = await customAxios.put('/users/' + data[1], data[0])
+export const editProfile = createAsyncThunk("users/editProfile", async (data) => {
+    console.log(data)
+    await customAxios.put('users/' + data[1], data[0])
+    const res = await customAxios.get('users/my-profile/' + data[1])
     return res.data
 })
 
-export const getProfile = createAsyncThunk('user/getProfile', async (data) => {
-    const res = await customAxios.get('/users/my-profile/' + data)
+export const getProfile = createAsyncThunk('users/getProfile', async (data) => {
+    const res = await customAxios.get('users/my-profile/' + data)
     console.log(res.data)
     return res.data
 })
