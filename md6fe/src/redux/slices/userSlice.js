@@ -4,7 +4,7 @@ import {editProfile, getProfile, login, logoutUser, register, verifyEmail} from 
 const initialState = {
     currentUser: JSON.parse(localStorage.getItem('user')),
     user: [],
-    profile: [],
+    profile: {},
     role:false,
     status:false
 }
