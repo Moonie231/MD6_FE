@@ -1,7 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {getMerchantActive, setStatus} from "../service/merchantService";
+import {getMerchantActive, setStatus} from "../../service/merchantService";
 import swal from "sweetalert";
 
 export default function MerchantActive() {
@@ -16,7 +16,7 @@ export default function MerchantActive() {
     }, [])
     return (
         <>
-            <table className="table table-striped">
+            <table className="table table-striped" >
                 <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -26,28 +26,27 @@ export default function MerchantActive() {
                     <th scope="col">Status</th>
                     <th scope="col">Image</th>
                     <th scope="col">Email</th>
-                    <th scope="col"></th>
+                    <th scope="col">Active</th>
                 </tr>
                 </thead>
                 <tbody>
                 {merchants !== undefined && merchants.map((item, key) => (
                     <>
                         <tr>
-                            <th scope="row">{key + 1}</th>
-                            <td>{item.nameMerchant}</td>
-                            <td>{item.address}</td>
-                            <td>{item.phone}</td>
-                            <td>{item.status}</td>
-                            <td>{item.image}</td>
-                            <td>{item.email}</td>
+                            <th scope="col">{key + 1}</th>
+                            <td scope="col">{item.nameMerchant}</td>
+                            <td scope="col">{item.address}</td>
+                            <td scope="col">{item.phone}</td>
+                            <td scope="col">{item.status}</td>
+                            <td scope="col"><img style={{height:100,width:100}} src={item.image} alt=""/></td>
+                            <td scope="col">{item.email}</td>
                             <td>
                                 {item.status === 'locked' && <>
-                                    <button
+                                    <button style={{backgroundColor:"rgb(240,134,40)", border:"none"}}
                                         className="btn-danger rounded text-white position-absolute start-0 top-0 m-1 py-1 px-2"
                                         onClick={() => {
                                             swal({
                                                 title: "Are you sure?",
-                                                text: "Once deleted, you will not be able to recover this imaginary file!",
                                                 icon: "warning",
                                                 buttons: true,
                                                 dangerMode: true,
@@ -59,11 +58,11 @@ export default function MerchantActive() {
                                                                 navigate('/admin/merchant-active')
                                                             })
                                                         })
-                                                        swal("Poof! Your imaginary file has been deleted!", {
+                                                        swal("Your account has been active!", {
                                                             icon: "success",
                                                         });
                                                     } else {
-                                                        swal("Your imaginary file is safe!");
+                                                        swal("Your account is safe!");
                                                     }
                                                 });
                                         }}
@@ -72,12 +71,11 @@ export default function MerchantActive() {
                                     </button>
                                 </>}
                                 {item.status === 'active' && <>
-                                    <button
+                                    <button style={{backgroundColor:"rgb(240,134,40)", border: "none"}}
                                         className="btn-danger rounded text-white position-absolute start-0 top-0 m-1 py-1 px-2"
                                         onClick={() => {
                                             swal({
                                                 title: "Are you sure?",
-                                                text: "Once deleted, you will not be able to recover this imaginary file!",
                                                 icon: "warning",
                                                 buttons: true,
                                                 dangerMode: true,
@@ -89,11 +87,11 @@ export default function MerchantActive() {
                                                                 navigate('/admin/merchant-active')
                                                             })
                                                         })
-                                                        swal("Poof! Your imaginary file has been deleted!", {
+                                                        swal("Your account has been locked!", {
                                                             icon: "success",
                                                         });
                                                     } else {
-                                                        swal("Your imaginary file is safe!");
+                                                        swal("Your account is safe!");
                                                     }
                                                 });
                                         }}
@@ -101,7 +99,6 @@ export default function MerchantActive() {
                                         Locked
                                     </button>
                                 </>}
-
                             </td>
                         </tr>
                     </>

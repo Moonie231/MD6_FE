@@ -15,7 +15,7 @@ export const register = createAsyncThunk("merchant/register", async (data) => {
 export const editProfile = createAsyncThunk(
     "merchant/editProfile",
     async (data) => {
-       await customAxios.put('merchants/edit/' + data[1], data[0])
+       await customAxios.put('merchants/' + data[1], data[0])
         const response = await customAxios.get('merchants/my-profile/'+data[1]);
         console.log(response.data)
         return response.data;
@@ -51,14 +51,7 @@ export const setStatus = createAsyncThunk(
     async (data) => {
         const res = await customAxios.put('admin/status/' + data)
         return res.data
-})
-
-export const logout = createAsyncThunk (
-    'merchant/logout',
-    async () => {
-        return false
-    }
-    )
+    })
 
 export const logout = createAsyncThunk (
     'merchant/logout',

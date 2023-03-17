@@ -10,10 +10,12 @@ const validateSchema = Yup.object().shape({
         .email("Invalid email format")
         .required("Required"),
     userPassword: Yup.string()
-        .min(2, "Too short!")
+        .matches(/^[a-zA-Z0-9]/)
+        .min(6, "Too short!")
         .max(50, "Too long!")
         .required("Required"),
     username:Yup.string()
+        .matches(/^[a-zA-Z0-9]/, "Username must have characters")
         .min(2, "Too short!")
         .max(50, "Too long!")
         .required("Required"),
@@ -64,9 +66,10 @@ export default function RegisterUser(){
                                                     }}
                                             >
                                                 <Form>
-                                                    <p>Please register to create an account merchant</p>
+                                                    <p>Please register to create an account buyer</p>
 
                                                     <div className="form-outline mb-4">
+                                                        <label for="username">Username</label>
                                                         <Field type="text" id="username" className="form-control" name = {'username'}
                                                                placeholder="Username"/>
                                                         <alert className="text-danger">
@@ -75,6 +78,7 @@ export default function RegisterUser(){
                                                     </div>
 
                                                     <div className="form-outline mb-4">
+                                                        <label htmlFor="password">Password</label>
                                                         <Field type="password" id="password" className="form-control" name ={'userPassword'}
                                                                placeholder="Password"/>
                                                         <alert className="text-danger">
@@ -83,6 +87,7 @@ export default function RegisterUser(){
                                                     </div>
 
                                                     <div className="form-outline mb-4">
+                                                        <label htmlFor="email">Email</label>
                                                         <Field type="text" id="name" className="form-control" name = {'email'}
                                                                placeholder="Email"/>
                                                         <alert className="text-danger">
@@ -91,14 +96,13 @@ export default function RegisterUser(){
                                                     </div>
 
                                                     <div className="text-center pt-1 mb-5 pb-1">
-                                                        <button className="btn btn-outline-primary btn-block fa-lg gradient-custom-2 mb-3"
+                                                        <button  style={{backgroundColor:"rgb(240,134,40)",border:'none',color:"white",width:300}}
                                                                 type="submit">Register
                                                         </button>
                                                     </div>
-
                                                     <div className="d-flex align-items-center justify-content-center pb-4">
                                                         <p className="mb-0 me-2">Already have an account?</p>
-                                                        <Link to={'/login-user'}><button type="button" className="btn btn-outline-danger">Log in</button></Link>
+                                                        <Link to={'/login-user'}><button type="button"  style={{backgroundColor:"rgb(240,134,40)",border:'none',color:"white",width:150}}>Log in</button></Link>
                                                     </div>
 
                                                 </Form>
@@ -106,7 +110,7 @@ export default function RegisterUser(){
                                         </div>
                                     </div>
                                     <div className="col-lg-6 d-flex align-items-center gradient-custom-2">
-                                        <img style={{width:'460px',height:'100%'}} src="" alt=""/>
+                                        <img style={{width:'460px',height:'100%'}} src="/img/food.jpg" alt=""/>
                                         <div className="text-white px-3 py-4 p-md-5 mx-md-4">
                                         </div>
                                     </div>

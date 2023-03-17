@@ -27,6 +27,8 @@ export default function LoginUser() {
                 swal("User not found");
             } else if (e.payload === "Wrong password") {
                 swal("Wrong password");
+            }else if (e.payload.status === false ||e.payload.status ==='false'){
+                swal('Account not verified')
             }else {
                 navigate("/")
             }
@@ -58,36 +60,35 @@ export default function LoginUser() {
                                                         handleLogin(values)
                                                     }}>
                                                 <Form>
-                                                    <p>Please login to your account merchant</p>
+                                                    <p>Please login to your account <a href="" style={{color:'rgb(240,134,40)'}} target="_blank">Buyer</a></p>
                                                     <div className="form-outline mb-4">
+                                                        <label className="form-label"
+                                                               htmlFor="form2Example11">Email</label>
                                                         <Field type="email" id="form2Example11" name={'email'}
                                                                className="form-control"
                                                                placeholder="Email"/>
-                                                        <label className="form-label"
-                                                               htmlFor="form2Example11">Email</label>
                                                         <alert className="text-danger">
                                                             <ErrorMessage name={"email"}></ErrorMessage>
                                                         </alert>
                                                     </div>
                                                     <div className="form-outline mb-4">
+                                                        <label className="form-label"
+                                                               htmlFor="form2Example22">Password</label>
                                                         <Field type="password" id="form2Example22" name={'password'}
                                                                placeholder="Password"
                                                                className="form-control"/>
-                                                        <label className="form-label"
-                                                               htmlFor="form2Example22">Password</label>
                                                         <alert className="text-danger">
                                                             <ErrorMessage name={"password"}></ErrorMessage>
                                                         </alert>
                                                     </div>
                                                     <div className="text-center pt-1 mb-5 pb-1">
                                                         <button
-                                                            className="btn btn-outline-primary btn-block fa-lg gradient-custom-2 mb-3"
-                                                            type="submit">Login
+                                                            style={{backgroundColor:"rgb(240,134,40)",border:'none',color:"white",width:300}}                                                            type="submit">Login
                                                         </button>
                                                     </div>
                                                     <div className="d-flex align-items-center justify-content-center pb-4">
                                                         <p className="mb-0 me-2">Don't have an account?</p>
-                                                        <Link to={"/register-user"}><button type="button" className="btn btn-outline-danger">Create new</button></Link>
+                                                        <Link to={"/register-user"}><button type="button" style={{backgroundColor:"rgb(240,134,40)",border:'none',color:"white",width:150}}>Create new</button></Link>
                                                     </div>
                                                 </Form>
                                             </Formik>

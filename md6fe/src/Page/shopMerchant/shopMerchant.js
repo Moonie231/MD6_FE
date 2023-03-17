@@ -1,140 +1,103 @@
-export default function ShopMerchant(){
-    return(
-        <>
-            <body>
-            <div className="breadcrumb-option">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-6 col-md-6 col-sm-6">
-                            <div className="breadcrumb__text">
-                                <h2>Shopping cart</h2>
-                            </div>
-                        </div>
-                        <div className="col-lg-6 col-md-6 col-sm-6">
-                            <div className="breadcrumb__links">
-                                <a href="./index.html">Home</a>
-                                <span>Shopping cart</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+import {useDispatch, useSelector} from "react-redux";
+import {deleteFood, getFood, myFood} from "../../service/foodsService";
+import {useEffect} from "react";
+import {Link, useNavigate, useParams} from "react-router-dom";
+import swal from 'sweetalert'
 
-            <section className="shopping-cart spad">
-                <div className="container">
-                    <div className="row">
-                            <div className="shopping__cart__table">
-                                <table>
-                                    <thead>
-                                    <tr>
-                                        <th>Product</th>
-                                        <th>Quantity</th>
-                                        <th>Total</th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td className="product__cart__item">
-                                            <div className="product__cart__item__pic">
-                                                <img src="/img/shop/cart/cart-1.jpg" alt=""/>
-                                            </div>
-                                            <div className="product__cart__item__text">
-                                                <h6>T-shirt Contrast Pocket</h6>
-                                                <h5>$98.49</h5>
-                                            </div>
-                                        </td>
-                                        <td className="quantity__item">
-                                            <div className="quantity">
-                                                <div className="pro-qty">
-                                                    <input type="text" value="1"/>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className="cart__price">$ 30.00</td>
-                                        <td className="cart__close"><span className="icon_close"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td className="product__cart__item">
-                                            <div className="product__cart__item__pic">
-                                                <img src="/img/shop/cart/cart-2.jpg" alt=""/>
-                                            </div>
-                                            <div className="product__cart__item__text">
-                                                <h6>Diagonal Textured Cap</h6>
-                                                <h5>$98.49</h5>
-                                            </div>
-                                        </td>
-                                        <td className="quantity__item">
-                                            <div className="quantity">
-                                                <div className="pro-qty">
-                                                    <input type="text" value="1"/>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className="cart__price">$ 32.50</td>
-                                        <td className="cart__close"><span className="icon_close"></span></td>
-                                    </tr>
+export default function ShopMerchant() {
+    const {idMerchant} = useParams()
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
+    const foods = useSelector(state => {
+        return state.foods.myFood
+    });
+    useEffect(() => {
+        dispatch(myFood(idMerchant))
+    }, []);
+
+    return (
+        <>
+            <div>
+                <Link className="btn btn-warning" style={{marginTop: 50}} to={`/add-food`}>
+                    Create Food
+                </Link>
+            </div>
+            <section className="wishlist spad">
+                <div className="row">
+                    <div className="col-lg-12">
+                        <div className="wishlist__cart__table">
+                            <table style={{marginLeft: 60}}>
+                                <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Description</th>
+                                    <th></th>
+                                    <th>Category</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {foods.map((item) => (
                                     <tr>
                                         <td className="product__cart__item">
                                             <div className="product__cart__item__pic">
-                                                <img src="/img/shop/cart/cart-3.jpg" alt=""/>
+                                                <img style={{height: 70, width: 70}} src={item.img} alt=""/>
                                             </div>
                                             <div className="product__cart__item__text">
-                                                <h6>Basic Flowing Scarf</h6>
-                                                <h5>$98.49</h5>
+                                                <h6>{item.nameFood}</h6>
                                             </div>
                                         </td>
-                                        <td className="quantity__item">
-                                            <div className="quantity">
-                                                <div className="pro-qty">
-                                                    <input type="text" value="1"/>
-                                                </div>
-                                            </div>
+                                        <td className="cart__price">$ {item.price}</td>
+                                        <td className="cart__stock">{item.description}</td>
+                                        <td className="cart__stock"></td>
+                                        <td className="cart__stock">{item.nameCategory}</td>
+                                        <td className="cart__btn">
+                                            <Link to={`/edit-food/${item.idFood}`}>
+                                                <a href="#" className="btn btn-dark" style={{fontSize: 20, width: 100}}>
+                                                    Edit</a>
+                                            </Link>
                                         </td>
-                                        <td className="cart__price">$ 47.00</td>
-                                        <td className="cart__close"><span className="icon_close"></span></td>
+                                        <td>
+                                            <span className="icon_close " style={{fontSize: 30}}
+                                                  onClick={() => {
+                                                      swal({
+                                                          title: "Are you sure?",
+                                                          text: "Once deleted, you will not be able to recover this imaginary file!",
+                                                          icon: "warning",
+                                                          buttons: true,
+                                                          dangerMode: true,
+                                                      })
+                                                          .then((willDelete) => {
+                                                              if (willDelete) {
+
+                                                                  swal("Poof! Your imaginary file has been deleted!", {
+                                                                      icon: "success",
+                                                                  });
+                                                                  dispatch(deleteFood(item.idFood)).then(() => {
+                                                                      navigate('/')
+                                                                      dispatch(getFood()).then(() => {
+                                                                      })
+
+                                                                  })
+                                                              } else {
+                                                                  swal("Your imaginary file is safe!");
+                                                              }
+                                                          });
+                                                  }}
+                                            >
+                                            </span>
+                                        </td>
                                     </tr>
-                                    <tr>
-                                        <td className="product__cart__item">
-                                            <div className="product__cart__item__pic">
-                                                <img src="/img/shop/cart/cart-4.jpg" alt=""/>
-                                            </div>
-                                            <div className="product__cart__item__text">
-                                                <h6>Basic Flowing Scarf</h6>
-                                                <h5>$98.49</h5>
-                                            </div>
-                                        </td>
-                                        <td className="quantity__item">
-                                            <div className="quantity">
-                                                <div className="pro-qty">
-                                                    <input type="text" value="1"/>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td className="cart__price">$ 30.00</td>
-                                        <td className="cart__close"><span className="icon_close"></span></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div className="row">
-                                <div className="col-lg-6 col-md-6 col-sm-6">
-                                    <div className="continue__btn">
-                                        <a href="#">Continue Shopping</a>
-                                    </div>
-                                </div>
-                                <div className="col-lg-6 col-md-6 col-sm-6">
-                                    <div className="continue__btn update__btn">
-                                        <a href="#"><i className="fa fa-spinner"></i> Update cart</a>
-                                    </div>
-                                </div>
-                            </div>
+
+                                ))}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </section>
-
-            </body>
-
         </>
     )
 }

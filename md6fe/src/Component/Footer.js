@@ -1,7 +1,7 @@
-export default function Footer(){
-    return(
+export default function Footer() {
+    return (
         <>
-            <footer className="footer set-bg" data-setbg="/img/footer-bg.jpg">
+            <footer className="footer set-bg" data-setbg="/img/footer-bg.jpg" style={{backgroundColor:'dimgray'}} >
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-4 col-md-6 col-sm-6">
@@ -17,11 +17,9 @@ export default function Footer(){
                         <div className="col-lg-4 col-md-6 col-sm-6">
                             <div className="footer__about">
                                 <div className="footer__logo">
-                                    <a href="#"><img src="/img/footer-logo.png" alt=""/></a>
+                                    <a href="#"><img style={{height: 150}} src="/img/logo.png" alt=""/></a>
                                 </div>
-                                <p>Lorem ipsum dolor amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                    ut
-                                    labore dolore magna aliqua.</p>
+                                <p>Choose your way and pay our way</p>
                                 <div className="footer__social">
                                     <a href="#"><i className="fa fa-facebook"></i></a>
                                     <a href="#"><i className="fa fa-twitter"></i></a>
@@ -51,7 +49,7 @@ export default function Footer(){
                                     <script>document.write(new Date().getFullYear());</script>
                                     All rights reserved | This template is made with <i className="fa fa-heart"
                                                                                         aria-hidden="true"></i> by <a
-                                    href="https://colorlib.com" target="_blank">Colorlib</a>
+                                    href="\" target="_blank">TUNG</a>
                                 </p>
                             </div>
                             <div className="col-lg-5">
@@ -67,15 +65,6 @@ export default function Footer(){
                     </div>
                 </div>
             </footer>
-
-            <div className="search-model">
-                <div className="h-100 d-flex align-items-center justify-content-center">
-                    <div className="search-close-switch">+</div>
-                    <form className="search-model-form">
-                        <input type="text" id="search-input" placeholder="Search here....."/>
-                    </form>
-                </div>
-            </div>
         </>
     )
 }
