@@ -94,103 +94,93 @@ export default function Profile() {
 
     return (
         <>
-            <section className="h-100 gradient-form" style={{backgroundColor: ''}}>
-                <div className="container py-5 h-100">
-                    <div className="row d-flex justify-content-center align-items-center h-100">
-                        <div className="col-xl-10">
-                            <div className="card rounded-3 text-black">
-                                <div className="row g-0">
+            <div className="container">
+                <section className="contact spad">
+                    <div className="container">
 
-                                    <div className="col-lg-6">
-                                        <div className="card-body p-md-5 mx-md-4">
-                                            <div className="text-center">
-                                                <img src="/img/logo.png" alt=""/>
-                                                <h4 className="mt-1 mb-5 pb-1"></h4>
-                                            </div>
-                                            <Formik
-                                                initialValues={{
-                                                    nameMerchant: merchant.nameMerchant,
-                                                    address: merchant.address,
-                                                    phone: merchant.phone,
-                                                    image: merchant.image
-                                                }}
-                                                validationSchema={validateSchema}
-                                                onSubmit={(values) => {
-                                                    values.image = urls[0]
-                                                    handleEdit(values)
-                                                }}
-                                                enableReinitialize={true}
+                        <div className="row">
+                            <div className="col-lg-4">
+                                <div className="contact__text">
+                                    <img src={urls} style={{borderRadius: "23px", width: '250px', height: '250px'}}/>
+                                    <div className="col-md-12">
+                                        <div style={{float: "left", width: "100%"}}>
+                                            <label htmlFor="exampleFormControlFile1">
+                                                <strong>Upload Image Here</strong>
+                                            </label>
+                                            <input
+                                                type="file"
+                                                className="form-control-file"
+                                                id="exampleFormControlFile1"
+                                                multiple
+                                                onChange={handleChange}
+                                            />
+                                            <br/>
+                                            <button
+                                                type="button" style={{backgroundColor: "rgb(240,134,40)"}}
+                                                className="site-btn"
+                                                onClick={handleUpload}
                                             >
-                                                <Form>
-                                                    <div className="row g-3">
-                                                        <div className="col-12">
-                                                            <div className="form-floating">
-                                                                <label for="nameMerchant">Name Merchant</label>
-                                                                <Field type="text" class="form-control"
-                                                                       name={'nameMerchant'} id="nameMerchant"
-                                                                       placeholder="Name"/>
-                                                                <alert className="text-danger">
-                                                                    <ErrorMessage name={"nameMerchant"}></ErrorMessage>
-                                                                </alert>
-                                                            </div>
-                                                            <div className="form-floating">
-                                                                <label htmlFor="address">Address</label>
-                                                                <Field type="text" class="form-control" name={'address'}
-                                                                       id="address" placeholder="Address"/>
-                                                            </div>
-                                                            <div className="form-floating">
-                                                                <label htmlFor="phone">Phone</label>
-                                                                <Field type="text" class="form-control" name={'phone'}
-                                                                       id="phone" placeholder="Phone"/>
-                                                                <alert className="text-danger">
-                                                                    <ErrorMessage name={"phone"}></ErrorMessage>
-                                                                </alert>
-                                                            </div>
-                                                            <div className="col-md-12">
-                                                                <div>
-                                                                    <label htmlFor="exampleFormControlFile1">
-                                                                        <strong>Upload Image Here</strong>
-                                                                    </label>
-                                                                    <input
-                                                                        type="file"
-                                                                        className="form-control-file"
-                                                                        id="exampleFormControlFile1"
-                                                                        multiple
-                                                                        onChange={handleChange}
-                                                                    />
-                                                                </div>
-                                                                <div>
-                                                                    <button
-                                                                        type="button"
-                                                                        className="btn btn-info w-100 py-3"
-                                                                        onClick={handleUpload}
-                                                                    >
-                                                                        Up
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-12">
-                                                            <button className="btn btn-info w-100 py-3" style={{backgroundColor:"rgb(240,134,40)"}}
-                                                                    type="submit">Save changes
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </Form>
-                                            </Formik>
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-6 d-flex align-items-center gradient-custom-2">
-                                        <img style={{width: '460px', height: '100%'}} src={urls} alt={urls}/>
-                                        <div className="text-white px-3 py-4 p-md-5 mx-md-4">
+                                                Up
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div className="col-lg-8">
+                                <div className="contact__form">
+                                    <Formik
+                                        initialValues={{
+                                            nameMerchant: merchant.nameMerchant,
+                                            address: merchant.address,
+                                            phone: merchant.phone,
+                                            image: merchant.image
+                                        }}
+                                        validationSchema={validateSchema}
+                                        onSubmit={(values) => {
+                                            values.image = urls[0]
+                                            handleEdit(values)
+                                        }}
+                                        enableReinitialize={true}
+                                    >
+                                        <Form>
+                                            <div className="row">
+                                                <div className="col-lg-12">
+                                                    <label for="nameMerchant">Name Merchant</label>
+                                                    <Field type="text" class="form-control"
+                                                           name={'nameMerchant'} id="nameMerchant"
+                                                           placeholder="Name"/>
+                                                    <alert className="text-danger">
+                                                        <ErrorMessage name={"nameMerchant"}></ErrorMessage>
+                                                    </alert>
+                                                </div>
+                                                <div className="col-lg-12">
+                                                    <label htmlFor="address">Address</label>
+                                                    <Field type="text" class="form-control" name={'address'}
+                                                           id="address" placeholder="Address"/>
+                                                </div>
+                                                <div className="col-lg-12">
+                                                    <label htmlFor="phone">Phone</label>
+                                                    <Field type="text" class="form-control" name={'phone'}
+                                                           id="phone" placeholder="Phone"/>
+                                                    <alert className="text-danger">
+                                                        <ErrorMessage name={"phone"}></ErrorMessage>
+                                                    </alert>
+                                                </div>
+
+                                                <div className="col-lg-12">
+                                                    <button type="submit" className="site-btn"
+                                                            style={{backgroundColor: "rgb(240,134,40)"}}>Send Us
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </Form>
+                                    </Formik>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </div>
         </>
     )
 }
