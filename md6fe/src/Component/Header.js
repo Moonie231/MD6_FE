@@ -7,9 +7,11 @@ import {useEffect} from "react";
 export default function Header() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const user = useSelector((state) => {
+    const merchant = useSelector((state) => {
         return state.merchant.currentMerchant
-
+    });
+    const user = useSelector((state) => {
+        return state.user.currentUser
     });
 
     // useEffect(()=>{
@@ -72,12 +74,11 @@ export default function Header() {
                                     {localStorage.getItem('NameStatus') === true || localStorage.getItem('NameStatus') === 'true' &&
                                         <li><a href="">Shop</a>
                                             <ul className="dropdown">
-                                                <li><Link to={'/merchants/my-shop/' + user.idMerchant}>My Shop</Link>
+                                                <li><Link to={'/merchants/my-shop/' + merchant.idMerchant}>My Shop</Link>
                                                 </li>
                                             </ul>
                                         </li>}
                                     <li><Link to={'/shop'}>Foods</Link></li>
-                                    {console.log(localStorage.getItem('NameStatus'))}
                                     {((localStorage.getItem('NameStatus')===null && localStorage.getItem('role')===null && localStorage.getItem('status')===null) || (localStorage.getItem('NameStatus') === false && localStorage.getItem('role') === false && localStorage.getItem('status') === false))&& <>
                                         <li><a href="">Login</a>
                                             <ul className="dropdown">
@@ -89,9 +90,9 @@ export default function Header() {
                                     </>}
 
                                     {localStorage.getItem('NameStatus') === true || localStorage.getItem('NameStatus') === 'true' && <>
-                                        <li><a href="#">{user.nameMerchant}</a>
+                                        <li><a href="#">{merchant.nameMerchant}</a>
                                             <ul className="dropdown">
-                                                <li><Link to={`/merchants/${user.idMerchant}`}>Profile</Link></li>
+                                                <li><Link to={`/merchants/${merchant.idMerchant}`}>Profile</Link></li>
                                                 <li><a href="" onClick={(e) => {
                                                     dispatch(logout())
                                                     navigate('/login-merchant')
@@ -104,10 +105,15 @@ export default function Header() {
                                         <li><Link to={'/admin/merchant-pending'}>Merchant Pending</Link></li>
                                     </>}
                                     {localStorage.getItem('status') === true || localStorage.getItem('status') === 'true' && <>
-                                        <li><a href="" onClick={(e) => {
-                                            dispatch(logoutUser())
-                                            navigate('/login-user')
-                                        }}>Log Out</a></li>
+                                        <li><a href="#">{user.username}</a>
+                                            <ul className="dropdown">
+                                                <li><Link to={`/users/${user.idUser}`}>Profile</Link></li>
+                                                <li><a href="" onClick={(e) => {
+                                                    dispatch(logoutUser())
+                                                    navigate('/login-user')
+                                                }}>Log Out</a></li>
+                                            </ul>
+                                        </li>
                                     </>}
                                 </ul>
                             </nav>

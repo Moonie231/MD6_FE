@@ -16,7 +16,7 @@ const userSlice = createSlice({
     extraReducers: builder => {
         builder.addCase(login.fulfilled, (state, action) => {
             state.currentUser = action.payload;
-            localStorage.setItem("username", action.payload.username);
+            localStorage.setItem("user", JSON.stringify(action.payload));
             localStorage.setItem("idUser", action.payload.idUser);
             localStorage.setItem("access-token", action.payload.token)
             state.status = true
@@ -34,9 +34,13 @@ const userSlice = createSlice({
         });
         builder.addCase(editProfile.fulfilled, (state, action) => {
             state.currentUser = action.payload;
+            localStorage.setItem("user", JSON.stringify(action.payload));
+
         });
         builder.addCase(getProfile.fulfilled, (state, action) => {
             state.profile = action.payload;
+            localStorage.setItem("user", JSON.stringify(action.payload));
+
         });
         builder.addCase(verifyEmail.fulfilled, (state, action) => {
 
