@@ -21,6 +21,7 @@ import CreateAddress from "./Page/address/addAddress";
 import StatisticsByUser from "./Page/shopMerchant/statisticsByUser";
 import Cart from "./Page/user/cart";
 
+
 function App() {
     localStorage.getItem('NameStatus')
     localStorage.getItem('role')
