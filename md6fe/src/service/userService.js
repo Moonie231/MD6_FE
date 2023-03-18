@@ -58,3 +58,20 @@ export const addAddress = createAsyncThunk(
         return res.data
     }
 )
+
+export const editAddress = createAsyncThunk(
+    'users/editAddress',
+    async (data) => {
+        const res = await customAxios.put('users/address/edit/'+ data[1], data[0])
+        return res.data
+    }
+)
+
+export const deleteAddress = createAsyncThunk(
+    'user/deleteAddress',
+    async (data)=>{
+        const res = await customAxios.delete('users/address/delete/'+ data);
+        console.log(res.data)
+        return res.data
+    }
+)

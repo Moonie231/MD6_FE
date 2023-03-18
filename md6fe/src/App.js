@@ -17,10 +17,9 @@ import Shop from "./Page/shopMerchant/shop";
 import ProfileMerchant from "./Page/merchant/profile";
 import ProfileUser from "./Page/user/profile";
 import Address from "./Page/address/address";
-import CreateAddress from "./Page/address/addAddress";
 import StatisticsByUser from "./Page/shopMerchant/statisticsByUser";
 import Cart from "./Page/user/cart";
-
+import Merchant from "./Page/admin/merchant";
 
 function App() {
     localStorage.getItem('NameStatus')
@@ -50,14 +49,13 @@ function App() {
                 <Route path={'users'}>
                     <Route path={`:idUser`} element={<ProfileUser></ProfileUser>}></Route>
                     <Route path={'address'}>
-                        <Route path={`:idUser`} element={<Address></Address>}></Route>
-                        {/*<Route path={`add`} element={<CreateAddress></CreateAddress>}></Route>*/}
-                        <Route path={`edit/:idAddress`} element={<Address></Address>}></Route>
+                        <Route path={`:idUser`} element={<Address></Address>}></Route>>
                     </Route>
                 </Route>
                 <Route path={'admin'}>
                     <Route path={'merchant-active'} element={<MerchantActive></MerchantActive>}></Route>
                     <Route path={'merchant-pending'} element={<MerchantPending></MerchantPending>}></Route>
+                    <Route path={'merchant/:idMerchant'} element={<Merchant></Merchant>}></Route>
                 </Route>
                 <Route path={'*'} element={<Home/>}></Route>
             </Routes>
