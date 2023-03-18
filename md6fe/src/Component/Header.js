@@ -54,8 +54,10 @@ export default function Header() {
                                             <a href="#"><img src="/img/icon/heart.png" alt=""/></a>
                                         </div>
                                         <div className="header__top__right__cart">
-                                            <a href="#"><img src="/img/icon/cart.png" alt=""/> <span>0</span></a>
-                                            <div className="cart__price">Cart: <span>$0.00</span></div>
+                                            <Link to={'my-cart/'+localStorage.getItem('idOrder')}>
+                                                <a href=""><img src="/img/icon/cart.png" alt=""/> <span>0</span></a>
+                                            </Link>
+                                            <div className="cart__price" >Cart: <span>$0.00</span></div>
                                         </div>
 
                                     </div>
@@ -75,6 +77,8 @@ export default function Header() {
                                         <li><a href="">Shop</a>
                                             <ul className="dropdown">
                                                 <li><Link to={'/merchants/my-shop/' + merchant.idMerchant}>My Shop</Link>
+                                                </li>
+                                                <li><Link to={'/merchants/statistics/' + merchant.idMerchant}>Statistics</Link>
                                                 </li>
                                             </ul>
                                         </li>}

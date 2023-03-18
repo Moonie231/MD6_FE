@@ -18,20 +18,21 @@ import ProfileMerchant from "./Page/merchant/profile";
 import ProfileUser from "./Page/user/profile";
 import Address from "./Page/address/address";
 import CreateAddress from "./Page/address/addAddress";
+import StatisticsByUser from "./Page/shopMerchant/statisticsByUser";
+import Cart from "./Page/user/cart";
+
 
 function App() {
     localStorage.getItem('NameStatus')
     localStorage.getItem('role')
     localStorage.getItem('status')
-    console.log(localStorage.getItem('NameStatus'),
-        localStorage.getItem('role'),
-        localStorage.getItem('status'))
     return (
         <>
             <Header></Header>
             <Routes>
                 <Route path={''} element={<Home/>}></Route>
                 <Route path={'login-merchant'} element={<LoginMerchant/>}></Route>
+                <Route path={'my-cart/:id'} element={<Cart/>}></Route>
                 <Route path={'verify-email/' + localStorage.getItem('email-token')} element={<VerifyEmail/>}></Route>
                 <Route path={'register-merchant'} element={<RegisterMerchant/>}></Route>
                 <Route path={'login-user'} element={<LoginUser/>}></Route>
@@ -42,6 +43,8 @@ function App() {
                 <Route path={'merchants'}>
                     <Route path={`:idMerchant`} element={<ProfileMerchant></ProfileMerchant>}></Route>
                     <Route path={'my-shop/:idMerchant'} element={<ShopMerchant/>}>
+                    </Route>
+                    <Route path={'statistics/:id'} element={<StatisticsByUser/>}>
                     </Route>
                 </Route>
                 <Route path={'users'}>
