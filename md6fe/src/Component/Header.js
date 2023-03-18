@@ -108,6 +108,7 @@ export default function Header() {
                                         <li><a href="#">{user.username}</a>
                                             <ul className="dropdown">
                                                 <li><Link to={`/users/${user.idUser}`}>Profile</Link></li>
+                                                <li><Link to={`/users/address/${user.idUser}`}>My Address</Link></li>
                                                 <li><a href="" onClick={(e) => {
                                                     dispatch(logoutUser())
                                                     navigate('/login-user')
