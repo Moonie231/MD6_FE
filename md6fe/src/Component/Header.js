@@ -76,6 +76,8 @@ export default function Header() {
                                             <ul className="dropdown">
                                                 <li><Link to={'/merchants/my-shop/' + merchant.idMerchant}>My Shop</Link>
                                                 </li>
+                                                <li><Link to={'/merchants/statistics/' + merchant.idMerchant}>Statistics</Link>
+                                                </li>
                                             </ul>
                                         </li>}
                                     <li><Link to={'/shop'}>Foods</Link></li>

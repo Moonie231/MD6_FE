@@ -16,6 +16,7 @@ import MerchantPending from "./Page/admin/merchantPending";
 import Shop from "./Page/shopMerchant/shop";
 import ProfileMerchant from "./Page/merchant/profile";
 import ProfileUser from "./Page/user/profile";
+import StatisticsByUser from "./Page/shopMerchant/statisticsByUser";
 
 function App() {
     localStorage.getItem('NameStatus')
@@ -40,6 +41,8 @@ function App() {
                 <Route path={'merchants'}>
                     <Route path={`:idMerchant`} element={<ProfileMerchant></ProfileMerchant>}></Route>
                     <Route path={'my-shop/:idMerchant'} element={<ShopMerchant/>}>
+                    </Route>
+                    <Route path={'statistics/:id'} element={<StatisticsByUser/>}>
                     </Route>
                 </Route>
                 <Route path={'users'}>
