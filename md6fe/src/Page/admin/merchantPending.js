@@ -1,4 +1,4 @@
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {getMerchantActive, getMerchantPending, setStatus} from "../../service/merchantService";
@@ -34,7 +34,7 @@ export default function MerchantPending() {
                     <>
                         <tr>
                             <th scope="row">{key + 1}</th>
-                            <td>{item.nameMerchant}</td>
+                            <Link to={`admin/merchant/${item.idMerchant}`}><td>{item.nameMerchant}</td></Link>
                             <td>{item.address}</td>
                             <td>{item.phone}</td>
                             <td>{item.status}</td>

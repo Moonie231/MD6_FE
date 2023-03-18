@@ -1,10 +1,8 @@
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {addAddress, getAddress} from "../../service/userService";
+import {addAddress, deleteAddress, editAddress, getAddress} from "../../service/userService";
 import swal from "sweetalert";
-import {addFood, deleteFood, getFood} from "../../service/foodsService";
-import {getMerchantActive, setStatus} from "../../service/merchantService";
 
 export default function Address() {
     let {idUser} = useParams()
@@ -13,6 +11,7 @@ export default function Address() {
     let address = useSelector(state => {
         return state.user.address
     })
+
     useEffect(() => {
         dispatch(getAddress(idUser))
     }, [])
@@ -90,11 +89,11 @@ export default function Address() {
                                                                             })
 
                                                                         });
-                                                                        swal("Your account has been active!", {
+                                                                        swal("Add ok!", {
                                                                             icon: "success",
                                                                         });
                                                                     } else {
-                                                                        swal("Your account is safe!");
+                                                                        swal("No address");
                                                                     }
                                                                 });
                                                         }}>
@@ -178,7 +177,6 @@ export default function Address() {
                                                             {item.phone}</div>
                                                     </div>
                                                     <div className="" style={{justifyContent: 'flex-end'}}>
-                                                        <Link to={`/users/address/edit/${item.idAddress}`}>
                                                             <button className=""
                                                                     style={{
                                                                         justifyContent: 'flex-end',
@@ -188,11 +186,75 @@ export default function Address() {
                                                                         padding: 4,
                                                                         color: 'white',
                                                                         textTransform: 'none',
-                                                                        overflow: 'visible'
-                                                                    }}>
-                                                                Cập nhật
+                                                                        overflow: 'visible',
+                                                                        marginRight: 10
+                                                                    }}
+                                                                    onClick={() => {
+                                                                        swal("Edit Your Address", {
+                                                                            content: "input",
+                                                                            inputValue: '132',
+                                                                            showCancelButton: true,
+                                                                            confirmButtonText: 'Lưu',
+                                                                            cancelButtonText: 'Hủy',
+                                                                        })
+                                                                            .then(async (result) => {
+                                                                                console.log(result)
+                                                                                if (result) {
+                                                                                    let data = [{nameAddress: result}, item.idAddress]
+                                                                                    await dispatch(editAddress(data)).then(async () =>{
+                                                                                        await dispatch(getAddress(localStorage.getItem('idUser'))).then(() => {
+                                                                                            navigate('/users/address/'+localStorage.getItem('idUser'))
+                                                                                        })
+
+                                                                                    });
+                                                                                    swal("Edit ok!", {
+                                                                                        icon: "success",
+                                                                                    });
+                                                                                } else {
+                                                                                    swal("Your address is safe!");
+                                                                                }
+                                                                            });
+                                                                    }}
+                                                            >
+                                                                Edit
                                                             </button>
-                                                        </Link>
+                                                        <button className=""
+                                                                style={{
+                                                                    justifyContent: 'flex-end',
+                                                                    border: 0,
+                                                                    background: '#ee4d2d',
+                                                                    outline: 'none',
+                                                                    padding: 4,
+                                                                    color: 'white',
+                                                                    textTransform: 'none',
+                                                                    overflow: 'visible',
+                                                                }}
+                                                                onClick={() => {
+                                                                    swal({
+                                                                        title: "Are you sure?",
+                                                                        text: "Once deleted, you will not be able to recover this imaginary file!",
+                                                                        icon: "warning",
+                                                                        buttons: true,
+                                                                        dangerMode: true,
+                                                                    })
+                                                                        .then((willDelete) => {
+                                                                            if (willDelete) {
+                                                                                swal("Poof! Your imaginary file has been deleted!", {
+                                                                                    icon: "success",
+                                                                                });
+                                                                                dispatch(deleteAddress(item.idAddress)).then(() => {
+                                                                                    navigate('/users/address/'+ idUser)
+                                                                                    dispatch(getAddress(idUser)).then(() => {
+                                                                                    })
+
+                                                                                })
+                                                                            } else {
+                                                                                swal("Your imaginary file is safe!");
+                                                                            }
+                                                                        });
+                                                                }}>
+                                                            Delete
+                                                        </button>
                                                     </div>
                                                 </div>
                                                 <div role="heading" className="">

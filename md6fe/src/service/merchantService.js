@@ -46,6 +46,14 @@ export const getMerchantPending = createAsyncThunk(
     }
 )
 
+export const getMerchant = createAsyncThunk(
+    'merchant/getMerchant',
+    async (data) => {
+        const res = await customAxios.get('admin/merchant/' + data)
+        return res.data
+    }
+)
+
 export const setStatus = createAsyncThunk(
     'merchant/lockMerchant',
     async (data) => {

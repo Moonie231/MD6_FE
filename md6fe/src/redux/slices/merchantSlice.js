@@ -5,12 +5,13 @@ import {
     getMerchantPending,
     getProfile, setStatus,
     login, logout,
-    register, statisticsByUser, statisticsByStatus, statisticsByFood
+    register, statisticsByUser, statisticsByStatus, statisticsByFood, getMerchant
 } from "../../service/merchantService";
 
 const initialState = {
     currentMerchant: JSON.parse(localStorage.getItem('merchant')) ,
     merchant: [],
+    merchantDetail: {},
     profile: {},
     status:false,
     statisticsByUser:[],
@@ -56,6 +57,9 @@ const merchantSlice = createSlice({
         });
         builder.addCase(getMerchantPending.fulfilled, (state, action) => {
             state.merchant = action.payload;
+        });
+        builder.addCase(getMerchant.fulfilled, (state, action) => {
+            state.merchantDetail = action.payload;
         });
         builder.addCase(statisticsByUser.fulfilled, (state, action) => {
             state.statisticsByUser = action.payload;
