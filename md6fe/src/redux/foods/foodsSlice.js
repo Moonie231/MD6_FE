@@ -29,6 +29,7 @@ const foodsSlice = createSlice({
                 state.foods.push(action.payload)
             })
             builder.addCase(findByIdFood.fulfilled, (state, action) => {
+                console.log(action.payload)
                 state.food = action.payload
             })
 
