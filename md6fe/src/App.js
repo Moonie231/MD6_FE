@@ -24,6 +24,8 @@ import Food from "./Page/food/food";
 import Checkout from "./Page/user/checkOut";
 import ManagerOrder from "./Page/merchant/managerOrder";
 import OrderDetail from "./Page/merchant/orderDetail";
+import StatisticsByTime from "./Page/shopMerchant/statisticsByTime";
+
 
 function App() {
     localStorage.getItem('NameStatus')
@@ -51,6 +53,8 @@ function App() {
                     </Route>
                     <Route path={`manager-order/:idMerchant`} element={<ManagerOrder/>}/>
                     <Route path={'statistics/:id'} element={<StatisticsByUser/>}>
+                    </Route>
+                    <Route path={'statistics-by-time/:id'} element={<StatisticsByTime/>}>
                     </Route>
                 </Route>
                 <Route path={'users'}>

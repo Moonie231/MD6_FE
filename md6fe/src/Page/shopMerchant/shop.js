@@ -20,6 +20,7 @@ export default function Shop() {
     })
     useEffect(() => {
         dispatch(getFoods(page1)).then()
+
     }, [])
 
     const handleSearch = (values) => {

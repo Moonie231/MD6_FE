@@ -74,12 +74,15 @@ export default function Header() {
                                     <li><Link to={'/'}>Home</Link></li>
                                     {localStorage.getItem('NameStatus') === true || localStorage.getItem('NameStatus') === 'true' &&
                                         <li><a href="">Shop</a>
-                                            <ul className="dropdown">
-                                                <li><Link to={'/merchants/manager-order/' + merchant.idMerchant}>Manager Order</Link>
-                                                </li>
+
+                                            <ul className="dropdown" style={{width:160}}>
                                                 <li><Link to={'/merchants/my-shop/' + merchant.idMerchant}>My Shop</Link>
                                                 </li>
+                                                <li><Link to={'/merchants/manager-order/' + merchant.idMerchant}>Manager Order</Link>
+                                                </li>
                                                 <li><Link to={'/merchants/statistics/' + merchant.idMerchant}>Statistics</Link>
+                                                </li>
+                                                <li><Link to={'/merchants/statistics-by-time/' + merchant.idMerchant}>Statistics Time</Link>
                                                 </li>
                                             </ul>
                                         </li>}
