@@ -1,12 +1,15 @@
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
-import {editOrder, showCart} from "../../service/orderService";
+import {deleteOrderDetail, editOrder, showCart} from "../../service/orderService";
 import {Field, Form, Formik} from "formik";
+import swal from "sweetalert";
+import {deleteFood, getFood} from "../../service/foodsService";
 
 export default function Cart(){
     const {id}=useParams()
     const dispatch=useDispatch()
+    const navigate=useNavigate()
     const foods=useSelector((state)=>{
         let money=0;
         state.orders.order.map((item)=>{
@@ -86,7 +89,29 @@ export default function Cart(){
 
                                                 </td>
                                                 <td className="cart__price">$ {item.price}</td>
-                                                <td className="cart__close"><span className="icon_close"></span></td>
+                                                <td className="cart__close"><span className="icon_close" onClick={()=>{
+                                                    swal({
+                                                        title: "Are you sure?",
+                                                        text: "Once deleted, you will not be able to recover this imaginary file!",
+                                                        icon: "warning",
+                                                        buttons: true,
+                                                        dangerMode: true,
+                                                    })
+                                                        .then((willDelete) => {
+                                                            if (willDelete) {
+
+                                                                swal("Poof! Your imaginary file has been deleted!", {
+                                                                    icon: "success",
+                                                                });
+                                                                dispatch(deleteOrderDetail(item.idOrderdetail)).then(() => {
+                                                                    navigate('/my-cart/'+id)
+                                                                })
+                                                                dispatch(showCart(id))
+                                                            } else {
+                                                                swal("Your imaginary file is safe!");
+                                                            }
+                                                        });
+                                                }}></span></td>
                                             </tr>
                                         )
                                     }
