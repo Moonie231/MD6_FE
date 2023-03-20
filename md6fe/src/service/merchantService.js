@@ -46,10 +46,37 @@ export const getMerchantPending = createAsyncThunk(
     }
 )
 
+export const getMerchant = createAsyncThunk(
+    'merchant/getMerchant',
+    async (data) => {
+        const res = await customAxios.get('admin/merchant/' + data)
+        return res.data
+    }
+)
+
 export const setStatus = createAsyncThunk(
     'merchant/lockMerchant',
     async (data) => {
         const res = await customAxios.put('admin/status/' + data)
+        return res.data
+    })
+export const statisticsByUser = createAsyncThunk(
+    'merchant/statisticsByUser',
+    async (data) => {
+        const res = await customAxios.get('merchants/statistics-by-user/' + data)
+        return res.data
+    })
+export const statisticsByStatus = createAsyncThunk(
+    'merchant/statisticsByStatus',
+    async (data) => {
+        const res = await customAxios.get('merchants/statistics-by-status/' + data)
+        return res.data
+    })
+export const statisticsByFood = createAsyncThunk(
+    'merchant/statisticsByFood',
+    async (data) => {
+        const res = await customAxios.get('merchants/statistics-by-food/' + data)
+        console.log(res.data)
         return res.data
     })
 
