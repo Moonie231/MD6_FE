@@ -2,7 +2,6 @@ import {Link, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {getProfile, logout} from "../service/merchantService";
 import {logoutUser} from "../service/userService";
-import {useEffect} from "react";
 
 export default function Header() {
     const navigate = useNavigate()
@@ -14,9 +13,7 @@ export default function Header() {
         return state.user.currentUser
     });
 
-    // useEffect(()=>{
-    //     dispatch(getProfile(localStorage.getItem('idMerchant'))).then()
-    // },[])
+
 
     return (
         <>
@@ -53,13 +50,15 @@ export default function Header() {
                                                                                        alt=""/></a>
                                             <a href="#"><img src="/img/icon/heart.png" alt=""/></a>
                                         </div>
-                                        <div className="header__top__right__cart">
-                                            <Link to={'my-cart/'+localStorage.getItem('idOrder')}>
-                                                <a href=""><img src="/img/icon/cart.png" alt=""/> <span>0</span></a>
-                                            </Link>
-                                            <div className="cart__price" >Cart: <span>$0.00</span></div>
-                                        </div>
-
+                                        {localStorage.getItem('status') === true || localStorage.getItem('status') === 'true' &&<>
+                                            <div className="header__top__right__cart">
+                                                <Link to={'my-cart/'+localStorage.getItem('idOrder')}>
+                                                    <a href=""><img src="/img/icon/cart.png" alt=""/> <span>0</span></a>
+                                                </Link>
+                                                <div className="cart__price" >Cart: <span>$0.00</span></div>
+                                            </div>
+                                        </>}
+                                        '
                                     </div>
                                 </div>
                             </div>
