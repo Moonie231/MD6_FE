@@ -76,7 +76,25 @@ export const statisticsByFood = createAsyncThunk(
     'merchant/statisticsByFood',
     async (data) => {
         const res = await customAxios.get('merchants/statistics-by-food/' + data)
+        return res.data
+    })
+export const statisticsByWeek = createAsyncThunk(
+    'merchant/statisticsByWeek',
+    async (data) => {
+        const res = await customAxios.get('merchants/statistics-by-week/' + data[0]+'/?month='+data[1])
         console.log(res.data)
+        return res.data
+    })
+export const statisticsByMonth = createAsyncThunk(
+    'merchant/statisticsByMonth',
+    async (data) => {
+        const res = await customAxios.get('merchants/statistics-by-month/' + + data[0]+'/?year='+data[1])
+        return res.data
+    })
+export const statisticsByYear = createAsyncThunk(
+    'merchant/statisticsByYear',
+    async (data) => {
+        const res = await customAxios.get('merchants/statistics-by-year/' + data)
         return res.data
     })
 
