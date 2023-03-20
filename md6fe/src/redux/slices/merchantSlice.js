@@ -3,9 +3,18 @@ import {
     editProfile,
     getMerchantActive,
     getMerchantPending,
-    getProfile, setStatus,
-    login, logout,
-    register, statisticsByUser, statisticsByStatus, statisticsByFood, getMerchant
+    getProfile,
+    setStatus,
+    login,
+    logout,
+    register,
+    statisticsByUser,
+    statisticsByStatus,
+    statisticsByFood,
+    getMerchant,
+    statisticsByWeek,
+    statisticsByMonth,
+    statisticsByYear
 } from "../../service/merchantService";
 
 const initialState = {
@@ -16,7 +25,10 @@ const initialState = {
     status:false,
     statisticsByUser:[],
     statisticsByStatus:[],
-    statisticsByFood:[]
+    statisticsByFood:[],
+    statisticsByWeek:[],
+    statisticsByMonth:[],
+    statisticsByYear:[],
 }
 
 const merchantSlice = createSlice({
@@ -69,6 +81,15 @@ const merchantSlice = createSlice({
         });
         builder.addCase(statisticsByFood.fulfilled, (state, action) => {
             state.statisticsByFood = action.payload;
+        });
+        builder.addCase(statisticsByWeek.fulfilled, (state, action) => {
+            state.statisticsByWeek = action.payload;
+        });
+        builder.addCase(statisticsByMonth.fulfilled, (state, action) => {
+            state.statisticsByMonth = action.payload;
+        });
+        builder.addCase(statisticsByYear.fulfilled, (state, action) => {
+            state.statisticsByYear = action.payload;
         });
         builder.addCase(setStatus.fulfilled, (state, action) => {
         });

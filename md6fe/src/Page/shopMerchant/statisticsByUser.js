@@ -10,6 +10,9 @@ ChartJS.register(
 )
 export default function StatisticsByUser() {
     const {id}=useParams()
+    const [statusWeek,setStatusWeek]=useState(true)
+    const [statusMonth,setStatusMonth]=useState(false)
+    const [statusYear,setStatusYear]=useState(false)
     const statisticsUser = useSelector((state) => {
         console.log(state.merchant.statisticsByUser)
         let money=0;
@@ -119,31 +122,59 @@ export default function StatisticsByUser() {
     }
     return (
         <>
-            <div className="container">
-                <h2>Statistics User</h2>
-                <h2>Total:{statisticsUser.sum}</h2>
-                <div>
-                    <Bar style={{height:500}} data={dataUser}
-                         options={options}
-                    ></Bar>
-                </div>
+            <div style={{textAlign:'center',marginTop:10}}>
+                <button className="btn btn-dark" onClick={()=>{
+                    setStatusWeek(!statusWeek)
+                    setStatusMonth(false)
+                    setStatusYear(false)
+                }
+                }>User</button>
+                <button style={{marginLeft:10}} className="btn btn-dark" onClick={()=>{
+                    setStatusMonth(!statusMonth)
+                    setStatusYear(false)
+                    setStatusWeek(false)
+                }
+                }>Status</button>
+                <button style={{marginLeft:10}} className="btn btn-dark" onClick={()=>{
+                    setStatusYear(!statusYear)
+                    setStatusWeek(false)
+                    setStatusMonth(false)
+                }
+                }>Food</button>
             </div>
-            <div className="container">
-                <h2>Statistics Status</h2>
-                <div>
-                    <Bar style={{height:500}} data={dataStatus}
-                         options={options}
-                    ></Bar>
+            {statusWeek &&
+                <div className="container">
+                    <h4>Statistics User</h4>
+                    <h4>Total:{statisticsUser.sum}</h4>
+                    <div>
+                        <Bar style={{height:500}} data={dataUser}
+                             options={options}
+                        ></Bar>
+                    </div>
                 </div>
-            </div>
-            <div className="container">
-                <h2>Statistics Food</h2>
-                <div>
-                    <Bar style={{height:500}} data={dataFood}
-                         options={options}
-                    ></Bar>
+
+            }
+            {statusMonth &&
+                <div className="container">
+                    <h4>Statistics Status</h4>
+                    <div>
+                        <Bar style={{height:500}} data={dataStatus}
+                             options={options}
+                        ></Bar>
+                    </div>
                 </div>
-            </div>
+
+            }
+            {statusYear &&
+                <div className="container">
+                    <h4  >Statistics Food</h4>
+                    <div>
+                        <Bar style={{height:500}} data={dataFood}
+                             options={options}
+                        ></Bar>
+                    </div>
+                </div>
+            }
         </>
     )
 }
