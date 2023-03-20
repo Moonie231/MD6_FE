@@ -97,16 +97,16 @@ export default function Cart(){
                                                         buttons: true,
                                                         dangerMode: true,
                                                     })
-                                                        .then((willDelete) => {
+                                                        .then(async (willDelete) => {
                                                             if (willDelete) {
 
                                                                 swal("Poof! Your imaginary file has been deleted!", {
                                                                     icon: "success",
                                                                 });
-                                                                dispatch(deleteOrderDetail(item.idOrderdetail)).then(() => {
+                                                                await dispatch(deleteOrderDetail(item.idOrderdetail)).then(() => {
                                                                     navigate('/my-cart/'+id)
                                                                 })
-                                                                dispatch(showCart(id))
+                                                                await dispatch(showCart(id))
                                                             } else {
                                                                 swal("Your imaginary file is safe!");
                                                             }
