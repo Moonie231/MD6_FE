@@ -24,8 +24,24 @@ export const editOrder = createAsyncThunk(
 export const deleteOrderDetail = createAsyncThunk(
     'orders/deleteOrderDetail',
     async (data)=>{
-        console.log(data)
         const res = await customAxios.delete('orders/delete-cart/'+data);
         return res.data;
+    }
+)
+
+export const myOrder = createAsyncThunk(
+    'orders/myOrder',
+    async (data)=>{
+        const res = await customAxios.get('orders/my-order/'+data)
+        return res.data
+    }
+)
+
+export const orderFood = createAsyncThunk(
+    'orders/orderFood',
+    async (data) => {
+        const res = await customAxios.get(`orders/my-order-food/${data[1]}/${data[0]}`)
+        console.log(res.data)
+        return res.data
     }
 )
