@@ -44,69 +44,6 @@ export default function Merchant (){
                          </div>
                      </div>
                  </div>
-                 <div className="product__details__tab">
-                     <div className="col-lg-12">
-                         <ul className="nav nav-tabs" role="tablist">
-                             <li className="nav-item">
-                                 <a className="nav-link active" data-toggle="tab" href="#tabs-1"
-                                    role="tab">Description</a>
-                             </li>
-                             <li className="nav-item">
-                                 <a className="nav-link" data-toggle="tab" href="#tabs-2" role="tab">Additional
-                                     information</a>
-                             </li>
-                             <li className="nav-item">
-                                 <a className="nav-link" data-toggle="tab" href="#tabs-3" role="tab">Previews(1)</a>
-                             </li>
-                         </ul>
-                         <div className="tab-content">
-                             <div className="tab-pane active" id="tabs-1" role="tabpanel">
-                                 <div className="row d-flex justify-content-center">
-                                     <div className="col-lg-8">
-                                         <p>This delectable Strawberry Pie is an extraordinary treat filled with sweet
-                                             and
-                                             tasty chunks of delicious strawberries. Made with the freshest ingredients,
-                                             one
-                                             bite will send you to summertime. Each gift arrives in an elegant gift box
-                                             and
-                                             arrives with a greeting card of your choice that you can personalize
-                                             online!</p>
-                                     </div>
-                                 </div>
-                             </div>
-                             <div className="tab-pane" id="tabs-2" role="tabpanel">
-                                 <div className="row d-flex justify-content-center">
-                                     <div className="col-lg-8">
-                                         <p>This delectable Strawberry Pie is an extraordinary treat filled with sweet
-                                             and
-                                             tasty chunks of delicious strawberries. Made with the freshest ingredients,
-                                             one
-                                             bite will send you to summertime. Each gift arrives in an elegant gift box
-                                             and
-                                             arrives with a greeting card of your choice that you can personalize
-                                             online!2
-                                         </p>
-                                     </div>
-                                 </div>
-                             </div>
-                             <div className="tab-pane" id="tabs-3" role="tabpanel">
-                                 <div className="row d-flex justify-content-center">
-                                     <div className="col-lg-8">
-                                         <p>This delectable Strawberry Pie is an extraordinary treat filled with sweet
-                                             and
-                                             tasty chunks of delicious strawberries. Made with the freshest ingredients,
-                                             one
-                                             bite will send you to summertime. Each gift arrives in an elegant gift box
-                                             and
-                                             arrives with a greeting card of your choice that you can personalize
-                                             online!3
-                                         </p>
-                                     </div>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
              </div>
          </section>
      </>
