@@ -2,7 +2,7 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {editOrder, showCart} from "../../service/orderService";
-import {editProfile, getProfile} from "../../service/userService";
+import {addAddress, editProfile, getAddress, getProfile} from "../../service/userService";
 import {Field, Form, Formik} from "formik";
 import swal from "sweetalert";
 
@@ -22,8 +22,11 @@ export default function Checkout(){
         return obj
     })
     const user=useSelector((state)=>{
-        console.log(state.user.profile)
         return state.user.profile
+    })
+
+    const  address = useSelector((state)=>{
+        return state.user.address
     })
     const handle=async (value)=>{
         let data=[
@@ -48,6 +51,10 @@ export default function Checkout(){
         dispatch(showCart(id))
         dispatch(getProfile(localStorage.getItem('idUser')))
     },[])
+
+    useEffect(()=>{
+        dispatch(getAddress(localStorage.getItem('idUser')))
+    }, [])
     return(
         <>
             <div className="breadcrumb-option">
@@ -89,10 +96,56 @@ export default function Checkout(){
                                             </div>
                                             <div className="checkout__input">
                                                 <p>Address<span>*</span></p>
-                                                <input type="text" placeholder="Street Address"
-                                                       className="checkout__input__add"/>
+                                                <Field
+                                                    as="select"
+                                                    name={"id_Category"}
+                                                    className="form-control"
+                                                    id="id_Category"
+                                                    style={{width:'95%', float:'left'}}
+                                                >
+                                                    <option selected>Address</option>
+                                                    {address !== undefined &&
+                                                        address.map((item, index) => (
+
+                                                            <option value={item.idAddress}>
+                                                                {item.nameAddress}
+                                                            </option>
+                                                        ))}
+                                                </Field>
+
+                                                <i  style={{width:'5%',padding:'10px 0 0 10px'}} className="fa-solid fa-circle-plus"
+                                                 onClick={() => {
+                                                     swal("New Address", {
+                                                         content: "input",
+                                                         showCancelButton: true,
+                                                         confirmButtonText: 'Lưu',
+                                                         cancelButtonText: 'Hủy',
+                                                     })
+                                                         .then(async (result) => {
+                                                             console.log(result)
+                                                             if (result) {
+                                                                 let data = {
+                                                                     nameAddress: result,
+                                                                     id_User: localStorage.getItem("idUser")
+                                                                 }
+                                                                 await dispatch(addAddress(data)).then(async () =>{
+                                                                     await dispatch(getAddress(localStorage.getItem('idUser'))).then(() => {
+                                                                         navigate('/check-out/'+ id)
+                                                                     })
+
+                                                                 });
+                                                                 swal("Add ok!", {
+                                                                     icon: "success",
+                                                                 });
+                                                             } else {
+                                                                 swal("No address");
+                                                             }
+                                                         });
+                                                 }}
+                                                ></i>
+
                                             </div>
-                                            <div className="row">
+                                            <div className="row" style={{clear:'both'}}>
                                                 <div className="col-lg-6">
                                                     <div className="checkout__input">
                                                         <p>Phone<span>*</span></p>

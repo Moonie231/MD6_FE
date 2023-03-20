@@ -22,9 +22,10 @@ import Cart from "./Page/user/cart";
 import Merchant from "./Page/admin/merchant";
 import Food from "./Page/food/food";
 import Checkout from "./Page/user/checkOut";
+import MyOrder from "./Page/user/myOrder";
 import ManagerOrder from "./Page/merchant/managerOrder";
-import OrderDetail from "./Page/merchant/orderDetail";
 import StatisticsByTime from "./Page/shopMerchant/statisticsByTime";
+import OrderDetail from "./Page/merchant/orderDetail";
 
 
 function App() {
@@ -59,9 +60,8 @@ function App() {
                 </Route>
                 <Route path={'users'}>
                     <Route path={`:idUser`} element={<ProfileUser></ProfileUser>}></Route>
-                    <Route path={'address'}>
-                        <Route path={`:idUser`} element={<Address></Address>}></Route>>
-                    </Route>
+                    <Route path={`my-order/:idUser`} element={<MyOrder></MyOrder>}></Route>
+                        <Route path={`address/:idUser`} element={<Address></Address>}></Route>>
                 </Route>
                 <Route path={'admin'}>
                     <Route path={'merchant-active'} element={<MerchantActive></MerchantActive>}></Route>
