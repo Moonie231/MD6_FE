@@ -6,7 +6,7 @@ import {Link, useNavigate, useSearchParams} from "react-router-dom";
 import {addToCart} from "../../service/orderService";
 
 export default function Shop() {
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const foods = useSelector((state) => {
         return state.foods.search.foods
@@ -23,7 +23,7 @@ export default function Shop() {
     }, [])
 
     const handleSearch = (values) => {
-        dispatch(searchNameFood(values)).then((res)=>{
+        dispatch(searchNameFood(values)).then((res) => {
             }
         )
     }
@@ -56,11 +56,11 @@ export default function Shop() {
                                     <div className="shop__option__search">
                                         <Formik initialValues={{
                                             nameFood: ""
-                                        }} onSubmit={(values) =>{
+                                        }} onSubmit={(values) => {
                                             handleSearch(values)
                                         }
                                         }>
-                                            <Form >
+                                            <Form>
                                                 <Field type="text" name={'nameFood'} placeholder="Search"/>
                                                 <button type="submit"><i className="fa fa-search"></i></button>
                                             </Form>
@@ -86,22 +86,24 @@ export default function Shop() {
                             {foods.map((item) => (
                                     <div className="col-lg-3 col-md-6 col-sm-6">
                                         <div className="product__item">
-                                            <div className="product__item__pic set-bg"
-                                                 style={{backgroundImage: `url(${item.img})`}}>
-                                                <div className="product__label">
-                                                    <span>{item.nameCategory}</span>
+                                            <Link to={`/food/${item.idFood}`}>
+                                                <div className="product__item__pic set-bg"
+                                                     style={{backgroundImage: `url(${item.img})`}}>
+                                                    <div className="product__label">
+                                                        <span>{item.nameCategory}</span>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </Link>
                                             <div className="product__item__text">
-                                                <h6><Link to={`/food/${item.idFood}`}>{item.nameFood}</Link></h6>
+                                                <h6>{item.nameFood}</h6>
                                                 <div className="product__item__price">${item.price}</div>
                                                 <div className="cart_add">
-                                                    <a href="" onClick={(e)=>{
-                                                        let data={
+                                                    <a href="" onClick={(e) => {
+                                                        let data = {
                                                             id_Food: item.idFood,
-                                                            id_Order:localStorage.getItem('idOrder'),
-                                                            quantity:1,
-                                                            price:item.price
+                                                            id_Order: localStorage.getItem('idOrder'),
+                                                            quantity: 1,
+                                                            price: item.price
                                                         }
                                                         dispatch(addToCart(data))
                                                     }}>Add to cart</a>
@@ -118,15 +120,17 @@ export default function Shop() {
                                 <li className="page-item">
                                     {(page1 === 1) ?
                                         <>
-                                            <div className="page-link"><span aria-hidden="true" style={{color:'black'}}>&laquo;</span></div>
+                                            <div className="page-link"><span aria-hidden="true"
+                                                                             style={{color: 'black'}}>&laquo;</span>
+                                            </div>
                                         </>
                                         :
                                         <>
-                                            <div  className="page-link" onClick={() => {
+                                            <div className="page-link" onClick={() => {
                                                 dispatch(getFoods(page1 - 1));
-                                                navigate('/shop?page='+(page1-1))
+                                                navigate('/shop?page=' + (page1 - 1))
                                             }
-                                            }> <span aria-hidden="true">&laquo;</span>
+                                            }><span aria-hidden="true">&laquo;</span>
                                             </div>
                                         </>
                                     }
@@ -134,15 +138,18 @@ export default function Shop() {
                                 <li className="page-item"><a className="page-link">{page1}/{totalPages}</a></li>
                                 <li className="page-item">
                                     {(page1 === totalPages) ?
-                                        <><div className="page-link"><span aria-hidden="true" style={{color:'black'}}>&raquo;</span></div>
+                                        <>
+                                            <div className="page-link"><span aria-hidden="true"
+                                                                             style={{color: 'black'}}>&raquo;</span>
+                                            </div>
                                         </>
                                         :
                                         <>
-                                            <div  className="page-link" onClick={() => {
+                                            <div className="page-link" onClick={() => {
                                                 dispatch(getFoods(Number(page1) + 1));
-                                                navigate('/shop?page='+(Number(page1)+1))
+                                                navigate('/shop?page=' + (Number(page1) + 1))
                                             }
-                                            }> <span aria-hidden="true">&raquo;</span>
+                                            }><span aria-hidden="true">&raquo;</span>
                                             </div>
                                         </>
                                     }

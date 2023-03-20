@@ -13,11 +13,11 @@ export default function Home() {
     })
     useEffect(() => {
         dispatch(getFood())
-    },[])
+    }, [])
 
     useEffect(() => {
         dispatch(getCategories())
-    },[])
+    }, [])
     return (
         <>
             <body>
@@ -69,34 +69,36 @@ export default function Home() {
             <section className="product spad">
                 <div className="container">
                     <div className="row">
-                            {foods!==undefined && foods.map((item)=>(
+                        {foods !== undefined && foods.map((item) => (
                                 <div className="col-lg-3 col-md-6 col-sm-6">
-                                <div className="product__item">
-                                    <div className="product__item__pic set-bg"
-                                         style={{backgroundImage: `url(${item.img})`}}>
-                                        <div className="product__label">
-                                            <span>{item.nameCategory}</span>
+                                    <div className="product__item">
+                                        <Link to={`/food/${item.idFood}`}>
+                                            <div className="product__item__pic set-bg"
+                                                 style={{backgroundImage: `url(${item.img})`}}>
+                                                <div className="product__label">
+                                                    <span>{item.nameCategory}</span>
+                                                </div>
+                                            </div>
+                                        </Link>
+                                        <div className="product__item__text">
+                                            <h6>{item.nameFood}</h6>
+                                            <div className="product__item__price">${item.price}</div>
+                                            <div className="cart_add">
+                                                <a href="" onClick={(e) => {
+                                                    let data = {
+                                                        id_Food: item.idFood,
+                                                        id_Order: localStorage.getItem('idOrder'),
+                                                        quantity: 1,
+                                                        price: item.price
+                                                    }
+                                                    dispatch(addToCart(data))
+                                                }}>Add to cart</a>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div className="product__item__text">
-                                        <h6><Link to={`/food/${item.idFood}`}>{item.nameFood}</Link></h6>
-                                        <div className="product__item__price">${item.price}</div>
-                                        <div className="cart_add">
-                                            <a href="" onClick={(e)=>{
-                                                let data={
-                                                    id_Food: item.idFood,
-                                                    id_Order:localStorage.getItem('idOrder'),
-                                                    quantity:1,
-                                                    price:item.price
-                                                }
-                                                dispatch(addToCart(data))
-                                            }}>Add to cart</a>
-                                        </div>
-                                    </div>
-                                </div>
                                 </div>
                             )
-                            )}
+                        )}
 
 
                     </div>
@@ -108,8 +110,8 @@ export default function Home() {
                     <div className="row">
                         <div className="col-lg-6">
                             <div className="class__form">
-                                <div className="section-title" >
-                                    <h2> <br/></h2>
+                                <div className="section-title">
+                                    <h2><br/></h2>
                                 </div>
                                 <form action="#">
                                     <input type="text" placeholder="Name"/>

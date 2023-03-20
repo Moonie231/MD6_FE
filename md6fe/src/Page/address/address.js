@@ -37,7 +37,7 @@ export default function Address() {
                                         lineHeight: '1.5rem',
                                         color: '#333'
                                     }}>
-                                        Địa chỉ của tôi
+                                        My address
                                     </div>
                                     <div className="" style={{
                                         fontSize: '.875rem',
@@ -121,7 +121,7 @@ export default function Address() {
                                                                     points="10 4.5 5.5 4.5 5.5 0 4.5 0 4.5 4.5 0 4.5 0 5.5 4.5 5.5 4.5 10 5.5 10 5.5 5.5 10 5.5"></polygon>
                                                             </svg>
                                                         </div>
-                                                        <div>Thêm địa chỉ mới</div>
+                                                        <div>New Address</div>
                                                     </div>
                                                 </button>
                                         </div>
@@ -131,7 +131,7 @@ export default function Address() {
                             <div className="" style={{background: '#f5f5f5'}}>
                                 <div className="" style={{padding: '12px 30px 0', background: '#fff'}}>
                                     <div className=""
-                                         style={{marginBottom: 8, fontSize: '1.125rem', lineHeight: ' 1.75rem'}}>Địa chỉ
+                                         style={{marginBottom: 8, fontSize: '1.125rem', lineHeight: ' 1.75rem'}}>Address
                                     </div>
                                     {address.map(item => (
                                         <div className=""

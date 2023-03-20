@@ -5,7 +5,7 @@ const initialState = {
     order: [],
 };
 
-const categorySlice = createSlice({
+const orderSlice = createSlice({
     name: "orders",
     initialState,
     reducers: {},
@@ -17,8 +17,10 @@ const categorySlice = createSlice({
             state.order=action.payload
         });
         builder.addCase(editOrder.fulfilled, (state, action) => {
+            console.log(action.payload)
+            localStorage.setItem("idOrder", action.payload.idOrder);
         });
     },
 });
 
-export default categorySlice.reducer;
+export default orderSlice.reducer;
