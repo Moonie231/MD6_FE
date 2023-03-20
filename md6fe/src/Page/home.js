@@ -3,6 +3,7 @@ import {useEffect} from "react";
 import {getFood} from "../service/foodsService";
 import {getCategories} from "../service/categoryService";
 import {addToCart} from "../service/orderService";
+import {Link} from "react-router-dom";
 
 
 export default function Home() {
@@ -78,7 +79,7 @@ export default function Home() {
                                         </div>
                                     </div>
                                     <div className="product__item__text">
-                                        <h6><a href="#">{item.nameFood}</a></h6>
+                                        <h6><Link to={`/food/${item.idFood}`}>{item.nameFood}</Link></h6>
                                         <div className="product__item__price">${item.price}</div>
                                         <div className="cart_add">
                                             <a href="" onClick={(e)=>{

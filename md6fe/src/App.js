@@ -20,6 +20,7 @@ import Address from "./Page/address/address";
 import StatisticsByUser from "./Page/shopMerchant/statisticsByUser";
 import Cart from "./Page/user/cart";
 import Merchant from "./Page/admin/merchant";
+import Food from "./Page/food/food";
 
 function App() {
     localStorage.getItem('NameStatus')
@@ -39,6 +40,7 @@ function App() {
                 <Route path={'add-food'} element={<AddFood/>}/>
                 <Route path={'shop'} element={<Shop/>}/>
                 <Route path={`edit-food/:idFood`} element={<EditFood/>}/>
+                <Route path={`food/:idFood`} element={<Food/>}/>
                 <Route path={'merchants'}>
                     <Route path={`:idMerchant`} element={<ProfileMerchant></ProfileMerchant>}></Route>
                     <Route path={'my-shop/:idMerchant'} element={<ShopMerchant/>}>
