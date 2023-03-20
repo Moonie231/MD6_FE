@@ -25,6 +25,8 @@ import Checkout from "./Page/user/checkOut";
 import MyOrder from "./Page/user/myOrder";
 import ManagerOrder from "./Page/merchant/managerOrder";
 import StatisticsByTime from "./Page/shopMerchant/statisticsByTime";
+import OrderDetail from "./Page/merchant/orderDetail";
+
 
 function App() {
     localStorage.getItem('NameStatus')

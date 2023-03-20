@@ -37,18 +37,23 @@ const orderSlice = createSlice({
         builder.addCase(findByIdOrder.fulfilled, (state, action) => {
             state.order = action.payload
         })
-        builder.addCase(deleteOrderDetail.fulfilled, (state, action) => {
-        });
+
         builder.addCase(myOrder.fulfilled, (state, action) => {
             state.orders=action.payload
         });
         builder.addCase(orderFood.fulfilled, (state, action) => {
             state.food=action.payload
         });
+
+
+        builder.addCase(deleteOrderDetail.fulfilled, (state, action) => {
+        });
+
         builder.addCase(setStatusConfirm.fulfilled, (state, action) => {
         });
         builder.addCase(setStatusCancelled.fulfilled, (state, action) => {
         });
+
         builder.addCase(setStatusSuccess.fulfilled, (state, action) => {
         });
     },
