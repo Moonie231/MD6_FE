@@ -2,19 +2,19 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
     addToCart,
     deleteOrderDetail,
-    editOrder, findByIdOrder,
-    getOrder, setStatusCancelled,
-    setStatusConfirm,
+    editOrder,
+    findByIdOrder, getOrder,
+    myOrder,
+    orderFood, setStatusCancelled, setStatusConfirm, setStatusSuccess,
     showCart
 } from "../../service/orderService";
-import {setStatus} from "../../service/merchantService";
-import {findByIdFood} from "../../service/foodsService";
-
 
 const initialState = {
     order: [],
+    orders: [],
+    food: [],
     orderMerchant: [],
-};
+}
 
 const orderSlice = createSlice({
     name: "orders",
@@ -38,14 +38,24 @@ const orderSlice = createSlice({
             state.order = action.payload
         })
 
+        builder.addCase(myOrder.fulfilled, (state, action) => {
+            state.orders=action.payload
+        });
+        builder.addCase(orderFood.fulfilled, (state, action) => {
+            state.food=action.payload
+        });
+
+
         builder.addCase(deleteOrderDetail.fulfilled, (state, action) => {
         });
+
         builder.addCase(setStatusConfirm.fulfilled, (state, action) => {
         });
         builder.addCase(setStatusCancelled.fulfilled, (state, action) => {
         });
 
-
+        builder.addCase(setStatusSuccess.fulfilled, (state, action) => {
+        });
     },
 });
 

@@ -8,7 +8,7 @@ export default function Food() {
     const dispatch = useDispatch()
     const food = useSelector(state => {
         console.log(state)
-        return state.foods.food[0]
+        return state.foods.food
     })
 
     useEffect(() =>{
