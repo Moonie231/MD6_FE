@@ -13,7 +13,6 @@ const store = configureStore({
         foods: foodsReducer,
         categories: categoryReducer,
         orders: orderReducer,
-
     },
 });
 export default store;

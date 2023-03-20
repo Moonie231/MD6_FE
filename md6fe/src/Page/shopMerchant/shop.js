@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {getFoods, searchNameFood} from "../../service/foodsService";
+import {findByIdFood, getFoods, searchNameFood} from "../../service/foodsService";
 import {Field, Form, Formik} from "formik";
 import {Link, useNavigate, useSearchParams} from "react-router-dom";
 import {addToCart} from "../../service/orderService";
@@ -93,7 +93,7 @@ export default function Shop() {
                                                 </div>
                                             </div>
                                             <div className="product__item__text">
-                                                <h6><a href="#">{item.nameFood}</a></h6>
+                                                <h6><Link to={`/food/${item.idFood}`}>{item.nameFood}</Link></h6>
                                                 <div className="product__item__price">${item.price}</div>
                                                 <div className="cart_add">
                                                     <a href="" onClick={(e)=>{

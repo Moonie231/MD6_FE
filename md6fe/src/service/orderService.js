@@ -17,11 +17,17 @@ export const showCart = createAsyncThunk(
     }
 )
 export const editOrder = createAsyncThunk(
-
-    'order/editOrder',
+    'orders/editOrder',
     async (data)=>{
-        await customAxios.put('orders/editOrder/'+data.idOrder,data);
-        const res = await customAxios.get(`orders/getOrder`);
+        console.log(data)
+        const res = await customAxios.put('orders/editOrder/'+data[1],data[0]);
+        return res.data;
+    }
+)
+export const getOrder = createAsyncThunk(
+    'order/getOrder',
+    async (data)=>{
+        const res = await customAxios.get(`orders/getOrder/`+ data);
         return res.data;
     }
 )
