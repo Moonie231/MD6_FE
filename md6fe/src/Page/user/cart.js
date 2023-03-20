@@ -121,17 +121,8 @@ export default function Cart(){
                                 <ul>
                                     <li>Total <span>$ {foods.sum}</span></li>
                                 </ul>
-                                <a href="" className="primary-btn" onClick={()=>{
-                                    let data=[
-                                        {
-                                            totalMoney:foods.sum,
-                                            id_user:localStorage.getItem('idUser')
-                                        }
-                                        ,
-                                        id
-                                    ]
-                                    dispatch(editOrder(data))
-                                }}>Proceed to checkout</a>
+                                <Link to={'/check-out/'+id}><a href="" className="primary-btn" >Proceed to checkout</a></Link>
+
                             </div>
                         </div>
                     </div>

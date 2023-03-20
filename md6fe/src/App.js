@@ -20,6 +20,7 @@ import Address from "./Page/address/address";
 import StatisticsByUser from "./Page/shopMerchant/statisticsByUser";
 import Cart from "./Page/user/cart";
 import Merchant from "./Page/admin/merchant";
+import Checkout from "./Page/user/checkOut";
 
 function App() {
     localStorage.getItem('NameStatus')
@@ -32,6 +33,7 @@ function App() {
                 <Route path={''} element={<Home/>}></Route>
                 <Route path={'login-merchant'} element={<LoginMerchant/>}></Route>
                 <Route path={'my-cart/:id'} element={<Cart/>}></Route>
+                <Route path={'check-out/:id'} element={<Checkout/>}></Route>
                 <Route path={'verify-email/' + localStorage.getItem('email-token')} element={<VerifyEmail/>}></Route>
                 <Route path={'register-merchant'} element={<RegisterMerchant/>}></Route>
                 <Route path={'login-user'} element={<LoginUser/>}></Route>
