@@ -3,6 +3,7 @@ import foodsReducer from "./foods/foodsSlice"
 import userReducer from "./slices/userSlice";
 import merchantReducer from "./slices/merchantSlice";
 import categoryReducer from "./slices/categorySlice"
+import ordersReducer from "./slices/orderSlice";
 
 const store = configureStore({
     reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
         merchant: merchantReducer,
         foods: foodsReducer,
         categories: categoryReducer,
+        orders: ordersReducer
     },
 });
 export default store;

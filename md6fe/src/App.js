@@ -17,6 +17,7 @@ import ShopMerchant from "./Page/shopMerchant/shopMerchant";
 import MerchantActive from "./Page/admin/merchantActive";
 import MerchantPending from "./Page/admin/merchantPending";
 import Shop from "./Page/shopMerchant/shop";
+import ShowCart from "./Page/cart/showCart";
 
 function App() {
   localStorage.getItem('NameStatus')
@@ -38,6 +39,7 @@ function App() {
     <Route path={'add-food'} element={<AddFood/>}/>
     <Route path={'shop'} element={<Shop/>}/>
     <Route path={`edit-food/:idFood`} element={<EditFood/>}/>
+    <Route path={'show-cart/:idOrder'} element={<ShowCart/>}/>
     <Route path={'merchants'}>
         <Route path={`:idMerchant`} element={<Profile></Profile>}></Route>
         <Route path={'my-shop/:idMerchant'} element={<ShopMerchant/>}>
