@@ -1,5 +1,7 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import customAxios from "./api";
+
+
 export const addToCart = createAsyncThunk(
     'orders/addToCart',
     async (data)=>{
@@ -21,11 +23,40 @@ export const editOrder = createAsyncThunk(
         return res.data;
     }
 )
+
+export const getOrder = createAsyncThunk(
+    'order/getOrder',
+    async (data)=>{
+        const res = await customAxios.get(`orders/getOrder/`+ data);
+        return res.data;
+    }
+)
+export const findByIdOrder = createAsyncThunk(
+    'orders/findByIdOrder',
+    async (data)=>{
+        const res = await customAxios.get('/orders/find-by-idOrder/'+data);
+        return res.data
+    }
+)
+
 export const deleteOrderDetail = createAsyncThunk(
     'orders/deleteOrderDetail',
     async (data)=>{
-        console.log(data)
         const res = await customAxios.delete('orders/delete-cart/'+data);
         return res.data;
     }
 )
+export const setStatusConfirm = createAsyncThunk(
+    'order/orderConfirm',
+    async (data) => {
+        const res = await customAxios.put('orders/statusConfirm/' + data)
+        return res.data
+    })
+export const setStatusCancelled = createAsyncThunk(
+    'order/orderCancelled',
+    async (data) => {
+        const res = await customAxios.put('orders/statusCancelled/' + data)
+        return res.data
+    })
+
+

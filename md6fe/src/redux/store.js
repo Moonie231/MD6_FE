@@ -5,6 +5,7 @@ import merchantReducer from "./slices/merchantSlice";
 import categoryReducer from "./slices/categorySlice"
 import orderReducer from "./slices/orderSlice"
 
+
 const store = configureStore({
     reducer: {
         user: userReducer,

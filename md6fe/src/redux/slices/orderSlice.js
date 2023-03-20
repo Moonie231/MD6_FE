@@ -1,8 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {addToCart, deleteOrderDetail, editOrder, showCart} from "../../service/orderService";
+import {
+    addToCart,
+    deleteOrderDetail,
+    editOrder, findByIdOrder,
+    getOrder, setStatusCancelled,
+    setStatusConfirm,
+    showCart
+} from "../../service/orderService";
+import {setStatus} from "../../service/merchantService";
+import {findByIdFood} from "../../service/foodsService";
+
 
 const initialState = {
     order: [],
+    orderMerchant: [],
 };
 
 const orderSlice = createSlice({
@@ -19,8 +30,22 @@ const orderSlice = createSlice({
         builder.addCase(editOrder.fulfilled, (state, action) => {
             localStorage.setItem("idOrder", action.payload.idOrder);
         });
+
+        builder.addCase(getOrder.fulfilled, (state, action) => {
+            state.order = action.payload
+        });
+        builder.addCase(findByIdOrder.fulfilled, (state, action) => {
+            state.order = action.payload
+        })
+
         builder.addCase(deleteOrderDetail.fulfilled, (state, action) => {
         });
+        builder.addCase(setStatusConfirm.fulfilled, (state, action) => {
+        });
+        builder.addCase(setStatusCancelled.fulfilled, (state, action) => {
+        });
+
+
     },
 });
 

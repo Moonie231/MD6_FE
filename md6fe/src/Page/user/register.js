@@ -97,6 +97,7 @@ export default function RegisterUser(){
 
                                                     <div className="text-center pt-1 mb-5 pb-1">
                                                         <button  style={{backgroundColor:"rgb(240,134,40)",border:'none',color:"white",width:300}}
+
                                                                 type="submit">Register
                                                         </button>
                                                     </div>

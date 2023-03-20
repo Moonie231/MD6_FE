@@ -97,7 +97,7 @@ export default function ShopMerchant() {
                         </div>
                     </div>
                 </section>
-        </div>
+            </div>
 
         </>
     )

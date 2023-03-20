@@ -54,9 +54,7 @@ export const editFood = createAsyncThunk(
 export const searchNameFood = createAsyncThunk(
     "foods/searchNameFood",
     async (data) => {
-        console.log(data)
-        const res = await customAxios.post('/foods/find-by-nameFood' , data)
-        console.log(res.data)
+        const res = await customAxios.post('/foods/find-by-nameFood' ,data)
         return res.data;
     })
 
