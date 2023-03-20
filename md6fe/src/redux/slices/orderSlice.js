@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {addToCart, editOrder, showCart} from "../../service/orderService";
+import {addToCart, deleteOrderDetail, editOrder, showCart} from "../../service/orderService";
 
 const initialState = {
     order: [],
@@ -17,8 +17,9 @@ const orderSlice = createSlice({
             state.order=action.payload
         });
         builder.addCase(editOrder.fulfilled, (state, action) => {
-            console.log(action.payload)
             localStorage.setItem("idOrder", action.payload.idOrder);
+        });
+        builder.addCase(deleteOrderDetail.fulfilled, (state, action) => {
         });
     },
 });
