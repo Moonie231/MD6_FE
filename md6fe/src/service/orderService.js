@@ -19,11 +19,11 @@ export const showCart = createAsyncThunk(
 export const editOrder = createAsyncThunk(
     'orders/editOrder',
     async (data)=>{
-        console.log(data)
         const res = await customAxios.put('orders/editOrder/'+data[1],data[0]);
         return res.data;
     }
 )
+
 export const getOrder = createAsyncThunk(
     'order/getOrder',
     async (data)=>{
@@ -31,3 +31,32 @@ export const getOrder = createAsyncThunk(
         return res.data;
     }
 )
+export const findByIdOrder = createAsyncThunk(
+    'orders/findByIdOrder',
+    async (data)=>{
+        const res = await customAxios.get('/orders/find-by-idOrder/'+data);
+        return res.data
+    }
+)
+
+export const deleteOrderDetail = createAsyncThunk(
+    'orders/deleteOrderDetail',
+    async (data)=>{
+        const res = await customAxios.delete('orders/delete-cart/'+data);
+        return res.data;
+    }
+)
+export const setStatusConfirm = createAsyncThunk(
+    'order/orderConfirm',
+    async (data) => {
+        const res = await customAxios.put('orders/statusConfirm/' + data)
+        return res.data
+    })
+export const setStatusCancelled = createAsyncThunk(
+    'order/orderCancelled',
+    async (data) => {
+        const res = await customAxios.put('orders/statusCancelled/' + data)
+        return res.data
+    })
+
+

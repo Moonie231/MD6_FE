@@ -23,6 +23,7 @@ import Merchant from "./Page/admin/merchant";
 import Food from "./Page/food/food";
 import Checkout from "./Page/user/checkOut";
 import ManagerOrder from "./Page/merchant/managerOrder";
+import OrderDetail from "./Page/merchant/orderDetail";
 
 function App() {
     localStorage.getItem('NameStatus')

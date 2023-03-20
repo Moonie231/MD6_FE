@@ -1,12 +1,15 @@
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
-import {editOrder, getOrder, showCart} from "../../service/orderService";
+import {Link, useNavigate, useParams} from "react-router-dom";
+import {editOrder, getOrder, setStatusCancelled, setStatusConfirm, showCart} from "../../service/orderService";
+import swal from "sweetalert";
+import {getMerchantPending, setStatus} from "../../service/merchantService";
 
 export default function ManagerOrder() {
     const {idMerchant} = useParams()
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
     const order = useSelector(state => {
         return state.orders.order
     })
@@ -114,7 +117,7 @@ export default function ManagerOrder() {
                                                 wordWrap: 'break-word'
                                             }}>
                                                 <div>
-                                                    <div className="" style={{
+                                                    <Link to={`orderDetail/${item.idOrder}`} className="" style={{
                                                         overflow: 'hidden',
                                                         display: '-webkit-box',
                                                         textOverflow: 'ellipsis',
@@ -125,8 +128,8 @@ export default function ManagerOrder() {
                                                     }}>
                                                         <p className="" style={{
                                                             verticalAlign: 'middle',
-                                                        }}>{item.nameFood}</p>
-                                                    </div>
+                                                        }}>{item.nameFood}</p></Link>
+
                                                 </div>
                                                 <div>
                                                     <div className="" style={{
@@ -145,12 +148,60 @@ export default function ManagerOrder() {
                                                     color: 'rgba(0,0,0,.87)'
                                                 }}>${item.price}</span>
                                             </div>
-                                            <div className="btn btn-outline-success" style={{marginTop: 20}}>
-                                                   Confirm
-                                            </div>
-                                        <div className="btn btn-outline-danger" style={{marginLeft: 10, marginTop: 20}}>
-                                                   Cancel
-                                            </div>
+                                            {item.status === 'pending' && <>
+                                                <div className="btn btn-outline-success" style={{marginTop: 20}}
+                                                     onClick={() => {
+                                                         swal({
+                                                             title: "Are you sure?",
+                                                             icon: "warning",
+                                                             buttons: true,
+                                                             dangerMode: true,
+                                                         })
+                                                             .then(async (willConfirm) => {
+                                                                 if (willConfirm) {
+                                                                     console.log(item.idOrder)
+                                                                     await dispatch(setStatusConfirm(item.idOrder)).then(async () => {
+                                                                         await dispatch(getOrder(idMerchant)).then(() => {
+                                                                             navigate('/merchants/manager-order/' + idMerchant)
+                                                                         })
+                                                                     })
+                                                                     swal("Your account has been active!", {
+                                                                         icon: "success",
+                                                                     });
+                                                                 } else {
+                                                                     swal("Your account is safe!");
+                                                                 }
+                                                             });
+                                                     }}>
+                                                    Confirm
+                                                </div>
+                                                <div className="btn btn-outline-danger"
+                                                     style={{marginLeft: 10, marginTop: 20}} onClick={() => {
+                                                    swal({
+                                                        title: "Are you sure?",
+                                                        icon: "warning",
+                                                        buttons: true,
+                                                        dangerMode: true,
+                                                    })
+                                                        .then(async (willCancelled) => {
+                                                            if (willCancelled) {
+                                                                await dispatch(setStatusCancelled(item.idOrder)).then(async () => {
+                                                                    await dispatch(getOrder(idMerchant)).then(() => {
+                                                                        navigate('/merchants/manager-order/' + idMerchant)
+                                                                    })
+                                                                })
+                                                                swal("Your account has been active!", {
+                                                                    icon: "success",
+                                                                });
+                                                            } else {
+                                                                swal("Your account is safe!");
+                                                            }
+                                                        });
+                                                }}>
+                                                    Cancel
+                                                </div>
+                                            </>
+                                            }
                                         </div>
                                     </span>
                                             </div>
