@@ -4,6 +4,7 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 import {editOrder, getOrder, setStatusCancelled, setStatusConfirm, showCart} from "../../service/orderService";
 import swal from "sweetalert";
 import {getMerchantPending, setStatus} from "../../service/merchantService";
+import {Field, Form, Formik} from "formik";
 
 export default function ManagerOrder() {
     const {idMerchant} = useParams()
@@ -20,8 +21,34 @@ export default function ManagerOrder() {
 
     return (
         <>
-            <div className="container" style={{backgroundColor: 'lightgray'}}>
 
+            <div className="container" style={{backgroundColor: 'lightgray', marginTop: 40}}>
+                <div className="row">
+                    <div className="col-lg-6 col-md-6 col-sm-6">
+                        <div className="breadcrumb__text">
+                            <h2>Order</h2>
+                        </div>
+                    </div>
+                    {/*<div className="shop__option__search" style={{width: 500,marginLeft: 250}}>*/}
+                    {/*    <Formik initialValues={{*/}
+                    {/*        nameFood: ""*/}
+                    {/*    }} onSubmit={(values) =>{*/}
+                    {/*        // handleSearch(values)*/}
+                    {/*    }*/}
+                    {/*    }>*/}
+                    {/*        <Form >*/}
+                    {/*            <Field type="text" name={'nameFood'} placeholder="Search"/>*/}
+                    {/*            <button type="submit"><i className="fa fa-search"></i></button>*/}
+                    {/*        </Form>*/}
+                    {/*    </Formik>*/}
+                    {/*</div>*/}
+                    <div className="col-lg-6 col-md-6 col-sm-6">
+                        <div className="breadcrumb__links">
+                            <Link to={'/'}>Home</Link>
+                            <span>Order</span>
+                        </div>
+                    </div>
+                </div>
                 {order.map((item) => (
                     <>
                         <div className="" style={{
