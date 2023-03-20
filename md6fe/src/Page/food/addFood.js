@@ -71,51 +71,123 @@ export default function AddFood() {
 
     return (
         <>
+            {/*<div className="row">*/}
+            {/*    <div className="offset-3 col-6 mt-5">*/}
+            {/*        <h1 style={{textAlign: 'center'}}>Add Food</h1>*/}
+            {/*        <Formik*/}
+            {/*            initialValues={{*/}
+            {/*                nameFood: '',*/}
+            {/*                description: '',*/}
+            {/*                price: "",*/}
+            {/*                id_Category:"",*/}
+            {/*                id_Merchant: localStorage.getItem('idMerchant')*/}
+
+            {/*            }}*/}
+            {/*            onSubmit={(values) => {*/}
+            {/*                values.img= urls[0]*/}
+            {/*                handleAdd(values)*/}
+            {/*            }}>*/}
+            {/*            <Form>*/}
+            {/*                <div className="mb-3">*/}
+            {/*                    <label htmlFor="exampleInput" className="form-label">NameFood</label>*/}
+            {/*                    <Field type="text" className="form-control" id="exampleInput" name={'nameFood'}/>*/}
+            {/*                </div>*/}
+            {/*                <div className="mb-3">*/}
+            {/*                    <label htmlFor="exampleInput" className="form-label">Description</label>*/}
+            {/*                    <Field type="text" className="form-control" id="exampleInput" name={'description'}/>*/}
+            {/*                </div>*/}
+            {/*                <div className="mb-3">*/}
+            {/*                    <label htmlFor="exampleInput" className="form-label">Price</label>*/}
+            {/*                    <Field type="text" className="form-control" id="exampleInput" name={'price'}/>*/}
+            {/*                </div>*/}
+            {/*                <div className="ml-3 form-group">*/}
+            {/*                    <label htmlFor="exampleInputPassword">Image</label>*/}
+            {/*                    <br/>*/}
+            {/*                    {urls.map(item=>(*/}
+            {/*                        <>*/}
+            {/*                            <img src={item} alt="" style={{width:400, height: 400}}/>*/}
+            {/*                        </>*/}
+            {/*                    ))}*/}
+
+            {/*                    <br/>*/}
+            {/*                    <input type='file'  onChange={handleChange}>*/}
+            {/*                    </input>*/}
+            {/*                    <button className="btn btn-info" style={{marginLeft:10}} type='button' onClick={handleUpload}>Up</button>*/}
+            {/*                </div>*/}
+            {/*                <div className="col-12">*/}
+            {/*                    <Field*/}
+            {/*                        as="select"*/}
+            {/*                        name={"id_Category"}*/}
+            {/*                        className="form-control"*/}
+            {/*                        id="id_Category"*/}
+            {/*                    >*/}
+            {/*                        <option selected>Category</option>*/}
+            {/*                        {categories !== undefined &&*/}
+            {/*                            categories.map((item, index) => (*/}
+
+            {/*                                <option value={item.idCategory}>*/}
+            {/*                                    {item.nameCategory}*/}
+            {/*                                </option>*/}
+            {/*                            ))}*/}
+
+            {/*                    </Field>*/}
+            {/*                </div>*/}
+            {/*                <button type="submit"  style={{marginLeft: "40%"}} className="btn btn-info" >Add</button>*/}
+
+            {/*            </Form>*/}
+            {/*        </Formik>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
             <div className="row">
                 <div className="offset-3 col-6 mt-5">
-                    <h1 style={{textAlign: 'center'}}>Add Food</h1>
+                    <div className="section-title">
+                        <h2>Add Foods</h2>
+                    </div>
                     <Formik
                         initialValues={{
                             nameFood: '',
                             description: '',
-                            price: "",
-                            id_Category:"",
+                            price: '',
+                            id_Category: '',
                             id_Merchant: localStorage.getItem('idMerchant')
-
                         }}
                         onSubmit={(values) => {
-                            values.img= urls[0]
+                            values.img = urls[0]
                             handleAdd(values)
                         }}>
                         <Form>
                             <div className="mb-3">
-                                <label htmlFor="exampleInput" className="form-label">NameFood</label>
-                                <Field type="text" className="form-control" id="exampleInput" name={'nameFood'}/>
+                                <label htmlFor="exampleInput" className="form-label">Name product</label>
+                                <Field type="text" className="form-control" id="exampleInput" name={'name'}/>
+                            </div>
+                            <div className="mb-3">
+                                <label htmlFor="exampleInput" className="form-label">Price</label>
+                                <Field type="number" className="form-control" id="exampleInput" name={'price'}/>
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="exampleInput" className="form-label">Description</label>
                                 <Field type="text" className="form-control" id="exampleInput" name={'description'}/>
                             </div>
                             <div className="mb-3">
-                                <label htmlFor="exampleInput" className="form-label">Price</label>
-                                <Field type="text" className="form-control" id="exampleInput" name={'price'}/>
+                                <label htmlFor="exampleInput" className="form-label">Quantity</label>
+                                <Field type="number" className="form-control" id="exampleInput" name={'totalQuantity'}/>
                             </div>
                             <div className="ml-3 form-group">
                                 <label htmlFor="exampleInputPassword">Image</label>
                                 <br/>
-                                {urls.map(item=>(
+                                {urls.map(item => (
                                     <>
-                                        <img src={item} alt="" style={{width:400, height: 400}}/>
-                                    </>
+                                        <img src={item} alt="" style={{width: 50}}/></>
                                 ))}
-
                                 <br/>
-                                <input type='file'  onChange={handleChange}>
+                                <input type='file' onChange={handleChange}>
                                 </input>
-                                <button className="btn btn-info" style={{marginLeft:10}} type='button' onClick={handleUpload}>Up</button>
+                                <button className="btn btn-outline-success" style={{marginRight: 10}} type='button'
+                                        onClick={handleUpload}>Up
+                                </button>
 
                             </div>
-                            <div className="col-12">
+                            <div className="mb-3">
                                 <Field
                                     as="select"
                                     name={"id_Category"}
@@ -133,7 +205,7 @@ export default function AddFood() {
 
                                 </Field>
                             </div>
-                            <button type="submit"  style={{marginLeft: "40%"}} className="btn btn-info" >Add</button>
+                            <button style={{marginBottom:50}} type="submit" className="btn btn-outline-primary">Add</button>
                         </Form>
                     </Formik>
                 </div>
