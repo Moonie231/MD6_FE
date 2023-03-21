@@ -32,6 +32,7 @@ const userSlice = createSlice({
             localStorage.setItem("idMerchant", action.payload.idMerchantByOrder);
             localStorage.setItem("idUser", action.payload.idUser);
             localStorage.setItem("access-token", action.payload.token)
+            localStorage.getItem('idMerchant')
             state.status = true
             localStorage.setItem("status", state.status)
             if(action.payload.role===2||action.payload.role==='2'){

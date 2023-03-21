@@ -4,15 +4,15 @@ import {
     deleteOrderDetail,
     editOrder,
     findByIdOrder, getOrder,
-    myOrder,
+    myOrder, orderDetail,
     orderFood, searchOrder, setStatusCancelled, setStatusConfirm, setStatusSuccess,
     showCart
 } from "../../service/orderService";
-import {getFoods} from "../../service/foodsService";
 
 const initialState = {
     order: [],
     orders: [],
+    orderDetail: {},
     food: [],
     orderMerchant: [],
     search:[],
@@ -47,6 +47,9 @@ const orderSlice = createSlice({
         });
         builder.addCase(orderFood.fulfilled, (state, action) => {
             state.order=action.payload
+        });
+        builder.addCase(orderDetail.fulfilled, (state, action) => {
+            state.orderDetail=action.payload
         });
         builder.addCase(deleteOrderDetail.fulfilled, (state, action) => {
         });

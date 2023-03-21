@@ -16,6 +16,7 @@ export default function MerchantActive() {
     }, [])
     return (
         <>
+            <div className="container">
             <table className="table table-striped" >
                 <thead>
                 <tr>
@@ -106,6 +107,7 @@ export default function MerchantActive() {
 
                 </tbody>
             </table>
+            </div>
         </>
     )
 }
