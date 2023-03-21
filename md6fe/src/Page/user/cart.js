@@ -6,25 +6,27 @@ import {Field, Form, Formik} from "formik";
 import swal from "sweetalert";
 import {deleteFood, getFood} from "../../service/foodsService";
 
-export default function Cart(){
-    const {id}=useParams()
-    const dispatch=useDispatch()
-    const navigate=useNavigate()
-    const foods=useSelector((state)=>{
-        let money=0;
-        state.orders.order.map((item)=>{
+export default function Cart() {
+    const {id} = useParams()
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const foods = useSelector((state) => {
+        let money = 0;
+        state.orders.order.map((item) => {
             money += item.price;
         })
+
         let obj = {
             list: state.orders.order,
-            sum:money
+            sum: money
         }
         return obj
     })
-    useEffect(()=>{
+
+    useEffect(() => {
         dispatch(showCart(id))
-    },[])
-    return(
+    }, [])
+    return (
         <>
             <div className="breadcrumb-option">
                 <div className="container">
@@ -60,62 +62,56 @@ export default function Cart(){
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    {foods.list!==undefined && foods.list.map((item) =>
-                                    {
-                                        return(
-                                            <tr>
-                                                <td className="product__cart__item">
-                                                    <div className="product__cart__item__pic">
-                                                        <img style={{width:90,height:90}} src={item.img} alt=""/>
-                                                    </div>
-                                                    <div className="product__cart__item__text">
-                                                        <h6>{item.nameFood}</h6>
-                                                    </div>
-                                                </td>
-                                                <td className="quantity__item">
-                                                    <Formik initialValues={{
-                                                        quantity:item.quantity
-                                                    }
-                                                    }>
-                                                        <Form>
-                                                            <div className="quantity">
-                                                                <div className="pro-qty">
+                                    {foods.list !== undefined && foods.list.map((item) => {
+                                            return (
+                                                <tr>
+                                                    <td className="product__cart__item">
+                                                        <div className="product__cart__item__pic">
+                                                            <img style={{width: 90, height: 90}} src={item.img} alt=""/>
+                                                        </div>
+                                                        <div className="product__cart__item__text">
+                                                            <h6>{item.nameFood}</h6>
+                                                        </div>
+                                                    </td>
+                                                    <td className="quantity__item">
 
-                                                                    <Field type="number" name="quantity"/>
+                                                                <div className="quantity">
+                                                                    <div className="pro-qty">
+
+                                                                        <h6>{item.quantity}</h6>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </Form>
-                                                    </Formik>
 
-                                                </td>
-                                                <td className="cart__price">$ {item.price}</td>
-                                                <td className="cart__close"><span className="icon_close" onClick={()=>{
-                                                    swal({
-                                                        title: "Are you sure?",
-                                                        text: "Once deleted, you will not be able to recover this imaginary file!",
-                                                        icon: "warning",
-                                                        buttons: true,
-                                                        dangerMode: true,
-                                                    })
-                                                        .then((willDelete) => {
-                                                            if (willDelete) {
 
-                                                                swal("Poof! Your imaginary file has been deleted!", {
-                                                                    icon: "success",
-                                                                });
-                                                                dispatch(deleteOrderDetail(item.idOrderdetail)).then(() => {
-                                                                    navigate('/my-cart/'+id)
-                                                                })
-                                                                dispatch(showCart(id))
-                                                            } else {
-                                                                swal("Your imaginary file is safe!");
-                                                            }
-                                                        });
-                                                }}></span></td>
-                                            </tr>
-                                        )
-                                    }
+                                                    </td>
+                                                    <td className="cart__price">$ {item.price}</td>
+                                                    <td className="cart__close"><span className="icon_close"
+                                                                                      onClick={() => {
+                                                                                          swal({
+                                                                                              title: "Are you sure?",
+                                                                                              text: "Once deleted, you will not be able to recover this imaginary file!",
+                                                                                              icon: "warning",
+                                                                                              buttons: true,
+                                                                                              dangerMode: true,
+                                                                                          })
+                                                                                              .then(async (willDelete) => {
+                                                                                                  if (willDelete) {
 
+                                                                                                      swal("Poof! Your imaginary file has been deleted!", {
+                                                                                                          icon: "success",
+                                                                                                      });
+                                                                                                      await dispatch(deleteOrderDetail(item.idOrderdetail)).then(() => {
+                                                                                                          navigate('/my-cart/' + id)
+                                                                                                      })
+                                                                                                      await dispatch(showCart(id))
+                                                                                                  } else {
+                                                                                                      swal("Your imaginary file is safe!");
+                                                                                                  }
+                                                                                              });
+                                                                                      }}></span></td>
+                                                </tr>
+                                            )
+                                        }
                                     )}
                                     </tbody>
                                 </table>
@@ -138,7 +134,7 @@ export default function Cart(){
                                 <h6>Discount codes</h6>
                                 <form action="#">
                                     <input type="text" placeholder="Coupon code"/>
-                                        <button type="submit">Apply</button>
+                                    <button type="submit">Apply</button>
                                 </form>
                             </div>
                             <div className="cart__total">
@@ -146,7 +142,7 @@ export default function Cart(){
                                 <ul>
                                     <li>Total <span>$ {foods.sum}</span></li>
                                 </ul>
-                                <Link to={'/check-out/'+id}><a href="" className="primary-btn" >Proceed to checkout</a></Link>
+                                <Link to={'/check-out/' + id}><a href="" className="primary-btn">Proceed to checkout</a></Link>
 
                             </div>
                         </div>

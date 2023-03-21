@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
-    addToCart,
+    addToCart, count,
     deleteOrderDetail,
     editOrder,
     findByIdOrder, getOrder,
@@ -15,6 +15,7 @@ const initialState = {
     orderDetail: {},
     food: [],
     orderMerchant: [],
+    count:0
 }
 
 const orderSlice = createSlice({
@@ -58,6 +59,9 @@ const orderSlice = createSlice({
         });
 
         builder.addCase(setStatusSuccess.fulfilled, (state, action) => {
+        });
+        builder.addCase(count.fulfilled, (state, action) => {
+            state.count=action.payload
         });
     },
 });
