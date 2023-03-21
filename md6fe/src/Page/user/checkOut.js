@@ -12,12 +12,17 @@ export default function Checkout(){
     const dispatch=useDispatch()
     const foods=useSelector((state)=>{
         let money=0;
+        let listIdMerchant=[]
         state.orders.order.map((item)=>{
             money += item.price;
+            listIdMerchant.push(item.id_Merchant)
         })
+        let set = new Set(listIdMerchant);
+        let new_arr = Array.from(set);
         let obj = {
             list: state.orders.order,
-            sum:money
+            sum:money,
+            listMerchant:new_arr
         }
         return obj
     })
@@ -122,11 +127,11 @@ export default function Checkout(){
                                                          cancelButtonText: 'Hủy',
                                                      })
                                                          .then(async (result) => {
-                                                             console.log(result)
                                                              if (result) {
                                                                  let data = {
                                                                      nameAddress: result,
-                                                                     id_User: localStorage.getItem("idUser")
+                                                                     id_User: localStorage.getItem("idUser"),
+                                                                     listMerchant:foods.listMerchant
                                                                  }
                                                                  await dispatch(addAddress(data)).then(async () =>{
                                                                      await dispatch(getAddress(localStorage.getItem('idUser'))).then(() => {

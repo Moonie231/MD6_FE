@@ -13,6 +13,9 @@ export const showCart = createAsyncThunk(
     'orders/showCart',
     async (data) => {
         const res = await customAxios.get('orders/show-cart/' + data);
+        if(res.data.length=== 0) {
+            localStorage.setItem('idMerchant',null)
+        }
         return res.data;
     }
 )
@@ -82,5 +85,12 @@ export const setStatusSuccess = createAsyncThunk(
     'order/orderSuccess',
     async (data) => {
         const res = await customAxios.put('orders/statusSuccess/' + data)
+        return res.data
+    })
+export const count = createAsyncThunk(
+    'order/count',
+    async (data) => {
+        const res = await customAxios.get('orders/countCart/' + data)
+        console.log(res.data)
         return res.data
     })

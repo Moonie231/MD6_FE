@@ -2,6 +2,8 @@ import {Link, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {getProfile, logout} from "../service/merchantService";
 import {logoutUser} from "../service/userService";
+import {useEffect} from "react";
+import {count} from "../service/orderService";
 
 export default function Header() {
     const navigate = useNavigate()
@@ -12,8 +14,13 @@ export default function Header() {
     const user = useSelector((state) => {
         return state.user.currentUser
     });
+    const countCart=useSelector((state) => {
+        return state.orders.count
+    })
 
-
+    useEffect(()=>{
+        dispatch(count(localStorage.getItem('idOrder')))
+    })
 
     return (
         <>
@@ -55,10 +62,10 @@ export default function Header() {
                                                 <Link to={'my-cart/'+localStorage.getItem('idOrder')}>
                                                     <a href=""><img src="/img/icon/cart.png" alt=""/> <span>0</span></a>
                                                 </Link>
-                                                <div className="cart__price" >Cart: <span>$0.00</span></div>
+                                                <div className="cart__price" >Cart: <span>[{countCart}]</span></div>
                                             </div>
                                         </>}
-                                        '
+
                                     </div>
                                 </div>
                             </div>
