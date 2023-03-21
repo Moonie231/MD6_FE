@@ -1,5 +1,5 @@
 import FoodOfOrder from "./foodOfOrder";
-import {useNavigate, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {orderDetail} from "../../service/orderService";
@@ -18,7 +18,7 @@ export default function OrderDetail() {
     }, [])
     return (
         <>
-            <div className="container">
+            <div className="container" style={{backgroundColor: 'lightgray'}}>
                 <div className="xMDeox" style={{
                     position: 'relative',
                     flexGrow: 1,
@@ -28,13 +28,14 @@ export default function OrderDetail() {
                     minWidth: 0,
                     background: '#fff',
                     boxShadow: '0 1px 2px 0 rgb(0 0 0 / 13%)',
-                    borderRadius: '0.125rem'
+                    borderRadius: '0.125rem',
                 }}>
                     <div className="GBcYbK" style={{
                         minHeight: 740,
                         background: '#f5f5f5',
                         boxShadow: '0 0 0 2px #f5f5f5'
                     }}>
+
                         <div className="BRCaAU" style={{
                             borderRadius: 2,
                             backgroundColor: '#fff',
@@ -46,7 +47,8 @@ export default function OrderDetail() {
                                 display: 'flex',
                                 justifyContent: 'space-between',
                                 alignItems: 'center'
-                            }}>
+                            }}><Link to={'/users/my-order/' + localStorage.getItem('idUser')}><h4><i
+                                className="fa-solid fa-arrow-rotate-left"></i> Back</h4></Link>
                                 <div className="K8h4Ws" style={{
                                     color: 'rgba(0,0,0,.54)'
                                 }}>
@@ -96,15 +98,15 @@ export default function OrderDetail() {
                                                 overflow: 'hidden',
                                                 textOverflow: 'ellipsis',
                                                 color: 'rgba(0,0,0,.8)'
-                                            }}>Minh Trang
+                                            }}>{order.username}
                                             </div>
                                             <div className="IqSKNq" style={{
                                                 color: 'rgba(0,0,0,.54)',
                                                 fontSize: 12,
                                                 whiteSpace: 'pre-line'
                                             }}>
-                                                <p>{order.phone}</p>
-                                                <p>Address</p>
+                                                <p><i className="fa-solid fa-phone"></i> {order.phone}</p>
+                                                <p><i className="fa-solid fa-location-dot"></i> {order.nameAddress}</p>
                                             </div>
                                         </div>
                                         <div className="w5KHDc">
@@ -123,10 +125,9 @@ export default function OrderDetail() {
                             <div>
                                 <div>
                                     <div className="z1upOh" style={{
-                                        padding: '12px 24px',
-                                        backgroundColor: '#fafafa'
+                                        padding: '12px 24px'
                                     }}>
-                                        <FoodOfOrder id = {idOrder}></FoodOfOrder>
+                                        <FoodOfOrder id={idOrder}></FoodOfOrder>
                                     </div>
                                     <div className="QZ4vFF" style={{
                                         backgroundColor: ' #fafafa',
