@@ -3,16 +3,32 @@ import {
     editProfile,
     getMerchantActive,
     getMerchantPending,
-    getProfile, setStatus,
-    login, logout,
-    register
+    getProfile,
+    setStatus,
+    login,
+    logout,
+    register,
+    statisticsByUser,
+    statisticsByStatus,
+    statisticsByFood,
+    getMerchant,
+    statisticsByWeek,
+    statisticsByMonth,
+    statisticsByYear
 } from "../../service/merchantService";
 
 const initialState = {
     currentMerchant: JSON.parse(localStorage.getItem('merchant')) ,
     merchant: [],
+    merchantDetail: {},
     profile: {},
-    status:false
+    status:false,
+    statisticsByUser:[],
+    statisticsByStatus:[],
+    statisticsByFood:[],
+    statisticsByWeek:[],
+    statisticsByMonth:[],
+    statisticsByYear:[],
 }
 
 const merchantSlice = createSlice({
@@ -53,6 +69,27 @@ const merchantSlice = createSlice({
         });
         builder.addCase(getMerchantPending.fulfilled, (state, action) => {
             state.merchant = action.payload;
+        });
+        builder.addCase(getMerchant.fulfilled, (state, action) => {
+            state.merchantDetail = action.payload;
+        });
+        builder.addCase(statisticsByUser.fulfilled, (state, action) => {
+            state.statisticsByUser = action.payload;
+        });
+        builder.addCase(statisticsByStatus.fulfilled, (state, action) => {
+            state.statisticsByStatus = action.payload;
+        });
+        builder.addCase(statisticsByFood.fulfilled, (state, action) => {
+            state.statisticsByFood = action.payload;
+        });
+        builder.addCase(statisticsByWeek.fulfilled, (state, action) => {
+            state.statisticsByWeek = action.payload;
+        });
+        builder.addCase(statisticsByMonth.fulfilled, (state, action) => {
+            state.statisticsByMonth = action.payload;
+        });
+        builder.addCase(statisticsByYear.fulfilled, (state, action) => {
+            state.statisticsByYear = action.payload;
         });
         builder.addCase(setStatus.fulfilled, (state, action) => {
         });

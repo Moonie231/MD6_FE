@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getProfile, logout} from "../service/merchantService";
 import {logoutUser} from "../service/userService";
 import {useEffect} from "react";
+import {count} from "../service/orderService";
 
 export default function Header() {
     const navigate = useNavigate()
@@ -13,10 +14,13 @@ export default function Header() {
     const user = useSelector((state) => {
         return state.user.currentUser
     });
+    const countCart=useSelector((state) => {
+        return state.orders.count
+    })
 
-    // useEffect(()=>{
-    //     dispatch(getProfile(localStorage.getItem('idMerchant'))).then()
-    // },[])
+    useEffect(()=>{
+        dispatch(count(localStorage.getItem('idOrder')))
+    })
 
     return (
         <>
@@ -53,10 +57,14 @@ export default function Header() {
                                                                                        alt=""/></a>
                                             <a href="#"><img src="/img/icon/heart.png" alt=""/></a>
                                         </div>
-                                        <div className="header__top__right__cart">
-                                            <a href="#"><img src="/img/icon/cart.png" alt=""/> <span>0</span></a>
-                                            <div className="cart__price">Cart: <span>$0.00</span></div>
-                                        </div>
+                                        {localStorage.getItem('status') === true || localStorage.getItem('status') === 'true' &&<>
+                                            <div className="header__top__right__cart">
+                                                <Link to={'my-cart/'+localStorage.getItem('idOrder')}>
+                                                    <a href=""><img src="/img/icon/cart.png" alt=""/> <span>0</span></a>
+                                                </Link>
+                                                <div className="cart__price" >Cart: <span>[{countCart}]</span></div>
+                                            </div>
+                                        </>}
 
                                     </div>
                                 </div>
@@ -73,8 +81,15 @@ export default function Header() {
                                     <li><Link to={'/'}>Home</Link></li>
                                     {localStorage.getItem('NameStatus') === true || localStorage.getItem('NameStatus') === 'true' &&
                                         <li><a href="">Shop</a>
-                                            <ul className="dropdown">
+
+                                            <ul className="dropdown" style={{width:160}}>
                                                 <li><Link to={'/merchants/my-shop/' + merchant.idMerchant}>My Shop</Link>
+                                                </li>
+                                                <li><Link to={'/merchants/manager-order/' + merchant.idMerchant}>Manager Order</Link>
+                                                </li>
+                                                <li><Link to={'/merchants/statistics/' + merchant.idMerchant}>Statistics</Link>
+                                                </li>
+                                                <li><Link to={'/merchants/statistics-by-time/' + merchant.idMerchant}>Statistics Time</Link>
                                                 </li>
                                             </ul>
                                         </li>}
@@ -108,6 +123,8 @@ export default function Header() {
                                         <li><a href="#">{user.username}</a>
                                             <ul className="dropdown">
                                                 <li><Link to={`/users/${user.idUser}`}>Profile</Link></li>
+                                                <li><Link to={`/users/address/${user.idUser}`}>My Address</Link></li>
+                                                <li><Link to={`/users/my-order/${user.idUser}`}>My Order</Link></li>
                                                 <li><a href="" onClick={(e) => {
                                                     dispatch(logoutUser())
                                                     navigate('/login-user')

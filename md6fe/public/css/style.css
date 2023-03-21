@@ -1104,7 +1104,7 @@ ol {
   opacity: 0;
   visibility: hidden;
 }
-.product__item__text .cart_add a {
+.product__item__text .cart_add h5 {
   color: #111111;
   font-size: 16px;
   font-weight: 600;
@@ -4025,4 +4025,5 @@ ol {
   .checkout__order__products span {
     display: none;
   }
+
 }

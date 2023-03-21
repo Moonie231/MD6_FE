@@ -1,4 +1,4 @@
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {getMerchantActive, getMerchantPending, setStatus} from "../../service/merchantService";
@@ -15,66 +15,71 @@ export default function MerchantPending() {
         dispatch(getMerchantPending())
     }, [])
     return (
-        <>
-            <table className="table table-striped">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name Merchant</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Active</th>
-                </tr>
-                </thead>
-                <tbody>
-                {merchants !== undefined && merchants.map((item, key) => (
-                    <>
-                        <tr>
-                            <th scope="row">{key + 1}</th>
-                            <td>{item.nameMerchant}</td>
-                            <td>{item.address}</td>
-                            <td>{item.phone}</td>
-                            <td>{item.status}</td>
-                            <td><img style={{height: 100, width: 100}} src={item.image} alt=""/></td>
-                            <td>{item.email}</td>
-                            <td>
-                                <button style={{backgroundColor:"rgb(240,134,40)", border: "none"}}
-                                    className="btn-danger rounded text-white position-absolute start-0 top-0 m-1 py-1 px-2"
-                                    onClick={() => {
-                                        swal({
-                                            title: "Are you sure?",
-                                            icon: "warning",
-                                            buttons: true,
-                                            dangerMode: true,
-                                        })
-                                            .then(async (willActive) => {
-                                                if (willActive) {
-                                                    await dispatch(setStatus(item.idMerchant)).then(async () => {
-                                                        await dispatch(getMerchantPending()).then(() => {
-                                                            navigate('/admin/merchant-pending')
-                                                        })
-                                                    })
-                                                    swal("Your account has been active!", {
-                                                        icon: "success",
-                                                    });
-                                                } else {
-                                                    swal("Your account is safe!");
-                                                }
-                                            });
-                                    }}
-                                >
-                                    Pending
-                                </button>
-                            </td>
-                        </tr>
-                    </>
-                ))}
 
-                </tbody>
-            </table>
+        <>
+            <div className="container">
+                <table className="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name Merchant</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Active</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {merchants !== undefined && merchants.map((item, key) => (
+                        <>
+                            <tr>
+                                <th scope="row">{key + 1}</th>
+                                <Link to={`admin/merchant/${item.idMerchant}`}>
+                                    <td>{item.nameMerchant}</td>
+                                </Link>
+                                <td>{item.address}</td>
+                                <td>{item.phone}</td>
+                                <td>{item.status}</td>
+                                <td><img style={{height: 100, width: 100}} src={item.image} alt=""/></td>
+                                <td>{item.email}</td>
+                                <td>
+                                    <button style={{backgroundColor: "rgb(240,134,40)", border: "none"}}
+                                            className="btn-danger rounded text-white position-absolute start-0 top-0 m-1 py-1 px-2"
+                                            onClick={() => {
+                                                swal({
+                                                    title: "Are you sure?",
+                                                    icon: "warning",
+                                                    buttons: true,
+                                                    dangerMode: true,
+                                                })
+                                                    .then(async (willActive) => {
+                                                        if (willActive) {
+                                                            await dispatch(setStatus(item.idMerchant)).then(async () => {
+                                                                await dispatch(getMerchantPending()).then(() => {
+                                                                    navigate('/admin/merchant-pending')
+                                                                })
+                                                            })
+                                                            swal("Your account has been active!", {
+                                                                icon: "success",
+                                                            });
+                                                        } else {
+                                                            swal("Your account is safe!");
+                                                        }
+                                                    });
+                                            }}
+                                    >
+                                        Pending
+                                    </button>
+                                </td>
+                            </tr>
+                        </>
+                    ))}
+
+                    </tbody>
+                </table>
+            </div>
         </>
     )
 }
