@@ -1,10 +1,13 @@
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect, useState} from "react";
 import {Link, useNavigate, useParams} from "react-router-dom";
-import {editOrder, getOrder, setStatusCancelled, setStatusConfirm, showCart} from "../../service/orderService";
+import {
+    editOrder, getOrder, searchOrder, setStatusCancelled, setStatusConfirm, showCart
+} from "../../service/orderService";
 import swal from "sweetalert";
 import {getMerchantPending, setStatus} from "../../service/merchantService";
 import {Field, Form, Formik} from "formik";
+
 
 export default function ManagerOrder() {
     const {idMerchant} = useParams()
@@ -15,52 +18,52 @@ export default function ManagerOrder() {
         return state.orders.order
     })
 
+    const handleSearch = (values) => {
+        dispatch(searchOrder(values));
+
+    }
     useEffect(() => {
         dispatch(getOrder(idMerchant))
     }, [])
 
-    return (
-        <>
+
+    return (<>
 
             <div className="container" style={{backgroundColor: 'lightgray', marginTop: 40}}>
                 <div className="row">
-                    <div className="col-lg-6 col-md-6 col-sm-6">
+                    <div className="col-lg-3 col-md-6 col-sm-6">
                         <div className="breadcrumb__text">
                             <h2>Order</h2>
                         </div>
                     </div>
-                    {/*<div className="shop__option__search" style={{width: 500,marginLeft: 250}}>*/}
-                    {/*    <Formik initialValues={{*/}
-                    {/*        nameFood: ""*/}
-                    {/*    }} onSubmit={(values) =>{*/}
-                    {/*        // handleSearch(values)*/}
-                    {/*    }*/}
-                    {/*    }>*/}
-                    {/*        <Form >*/}
-                    {/*            <Field type="text" name={'nameFood'} placeholder="Search"/>*/}
-                    {/*            <button type="submit"><i className="fa fa-search"></i></button>*/}
-                    {/*        </Form>*/}
-                    {/*    </Formik>*/}
-                    {/*</div>*/}
-                    <div className="col-lg-6 col-md-6 col-sm-6">
+                    <div className="col-lg-6">
+                        <div className="shop__option__search" style={{width: 500, marginTop: 10}}>
+                            <Formik initialValues={{
+                                value: ''
+                            }} onSubmit={(values) => {
+                                handleSearch(values.value)
+                            }}>
+                                <Form>
+                                    <Field type="text" name={'value'} placeholder="Search"/>
+                                    <button type="submit"><i className="fa fa-search"></i></button>
+                                </Form>
+                            </Formik>
+                        </div>
+                    </div>
+                    <div className="col-lg-3 col-md-6 col-sm-6">
                         <div className="breadcrumb__links">
                             <Link to={'/'}>Home</Link>
                             <span>Order</span>
                         </div>
                     </div>
                 </div>
-                {order.map((item) => (
-                    <>
+                {order.map((item) => (<>
                         <div className="" style={{
-                            margin: '12px 0',
-                            boxShadow: '0 1px 1px 0 rgb(0 0 0 / 5%)',
-                            borderRadius: '0.125rem',
+                            margin: '12px 0', boxShadow: '0 1px 1px 0 rgb(0 0 0 / 5%)', borderRadius: '0.125rem',
                         }}>
                             <div>
                                 <div className="" style={{
-                                    paddingTop: 24,
-                                    padding: '12px 24px',
-                                    background: '#fff'
+                                    paddingTop: 24, padding: '12px 24px', background: '#fff'
                                 }}>
                                     <div className="" style={{
                                         padding: '0 0 0px',
@@ -69,27 +72,39 @@ export default function ManagerOrder() {
                                         alignItems: 'center'
                                     }}>
                                         <div className="" style={{
-                                            padding: '0 0 0 10px',
-                                            display: 'flex',
-                                            alignItems: 'center'
+                                            padding: '0 0 0 10px', display: 'flex', alignItems: 'center'
                                         }}>
                                         </div>
                                         <div className="" style={{
-                                            color: '#ee4d2d',
+                                            color: 'black',
+                                            textAlign: 'right',
+                                            textTransform: 'uppercase',
+                                            whiteSpace: 'nowrap',
+                                            marginRight: 900
+                                        }}>{item.username}
+                                        </div>
+                                        <div className="" style={{
+                                            color: 'black',
+                                            textAlign: 'left',
+                                            textTransform: 'uppercase',
+                                            whiteSpace: 'nowrap',
+                                            marginLeft: '-170px'
+                                        }}>{item.phone}
+                                        </div>
+                                        <div className="" style={{
+                                            color: 'red',
                                             textAlign: 'right',
                                             textTransform: 'uppercase',
                                             whiteSpace: 'nowrap',
                                         }}>{item.status}
                                         </div>
-
                                     </div>
                                     <div className="" style={{
                                         borderBottom: '1px solid rgba(0,0,0,.09)',
                                     }}></div>
                                     <div className="">
                                         <div className="" style={{
-                                            margin: 0,
-                                            border: 0
+                                            margin: 0, border: 0
                                         }}>
                                             <div>
                                     <span className="" style={{
@@ -109,15 +124,10 @@ export default function ManagerOrder() {
                                             wordWrap: 'break-word'
                                         }}>
                                         <div className="" style={{
-                                            width: 80,
-                                            height: 80,
-                                            flexShrink: 0,
-                                            border: '1px solid #e1e1e1',
+                                            width: 80, height: 80, flexShrink: 0, border: '1px solid #e1e1e1',
                                         }}>
                                             <div className="" style={{
-                                                position: 'relative',
-                                                width: '100%',
-                                                height: '100%'
+                                                position: 'relative', width: 80, height: 80
                                             }}>
                                             <div
                                                 className=""
@@ -128,7 +138,10 @@ export default function ManagerOrder() {
                                                     backgroundRepeat: 'no-repeat',
                                                     position: 'absolute',
                                                     top: 0,
-                                                    left: 0
+                                                    left: 0,
+                                                    width: '100%',
+                                                    height: '100%'
+
                                                 }}>
                                                 <div className=""></div>
                                             </div>
@@ -160,8 +173,7 @@ export default function ManagerOrder() {
                                                 </div>
                                                 <div>
                                                     <div className="" style={{
-                                                        margin: '0 0 5px',
-                                                        color: 'rgba(0,0,0,.54)'
+                                                        margin: '0 0 5px', color: 'rgba(0,0,0,.54)'
                                                     }}>Category: {item.nameCategory}</div>
                                                     <div className="" style={{margin: '0 0 5px'}}>x{item.quantity}</div>
                                                 </div>
@@ -170,9 +182,7 @@ export default function ManagerOrder() {
                                         <div className="" style={{textAlign: 'right'}}>
                                             <div>
                                                 <span className="" style={{
-                                                    verticalAlign: 'middle',
-                                                    fontSize: 14,
-                                                    color: 'rgba(0,0,0,.87)'
+                                                    verticalAlign: 'middle', fontSize: 14, color: 'rgba(0,0,0,.87)'
                                                 }}>${item.price}</span>
                                             </div>
                                             {item.status === 'pending' && <>
@@ -227,8 +237,7 @@ export default function ManagerOrder() {
                                                 }}>
                                                     Cancel
                                                 </div>
-                                            </>
-                                            }
+                                            </>}
                                         </div>
                                     </span>
                                             </div>
@@ -247,20 +256,15 @@ export default function ManagerOrder() {
 
                             </div>
                             <div className="" style={{
-                                padding: '24px 24px 12px',
-                                background: '#fffefb',
+                                padding: '24px 24px 12px', background: '#fffefb',
                             }}>
                                 <div className="" style={{
-                                    display: 'flex',
-                                    justifyContent: 'flex-end',
-                                    alignItems: 'center'
+                                    display: 'flex', justifyContent: 'flex-end', alignItems: 'center'
                                 }}>
                                 </div>
                             </div>
                         </div>
-                    </>
-                ))}
+                    </>))}
             </div>
-        </>
-    )
+        </>)
 }

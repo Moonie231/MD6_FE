@@ -19,7 +19,6 @@ export default function FoodOfOrder({id}) {
 
     return (
         <>
-
             {foodOrder && foodOrder.map((item,index) => (
                 <div key={index}>
                     <span className="" style={{
@@ -58,7 +57,9 @@ export default function FoodOfOrder({id}) {
                                             backgroundRepeat: 'no-repeat',
                                             position: 'absolute',
                                             top: 0,
-                                            left: 0
+                                            left: 0,
+                                            width: '100%',
+                                            height: '100%'
                                         }}>
                                         <div className=""></div>
                                     </div>
