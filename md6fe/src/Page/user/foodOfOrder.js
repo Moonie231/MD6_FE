@@ -19,9 +19,7 @@ export default function FoodOfOrder({id}) {
 
     return (
         <>
-
-            {foodOrder && foodOrder.map((item, index) => (
-
+            {foodOrder && foodOrder.map((item,index) => (
                 <div key={index}>
                     <div className="Zrxery" style={{
                         padding: '20px 24px',
