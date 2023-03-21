@@ -3,7 +3,10 @@ import {useEffect} from "react";
 import {findByIdFood, getFoods, searchNameFood} from "../../service/foodsService";
 import {Field, Form, Formik} from "formik";
 import {Link, useNavigate, useSearchParams} from "react-router-dom";
-import {addToCart} from "../../service/orderService";
+import {addToCart, count, showCart} from "../../service/orderService";
+import swal from "sweetalert";
+import {ToastContainer, toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Shop() {
     const navigate = useNavigate()
@@ -91,23 +94,39 @@ export default function Shop() {
                                                 <div className="product__item__pic set-bg"
                                                      style={{backgroundImage: `url(${item.img})`}}>
                                                     <div className="product__label">
-                                                        <span>{item.nameCategory}</span>
+                                                        <span>{item.nameMerchant}</span>
                                                     </div>
                                                 </div>
                                             </Link>
                                             <div className="product__item__text">
-                                                <h6>{item.nameFood}</h6>
+                                                <h5 className="product__item__price">{item.nameFood}</h5>
                                                 <div className="product__item__price">${item.price}</div>
                                                 <div className="cart_add">
-                                                    <a href="" onClick={(e) => {
-                                                        let data = {
-                                                            id_Food: item.idFood,
-                                                            id_Order: localStorage.getItem('idOrder'),
-                                                            quantity: 1,
-                                                            price: item.price
+                                                    <h5 style={{cursor: 'pointer'}} onClick={(e) => {
+                                                        if (localStorage.getItem('idMerchant') === 'null' || item.id_Merchant == localStorage.getItem('idMerchant')) {
+                                                            toast.success("Added to cart", {
+                                                                position: "top-right",
+                                                                autoClose: 3000,
+                                                                hideProgressBar: false,
+                                                                closeOnClick: true,
+                                                                pauseOnHover: true,
+                                                                draggable: true,
+                                                                progress: undefined,
+                                                            });
+                                                            let data = {
+                                                                id_Food: item.idFood,
+                                                                id_Order: localStorage.getItem('idOrder'),
+                                                                quantity: 1,
+                                                                price: item.price,
+                                                            }
+                                                            localStorage.setItem('idMerchant', item.id_Merchant)
+                                                            dispatch(addToCart(data)).then(()=> {
+                                                                dispatch(count(localStorage.getItem('idOrder')))
+                                                            })                                                        } else {
+                                                            swal('you can only buy from 1 store')
                                                         }
-                                                        dispatch(addToCart(data))
-                                                    }}>Add to cart</a>
+                                                    }}>Add to cart</h5>
+                                                    <ToastContainer/>
                                                 </div>
                                             </div>
                                         </div>
