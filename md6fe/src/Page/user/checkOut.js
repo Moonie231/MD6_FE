@@ -37,13 +37,20 @@ export default function Checkout(){
         let data=[
             {
                 totalMoney:foods.sum,
-                id_user:localStorage.getItem('idUser')
+                id_user:localStorage.getItem('idUser'),
+                id_Address:value.id_Address
             }
             ,
             id
         ]
         dispatch(editOrder(data)).then(()=>{
-            let info=[{...value},user.idUser]
+            console.log(value)
+            let infoOne={
+                username: value.username,
+                email: value.email,
+                phone: value.phone,
+            }
+            let info=[{...infoOne},user.idUser]
             dispatch(editProfile(info))
             swal("Order Success !!!");
                 navigate('/')
@@ -51,6 +58,9 @@ export default function Checkout(){
         )
 
 
+    }
+    const handleAddress=async (event)=>{
+        console.log(event.target.value)
     }
     useEffect(()=>{
         dispatch(showCart(id))
@@ -86,7 +96,8 @@ export default function Checkout(){
                         <Formik initialValues={{
                             username: user.username,
                             email: user.email,
-                            phone: user.phone
+                            phone: user.phone,
+                            id_Address:''
                         }} enableReinitialize={true} onSubmit={handle}>
                             <Form>                            <div className="row">
                                 <div className="col-lg-8 col-md-6">
@@ -103,16 +114,16 @@ export default function Checkout(){
                                                 <p>Address<span>*</span></p>
                                                 <Field
                                                     as="select"
-                                                    name={"id_Category"}
+                                                    name={"id_Address"}
                                                     className="form-control"
-                                                    id="id_Category"
+                                                    id="id_Address"
                                                     style={{width:'95%', float:'left'}}
                                                 >
                                                     <option selected>Address</option>
                                                     {address !== undefined &&
                                                         address.map((item, index) => (
 
-                                                            <option value={item.idAddress}>
+                                                            <option  value={item.idAddress}>
                                                                 {item.nameAddress}
                                                             </option>
                                                         ))}
@@ -131,7 +142,8 @@ export default function Checkout(){
                                                                  let data = {
                                                                      nameAddress: result,
                                                                      id_User: localStorage.getItem("idUser"),
-                                                                     listMerchant:foods.listMerchant
+                                                                     listMerchant:foods.listMerchant,
+                                                                     id_Address:1
                                                                  }
                                                                  await dispatch(addAddress(data)).then(async () =>{
                                                                      await dispatch(getAddress(localStorage.getItem('idUser'))).then(() => {

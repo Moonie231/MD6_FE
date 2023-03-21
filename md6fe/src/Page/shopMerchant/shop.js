@@ -94,7 +94,7 @@ export default function Shop() {
                                                 <div className="product__item__pic set-bg"
                                                      style={{backgroundImage: `url(${item.img})`}}>
                                                     <div className="product__label">
-                                                        <span>{item.nameMerchant}</span>
+                                                        <span><i className="fa-solid fa-store"></i> {item.nameMerchant}</span>
                                                     </div>
                                                 </div>
                                             </Link>
