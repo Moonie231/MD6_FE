@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import customAxios from "../../service/api";
 
 export default function FoodOfOrder({id}) {
@@ -11,7 +11,7 @@ export default function FoodOfOrder({id}) {
     const food = useSelector((state) => state.orders.food)
 
     useEffect(() => {
-        customAxios.get('/orders/my-order-food/'+idUser+'/'+ id).then(res => {
+        customAxios.get('/orders/my-order-food/'+ id).then(res => {
             console.log(res.data)
             setFoodOrder(res.data)
         })
@@ -20,8 +20,30 @@ export default function FoodOfOrder({id}) {
     return (
         <>
 
-            {foodOrder && foodOrder.map((item,index) => (
+            {foodOrder && foodOrder.map((item, index) => (
+
                 <div key={index}>
+                    <div className="Zrxery" style={{
+                        padding: '20px 24px',
+                        fontSize: 14,
+                        justifyContent: 'space-between',
+                        alignItems: 'center'
+                    }}>
+                        <div className="K8h4Ws" style={{
+                            color: 'rgba(0,0,0,.54)'
+                        }}>
+                        </div>
+                        <div>
+                                <span className="-XHRLL">{item.nameMerchant}</span>
+                        </div>
+                    </div>
+                    <div className="CqYika" style={{
+                        width: '100%',
+                        height: 0,
+                        borderBottom: '1px dotted rgba(0,0,0,.09)',
+                        position: 'relative'
+                    }}>
+                    </div>
                     <span className="" style={{
                         display: 'flex',
                         wordWrap: 'break-word',
@@ -49,6 +71,7 @@ export default function FoodOfOrder({id}) {
                                     width: '100%',
                                     height: '100%'
                                 }}>
+                                    <Link to={`/orderDetail/${id}`}>
                                     <div
                                         className=""
                                         style={{
@@ -58,10 +81,13 @@ export default function FoodOfOrder({id}) {
                                             backgroundRepeat: 'no-repeat',
                                             position: 'absolute',
                                             top: 0,
-                                            left: 0
+                                            left: 0,
+                                            width: '100%',
+                                            height: '100%'
                                         }}>
                                         <div className=""></div>
                                     </div>
+                                    </Link>
                                 </div>
                             </div>
                             <div className="" style={{

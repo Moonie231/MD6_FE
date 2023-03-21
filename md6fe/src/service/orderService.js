@@ -55,10 +55,18 @@ export const myOrder = createAsyncThunk(
     }
 )
 
+export const orderDetail = createAsyncThunk(
+    'orders/orderDetail',
+    async (data) => {
+        const res = await customAxios.get('orders/orderDetail/' + data)
+        return res.data
+    }
+)
+
 export const orderFood = createAsyncThunk(
     'orders/orderFood',
     async (data) => {
-        const res = await customAxios.get(`orders/my-order-food/${data[1]}/${data[0]}`)
+        const res = await customAxios.get(`orders/my-order-food/${data}`)
         console.log(res.data)
         return res.data
     }

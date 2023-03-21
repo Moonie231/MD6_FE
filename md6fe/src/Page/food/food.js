@@ -11,21 +11,18 @@ export default function Food() {
         return state.foods.food
     })
 
-    useEffect(() =>{
+    useEffect(() => {
         dispatch(findByIdFood(idFood))
     }, [])
-    return(
+    return (
         <>
             <section className="product-details spad">
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-6">
-                            <div className="product__details__img">
-                                <div className="product__details__big__img">
-                                    <img style={{width: "50%", height: "50%"}} src={food.img} alt=""/>
-                                </div>
-                            </div>
-                        </div>
+
+
+                        <img style={{width: "50%", height: "50%", paddingBottom: 100}} src={food.img} alt=""/>
+
                         <div className="col-lg-6">
                             <div className="product__details__text">
                                 <div className="product__label">{food.nameCategory}</div>
@@ -36,7 +33,7 @@ export default function Food() {
                                 <div className="product__details__option">
                                     <div className="quantity">
                                         <div className="pro-qty">
-                                            <input type="text" value="2"/>
+                                            <input type="text" value="" placeholder='so luong de add to cart'/>
                                         </div>
                                     </div>
                                     <a href="#" className="primary-btn">Add to cart</a>

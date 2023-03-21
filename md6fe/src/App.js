@@ -25,7 +25,7 @@ import Checkout from "./Page/user/checkOut";
 import MyOrder from "./Page/user/myOrder";
 import ManagerOrder from "./Page/merchant/managerOrder";
 import StatisticsByTime from "./Page/shopMerchant/statisticsByTime";
-import OrderDetail from "./Page/merchant/orderDetail";
+import OrderDetail from "./Page/user/orderDetail";
 
 
 function App() {
@@ -68,6 +68,7 @@ function App() {
                     <Route path={'merchant-pending'} element={<MerchantPending></MerchantPending>}></Route>
                     <Route path={'merchant/:idMerchant'} element={<Merchant></Merchant>}></Route>
                 </Route>
+                <Route path={'orderDetail/:idOrder'} element={<OrderDetail></OrderDetail>}></Route>
                 <Route path={'*'} element={<Home/>}></Route>
             </Routes>
             <Footer></Footer>

@@ -4,7 +4,7 @@ import {
     deleteOrderDetail,
     editOrder,
     findByIdOrder, getOrder,
-    myOrder,
+    myOrder, orderDetail,
     orderFood, setStatusCancelled, setStatusConfirm, setStatusSuccess,
     showCart
 } from "../../service/orderService";
@@ -12,6 +12,7 @@ import {
 const initialState = {
     order: [],
     orders: [],
+    orderDetail: {},
     food: [],
     orderMerchant: [],
 }
@@ -44,7 +45,9 @@ const orderSlice = createSlice({
         builder.addCase(orderFood.fulfilled, (state, action) => {
             state.food=action.payload
         });
-
+        builder.addCase(orderDetail.fulfilled, (state, action) => {
+            state.orderDetail=action.payload
+        });
 
         builder.addCase(deleteOrderDetail.fulfilled, (state, action) => {
         });

@@ -122,11 +122,11 @@ export default function MyOrder() {
                                                             navigate('/users/my-order/' + idUser)
                                                         })
                                                     })
-                                                    swal("Your account has been active!", {
+                                                    swal("Your order has been cencel!", {
                                                         icon: "success",
                                                     });
                                                 } else {
-                                                    swal("Your account is safe!");
+                                                    swal("Your order is safe!");
                                                 }
                                             });
                                     }}> Cancel
@@ -158,11 +158,11 @@ export default function MyOrder() {
                                                             navigate('/users/my-order/' + idUser)
                                                         })
                                                     })
-                                                    swal("Your account has been active!", {
+                                                    swal("Your order has been success!", {
                                                         icon: "success",
                                                     });
                                                 } else {
-                                                    swal("Your account is safe!");
+                                                    swal("Your order is safe!");
                                                 }
                                             });
                                     }}> Success
