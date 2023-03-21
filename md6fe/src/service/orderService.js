@@ -87,10 +87,18 @@ export const setStatusSuccess = createAsyncThunk(
         const res = await customAxios.put('orders/statusSuccess/' + data)
         return res.data
     })
-export const count = createAsyncThunk(
-    'order/count',
+    
+export const searchOrder = createAsyncThunk(
+    "orders/searchOrder",
     async (data) => {
-        const res = await customAxios.get('orders/countCart/' + data)
-        console.log(res.data)
-        return res.data
+        const res = await customAxios.post('/orders/find-by-order', [data])
+        return res.data;
     })
+
+        export const count = createAsyncThunk(
+            'order/count',
+            async (data) => {
+                const res = await customAxios.get('orders/countCart/' + data)
+                console.log(res.data)
+                return res.data
+            })
