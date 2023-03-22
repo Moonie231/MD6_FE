@@ -13,13 +13,14 @@ export default function ManagerOrder() {
     const {idMerchant} = useParams()
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    let obj = []
 
     const order = useSelector(state => {
         return state.orders.order
     })
 
     const handleSearch = (values) => {
-        dispatch(searchOrder(values));
+        dispatch(searchOrder([values,idMerchant]));
 
     }
     useEffect(() => {

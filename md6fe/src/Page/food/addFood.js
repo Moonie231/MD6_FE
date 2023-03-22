@@ -3,10 +3,22 @@ import {storage} from "../../service/firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate, useParams} from "react-router-dom";
-import {Field, Form, Formik} from "formik";
+import {ErrorMessage, Field, Form, Formik} from "formik";
 import {addFood} from "../../service/foodsService";
 import {getCategories} from "../../service/categoryService";
 import swal from "sweetalert";
+import * as Yup from "yup";
+const validateSchema = Yup.object().shape({
+    nameFood: Yup.string()
+        .min(2, "Too short!")
+        .max(50, "Too long!")
+        .required("Required"),
+    description: Yup.string()
+        .min(2, "Too short!")
+        .max(500, "Too long!")
+        .required("Required"),
+
+});
 
 export default function AddFood() {
 
@@ -71,77 +83,121 @@ export default function AddFood() {
 
     return (
         <>
+            <div className="container" style={{backgroundColor: 'lightgray', marginTop: 40}}>
             <div className="row">
-                <div className="offset-3 col-6 mt-5">
-                    <div className="section-title">
-                        <h2>Add Foods</h2>
+                <div className="container-xxl py-5">
+                    <div className="container">
+                        <div className="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s"
+                             style={{maxWidth: "600px"}}>
+                            <h2 className="mb-3">Add Food</h2>
+                        </div>
+                        <div className="row g-4">
+                            <div className="col-md-4 wow fadeInUp" data-wow-delay="0.1s" style={{height:360,marginTop:30}}>
+                                <img className="position-relative rounded w-100 h-100" src={urls[0]} alt={urls[0]}/>
+                            </div>
+                            <div className="col-md-8">
+                                <div className="wow fadeInUp" data-wow-delay="0.5s">
+                                    <Formik
+                                        initialValues={{
+                                            nameFood: "",
+                                            description: "",
+                                            price: "",
+                                            quantityFood: "",
+                                            id_Category: "",
+                                            id_Merchant: localStorage.getItem('idMerchant')
+                                        }}
+                                        validationSchema={validateSchema}
+                                        onSubmit={(values) => {
+                                            values.img = urls[0]
+                                            handleAdd(values);
+                                        }}
+                                    >
+                                        <Form>
+                                            <div className="row g-3">
+                                                <div className="col-12">
+                                                    <div className="form-floating">
+                                                        <label htmlFor="nameHome">NameFood</label>
+                                                        <Field type="text" class="form-control" name={'nameFood'}
+                                                               id="nameFood" placeholder=""/>
+                                                        <alert className="text-danger">
+                                                            <ErrorMessage name={"nameFood"}></ErrorMessage>
+                                                        </alert>
+                                                    </div>
+                                                </div>
+                                                <div className="col-12">
+                                                    <div className="form-floating">
+                                                        <label htmlFor="price">Price</label>
+                                                        <Field type="number" class="form-control" name={'price'}
+                                                               id="price" placeholder=""/>
+                                                    </div>
+                                                </div>
+                                                <div className="col-12">
+                                                    <div className="form-floating">
+                                                        <label htmlFor="description">Description</label>
+                                                        <Field as={'textarea'} class="form-control" name={'description'}
+                                                               id="description" placeholder=""
+                                                               style={{height: '150px'}}/>
+                                                        <alert className="text-danger">
+                                                            <ErrorMessage name={"description"}></ErrorMessage>
+                                                        </alert>
+                                                    </div>
+                                                </div>
+                                                <div className="col-12">
+                                                    <div className="form-floating">
+                                                        <label htmlFor="price">Quantity Food</label>
+                                                        <Field type="number" class="form-control" name={'quantityFood'}
+                                                               id="quantityFood" placeholder=""/>
+                                                    </div>
+                                                </div>
+                                                <div className="col-12">
+                                                    <label htmlFor="category">Category</label>
+                                                    <Field
+                                                        as="select"
+                                                        name={"id_Category"}
+                                                        className="form-control"
+                                                        id="id_Category"
+                                                    >
+                                                        <option selected>Category</option>
+                                                        {categories !== undefined &&
+                                                            categories.map((item, index) => (
+                                                                <option value={item.idCategory}>
+                                                                    {item.nameCategory}
+                                                                </option>
+                                                            ))}
+                                                    </Field>
+                                                </div>
+                                                <div className="col-md-6" style={{height:-100}}>
+                                                    <label htmlFor="exampleFormControlFile1">
+                                                    </label>
+                                                    <input
+                                                        type="file"
+                                                        className="form-control-file"
+                                                        id="exampleFormControlFile1"
+                                                        multiple
+                                                        onChange={handleChange}
+                                                    />
+                                                </div>
+                                                <div className="col-md-6" style={{marginTop: 30}}>
+                                                    <button
+                                                        type="button"
+                                                        className="btn btn-info"
+                                                        onClick={() => dispatch(handleUpload)}
+                                                    >
+                                                        Up
+                                                    </button>
+                                                </div>
+                                                <div className="col-12" style={{marginTop: 10}}>
+                                                    <button className="btn btn-info" type="submit">Add</button>
+                                                </div>
+                                            </div>
+                                        </Form>
+                                    </Formik>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <Formik
-                        initialValues={{
-                            nameFood: '',
-                            description: '',
-                            price: '',
-                            id_Category: '',
-                            id_Merchant: localStorage.getItem('idMerchant')
-                        }}
-                        onSubmit={(values) => {
-                            values.img = urls[0]
-                            handleAdd(values)
-                        }}>
-                        <Form>
-                            <div className="mb-3">
-                                <label htmlFor="exampleInput" className="form-label">Name product</label>
-                                <Field type="text" className="form-control" id="exampleInput" name={'name'}/>
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="exampleInput" className="form-label">Price</label>
-                                <Field type="number" className="form-control" id="exampleInput" name={'price'}/>
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="exampleInput" className="form-label">Description</label>
-                                <Field type="text" className="form-control" id="exampleInput" name={'description'}/>
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="exampleInput" className="form-label">Quantity</label>
-                                <Field type="number" className="form-control" id="exampleInput" name={'totalQuantity'}/>
-                            </div>
-                            <div className="ml-3 form-group">
-                                <label htmlFor="exampleInputPassword">Image</label>
-                                <br/>
-                                {urls.map(item => (
-                                    <>
-                                        <img src={item} alt="" style={{width: 50}}/></>
-                                ))}
-                                <br/>
-                                <input type='file' onChange={handleChange}>
-                                </input>
-                                <button className="btn btn-outline-success" style={{marginRight: 10}} type='button'
-                                        onClick={handleUpload}>Up
-                                </button>
-
-                            </div>
-                            <div className="mb-3">
-                                <Field
-                                    as="select"
-                                    name={"id_Category"}
-                                    className="form-control"
-                                    id="id_Category"
-                                >
-                                    <option selected>Category</option>
-                                    {categories !== undefined &&
-                                        categories.map((item, index) => (
-
-                                            <option value={item.idCategory}>
-                                                {item.nameCategory}
-                                            </option>
-                                        ))}
-
-                                </Field>
-                            </div>
-                            <button style={{marginBottom:50}} type="submit" className="btn btn-outline-primary">Add</button>
-                        </Form>
-                    </Formik>
                 </div>
+            </div>
             </div>
         </>
     )
