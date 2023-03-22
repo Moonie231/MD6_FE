@@ -2,7 +2,7 @@ import {Link, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {getProfile, logout} from "../service/merchantService";
 import {logoutUser} from "../service/userService";
-import {useEffect} from "react";
+import {useEffect, useRef} from "react";
 import {count} from "../service/orderService";
 
 export default function Header() {
@@ -21,6 +21,7 @@ export default function Header() {
     useEffect(()=>{
         window.scrollTo(0, 0);
         dispatch(count(localStorage.getItem('idOrder')))
+
     })
 
     return (

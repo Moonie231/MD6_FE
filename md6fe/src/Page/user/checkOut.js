@@ -49,7 +49,7 @@ export default function Checkout(){
             let info=[{...infoOne},user.idUser]
             dispatch(editProfile(info))
             swal("Order Success !!!");
-                navigate('/')
+                navigate('/users/my-order/'+localStorage.getItem('idUser'))
             }
         )
 
@@ -115,11 +115,10 @@ export default function Checkout(){
                                                     id="id_Address"
                                                     style={{width:'95%', float:'left'}}
                                                 >
-
+                                                    <option selected>Address</option>
                                                     {address !== undefined &&
                                                         address.map((item, index) => (
                                                             <>
-                                                                <option selected>{item.nameAddress}</option>
                                                                 <option  value={item.idAddress}>
                                                                     {item.nameAddress}
                                                                 </option>

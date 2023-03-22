@@ -1,6 +1,6 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import {getOrder, myOrder, orderFood, setStatusCancelled, setStatusSuccess} from "../../service/orderService";
 import FoodOfOrder from "./foodOfOrder";
 import swal from "sweetalert";
@@ -71,6 +71,20 @@ export default function MyOrder() {
                                         margin: 0,
                                         border: 0
                                     }}>
+                                        <div className="Zrxery" style={{
+                                            padding: '20px 24px',
+                                            fontSize: 14,
+                                            justifyContent: 'space-between',
+                                            alignItems: 'center'
+                                        }}>
+                                            <div className="K8h4Ws" style={{
+                                                color: 'rgba(0,0,0,.54)'
+                                            }}>
+                                            </div>
+                                            <div>
+                                                <span className="-XHRLL">{item.nameMerchant}</span>
+                                            </div>
+                                        </div>
                                         <FoodOfOrder id={item.idOrder}></FoodOfOrder>
                                         <div className=""></div>
                                     </div>
