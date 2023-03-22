@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom";
 import customAxios from "../../service/api";
 
-export default function FoodOfOrder({id}) {
+export default function FoodOfOrderMerchant({id}) {
     let {idUser} = useParams()
     const dispatch = useDispatch()
     const [foodOrder, setFoodOrder] = useState([])
@@ -30,7 +30,7 @@ export default function FoodOfOrder({id}) {
                         position: 'relative'
                     }}>
                     </div>
-                    <Link to={`/users/orderDetail/${id}`}>
+                    <Link to={`/merchants/orderDetail/${id}`}>
                     <span className="" style={{
                         display: 'flex',
                         wordWrap: 'break-word',

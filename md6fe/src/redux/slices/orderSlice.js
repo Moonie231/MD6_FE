@@ -37,7 +37,7 @@ const orderSlice = createSlice({
         });
 
         builder.addCase(getOrder.fulfilled, (state, action) => {
-            state.order = action.payload
+            state.orders = action.payload
         });
         builder.addCase(findByIdOrder.fulfilled, (state, action) => {
             state.order = action.payload

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 import {
     addAddress, deleteAddress, editAddress,
     editProfile,
@@ -12,12 +12,12 @@ import {
 import {deleteFood, editFood} from "../../service/foodsService";
 
 const initialState = {
-    currentUser: JSON.parse(localStorage.getItem('user')),
+    currentUser: localStorage.getItem('user') == 'undefined' ? {username: ''} : JSON.parse(localStorage.getItem('user')),
     user: [],
-    address:[],
+    address: [],
     profile: {},
-    role:false,
-    status:false
+    role: false,
+    status: false
 }
 
 const userSlice = createSlice({
@@ -35,8 +35,8 @@ const userSlice = createSlice({
             localStorage.getItem('idMerchant')
             state.status = true
             localStorage.setItem("status", state.status)
-            if(action.payload.role===2||action.payload.role==='2'){
-                state.role=true
+            if (action.payload.role === 2 || action.payload.role === '2') {
+                state.role = true
                 localStorage.setItem("role", state.role)
             }
         });
@@ -61,7 +61,7 @@ const userSlice = createSlice({
         })
         builder.addCase(logoutUser.fulfilled, (state, action) => {
             localStorage.clear()
-            state.role=false
+            state.role = false
             state.status = false
         });
         builder.addCase(getAddress.fulfilled, (state, action) => {
@@ -71,8 +71,8 @@ const userSlice = createSlice({
             state.user.push(action.payload)
         })
         builder.addCase(editAddress.fulfilled, (state, action) => {
-            for (let i =0; i<state.user.length; i++) {
-                if(action.payload.idAddress == state.user[i].idAddress) {
+            for (let i = 0; i < state.user.length; i++) {
+                if (action.payload.idAddress == state.user[i].idAddress) {
                     state.user[i] = action.payload;
                 }
             }
