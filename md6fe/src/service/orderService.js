@@ -46,7 +46,7 @@ export const deleteOrderDetail = createAsyncThunk(
     'orders/deleteOrderDetail',
     async (data) => {
         console.log(data)
-        const res = await customAxios.delete('orders/delete-cart/' + data[0]+'/'+data[1]);
+        const res = await customAxios.delete('orders/delete-cart/' +data);
         return res.data;
     }
 )

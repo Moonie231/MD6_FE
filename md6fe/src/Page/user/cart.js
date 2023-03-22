@@ -98,8 +98,7 @@ export default function Cart() {
                                                                                                       swal("Poof! Your imaginary file has been deleted!", {
                                                                                                           icon: "success",
                                                                                                       });
-                                                                                                      let data=[id,item.id_Food]
-                                                                                                      await dispatch(deleteOrderDetail(data)).then(() => {
+                                                                                                      await dispatch(deleteOrderDetail(item.idOrderdetail)).then(() => {
                                                                                                           navigate('/my-cart/' + id)
                                                                                                       })
                                                                                                       await dispatch(showCart(id))
