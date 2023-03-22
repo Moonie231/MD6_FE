@@ -1,7 +1,7 @@
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {editOrder, showCart} from "../../service/orderService";
+import {editOrder, showCart, updateQuantity} from "../../service/orderService";
 import {addAddress, editProfile, getAddress, getProfile} from "../../service/userService";
 import {Field, Form, Formik} from "formik";
 import swal from "sweetalert";
@@ -12,17 +12,13 @@ export default function Checkout(){
     const dispatch=useDispatch()
     const foods=useSelector((state)=>{
         let money=0;
-        let listIdMerchant=[]
         state.orders.order.map((item)=>{
             money += item.price;
-            listIdMerchant.push(item.id_Merchant)
         })
-        let set = new Set(listIdMerchant);
-        let new_arr = Array.from(set);
+
         let obj = {
             list: state.orders.order,
             sum:money,
-            listMerchant:new_arr
         }
         return obj
     })
@@ -44,7 +40,7 @@ export default function Checkout(){
             id
         ]
         dispatch(editOrder(data)).then(()=>{
-            console.log(value)
+            dispatch(updateQuantity(id))
             let infoOne={
                 username: value.username,
                 email: value.email,
@@ -119,13 +115,16 @@ export default function Checkout(){
                                                     id="id_Address"
                                                     style={{width:'95%', float:'left'}}
                                                 >
-                                                    <option selected>Address</option>
+
                                                     {address !== undefined &&
                                                         address.map((item, index) => (
+                                                            <>
+                                                                <option selected>{item.nameAddress}</option>
+                                                                <option  value={item.idAddress}>
+                                                                    {item.nameAddress}
+                                                                </option>
+                                                            </>
 
-                                                            <option  value={item.idAddress}>
-                                                                {item.nameAddress}
-                                                            </option>
                                                         ))}
                                                 </Field>
 
@@ -166,13 +165,13 @@ export default function Checkout(){
                                                 <div className="col-lg-6">
                                                     <div className="checkout__input">
                                                         <p>Phone<span>*</span></p>
-                                                        <Field type="text" name={'phone'}/>
+                                                        <Field type="text" name={'phone'} disabled/>
                                                     </div>
                                                 </div>
                                                 <div className="col-lg-6">
                                                     <div className="checkout__input">
                                                         <p>Email<span>*</span></p>
-                                                        <Field type="text" name={'email'}/>
+                                                        <Field type="text" name={'email'} disabled/>
                                                     </div>
                                                 </div>
                                             </div>
