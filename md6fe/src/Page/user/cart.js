@@ -81,10 +81,8 @@ export default function Cart() {
                                                                         <h6>{item.quantity}</h6>
                                                                     </div>
                                                                 </div>
-
-
                                                     </td>
-                                                    <td className="cart__price">$ {item.price}</td>
+                                                    <td className="cart__price">${item.price}</td>
                                                     <td className="cart__close"><span className="icon_close"
                                                                                       onClick={() => {
                                                                                           swal({
