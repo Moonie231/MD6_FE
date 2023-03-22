@@ -115,13 +115,16 @@ export default function Checkout(){
                                                     id="id_Address"
                                                     style={{width:'95%', float:'left'}}
                                                 >
-                                                    <option selected>Address</option>
+
                                                     {address !== undefined &&
                                                         address.map((item, index) => (
+                                                            <>
+                                                                <option selected>{item.nameAddress}</option>
+                                                                <option  value={item.idAddress}>
+                                                                    {item.nameAddress}
+                                                                </option>
+                                                            </>
 
-                                                            <option  value={item.idAddress}>
-                                                                {item.nameAddress}
-                                                            </option>
                                                         ))}
                                                 </Field>
 
@@ -162,13 +165,13 @@ export default function Checkout(){
                                                 <div className="col-lg-6">
                                                     <div className="checkout__input">
                                                         <p>Phone<span>*</span></p>
-                                                        <Field type="text" name={'phone'}/>
+                                                        <Field type="text" name={'phone'} disabled/>
                                                     </div>
                                                 </div>
                                                 <div className="col-lg-6">
                                                     <div className="checkout__input">
                                                         <p>Email<span>*</span></p>
-                                                        <Field type="text" name={'email'}/>
+                                                        <Field type="text" name={'email'} disabled/>
                                                     </div>
                                                 </div>
                                             </div>

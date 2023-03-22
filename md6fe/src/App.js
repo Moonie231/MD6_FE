@@ -26,6 +26,7 @@ import MyOrder from "./Page/user/myOrder";
 import ManagerOrder from "./Page/merchant/managerOrder";
 import StatisticsByTime from "./Page/shopMerchant/statisticsByTime";
 import OrderDetail from "./Page/user/orderDetail";
+import OrderDetailMerchant from "./Page/merchant/orderDetail";
 
 
 function App() {
@@ -50,25 +51,23 @@ function App() {
                 <Route path={`food/:idFood`} element={<Food/>}/>
                 <Route path={'merchants'}>
                     <Route path={`:idMerchant`} element={<ProfileMerchant></ProfileMerchant>}></Route>
-                    <Route path={'my-shop/:idMerchant'} element={<ShopMerchant/>}>
-                    </Route>
+                    <Route path={'my-shop/:idMerchant'} element={<ShopMerchant/>}></Route>
                     <Route path={`manager-order/:idMerchant`} element={<ManagerOrder/>}/>
-                    <Route path={'statistics/:id'} element={<StatisticsByUser/>}>
-                    </Route>
-                    <Route path={'statistics-by-time/:id'} element={<StatisticsByTime/>}>
-                    </Route>
+                    <Route path={'statistics/:id'} element={<StatisticsByUser/>}></Route>
+                    <Route path={'statistics-by-time/:id'} element={<StatisticsByTime/>}></Route>
+                    <Route path={'orderDetail/:idOrder'} element={<OrderDetailMerchant/>}></Route>
                 </Route>
                 <Route path={'users'}>
                     <Route path={`:idUser`} element={<ProfileUser></ProfileUser>}></Route>
                     <Route path={`my-order/:idUser`} element={<MyOrder></MyOrder>}></Route>
-                        <Route path={`address/:idUser`} element={<Address></Address>}></Route>>
+                    <Route path={`address/:idUser`} element={<Address></Address>}></Route>
+                    <Route path={'orderDetail/:idOrder'} element={<OrderDetail/>}></Route>
                 </Route>
                 <Route path={'admin'}>
                     <Route path={'merchant-active'} element={<MerchantActive></MerchantActive>}></Route>
                     <Route path={'merchant-pending'} element={<MerchantPending></MerchantPending>}></Route>
                     <Route path={'merchant/:idMerchant'} element={<Merchant></Merchant>}></Route>
                 </Route>
-                <Route path={'orderDetail/:idOrder'} element={<OrderDetail></OrderDetail>}></Route>
                 <Route path={'*'} element={<Home/>}></Route>
             </Routes>
             <Footer></Footer>
