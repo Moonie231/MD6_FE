@@ -143,6 +143,7 @@ export default function ManagerOrder() {
                             }}>
                                 {item.status === 'pending' && <>
                                     <div  style={{
+                                        cursor: 'pointer',
                                         justifyContent: 'flex-end',
                                         border: 0,
                                         background: '#ee4d2d',
@@ -178,6 +179,7 @@ export default function ManagerOrder() {
                                         Confirm
                                     </div>
                                     <div style={{
+                                       cursor: 'pointer',
                                         justifyContent: 'flex-end',
                                         border: 0,
                                         background: '#ee4d2d',
