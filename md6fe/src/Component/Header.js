@@ -19,6 +19,7 @@ export default function Header() {
     })
 
     useEffect(()=>{
+        window.scrollTo(0, 0);
         dispatch(count(localStorage.getItem('idOrder')))
     })
 

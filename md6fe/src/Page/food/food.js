@@ -30,15 +30,7 @@ export default function Food() {
                                 <h5>${food.price}</h5>
                                 <p>Quantity: {food.quantityFood}</p>
                                 <p>Desciption: {food.description}</p>
-                                <div className="product__details__option">
-                                    <div className="quantity">
-                                        <div className="pro-qty">
-                                            <input type="text" value="" placeholder='so luong de add to cart'/>
-                                        </div>
-                                    </div>
-                                    <a href="#" className="primary-btn">Add to cart</a>
-                                    <a href="#" className="heart__btn"><span className="icon_heart_alt"></span></a>
-                                </div>
+
                             </div>
                         </div>
                     </div>
