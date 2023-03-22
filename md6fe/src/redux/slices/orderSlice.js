@@ -6,7 +6,7 @@ import {
     findByIdOrder, getOrder,
     myOrder, orderDetail,
     orderFood, searchOrder, setStatusCancelled, setStatusConfirm, setStatusSuccess,
-    showCart
+    showCart, updateQuantity
 } from "../../service/orderService";
 
 const initialState = {
@@ -64,6 +64,8 @@ const orderSlice = createSlice({
         })
         builder.addCase(count.fulfilled, (state, action) => {
             state.count=action.payload
+        });
+        builder.addCase(updateQuantity.fulfilled, (state, action) => {
         });
     },
 });

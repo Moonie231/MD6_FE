@@ -81,10 +81,8 @@ export default function Cart() {
                                                                         <h6>{item.quantity}</h6>
                                                                     </div>
                                                                 </div>
-
-
                                                     </td>
-                                                    <td className="cart__price">$ {item.price}</td>
+                                                    <td className="cart__price">${item.price}</td>
                                                     <td className="cart__close"><span className="icon_close"
                                                                                       onClick={() => {
                                                                                           swal({
@@ -100,7 +98,8 @@ export default function Cart() {
                                                                                                       swal("Poof! Your imaginary file has been deleted!", {
                                                                                                           icon: "success",
                                                                                                       });
-                                                                                                      await dispatch(deleteOrderDetail(item.idOrderdetail)).then(() => {
+                                                                                                      let data=[id,item.id_Food]
+                                                                                                      await dispatch(deleteOrderDetail(data)).then(() => {
                                                                                                           navigate('/my-cart/' + id)
                                                                                                       })
                                                                                                       await dispatch(showCart(id))

@@ -12,7 +12,6 @@ export default function FoodOfOrder({id}) {
 
     useEffect(() => {
         customAxios.get('/orders/my-order-food/' + id).then(res => {
-            console.log(res.data)
             setFoodOrder(res.data)
         })
     }, [])
