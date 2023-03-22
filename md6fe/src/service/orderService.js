@@ -110,6 +110,7 @@ export const count = createAsyncThunk(
         const res = await customAxios.get('orders/countCart/' + data)
         return res.data
     })
+
 export const updateQuantity = createAsyncThunk(
     'order/updateQuantity',
     async (data) => {

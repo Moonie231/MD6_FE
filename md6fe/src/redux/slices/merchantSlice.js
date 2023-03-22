@@ -64,7 +64,6 @@ const merchantSlice = createSlice({
             localStorage.clear()
         });
         builder.addCase(getMerchantActive.fulfilled, (state, action) => {
-            console.log(1)
             state.merchant = action.payload;
         });
         builder.addCase(getMerchantPending.fulfilled, (state, action) => {
