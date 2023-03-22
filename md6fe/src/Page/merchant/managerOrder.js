@@ -20,7 +20,9 @@ export default function ManagerOrder() {
     console.log(order)
 
     const handleSearch = (values) => {
-        dispatch(searchOrder(values));
+        let data = [values, idMerchant]
+        console.log(data)
+        dispatch(searchOrder(data));
 
     }
     useEffect(() => {
