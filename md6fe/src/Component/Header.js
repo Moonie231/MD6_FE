@@ -110,6 +110,7 @@ export default function Header() {
                                         <li><a href="#">{merchant.nameMerchant}</a>
                                             <ul className="dropdown">
                                                 <li><Link to={`/merchants/${merchant.idMerchant}`}>Profile</Link></li>
+                                                <li><Link to={`/merchants/my-coupon/${merchant.idMerchant}`}>My Coupon</Link></li>
                                                 <li><a href="" onClick={(e) => {
                                                     dispatch(logout())
                                                     navigate('/login-merchant')
@@ -120,6 +121,7 @@ export default function Header() {
                                     {localStorage.getItem('role') === true || localStorage.getItem('role') === 'true' && <>
                                         <li><Link to={'/admin/merchant-active'}>Merchant Active</Link></li>
                                         <li><Link to={'/admin/merchant-pending'}>Merchant Pending</Link></li>
+                                        <li><Link to={'/admin/coupon'}>Coupon</Link></li>
                                     </>}
                                     {localStorage.getItem('status') === true || localStorage.getItem('status') === 'true' && <>
                                         <li><a href="#">{user.username}</a>

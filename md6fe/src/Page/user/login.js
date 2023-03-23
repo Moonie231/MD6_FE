@@ -37,7 +37,10 @@ export default function LoginUser() {
 
     return (
         <>
+
+
             <body>
+
             <section className="h-100 gradient-form" style={{backgroundColor: ''}}>
                 <div className="container py-5 h-100">
                     <div className="row d-flex justify-content-center align-items-center h-100">
@@ -48,7 +51,7 @@ export default function LoginUser() {
                                         <div className="card-body p-md-5 mx-md-4">
 
                                             <div className="text-center">
-                                                <img src="/img/logo.png" alt=""/>
+                                                <img src="/img/loginBuyer.jpg" alt=""/>
                                                 <h4 className="mt-1 mb-5 pb-1"></h4>
                                             </div>
                                             <Formik initialValues={{
@@ -95,7 +98,7 @@ export default function LoginUser() {
                                         </div>
                                     </div>
                                     <div className="col-lg-6 d-flex align-items-center gradient-custom-2">
-                                        <img style={{width: '459px', height: '100%'}} src="/img/fish-and-chips.jpeg" alt=""/>
+                                        <img style={{width: '459px', height: '100%'}} src="/img/hamburger.jpg" alt=""/>
                                         <div className="text-white px-3 py-4 p-md-5 mx-md-4">
                                         </div>
                                     </div>

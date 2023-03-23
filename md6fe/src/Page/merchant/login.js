@@ -48,7 +48,7 @@ export default function LoginMerchant() {
                                         <div className="card-body p-md-5 mx-md-4">
 
                                             <div className="text-center">
-                                                <img src="/img/logo.png" alt=""/>
+                                                <img src="/img/loginMerchant.jpg" alt=""/>
                                                 <h4 className="mt-1 mb-5 pb-1"></h4>
                                             </div>
                                             <Formik initialValues={{
@@ -101,7 +101,7 @@ export default function LoginMerchant() {
                                         </div>
                                     </div>
                                     <div className="col-lg-6 d-flex align-items-center gradient-custom-2">
-                                        <img style={{width: '459px', height: '100%'}} src="/img/fish-and-chips.jpeg"
+                                        <img style={{width: '459px', height: '100%'}} src="/img/sandwich.jpg"
                                              alt=""/>
                                         <div className="text-white px-3 py-4 p-md-5 mx-md-4">
                                         </div>
