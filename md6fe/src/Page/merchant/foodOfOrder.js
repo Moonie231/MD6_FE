@@ -15,7 +15,7 @@ export default function FoodOfOrderMerchant({id}) {
             console.log(1)
             setFoodOrder(res.data)
         })
-    }, [])
+    }, [id])
 
     return (
         <>

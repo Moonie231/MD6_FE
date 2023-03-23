@@ -6,6 +6,7 @@ import FoodOfOrder from "./foodOfOrder";
 import swal from "sweetalert";
 import {getMerchantActive, setStatus} from "../../service/merchantService";
 import {getFoods} from "../../service/foodsService";
+import {saveNotification} from "../../service/notificationService";
 
 export default function MyOrder() {
     const {idUser} = useParams()
@@ -131,6 +132,12 @@ export default function MyOrder() {
                                         })
                                             .then(async (willCancelled) => {
                                                 if (willCancelled) {
+                                                    let data={
+                                                        id_User:localStorage.getItem('idUser'),
+                                                        id_Order:item.idOrder,
+                                                        setStatus:'cancelled',
+                                                    }
+                                                    await dispatch(saveNotification(data))
                                                     await dispatch(setStatusCancelled(item.idOrder)).then(async () => {
                                                         let data=[idUser,page1]
                                                         await dispatch(myOrder(data)).then(() => {
@@ -168,6 +175,12 @@ export default function MyOrder() {
                                         })
                                             .then(async (willSuccess) => {
                                                 if (willSuccess) {
+                                                    let data={
+                                                        id_User:localStorage.getItem('idUser'),
+                                                        id_Order:item.idOrder,
+                                                        setStatus:'success',
+                                                    }
+                                                    await dispatch(saveNotification(data))
                                                     await dispatch(setStatusSuccess(item.idOrder)).then(async () => {
                                                         let data=[idUser,page1]
                                                         await dispatch(myOrder(data)).then(() => {

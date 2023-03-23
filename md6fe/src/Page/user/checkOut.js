@@ -5,6 +5,7 @@ import {editOrder, showCart, updateQuantity} from "../../service/orderService";
 import {addAddress, editProfile, getAddress, getProfile} from "../../service/userService";
 import {Field, Form, Formik} from "formik";
 import swal from "sweetalert";
+import {saveNotification} from "../../service/notificationService";
 
 export default function Checkout(){
     const navigate=useNavigate()
@@ -40,6 +41,12 @@ export default function Checkout(){
             id
         ]
         dispatch(editOrder(data)).then(()=>{
+            let data={
+                id_User:localStorage.getItem('idUser'),
+                id_Order:id,
+                setStatus:'pending',
+            }
+             dispatch(saveNotification(data))
             dispatch(updateQuantity(id))
             let infoOne={
                 username: value.username,
