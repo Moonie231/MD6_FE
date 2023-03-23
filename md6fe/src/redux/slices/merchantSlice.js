@@ -38,7 +38,6 @@ const merchantSlice = createSlice({
     extraReducers: builder => {
         builder.addCase(login.fulfilled, (state, action) => {
             state.currentMerchant = action.payload
-            console.log(typeof action.payload)
             localStorage.setItem("access-token", action.payload.token)
             localStorage.setItem("idMerchant",action.payload.idMerchant)
             localStorage.setItem("merchant", JSON.stringify(action.payload))

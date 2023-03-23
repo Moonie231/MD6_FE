@@ -6,18 +6,18 @@ import swal from "sweetalert";
 import {Field, Form, Formik} from "formik";
 import FoodOfOrder from "../merchant/foodOfOrder";
 import FoodOfOrderMerchant from "../merchant/foodOfOrder";
+import {saveNotification} from "../../service/notificationService";
+import {setStatus} from "../../service/merchantService";
 
 
 export default function ManagerOrder() {
     const {idMerchant} = useParams()
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
     const order = useSelector(state => {
         return state.orders.orders
     })
 
-    console.log(order)
 
     const handleSearch = (values) => {
         dispatch(searchOrder(values));
@@ -162,8 +162,13 @@ export default function ManagerOrder() {
                                              })
                                                  .then(async (willConfirm) => {
                                                      if (willConfirm) {
-                                                         console.log(item.idOrder)
                                                          await dispatch(setStatusConfirm(item.idOrder)).then(async () => {
+                                                             let data={
+                                                                 id_User:item.idUser,
+                                                                 id_Order:item.idOrder,
+                                                                 setStatus:'delivery'
+                                                             }
+                                                             await dispatch(saveNotification(data))
                                                              await dispatch(getOrder(idMerchant)).then(() => {
                                                                  navigate('/merchants/manager-order/' + idMerchant)
                                                              })
@@ -197,6 +202,12 @@ export default function ManagerOrder() {
                                         })
                                             .then(async (willCancelled) => {
                                                 if (willCancelled) {
+                                                    let data={
+                                                        id_User:item.idUser,
+                                                        id_Order:item.idOrder,
+                                                        setStatus:'cancelled',
+                                                    }
+                                                    await dispatch(saveNotification(data))
                                                     await dispatch(setStatusCancelled(item.idOrder)).then(async () => {
                                                         await dispatch(getOrder(idMerchant)).then(() => {
                                                             navigate('/merchants/manager-order/' + idMerchant)
