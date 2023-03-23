@@ -213,12 +213,12 @@ export default function Coupon () {
                                                                                 fontSize: 'var(--vc-main-title-font-size,1rem)',
                                                                                 fontWeight: 500,
                                                                                 lineHeight: 'var(--vc-main-title-line-height,1.25rem)'
-                                                                            }}>Discount {item.value}
+                                                                            }}>Discount {item.value + "%"}
                                                                         </div>
                                                                     </div>
                                                                     <div
                                                                         className="vc_Subtitle_subTitle vc_Subtitle_defaultLine"
-                                                                    >{item.value} discount on food
+                                                                    >{item.value}% discount on food
                                                                     </div>
                                                                 </div>
                                                                 <div className="vc_VoucherStandardTemplate_right"

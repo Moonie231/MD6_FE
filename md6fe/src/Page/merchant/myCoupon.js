@@ -214,21 +214,12 @@ export default function MyCoupon() {
                                                                                 fontSize: 'var(--vc-main-title-font-size,1rem)',
                                                                                 fontWeight: 500,
                                                                                 lineHeight: 'var(--vc-main-title-line-height,1.25rem)'
-                                                                            }}>Discount {item.value}
+                                                                            }}>Discount {item.value}%
                                                                         </div>
                                                                     </div>
                                                                     <div
                                                                         className="vc_Subtitle_subTitle vc_Subtitle_defaultLine"
-                                                                        // style={{
-                                                                        // fontSize: var(--vc-subtitle-font-size,.875rem);
-                                                                        // font-weight: var(--vc-subtitle-font-weight,normal);
-                                                                        // line-height: var(--vc-subtitle-line-height,1rem);
-                                                                        // margin: var(--vc-sub-title-margin,0);
-                                                                        // padding: var(--vc-sub-title-padding,0);
-                                                                        // text-align: var(--vc-subtitle-text-align,unset);
-                                                                        // white-space: var(--vc-sub-title-white-space,unset);
-                                                                        // word-break: break-word
-                                                                    >{item.value} discount on food
+                                                                    >{item.value}% discount on food
                                                                     </div>
                                                                 </div>
                                                                 <div className="vc_VoucherStandardTemplate_right"

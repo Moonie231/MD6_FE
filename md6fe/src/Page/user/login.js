@@ -20,7 +20,6 @@ export default function LoginUser() {
     const navigate = useNavigate();
     const handleLogin = async (values) => {
         await dispatch(login(values)).then((e) => {
-            console.log(e.payload)
             if (e.payload === "Account not ready") {
                 swal("Account not ready");
             } else if (e.payload === "User not found") {
