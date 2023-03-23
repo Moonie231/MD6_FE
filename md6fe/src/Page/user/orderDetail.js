@@ -117,7 +117,7 @@ export default function OrderDetail() {
                                                 fontWeight: 700,
                                                 paddingLeft: 170,
                                                 cursor: 'pointer'
-                                            }}>{order.Date}</p>
+                                            }}>{new Date(order.Date).toLocaleString()}</p>
                                         </div>
                                     </div>
                                 </div>
