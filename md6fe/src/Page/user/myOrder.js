@@ -1,35 +1,35 @@
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams, useSearchParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect} from "react";
 import {getOrder, myOrder, orderFood, setStatusCancelled, setStatusSuccess} from "../../service/orderService";
 import FoodOfOrder from "./foodOfOrder";
 import swal from "sweetalert";
 import {getMerchantActive, setStatus} from "../../service/merchantService";
+import {getFoods} from "../../service/foodsService";
 
 export default function MyOrder() {
     const {idUser} = useParams()
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const order = useSelector((state) => {
-        let list = []
-        state.orders.orders.map((item) => {
-            list.push(item.idOrder)
-
-        })
-        let obj = {
-            list: state.orders.orders,
-            listIdOrder: list
+     return state.orders.orders.order
+    })
+    const [page, setPage] = useSearchParams()
+    const page1 = page.get('page') || 1;
+    const totalPages = useSelector(state => {
+        if (state.orders.orders !== undefined) {
+            return state.orders.orders.totalPage;
         }
-        return obj
     })
     useEffect(() => {
-        dispatch(myOrder(idUser)).then((e) => {
+        let data=[idUser,Number(page1)]
+        dispatch(myOrder(data)).then((e) => {
         })
     }, [])
     return (
         <>
             <div className="container" style={{backgroundColor: 'lightgray'}}>
-                {order.list.map((item, index) => (
+                {order!==undefined && order.map((item, index) => (
                     <div key={index} className="" style={{
                         margin: '12px 0',
                         boxShadow: '0 1px 1px 0 rgb(0 0 0 / 5%)',
@@ -132,7 +132,8 @@ export default function MyOrder() {
                                             .then(async (willCancelled) => {
                                                 if (willCancelled) {
                                                     await dispatch(setStatusCancelled(item.idOrder)).then(async () => {
-                                                        await dispatch(myOrder(idUser)).then(() => {
+                                                        let data=[idUser,page1]
+                                                        await dispatch(myOrder(data)).then(() => {
                                                             navigate('/users/my-order/' + idUser)
                                                         })
                                                     })
@@ -168,7 +169,8 @@ export default function MyOrder() {
                                             .then(async (willSuccess) => {
                                                 if (willSuccess) {
                                                     await dispatch(setStatusSuccess(item.idOrder)).then(async () => {
-                                                        await dispatch(myOrder(idUser)).then(() => {
+                                                        let data=[idUser,page1]
+                                                        await dispatch(myOrder(data)).then(() => {
                                                             navigate('/users/my-order/' + idUser)
                                                         })
                                                     })
@@ -200,6 +202,54 @@ export default function MyOrder() {
                 ))}
 
             </div>
+            <nav aria-label="Page navigation example">
+                <ul className="pagination justify-content-center">
+                    <li className="page-item">
+                        {(page1 === 1) ?
+                            <>
+                                <div className="page-link"><span aria-hidden="true"
+                                                                 style={{color: 'black'}}>&laquo;</span>
+                                </div>
+                            </>
+                            :
+                            <>
+                                <div className="page-link" onClick={() => {
+                                    let data=[idUser,Number(page1-1)]
+                                    if(Number(page1-1)>0){
+                                        dispatch(myOrder(data));
+                                        navigate('/users/my-order/' + data[0]+'?page='+data[1])
+                                    }
+                                }
+                                }><span aria-hidden="true">&laquo;</span>
+                                </div>
+                            </>
+                        }
+                    </li>
+                    <li className="page-item"><a className="page-link">{page1}/{totalPages}</a></li>
+                    <li className="page-item">
+                        {(page1 === totalPages) ?
+                            <>
+                                <div className="page-link"><span aria-hidden="true"
+                                                                 style={{color: 'black'}}>&raquo;</span>
+                                </div>
+                            </>
+                            :
+                            <>
+                                <div className="page-link" onClick={() => {
+                                    if((Number(page1)+1)<=totalPages){
+                                        let data=[idUser,(Number(page1)+1)]
+                                        dispatch(myOrder(data));
+                                        navigate('/users/my-order/' + data[0]+'?page='+data[1])
+                                    }
+                                }
+                                }><span aria-hidden="true">&raquo;</span>
+                                </div>
+                            </>
+                        }
+                    </li>
+                </ul>
+            </nav>
+
         </>
     )
 }

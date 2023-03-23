@@ -118,11 +118,11 @@ export default function StatisticsByUser() {
         },
         responsive: true,
         maintainAspectRatio: false,
-        barThickness: 150
+        barThickness: 70
     }
     return (
         <>
-            <div style={{textAlign:'center',marginTop:10}}>
+            <div  style={{textAlign:'center',marginTop:80}}>
                 <button className="btn btn-dark" onClick={()=>{
                     setStatusWeek(!statusWeek)
                     setStatusMonth(false)
@@ -143,7 +143,7 @@ export default function StatisticsByUser() {
                 }>Food</button>
             </div>
             {statusWeek &&
-                <div className="container">
+                <div className="container" style={{height:630}}>
                     <h4>Statistics User</h4>
                     <h4>Total:{statisticsUser.sum}</h4>
                     <div>
@@ -155,7 +155,7 @@ export default function StatisticsByUser() {
 
             }
             {statusMonth &&
-                <div className="container">
+                <div className="container" style={{height:630}}>
                     <h4>Statistics Status</h4>
                     <div>
                         <Bar style={{height:500}} data={dataStatus}
@@ -166,7 +166,7 @@ export default function StatisticsByUser() {
 
             }
             {statusYear &&
-                <div className="container">
+                <div className="container" style={{height:630}}>
                     <h4  >Statistics Food</h4>
                     <div>
                         <Bar style={{height:500}} data={dataFood}
