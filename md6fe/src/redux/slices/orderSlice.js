@@ -33,9 +33,7 @@ const orderSlice = createSlice({
         builder.addCase(editOrder.fulfilled, (state, action) => {
             localStorage.setItem("idOrder", action.payload.idOrder);
             localStorage.setItem("idMerchant", null);
-
         });
-
         builder.addCase(getOrder.fulfilled, (state, action) => {
             state.orders = action.payload
         });
@@ -60,7 +58,7 @@ const orderSlice = createSlice({
         builder.addCase(setStatusSuccess.fulfilled, (state, action) => {
         });
         builder.addCase(searchOrder.fulfilled, (state, action) => {
-            state.orders = action.payload.order;
+            state.orders = action.payload;
         })
         builder.addCase(count.fulfilled, (state, action) => {
             state.count=action.payload

@@ -6,19 +6,23 @@ import swal from "sweetalert";
 import {Field, Form, Formik} from "formik";
 import FoodOfOrder from "../merchant/foodOfOrder";
 import FoodOfOrderMerchant from "../merchant/foodOfOrder";
+import {saveNotification} from "../../service/notificationService";
+import {setStatus} from "../../service/merchantService";
 
 
 export default function ManagerOrder() {
     const {idMerchant} = useParams()
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
     const order = useSelector(state => {
         return state.orders.orders
     })
 
+
     const handleSearch = (values) => {
-        dispatch(searchOrder([values,idMerchant]));
+        let data = [values, idMerchant]
+        console.log(data)
+        dispatch(searchOrder(data));
 
     }
     useEffect(() => {
@@ -56,172 +60,304 @@ export default function ManagerOrder() {
                         </div>
                     </div>
                 </div>
-                {order && order.map((item, index) => (
-                    <div key={index} className="" style={{
-                        margin: '12px 0',
-                        boxShadow: '0 1px 1px 0 rgb(0 0 0 / 5%)',
-                        borderRadius: '0.125rem',
-                    }}>
-                        <div>
-                            <div className="" style={{
-                                paddingTop: 24,
-                                padding: '12px 24px',
-                                background: '#fff'
-                            }}>
+                <div className="_0obGFe" style={{
+                    width: '100%',
+                    marginBottom: 12,
+                    display: 'flex',
+                    overflow: 'hidden',
+                    position: 'sticky',
+                    top: 0,
+                    zIndex: 10,
+                    background: '#fff',
+                    borderTopLeftRadius: 2,
+                    textTransform: 'uppercase',
+                    borderTopRightRadius: 2
+                }}>
 
+                    <Link className="vAkdD0 r-S3nG" style={{
+                        cursor: 'pointer',
+                        userSelect: 'none',
+                        padding: '16px 0',
+                        fontSize: 16,
+                        textAlign: 'center',
+                        color: 'rgba(0,0,0,.8)',
+                        background: '#fff',
+                        borderBottom: '2px solid rgba(0,0,0,.09)',
+                        display: 'flex',
+                        flex: 1,
+                        overflow: 'hidden',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }} onClick={{
+                        borderColor: '#ee4d2d',
+                        color: '#ee4d2d'
+                    }}>
+                        <p className="_0rjE9m" style={{
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap',
+                        }}>pending</p>
+                    </Link>
+                    <Link className="vAkdD0 r-S3nG" style={{
+                        cursor: 'pointer',
+                        userSelect: 'none',
+                        padding: '16px 0',
+                        fontSize: 16,
+                        textAlign: 'center',
+                        color: 'rgba(0,0,0,.8)',
+                        background: '#fff',
+                        borderBottom: '2px solid rgba(0,0,0,.09)',
+                        display: 'flex',
+                        flex: 1,
+                        overflow: 'hidden',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }} onClick={{
+                        borderColor: '#ee4d2d',
+                        color: '#ee4d2d'
+                    }}>
+                                <span className="_0rjE9m" style={{
+                                    overflow: 'hidden',
+                                    textOverflow: 'ellipsis',
+                                    whiteSpace: 'nowrap',
+                                }}>delivery</span>
+                    </Link>
+                    <Link className="vAkdD0 r-S3nG" style={{
+                        cursor: 'pointer',
+                        userSelect: 'none',
+                        padding: '16px 0',
+                        fontSize: 16,
+                        textAlign: 'center',
+                        color: 'rgba(0,0,0,.8)',
+                        background: '#fff',
+                        borderBottom: '2px solid rgba(0,0,0,.09)',
+                        display: 'flex',
+                        flex: 1,
+                        overflow: 'hidden',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }}
+                          onClick={{
+                              borderColor: '#ee4d2d',
+                              color: '#ee4d2d'
+                          }}>
+                                <span className="_0rjE9m" style={{
+                                    overflow: 'hidden',
+                                    textOverflow: 'ellipsis',
+                                    whiteSpace: 'nowrap',
+                                }}>success</span>
+                    </Link>
+                    <Link className="vAkdD0 r-S3nG" style={{
+                        cursor: 'pointer',
+                        userSelect: 'none',
+                        padding: '16px 0',
+                        fontSize: 16,
+                        textAlign: 'center',
+                        color: 'rgba(0,0,0,.8)',
+                        background: '#fff',
+                        borderBottom: '2px solid rgba(0,0,0,.09)',
+                        display: 'flex',
+                        flex: 1,
+                        overflow: 'hidden',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }}
+                          onClick={{
+                              borderColor: '#ee4d2d',
+                              color: '#ee4d2d'
+                          }}>
+                                <span className="_0rjE9m" style={{
+                                    overflow: 'hidden',
+                                    textOverflow: 'ellipsis',
+                                    whiteSpace: 'nowrap',
+                                }}>cancelled</span>
+                    </Link>
+                </div>
+                {order && order.map((item, index) => (
+                    <>
+
+                        <div key={index} className="" style={{
+                            margin: '12px 0',
+                            boxShadow: '0 1px 1px 0 rgb(0 0 0 / 5%)',
+                            borderRadius: '0.125rem',
+                        }}>
+                            <div>
                                 <div className="" style={{
-                                    padding: '0 0 0px',
-                                    justifyContent: 'space-between',
-                                    display: 'flex',
-                                    alignItems: 'center'
+                                    paddingTop: 24,
+                                    padding: '12px 24px',
+                                    background: '#fff'
                                 }}>
+
                                     <div className="" style={{
-                                        padding: '0 0 0 10px',
+                                        padding: '0 0 0px',
+                                        justifyContent: 'space-between',
                                         display: 'flex',
                                         alignItems: 'center'
                                     }}>
+                                        <div className="" style={{
+                                            padding: '0 0 0 10px',
+                                            display: 'flex',
+                                            alignItems: 'center'
+                                        }}>
+                                        </div>
+                                        <div className="" style={{
+                                            color: '#ee4d2d',
+                                            textAlign: 'right',
+                                            textTransform: 'uppercase',
+                                            whiteSpace: 'nowrap',
+                                        }}>{item.status}
+                                        </div>
+
+                                    </div>
+                                    <div className="" style={{
+                                        borderBottom: '1px solid rgba(0,0,0,.09)',
+                                    }}></div>
+                                    <div className="">
+                                        <div className="" style={{
+                                            margin: 0,
+                                            border: 0
+                                        }}>
+                                            <div className="Zrxery" style={{
+                                                padding: '20px 24px',
+                                                fontSize: 14,
+                                                justifyContent: 'space-between',
+                                                alignItems: 'center'
+                                            }}>
+                                                <div className="K8h4Ws" style={{
+                                                    color: 'rgba(0,0,0,.54)'
+                                                }}>
+                                                </div>
+                                                <div>
+                                                    <span className="-XHRLL">{item.username}</span>
+                                                </div>
+                                            </div>
+                                            <FoodOfOrderMerchant id={item.idOrder}></FoodOfOrderMerchant>
+
+                                            <div className=""></div>
+                                        </div>
+                                    </div>
+                                    <div className=""></div>
+                                </div>
+
+                            </div>
+                            <div className="" style={{
+                                width: '100%',
+                                height: 0,
+                                borderBottom: '1px dotted rgba(0,0,0,.09)',
+                                position: 'relative'
+                            }}>
+                            </div>
+                            <div className="" style={{
+                                padding: '24px 24px 12px',
+                                background: '#fffefb',
+                            }}>
+
+
+                                <div className="" style={{
+                                    display: 'flex',
+                                    justifyContent: 'flex-end',
+                                    alignItems: 'center'
+                                }}>
+                                    {item.status === 'pending' && <>
+                                        <div style={{
+                                            cursor: 'pointer',
+                                            justifyContent: 'flex-end',
+                                            border: 0,
+                                            background: '#ee4d2d',
+                                            outline: 'none',
+                                            padding: 4,
+                                            color: 'white',
+                                            textTransform: 'none',
+                                            overflow: 'visible',
+                                            marginRight: 10
+                                        }}
+                                             onClick={() => {
+                                                 swal({
+                                                     title: "Are you sure?",
+                                                     icon: "warning",
+                                                     buttons: true,
+                                                     dangerMode: true,
+                                                 })
+                                                     .then(async (willConfirm) => {
+                                                         if (willConfirm) {
+                                                             await dispatch(setStatusConfirm(item.idOrder)).then(async () => {
+                                                                 let data = {
+                                                                     id_User: item.idUser,
+                                                                     id_Order: item.idOrder,
+                                                                     setStatus: 'delivery'
+                                                                 }
+                                                                 await dispatch(saveNotification(data))
+                                                                 await dispatch(getOrder(idMerchant)).then(() => {
+                                                                     navigate('/merchants/manager-order/' + idMerchant)
+                                                                 })
+                                                             })
+                                                             swal("Your account has been active!", {
+                                                                 icon: "success",
+                                                             });
+                                                         } else {
+                                                             swal("Your account is safe!");
+                                                         }
+                                                     });
+                                             }}>
+                                            Confirm
+                                        </div>
+                                        <div style={{
+                                            cursor: 'pointer',
+                                            justifyContent: 'flex-end',
+                                            border: 0,
+                                            background: '#ee4d2d',
+                                            outline: 'none',
+                                            padding: 4,
+                                            color: 'white',
+                                            textTransform: 'none',
+                                            overflow: 'visible',
+                                            marginRight: 10
+                                        }} onClick={() => {
+                                            swal({
+                                                title: "Are you sure?",
+                                                icon: "warning",
+                                                buttons: true,
+                                                dangerMode: true,
+                                            })
+                                                .then(async (willCancelled) => {
+                                                    if (willCancelled) {
+                                                        let data = {
+                                                            id_User: item.idUser,
+                                                            id_Order: item.idOrder,
+                                                            setStatus: 'cancelled',
+                                                        }
+                                                        await dispatch(saveNotification(data))
+                                                        await dispatch(setStatusCancelled(item.idOrder)).then(async () => {
+                                                            await dispatch(getOrder(idMerchant)).then(() => {
+                                                                navigate('/merchants/manager-order/' + idMerchant)
+                                                            })
+                                                        })
+                                                        swal("Your account has been active!", {
+                                                            icon: "success",
+                                                        });
+                                                    } else {
+                                                        swal("Your account is safe!");
+                                                    }
+                                                });
+                                        }}>
+                                            Cancel
+                                        </div>
+                                    </>}
+                                    <div className="" style={{
+                                        margin: '0 10px 0 0',
+                                        fontSize: 14,
+                                        color: 'rgba(0,0,0,.8)'
+                                    }}>Total Money:
                                     </div>
                                     <div className="" style={{
                                         color: '#ee4d2d',
-                                        textAlign: 'right',
-                                        textTransform: 'uppercase',
-                                        whiteSpace: 'nowrap',
-                                    }}>{item.status}
+                                        fontSize: 24,
+                                    }}>${item.totalMoney}
                                     </div>
-
-                                </div>
-                                <div className="" style={{
-                                    borderBottom: '1px solid rgba(0,0,0,.09)',
-                                }}></div>
-                                <div className="">
-                                    <div className="" style={{
-                                        margin: 0,
-                                        border: 0
-                                    }}>
-                                        <div className="Zrxery" style={{
-                                            padding: '20px 24px',
-                                            fontSize: 14,
-                                            justifyContent: 'space-between',
-                                            alignItems: 'center'
-                                        }}>
-                                            <div className="K8h4Ws" style={{
-                                                color: 'rgba(0,0,0,.54)'
-                                            }}>
-                                            </div>
-                                            <div>
-                                                <span className="-XHRLL">{item.username} </span>|
-                                                <span className="-XHRLL"> {item.phone}</span>
-                                            </div>
-                                        </div>
-                                        <FoodOfOrderMerchant id={item.idOrder}></FoodOfOrderMerchant>
-                                        <div className=""></div>
-                                    </div>
-                                </div>
-                                <div className=""></div>
-                            </div>
-
-                        </div>
-                        <div className="" style={{
-                            width: '100%',
-                            height: 0,
-                            borderBottom: '1px dotted rgba(0,0,0,.09)',
-                            position: 'relative'
-                        }}>
-                        </div>
-                        <div className="" style={{
-                            padding: '24px 24px 12px',
-                            background: '#fffefb',
-                        }}>
-
-
-                            <div className="" style={{
-                                display: 'flex',
-                                justifyContent: 'flex-end',
-                                alignItems: 'center'
-                            }}>
-                                {item.status === 'pending' && <>
-                                    <div  style={{
-                                        justifyContent: 'flex-end',
-                                        border: 0,
-                                        background: '#ee4d2d',
-                                        outline: 'none',
-                                        padding: 4,
-                                        color: 'white',
-                                        textTransform: 'none',
-                                        overflow: 'visible',
-                                        marginRight: 10}}
-                                         onClick={() => {
-                                             swal({
-                                                 title: "Are you sure?",
-                                                 icon: "warning",
-                                                 buttons: true,
-                                                 dangerMode: true,
-                                             })
-                                                 .then(async (willConfirm) => {
-                                                     if (willConfirm) {
-                                                         await dispatch(setStatusConfirm(item.idOrder)).then(async () => {
-                                                             await dispatch(getOrder(idMerchant)).then(() => {
-                                                                 navigate('/merchants/manager-order/' + idMerchant)
-                                                             })
-                                                         })
-                                                         swal("Your account has been active!", {
-                                                             icon: "success",
-                                                         });
-                                                     } else {
-                                                         swal("Your account is safe!");
-                                                     }
-                                                 });
-                                         }}>
-                                        Confirm
-                                    </div>
-                                    <div style={{
-                                        justifyContent: 'flex-end',
-                                        border: 0,
-                                        background: '#ee4d2d',
-                                        outline: 'none',
-                                        padding: 4,
-                                        color: 'white',
-                                        textTransform: 'none',
-                                        overflow: 'visible',
-                                        marginRight: 10}} onClick={() => {
-                                        swal({
-                                            title: "Are you sure?",
-                                            icon: "warning",
-                                            buttons: true,
-                                            dangerMode: true,
-                                        })
-                                            .then(async (willCancelled) => {
-                                                if (willCancelled) {
-                                                    await dispatch(setStatusCancelled(item.idOrder)).then(async () => {
-                                                        await dispatch(getOrder(idMerchant)).then(() => {
-                                                            navigate('/merchants/manager-order/' + idMerchant)
-                                                        })
-                                                    })
-                                                    swal("Your account has been active!", {
-                                                        icon: "success",
-                                                    });
-                                                } else {
-                                                    swal("Your account is safe!");
-                                                }
-                                            });
-                                    }}>
-                                        Cancel
-                                    </div>
-                                </>}
-                                <div className="" style={{
-                                    margin: '0 10px 0 0',
-                                    fontSize: 14,
-                                    color: 'rgba(0,0,0,.8)'
-                                }}>Total Money:
-                                </div>
-                                <div className="" style={{
-                                    color: '#ee4d2d',
-                                    fontSize: 24,
-                                }}>${item.totalMoney}
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </>
                 ))}
             </div>
         </>)

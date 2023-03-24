@@ -9,13 +9,13 @@ export default function OrderDetailMerchant() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const order = useSelector((state) => {
-        console.log(state.orders.orderDetail)
         return state.orders.orderDetail
     })
+    console.log(idOrder)
 
     useEffect(() => {
         dispatch(orderDetail(idOrder))
-    }, [])
+    }, [idOrder])
     return (
         <>
             <div className="container" style={{backgroundColor: 'lightgray'}}>
@@ -117,7 +117,7 @@ export default function OrderDetailMerchant() {
                                                 fontWeight: 700,
                                                 paddingLeft: 170,
                                                 cursor: 'pointer'
-                                            }}>{order.Date}</p>
+                                            }}>{new Date(order.Date).toLocaleString()}</p>
                                         </div>
                                     </div>
                                 </div>

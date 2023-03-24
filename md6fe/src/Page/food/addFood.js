@@ -3,7 +3,7 @@ import {storage} from "../../service/firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate, useParams} from "react-router-dom";
-import {ErrorMessage, Field, Form, Formik} from "formik";
+import {ErrorMessage, Field, Form, Formik, useFormik} from "formik";
 import {addFood} from "../../service/foodsService";
 import {getCategories} from "../../service/categoryService";
 import swal from "sweetalert";
@@ -17,7 +17,6 @@ const validateSchema = Yup.object().shape({
         .min(2, "Too short!")
         .max(500, "Too long!")
         .required("Required"),
-
 });
 
 export default function AddFood() {
@@ -40,10 +39,19 @@ export default function AddFood() {
     const handleChange = (e) => {
         for (let i = 0; i < e.target.files.length; i++) {
             const newImage = e.target.files[i];
-            newImage["id"] = Math.random();
-            setImages((prevState) => [...prevState, newImage]);
+            if (!newImage) {
+                console.log('image is required');
+                return false;
+            }
+            if (!newImage.name.match(/\.(jpg|jpeg|png|gif)$/)) {
+                console.log('select valid image.');
+                return false;
+                newImage["id"] = Math.random();
+                setImages((prevState) => [...prevState, newImage]);
+            }
         }
     };
+
     const handleUpload = () => {
         const promises = [];
         if (images.length > 0) {
