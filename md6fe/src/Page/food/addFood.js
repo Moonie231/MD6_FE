@@ -10,13 +10,20 @@ import swal from "sweetalert";
 import * as Yup from "yup";
 const validateSchema = Yup.object().shape({
     nameFood: Yup.string()
+        .matches(/^[a-zA-Z0-9]/)
         .min(2, "Too short!")
         .max(50, "Too long!")
         .required("Required"),
     description: Yup.string()
+        .matches(/^[a-zA-Z0-9]/)
         .min(2, "Too short!")
         .max(500, "Too long!")
         .required("Required"),
+    price: Yup.number()
+        .required("Required"),
+    quantityFood: Yup.number()
+        .required("Required"),
+
 });
 
 export default function AddFood() {

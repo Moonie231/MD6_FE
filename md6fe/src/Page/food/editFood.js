@@ -11,14 +11,15 @@ import {getCategories} from "../../service/categoryService";
 import * as Yup from "yup";
 const validateSchema = Yup.object().shape({
     nameFood: Yup.string()
+        .matches(/^[a-zA-Z0-9]/)
         .min(2, "Too short!")
         .max(50, "Too long!")
         .required("Required"),
     description: Yup.string()
+        .matches(/^[a-zA-Z0-9]/)
         .min(2, "Too short!")
         .max(500, "Too long!")
         .required("Required"),
-
 });
 
 
