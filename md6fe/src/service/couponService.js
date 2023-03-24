@@ -5,7 +5,9 @@ import {create} from "axios";
 export const myCoupon = createAsyncThunk(
     "coupon/myCoupon",
     async (data) => {
+        console.log(data)
         const res = await customAxios.get("/coupons/"+ data);
+        console.log(res.data);
         return res.data;
     }
 );
