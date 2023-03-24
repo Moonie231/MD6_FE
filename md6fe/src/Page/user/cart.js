@@ -26,9 +26,6 @@ export default function Cart() {
         dispatch(showCart(id))
     }, [])
 
-    const handleClick = () => {
-        dispatch(myCoupon(localStorage.getItem('idMerchant')))
-    }
     return (
         <>
             <div className="breadcrumb-option">
@@ -69,7 +66,7 @@ export default function Cart() {
                                             return (
                                                 <>
 
-                                                    <tr>
+                                                    <tr style={{borderTop: '1px solid rgba(0,0,0,.09)'}}>
                                                         <td className="product__cart__item">
                                                             <div className="product__cart__item__pic">
                                                                 <img style={{width: 90, height: 90}} src={item.img} alt=""/>
@@ -116,41 +113,53 @@ export default function Cart() {
                                                         </span>
                                                         </td>
                                                     </tr>
-                                                    <div className="dT5fMv" style={{
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                        padding: '1rem 0 1rem 2.5rem',
+                                                    <tr style={{
                                                         borderTop: '1px solid rgba(0,0,0,.09)',
+                                                        paddingBottom: 0,
+                                                        paddingTop: 0
                                                     }}>
-                                                        <div className="jxfDh3" style={{
-                                                            display: 'flex',
-                                                            alignItems: 'center',
-                                                        }}>
-                                                            <div>
-                                                                <div className="">
-                                                                    <div className="kAocQv" style={{
-                                                                        whiteSpace: 'nowrap',
-                                                                        color: '#05a'
-                                                                    }}
-                                                                         onMouseEnter={handleClick()}>Coupon
+                                                        <td>
+                                                            <div className="dT5fMv" style={{
+                                                                display: 'flex',
+                                                                alignItems: 'center'
+                                                            }}>
+                                                                <div className="jxfDh3" style={{
+                                                                    display: 'flex',
+                                                                    alignItems: 'center',
+                                                                }}>
+                                                                    <div className="">
+                                                                        <div>
+                                                                            <Link
+                                                                                to={'/users/merchant-coupon/' + localStorage.getItem('MerchantId')}
+                                                                                style={{
+                                                                                    color: '#ee4d2d',
+                                                                                    textDecoration: 'none'
+                                                                                }}>Merchant Coupon</Link>
+                                                                        </div>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div className="AYBwMK" style={{
-                                                            display: 'flex',
-                                                            alignItems: 'center',
-                                                            padding: '1.25rem 0 1.25rem 2.5rem',
-                                                            borderTop: '1px solid rgba(0,0,0,.09)'
-                                                        }}>
-                                                            <div className="hYG2mu" style={{
-                                                                marginLeft: '0.9375rem',
-                                                            }}>Giảm ₫15.000 phí vận chuyển đơn tối
-                                                                thiểu ₫50.000; Giảm ₫25.000 phí vận chuyển đơn tối thiểu
-                                                                ₫99.000
+                                                        </td>
+                                                        <td colSpan={2}>
+                                                            <div className="AYBwMK" style={{
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                                padding: '1.25rem 0 1.25rem 2.5rem',
+
+                                                            }}>
+                                                                <div className="hYG2mu" style={{
+                                                                    marginLeft: '0.9375rem',
+                                                                }}>
+                                                                    <Link to={'/users/system-coupon'} style={{
+                                                                        color: '#ee4d2d',
+                                                                        textDecoration: 'none'
+                                                                    }}>System coupon</Link>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
+                                                        </td>
+
+                                                    </tr>
 
                                                 </>
                                             )

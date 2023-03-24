@@ -29,6 +29,7 @@ import OrderDetail from "./Page/user/orderDetail";
 import OrderDetailMerchant from "./Page/merchant/orderDetail";
 import MyCoupon from "./Page/merchant/myCoupon";
 import Coupon from "./Page/admin/coupon";
+import MerchantCoupon from "./Page/user/merchantCoupon";
 
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
                     <Route path={`my-order/:idUser`} element={<MyOrder></MyOrder>}></Route>
                     <Route path={`address/:idUser`} element={<Address></Address>}></Route>
                     <Route path={'orderDetail/:idOrder'} element={<OrderDetail/>}></Route>
+                    <Route path={'merchant-coupon/:idMerchant'} element={<MerchantCoupon/>}></Route>
                 </Route>
                 <Route path={'admin'}>
                     <Route path={'merchant-active'} element={<MerchantActive></MerchantActive>}></Route>
