@@ -14,7 +14,7 @@ export const showCart = createAsyncThunk(
     async (data) => {
         const res = await customAxios.get('orders/show-cart/' + data);
         if (res.data.length === 0) {
-            localStorage.setItem('idMerchant', null)
+            localStorage.setItem('MerchantId', null)
         }
         return res.data;
     }

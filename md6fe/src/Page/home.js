@@ -3,13 +3,14 @@ import {useEffect} from "react";
 import {getFood} from "../service/foodsService";
 import {getCategories} from "../service/categoryService";
 import {addToCart, count, deleteOrderDetail, showCart} from "../service/orderService";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import swal from "sweetalert";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Home() {
     const dispatch = useDispatch()
+    const navigate=useNavigate()
     const foods = useSelector((state) => {
         state.foods.foods.map((item) => {
         })
@@ -94,7 +95,8 @@ export default function Home() {
                                             <div className="product__item__price">${item.price}</div>
                                             <div className="cart_add">
                                                 <h5 style={{cursor: 'pointer'}} onClick={(e) => {
-                                                    if(localStorage.getItem('NameStatus')){
+                                                    if (localStorage.getItem('user') !== 'null' && localStorage.getItem('user') !== null) {
+                                                        if(localStorage.getItem('NameStatus')){
                                                     }else {
                                                         if(item.quantityFood<1){
                                                             toast.success("The product is out of stock", {
@@ -109,7 +111,7 @@ export default function Home() {
                                                                 icon:"X"
                                                             });
                                                         }else {
-                                                            if (localStorage.getItem('idMerchant') === 'null' || item.id_Merchant == localStorage.getItem('idMerchant')) {
+                                                            if (localStorage.getItem('MerchantId') === 'null' || item.id_Merchant == localStorage.getItem('MerchantId')) {
                                                                 toast.success("Added to cart", {
                                                                     position: "top-right",
                                                                     autoClose: 3000,
@@ -125,13 +127,16 @@ export default function Home() {
                                                                     quantity: 1,
                                                                     price: item.price,
                                                                 }
-                                                                localStorage.setItem('idMerchant', item.id_Merchant)
+                                                                localStorage.setItem('MerchantId', item.id_Merchant)
                                                                 dispatch(addToCart(data)).then(()=> {
                                                                     dispatch(count(localStorage.getItem('idOrder')))
                                                                 })                                                        } else {
                                                                 swal('you can only buy from 1 store')
                                                             }
                                                         }
+                                                    }}else {
+                                                        swal('You can login with buyer')
+                                                        navigate('/login-user')
                                                     }
 
                                                 }}>Add to cart</h5>
