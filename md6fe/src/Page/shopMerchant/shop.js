@@ -172,9 +172,10 @@ export default function Shop() {
                                         :
                                         <>
                                             <div className="page-link" onClick={() => {
+                                                if(page-1>0){
                                                 dispatch(getFoods(page1 - 1));
                                                 navigate('/shop?page=' + (page1 - 1))
-                                            }
+                                            }}
                                             }><span aria-hidden="true">&laquo;</span>
                                             </div>
                                         </>
@@ -191,9 +192,10 @@ export default function Shop() {
                                         :
                                         <>
                                             <div className="page-link" onClick={() => {
+                                                if(Number(page)+1<=totalPages){
                                                 dispatch(getFoods(Number(page1) + 1));
                                                 navigate('/shop?page=' + (Number(page1) + 1))
-                                            }
+                                            }}
                                             }><span aria-hidden="true">&raquo;</span>
                                             </div>
                                         </>
