@@ -8,11 +8,8 @@ export default function FoodOfOrderMerchant({id}) {
     const dispatch = useDispatch()
     const [foodOrder, setFoodOrder] = useState([])
 
-    console.log(1)
     useEffect(() => {
-        console.log(1)
         customAxios.get('orders/my-order-food/' + id).then(res => {
-            console.log(1)
             setFoodOrder(res.data)
         })
     }, [id])
