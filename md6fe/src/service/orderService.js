@@ -118,3 +118,51 @@ export const updateQuantity = createAsyncThunk(
         const res = await customAxios.put('foods/quantity/' + data)
         return res.data
     })
+export const findOrderByPending = createAsyncThunk(
+    'order/findOrderByPending',
+    async (data) => {
+        const res = await customAxios.get('orders/find-by-order-pending/' + data)
+        return res.data
+    })
+export const findOrderSuccess = createAsyncThunk(
+    'order/findOrderSuccess',
+    async (data) => {
+        const res = await customAxios.get('orders/find-by-order-success/' + data)
+        return res.data
+    })
+export const findOrderByCancelled = createAsyncThunk(
+    'order/findOrderByCancelled',
+    async (data) => {
+        const res = await customAxios.get('orders/find-by-order-cancelled/' + data)
+        return res.data
+    })
+export const findOrderByDelivery= createAsyncThunk(
+    'order/findOrderByDelivery',
+    async (data) => {
+        const res = await customAxios.get('orders/find-by-order-delivery/' + data)
+        return res.data
+    })
+export const countOrderByDelivery= createAsyncThunk(
+    'order/CountOrderByDelivery',
+    async (data) => {
+        const res = await customAxios.get('orders/count-order-delivery/' + data)
+        return res.data
+    })
+export const countOrderByPending= createAsyncThunk(
+    'order/CountOrderByPending',
+    async (data) => {
+        const res = await customAxios.get('orders/count-order-pending/' + data)
+        return res.data
+    })
+export const countOrderBySuccess= createAsyncThunk(
+    'order/CountOrderBySuccess',
+    async (data) => {
+        const res = await customAxios.get('orders/count-order-success/' + data)
+        return res.data
+    })
+export const countOrderByCancelled= createAsyncThunk(
+    'order/CountOrderByCancelled',
+    async (data) => {
+        const res = await customAxios.get('orders/count-order-cancelled/' + data)
+        return res.data
+    })

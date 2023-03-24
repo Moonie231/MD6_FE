@@ -1,7 +1,18 @@
 import {useDispatch, useSelector} from "react-redux";
 import React, {useEffect,} from "react";
 import {Link, useNavigate, useParams} from "react-router-dom";
-import {getOrder, searchOrder, setStatusCancelled, setStatusConfirm, showCart} from "../../service/orderService";
+import {
+    countOrderByCancelled,
+    countOrderByDelivery,
+    countOrderByPending,
+    countOrderBySuccess,
+    findOrderByCancelled, findOrderByDelivery,
+    findOrderByPending, findOrderSuccess,
+    getOrder,
+    searchOrder,
+    setStatusCancelled,
+    setStatusConfirm,
+} from "../../service/orderService";
 import swal from "sweetalert";
 import {Field, Form, Formik} from "formik";
 import FoodOfOrder from "../merchant/foodOfOrder";
@@ -15,17 +26,33 @@ export default function ManagerOrder() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const order = useSelector(state => {
+        console.log(state.orders.orders)
         return state.orders.orders
     })
-
+    const countPending=useSelector((state)=>{
+        return state.orders.countPending
+    })
+    const countSuccess=useSelector((state)=>{
+        return state.orders.countSuccess
+    })
+    const countCancelled=useSelector((state)=>{
+        return state.orders.countCancelled
+    })
+    const countDelivery=useSelector((state)=>{
+        return state.orders.countDelivery
+    })
 
     const handleSearch = (values) => {
         let data = [values, idMerchant]
-        console.log(data)
         dispatch(searchOrder(data));
 
     }
     useEffect(() => {
+        console.log(1)
+        dispatch(countOrderByCancelled(idMerchant))
+        dispatch(countOrderBySuccess(idMerchant))
+        dispatch(countOrderByDelivery(idMerchant))
+        dispatch(countOrderByPending(idMerchant))
         dispatch(getOrder(idMerchant))
     }, [])
 
@@ -65,7 +92,6 @@ export default function ManagerOrder() {
                     marginBottom: 12,
                     display: 'flex',
                     overflow: 'hidden',
-                    position: 'sticky',
                     top: 0,
                     zIndex: 10,
                     background: '#fff',
@@ -74,7 +100,7 @@ export default function ManagerOrder() {
                     borderTopRightRadius: 2
                 }}>
 
-                    <Link className="vAkdD0 r-S3nG" style={{
+                    <div className="vAkdD0 r-S3nG" style={{
                         cursor: 'pointer',
                         userSelect: 'none',
                         padding: '16px 0',
@@ -88,17 +114,16 @@ export default function ManagerOrder() {
                         overflow: 'hidden',
                         alignItems: 'center',
                         justifyContent: 'center',
-                    }} onClick={{
-                        borderColor: '#ee4d2d',
-                        color: '#ee4d2d'
-                    }}>
-                        <p className="_0rjE9m" style={{
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                            whiteSpace: 'nowrap',
-                        }}>pending</p>
-                    </Link>
-                    <Link className="vAkdD0 r-S3nG" style={{
+                    }} >
+                                <span onClick={()=>{
+                                    dispatch(findOrderByPending(idMerchant))
+                                }} className="_0rjE9m" style={{
+                                    overflow: 'hidden',
+                                    textOverflow: 'ellipsis',
+                                    whiteSpace: 'nowrap',
+                                }}>pending[{countPending}]</span>
+                    </div>
+                    <div className="vAkdD0 r-S3nG" style={{
                         cursor: 'pointer',
                         userSelect: 'none',
                         padding: '16px 0',
@@ -112,42 +137,16 @@ export default function ManagerOrder() {
                         overflow: 'hidden',
                         alignItems: 'center',
                         justifyContent: 'center'
-                    }} onClick={{
-                        borderColor: '#ee4d2d',
-                        color: '#ee4d2d'
-                    }}>
-                                <span className="_0rjE9m" style={{
+                    }} >
+                                <span onClick={()=>{
+                                    dispatch(findOrderByDelivery(idMerchant))
+                                }}  className="_0rjE9m" style={{
                                     overflow: 'hidden',
                                     textOverflow: 'ellipsis',
                                     whiteSpace: 'nowrap',
-                                }}>delivery</span>
-                    </Link>
-                    <Link className="vAkdD0 r-S3nG" style={{
-                        cursor: 'pointer',
-                        userSelect: 'none',
-                        padding: '16px 0',
-                        fontSize: 16,
-                        textAlign: 'center',
-                        color: 'rgba(0,0,0,.8)',
-                        background: '#fff',
-                        borderBottom: '2px solid rgba(0,0,0,.09)',
-                        display: 'flex',
-                        flex: 1,
-                        overflow: 'hidden',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                    }}
-                          onClick={{
-                              borderColor: '#ee4d2d',
-                              color: '#ee4d2d'
-                          }}>
-                                <span className="_0rjE9m" style={{
-                                    overflow: 'hidden',
-                                    textOverflow: 'ellipsis',
-                                    whiteSpace: 'nowrap',
-                                }}>success</span>
-                    </Link>
-                    <Link className="vAkdD0 r-S3nG" style={{
+                                }}>delivery[{countDelivery}]</span>
+                    </div>
+                    <div className="vAkdD0 r-S3nG" style={{
                         cursor: 'pointer',
                         userSelect: 'none',
                         padding: '16px 0',
@@ -162,16 +161,38 @@ export default function ManagerOrder() {
                         alignItems: 'center',
                         justifyContent: 'center'
                     }}
-                          onClick={{
-                              borderColor: '#ee4d2d',
-                              color: '#ee4d2d'
-                          }}>
-                                <span className="_0rjE9m" style={{
+                    >
+                                <span onClick={()=>{
+                                    dispatch(findOrderSuccess(idMerchant))
+                                }}  className="_0rjE9m" style={{
                                     overflow: 'hidden',
                                     textOverflow: 'ellipsis',
                                     whiteSpace: 'nowrap',
-                                }}>cancelled</span>
-                    </Link>
+                                }}>success[{countSuccess}]</span>
+                    </div>
+                    <div className="vAkdD0 r-S3nG" style={{
+                        cursor: 'pointer',
+                        userSelect: 'none',
+                        padding: '16px 0',
+                        fontSize: 16,
+                        textAlign: 'center',
+                        color: 'rgba(0,0,0,.8)',
+                        background: '#fff',
+                        borderBottom: '2px solid rgba(0,0,0,.09)',
+                        display: 'flex',
+                        flex: 1,
+                        overflow: 'hidden',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                    }}>
+                                <span onClick={()=>{
+                                    dispatch(findOrderByCancelled(idMerchant))
+                                }}  className="_0rjE9m" style={{
+                                    overflow: 'hidden',
+                                    textOverflow: 'ellipsis',
+                                    whiteSpace: 'nowrap',
+                                }}>cancelled[{countCancelled}]</span>
+                    </div>
                 </div>
                 {order && order.map((item, index) => (
                     <>
