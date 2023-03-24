@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {deleteOrderDetail, showCart} from "../../service/orderService";
 import swal from "sweetalert";
+import {myCoupon} from "../../service/couponService";
 
 export default function Cart() {
     const {id} = useParams()
@@ -25,8 +26,8 @@ export default function Cart() {
         dispatch(showCart(id))
     }, [])
 
-    const handleClick = () =>{
-        dispatch()
+    const handleClick = () => {
+        dispatch(myCoupon(localStorage.getItem('idMerchant')))
     }
     return (
         <>
@@ -131,11 +132,26 @@ export default function Cart() {
                                                                         whiteSpace: 'nowrap',
                                                                         color: '#05a'
                                                                     }}
-                                                                    onClick={handleClick()}>Coupon</div>
+                                                                         onMouseEnter={handleClick()}>Coupon
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <div className="AYBwMK" style={{
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            padding: '1.25rem 0 1.25rem 2.5rem',
+                                                            borderTop: '1px solid rgba(0,0,0,.09)'
+                                                        }}>
+                                                            <div className="hYG2mu" style={{
+                                                                marginLeft: '0.9375rem',
+                                                            }}>Giảm ₫15.000 phí vận chuyển đơn tối
+                                                                thiểu ₫50.000; Giảm ₫25.000 phí vận chuyển đơn tối thiểu
+                                                                ₫99.000
+                                                            </div>
+                                                        </div>
                                                     </div>
+
                                                 </>
                                             )
                                         }
