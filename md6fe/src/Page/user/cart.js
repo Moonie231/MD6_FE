@@ -1,10 +1,9 @@
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect, useState} from "react";
-import {deleteOrderDetail, editOrder, showCart} from "../../service/orderService";
-import {Field, Form, Formik} from "formik";
+import {useEffect} from "react";
+import {deleteOrderDetail, showCart} from "../../service/orderService";
 import swal from "sweetalert";
-import {deleteFood, getFood} from "../../service/foodsService";
+import {myCoupon} from "../../service/couponService";
 
 export default function Cart() {
     const {id} = useParams()
@@ -26,6 +25,7 @@ export default function Cart() {
     useEffect(() => {
         dispatch(showCart(id))
     }, [])
+
     return (
         <>
             <div className="breadcrumb-option">
@@ -64,50 +64,104 @@ export default function Cart() {
                                     <tbody>
                                     {foods.list !== undefined && foods.list.map((item) => {
                                             return (
-                                                <tr>
-                                                    <td className="product__cart__item">
-                                                        <div className="product__cart__item__pic">
-                                                            <img style={{width: 90, height: 90}} src={item.img} alt=""/>
-                                                        </div>
-                                                        <div className="product__cart__item__text">
-                                                            <h6>{item.nameFood}</h6>
-                                                        </div>
-                                                    </td>
-                                                    <td className="quantity__item">
+                                                <>
 
-                                                                <div className="quantity">
-                                                                    <div className="pro-qty">
+                                                    <tr style={{borderTop: '1px solid rgba(0,0,0,.09)'}}>
+                                                        <td className="product__cart__item">
+                                                            <div className="product__cart__item__pic">
+                                                                <img style={{width: 90, height: 90}} src={item.img} alt=""/>
+                                                            </div>
+                                                            <div className="product__cart__item__text">
+                                                                <h6>{item.nameFood}</h6>
+                                                            </div>
+                                                        </td>
+                                                        <td className="quantity__item">
 
-                                                                        <h6>{item.quantity}</h6>
+                                                            <div className="quantity">
+                                                                <div className="pro-qty">
+
+                                                                    <h6>{item.quantity}</h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td className="cart__price">${item.price}</td>
+                                                        <td className="cart__close">
+                                                        <span className="icon_close"
+                                                              onClick={() => {
+                                                                  swal({
+                                                                      title: "Are you sure?",
+                                                                      text: "Once deleted, you will not be able to recover this imaginary file!",
+                                                                      icon: "warning",
+                                                                      buttons: true,
+                                                                      dangerMode: true,
+                                                                  })
+                                                                      .then(async (willDelete) => {
+                                                                          if (willDelete) {
+
+                                                                              swal("Poof! Your imaginary file has been deleted!", {
+                                                                                  icon: "success",
+                                                                              });
+                                                                              await dispatch(deleteOrderDetail(item.idOrderdetail)).then(() => {
+                                                                                  navigate('/my-cart/' + id)
+                                                                              })
+                                                                              await dispatch(showCart(id))
+                                                                          } else {
+                                                                              swal("Your imaginary file is safe!");
+                                                                          }
+                                                                      });
+                                                              }}>
+                                                        </span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style={{
+                                                        borderTop: '1px solid rgba(0,0,0,.09)',
+                                                        paddingBottom: 0,
+                                                        paddingTop: 0
+                                                    }}>
+                                                        <td>
+                                                            <div className="dT5fMv" style={{
+                                                                display: 'flex',
+                                                                alignItems: 'center'
+                                                            }}>
+                                                                <div className="jxfDh3" style={{
+                                                                    display: 'flex',
+                                                                    alignItems: 'center',
+                                                                }}>
+                                                                    <div className="">
+                                                                        <div>
+                                                                            <Link
+                                                                                to={'/users/merchant-coupon/' + localStorage.getItem('MerchantId')}
+                                                                                style={{
+                                                                                    color: '#ee4d2d',
+                                                                                    textDecoration: 'none'
+                                                                                }}>Merchant Coupon</Link>
+                                                                        </div>
+
                                                                     </div>
                                                                 </div>
-                                                    </td>
-                                                    <td className="cart__price">${item.price}</td>
-                                                    <td className="cart__close"><span className="icon_close"
-                                                                                      onClick={() => {
-                                                                                          swal({
-                                                                                              title: "Are you sure?",
-                                                                                              text: "Once deleted, you will not be able to recover this imaginary file!",
-                                                                                              icon: "warning",
-                                                                                              buttons: true,
-                                                                                              dangerMode: true,
-                                                                                          })
-                                                                                              .then(async (willDelete) => {
-                                                                                                  if (willDelete) {
+                                                            </div>
+                                                        </td>
+                                                        <td colSpan={2}>
+                                                            <div className="AYBwMK" style={{
+                                                                display: 'flex',
+                                                                alignItems: 'center',
+                                                                padding: '1.25rem 0 1.25rem 2.5rem',
 
-                                                                                                      swal("Poof! Your imaginary file has been deleted!", {
-                                                                                                          icon: "success",
-                                                                                                      });
-                                                                                                      await dispatch(deleteOrderDetail(item.idOrderdetail)).then(() => {
-                                                                                                          navigate('/my-cart/' + id)
-                                                                                                      })
-                                                                                                      await dispatch(showCart(id))
-                                                                                                  } else {
-                                                                                                      swal("Your imaginary file is safe!");
-                                                                                                  }
-                                                                                              });
-                                                                                      }}></span></td>
-                                                </tr>
+                                                            }}>
+                                                                <div className="hYG2mu" style={{
+                                                                    marginLeft: '0.9375rem',
+                                                                }}>
+                                                                    <Link to={'/users/system-coupon'} style={{
+                                                                        color: '#ee4d2d',
+                                                                        textDecoration: 'none'
+                                                                    }}>System coupon</Link>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+
+                                                    </tr>
+
+                                                </>
                                             )
                                         }
                                     )}

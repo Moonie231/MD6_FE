@@ -111,31 +111,56 @@ export default function Header() {
                                     <ul>
                                         <li>USD <span className="arrow_carrot-down"></span>
                                             <ul>
-                                                <li style={{background: "white", color:'black',width:'100%'}}>EUR</li>
-                                                <li style={{background: "white", color:'black',width:'100%'}}>USD</li>
+                                                <li style={{
+                                                    background: "white",
+                                                    color: 'black',
+                                                    width: '100%'
+                                                }}>EUR
+                                                </li>
+                                                <li style={{
+                                                    background: "white",
+                                                    color: 'black',
+                                                    width: '100%'
+                                                }}>USD
+                                                </li>
                                             </ul>
                                         </li>
                                         <li>ENG <span className="arrow_carrot-down"></span>
                                             <ul>
-                                                <li style={{background: "white", color:'black',width:'100%'}}>Spanish</li>
-                                                <li style={{background: "white", color:'black',width:'100%'}}>ENG</li>
+                                                <li style={{
+                                                    background: "white",
+                                                    color: 'black',
+                                                    width: '100%'
+                                                }}>Spanish
+                                                </li>
+                                                <li style={{
+                                                    background: "white",
+                                                    color: 'black',
+                                                    width: '100%'
+                                                }}>ENG
+                                                </li>
                                             </ul>
                                         </li>
-                                        <li onMouseEnter={handleMouseEnter} style={{width: 300}}><i
-                                            className="fa-regular fa-bell">
-                                            {countUser !== undefined && countUser > 0 && <>
-                                                        <span
-                                                            className="notification-count" style={{color:"red",fontSize:12}}>[{countUser}]</span>
-                                            </>}
-                                            {countMerchant !== undefined && countMerchant > 0 && <>
-                                                <span className="notification-count" style={{color:"red",fontSize:12}}>[{countMerchant}]</span></>}
-
-                                        </i>
+                                        <li onMouseEnter={handleMouseEnter} style={{width: 300}}>
+                                            <i className="fa-regular fa-bell">
+                                                {countUser !== undefined && countUser > 0 && <>
+                                                    <span className="notification-count" style={{color: "red", fontSize: 12}}>
+                                                        [{countUser}]
+                                                    </span>
+                                                </>}
+                                                {countMerchant !== undefined && countMerchant > 0 && <>
+                                                    <span className="notification-count" style={{
+                                                        color: "red",
+                                                        fontSize: 12
+                                                    }}>[{countMerchant}]</span>
+                                                </>}
+                                            </i>
                                             <ul>
                                                 {notificationsMerchant !== undefined && notificationsMerchant.length !== 0 && localStorage.getItem('merchant') !== null && <>
                                                     {notificationsMerchant.map((item) => (
                                                         <Link to={'/merchants/orderDetail/' + item.idOrder}>
-                                                            <li style={{background: "white", color:'black'}}><i className="fa-solid fa-circle"></i> Order whose id
+                                                            <li style={{background: "white", color: 'black'}}><i
+                                                                className="fa-solid fa-circle"></i> Order whose id
                                                                 is {item.idOrder} of {item.email} have
                                                                 been {item.setStatus} </li>
                                                         </Link>
@@ -144,7 +169,8 @@ export default function Header() {
                                                 {notificationsUser !== undefined && notificationsUser.length !== 0 && localStorage.getItem('user') !== null && <>
                                                     {notificationsUser.map((item) => (
                                                         <Link to={'/users/orderDetail/' + item.idOrder}>
-                                                            <li style={{background: "white", color:'black'}}><i className="fa-solid fa-circle"></i> Order whose id
+                                                            <li style={{background: "white", color: 'black'}}><i
+                                                                className="fa-solid fa-circle"></i> Order whose id
                                                                 is {item.idOrder} of Store {item.nameMerchant} have
                                                                 been {item.setStatus} </li>
                                                         </Link>
@@ -215,7 +241,8 @@ export default function Header() {
                                     <li><a href="#">{merchant.nameMerchant}</a>
                                         <ul className="dropdown">
                                             <li><Link to={`/merchants/${merchant.idMerchant}`}>Profile</Link></li>
-                                            <li><Link to={`/merchants/my-coupon/${merchant.idMerchant}`}>My Coupon</Link></li>
+                                            <li><Link to={`/merchants/my-coupon/${merchant.idMerchant}`}>My
+                                                Coupon</Link></li>
                                             <li><a href="" onClick={(e) => {
                                                 dispatch(logout())
                                                 navigate('/login-merchant')

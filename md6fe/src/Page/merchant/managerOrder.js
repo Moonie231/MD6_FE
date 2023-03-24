@@ -171,7 +171,7 @@ export default function ManagerOrder() {
                         alignItems: 'center',
                         justifyContent: 'center'
                     }}
-                          >
+                    >
                                 <span onClick={()=>{
                                     handle('success').then(()=>{
                                         dispatch(findOrderSuccess(idMerchant))

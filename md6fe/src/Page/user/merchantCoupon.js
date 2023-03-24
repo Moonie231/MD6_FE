@@ -1,10 +1,10 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {createCoupon, deleteCoupon, myCoupon, updateCoupon} from "../../service/couponService";
+import {deleteCoupon, myCoupon, updateCoupon} from "../../service/couponService";
 import swal from "sweetalert";
 
-export default function MyCoupon() {
+export default function MerchantCoupon() {
     const {idMerchant} = useParams()
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -51,7 +51,7 @@ export default function MyCoupon() {
                                         fontWeight: 500,
                                         textransform: 'capitalize',
                                         color: 'rgba(0,0,0,.8)'
-                                    }}>My Coupon
+                                    }}> Coupon can use
                                     </div>
                                     <div className="WO0t3c" style={{
                                         display: 'flex'
@@ -60,53 +60,6 @@ export default function MyCoupon() {
                                             paddingLeft: '0.625rem',
                                             marginleft: '0.625rem',
                                         }}>
-                                            <button className="AtS1UR" style={{
-                                                height: 40,
-                                                padding: 20,
-                                                fontSize: '.875rem',
-                                                fontWeight: 400,
-                                                position: 'relative',
-                                                overflow: 'visible',
-                                                outline: 0,
-                                                background: '#ee4d2d',
-                                                cursor: 'pointer',
-                                                lineHeight: 1,
-                                                display: 'flex',
-                                                alignItems: 'center',
-                                                justifyContent: 'center',
-                                                color: '#fff',
-                                                transition: 'opacity .2s ease',
-                                                borderRadius: 2,
-                                                userSelect: 'none',
-                                                boxShadow: '0 1px 1px 0 rgb(0 0 0 / 9%)'
-                                            }} onClick={() => {
-                                                swal("New Coupon", {
-                                                    content: "input",
-                                                    showCancelButton: true,
-                                                    confirmButtonText: 'Lưu',
-                                                    cancelButtonText: 'Hủy',
-                                                })
-                                                    .then(async (result) => {
-                                                        if (result) {
-                                                            let data = {
-                                                                value: result,
-                                                                id_Merchant: localStorage.getItem('idMerchant')
-                                                            }
-                                                            await dispatch(createCoupon(data)).then(async () => {
-                                                                await dispatch(myCoupon(idMerchant)).then(() => {
-                                                                    navigate('/merchants/my-coupon/' + idMerchant)
-                                                                })
-
-                                                            });
-                                                            swal("Add ok!", {
-                                                                icon: "success",
-                                                            });
-                                                        } else {
-                                                            swal("No coupon!");
-                                                        }
-                                                    });
-                                            }}>New Coupon
-                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -177,32 +130,7 @@ export default function MyCoupon() {
                                                                          overflow: 'hidden',
                                                                          paddingLeft: '0.75rem',
                                                                          position: 'relative'
-                                                                     }} onClick={() => {
-                                                                    swal("Edit Your Coupon", {
-                                                                        content: "input",
-                                                                        inputValue: '132',
-                                                                        showCancelButton: true,
-                                                                        confirmButtonText: 'Lưu',
-                                                                        cancelButtonText: 'Hủy',
-                                                                    })
-                                                                        .then(async (result) => {
-                                                                            if (result) {
-                                                                                let data = [{value: result}, item.idCoupon]
-                                                                                console.log(data)
-                                                                                await dispatch(updateCoupon(data)).then(async () =>{
-                                                                                    await dispatch(myCoupon(idMerchant)).then(() => {
-                                                                                        navigate('/merchants/my-coupon/'+idMerchant)
-                                                                                    })
-
-                                                                                });
-                                                                                swal("Edit ok!", {
-                                                                                    icon: "success",
-                                                                                });
-                                                                            } else {
-                                                                                swal("Your address is safe!");
-                                                                            }
-                                                                        });
-                                                                }}>
+                                                                     }}>
                                                                     <div className="vc_MainTitle_mainTitle" style={{
                                                                         display: 'flex'
                                                                     }}>
@@ -236,37 +164,6 @@ export default function MyCoupon() {
                                                                             cursor: 'pointer',
                                                                             display: 'inline'
                                                                         }}>
-                                                                            <a className="vc_UseLink_link" style={{
-                                                                                color: 'white',
-                                                                                fontSize: '1 rem',
-                                                                                marginRight: '0.75rem',
-                                                                                position: 'relative',
-                                                                                textDecoration: 'none'
-                                                                            }} onClick={() => {
-                                                                                swal({
-                                                                                    title: "Are you sure?",
-                                                                                    text: "Once deleted, you will not be able to recover this imaginary file!",
-                                                                                    icon: "warning",
-                                                                                    buttons: true,
-                                                                                    dangerMode: true,
-                                                                                })
-                                                                                    .then((willDelete) => {
-                                                                                        if (willDelete) {
-                                                                                            swal("Poof! Your imaginary file has been deleted!", {
-                                                                                                icon: "success",
-                                                                                            });
-                                                                                            dispatch(deleteCoupon(item.idCoupon)).then(() => {
-                                                                                                navigate('/merchants/my-coupon/' + idMerchant)
-                                                                                                dispatch(myCoupon(idMerchant)).then(() => {
-                                                                                                })
-
-                                                                                            })
-                                                                                        } else {
-                                                                                            swal("Your imaginary file is safe!");
-                                                                                        }
-                                                                                    });
-                                                                            }}><i
-                                                                                className="fa-solid fa-delete-left"></i></a>
                                                                         </div>
                                                                     </div>
 
