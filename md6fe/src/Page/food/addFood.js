@@ -27,7 +27,6 @@ export default function AddFood() {
 
     const handleAdd = async (values) => {
         let data = {...values};
-        console.log(values,16)
         dispatch(addFood(data));
         navigate('/merchants/my-shop/'+localStorage.getItem('idMerchant'))
     }
@@ -106,7 +105,7 @@ export default function AddFood() {
                                             id_Category: "",
                                             id_Merchant: localStorage.getItem('idMerchant')
                                         }}
-                                        validationSchema={validateSchema}
+                                         validationSchema={validateSchema}
                                         onSubmit={(values) => {
                                             values.img = urls[0]
                                             handleAdd(values);
@@ -116,7 +115,7 @@ export default function AddFood() {
                                             <div className="row g-3">
                                                 <div className="col-12">
                                                     <div className="form-floating">
-                                                        <label htmlFor="nameHome">NameFood</label>
+                                                        <label htmlFor="nameFood">NameFood</label>
                                                         <Field type="text" class="form-control" name={'nameFood'}
                                                                id="nameFood" placeholder=""/>
                                                         <alert className="text-danger">
@@ -144,7 +143,7 @@ export default function AddFood() {
                                                 </div>
                                                 <div className="col-12">
                                                     <div className="form-floating">
-                                                        <label htmlFor="price">Quantity Food</label>
+                                                        <label htmlFor="quantityFood">Quantity Food</label>
                                                         <Field type="number" class="form-control" name={'quantityFood'}
                                                                id="quantityFood" placeholder=""/>
                                                     </div>

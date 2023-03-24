@@ -100,8 +100,8 @@ export const setStatusSuccess = createAsyncThunk(
 export const searchOrder = createAsyncThunk(
     "orders/searchOrder",
     async (data) => {
-        console.log(data)
         const res = await customAxios.post('/orders/find-by-order', data)
+        console.log(res.data,11111);
         return res.data;
     })
 

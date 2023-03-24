@@ -12,13 +12,10 @@ export default function ManagerOrder() {
     const {idMerchant} = useParams()
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    let obj = []
 
     const order = useSelector(state => {
         return state.orders.orders
     })
-
-    console.log(order)
 
     const handleSearch = (values) => {
         dispatch(searchOrder([values,idMerchant]));
@@ -112,11 +109,11 @@ export default function ManagerOrder() {
                                             }}>
                                             </div>
                                             <div>
-                                                <span className="-XHRLL">{item.username}</span>
+                                                <span className="-XHRLL">{item.username} </span>|
+                                                <span className="-XHRLL"> {item.phone}</span>
                                             </div>
                                         </div>
                                         <FoodOfOrderMerchant id={item.idOrder}></FoodOfOrderMerchant>
-
                                         <div className=""></div>
                                     </div>
                                 </div>
@@ -162,7 +159,6 @@ export default function ManagerOrder() {
                                              })
                                                  .then(async (willConfirm) => {
                                                      if (willConfirm) {
-                                                         console.log(item.idOrder)
                                                          await dispatch(setStatusConfirm(item.idOrder)).then(async () => {
                                                              await dispatch(getOrder(idMerchant)).then(() => {
                                                                  navigate('/merchants/manager-order/' + idMerchant)
