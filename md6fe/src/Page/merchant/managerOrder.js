@@ -23,10 +23,16 @@ import {setStatus} from "../../service/merchantService";
 
 export default function ManagerOrder() {
     const {idMerchant} = useParams()
+    const status = new URLSearchParams(window.location.search).get("status");
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const searchParams = new URLSearchParams();
+    const handle=async (status)=>{
+        searchParams.append('status', status);
+        const queryString = searchParams.toString();
+        navigate('/merchants/manager-order/4?' + queryString)
+    }
     const order = useSelector(state => {
-        console.log(state.orders.orders)
         return state.orders.orders
     })
     const countPending=useSelector((state)=>{
@@ -48,13 +54,12 @@ export default function ManagerOrder() {
 
     }
     useEffect(() => {
-        console.log(1)
         dispatch(countOrderByCancelled(idMerchant))
         dispatch(countOrderBySuccess(idMerchant))
         dispatch(countOrderByDelivery(idMerchant))
         dispatch(countOrderByPending(idMerchant))
         dispatch(getOrder(idMerchant))
-    }, [])
+    }, [status])
 
 
     return (
@@ -116,7 +121,10 @@ export default function ManagerOrder() {
                         justifyContent: 'center',
                     }} >
                                 <span onClick={()=>{
-                                    dispatch(findOrderByPending(idMerchant))
+                                    handle('pending').then(()=>{
+                                        dispatch(findOrderByPending(idMerchant))
+
+                                    })
                                 }} className="_0rjE9m" style={{
                                     overflow: 'hidden',
                                     textOverflow: 'ellipsis',
@@ -139,7 +147,9 @@ export default function ManagerOrder() {
                         justifyContent: 'center'
                     }} >
                                 <span onClick={()=>{
-                                    dispatch(findOrderByDelivery(idMerchant))
+                                    handle('delivery').then(()=>{
+                                        dispatch(findOrderByDelivery(idMerchant))
+                                    })
                                 }}  className="_0rjE9m" style={{
                                     overflow: 'hidden',
                                     textOverflow: 'ellipsis',
@@ -163,7 +173,9 @@ export default function ManagerOrder() {
                     }}
                           >
                                 <span onClick={()=>{
-                                    dispatch(findOrderSuccess(idMerchant))
+                                    handle('success').then(()=>{
+                                        dispatch(findOrderSuccess(idMerchant))
+                                    })
                                 }}  className="_0rjE9m" style={{
                                     overflow: 'hidden',
                                     textOverflow: 'ellipsis',
@@ -186,7 +198,9 @@ export default function ManagerOrder() {
                         justifyContent: 'center'
                     }}>
                                 <span onClick={()=>{
-                                    dispatch(findOrderByCancelled(idMerchant))
+                                    handle('cancelled').then(()=>{
+                                        dispatch(findOrderByCancelled(idMerchant))
+                                    })
                                 }}  className="_0rjE9m" style={{
                                     overflow: 'hidden',
                                     textOverflow: 'ellipsis',
@@ -301,6 +315,7 @@ export default function ManagerOrder() {
                                                  })
                                                      .then(async (willConfirm) => {
                                                          if (willConfirm) {
+                                                             handle('delivery').then()
                                                              await dispatch(setStatusConfirm(item.idOrder)).then(async () => {
                                                                  let data = {
                                                                      id_User: item.idUser,
@@ -342,6 +357,7 @@ export default function ManagerOrder() {
                                             })
                                                 .then(async (willCancelled) => {
                                                     if (willCancelled) {
+                                                        handle('cancelled').then()
                                                         let data = {
                                                             id_User: item.idUser,
                                                             id_Order: item.idOrder,
