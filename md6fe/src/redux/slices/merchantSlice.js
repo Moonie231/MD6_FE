@@ -61,6 +61,7 @@ const merchantSlice = createSlice({
         builder.addCase(logout.fulfilled, (state, action) => {
             state.status=false
             localStorage.clear()
+            localStorage.setItem('user',null)
         });
         builder.addCase(getMerchantActive.fulfilled, (state, action) => {
             state.merchant = action.payload;

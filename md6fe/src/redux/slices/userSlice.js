@@ -29,10 +29,9 @@ const userSlice = createSlice({
             state.currentUser = action.payload;
             localStorage.setItem("user", JSON.stringify(action.payload));
             localStorage.setItem("idOrder", action.payload.id_Order);
-            localStorage.setItem("idMerchant", action.payload.idMerchantByOrder);
+            localStorage.setItem("MerchantId", action.payload.idMerchantByOrder);
             localStorage.setItem("idUser", action.payload.idUser);
             localStorage.setItem("access-token", action.payload.token)
-            localStorage.getItem('idMerchant')
             state.status = true
             localStorage.setItem("status", state.status)
             if (action.payload.role === 2 || action.payload.role === '2') {
@@ -63,6 +62,7 @@ const userSlice = createSlice({
             localStorage.clear()
             state.role = false
             state.status = false
+            localStorage.setItem('user',null)
         });
         builder.addCase(getAddress.fulfilled, (state, action) => {
             state.address = action.payload;
