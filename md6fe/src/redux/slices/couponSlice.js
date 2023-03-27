@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {createCoupon, deleteCoupon, getCoupon, myCoupon, updateCoupon} from "../../service/couponService";
+import {adminCoupon, createCoupon, deleteCoupon, getCoupon, myCoupon, updateCoupon} from "../../service/couponService";
 
 const initialState = {
     coupons: [],
@@ -24,6 +24,9 @@ const couponSlice = createSlice({
             }
         });
         builder.addCase(getCoupon.fulfilled, (state, action) => {
+            state.coupons = action.payload;
+        });
+        builder.addCase(adminCoupon.fulfilled, (state, action) => {
             state.coupons = action.payload;
         });
     },

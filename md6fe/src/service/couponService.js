@@ -1,11 +1,9 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import customAxios from "./api";
-import {create} from "axios";
 
 export const myCoupon = createAsyncThunk(
     "coupon/myCoupon",
     async (data) => {
-        console.log(data)
         const res = await customAxios.get("/coupons/"+ data);
         console.log(res.data);
         return res.data;
@@ -40,6 +38,14 @@ export const getCoupon = createAsyncThunk(
     'coupon/getCoupon',
     async () => {
         const res = await customAxios.get("/coupons")
+        return res.data
+    }
+)
+
+export const adminCoupon = createAsyncThunk(
+    'coupon/adminCoupon',
+    async () => {
+        const res = await customAxios.get("/coupons/admin/coupon")
         return res.data
     }
 )
