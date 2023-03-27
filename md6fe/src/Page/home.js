@@ -126,6 +126,9 @@ export default function Home() {
                                                                     id_Order: localStorage.getItem('idOrder'),
                                                                     quantity: 1,
                                                                     price: item.price,
+                                                                    priceMerchantCoupon: item.price,
+                                                                    priceAdminCoupon: item.price,
+                                                                    totalPrice:item.price
                                                                 }
                                                                 localStorage.setItem('MerchantId', item.id_Merchant)
                                                                 dispatch(addToCart(data)).then(()=> {

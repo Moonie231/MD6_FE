@@ -1,8 +1,9 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {myCoupon} from "../../service/couponService";
+import {createCouponDetail, myCoupon} from "../../service/couponService";
 import swal from "sweetalert";
+import {updateCouponPriceMerchant} from "../../service/orderService";
 
 export default function MerchantCoupon() {
     const {idMerchant} = useParams()
@@ -91,11 +92,14 @@ export default function MerchantCoupon() {
                                                         })
                                                             .then( async (willChoose) => {
                                                                 if (willChoose) {
-                                                                    // await dispatch(setStatus(item.idMerchant)).then(async ()=>{
-                                                                    //     await dispatch(getMerchantActive()).then(()=>{
+                                                                    let infoDetails= {
+                                                                        id_Food:localStorage.getItem('OrderDetails'),
+                                                                        id_Coupon:item.idCoupon
+                                                                    }
+                                                                    dispatch(createCouponDetail(infoDetails))
+                                                                    let data=[localStorage.getItem('OrderDetails'),{value:Number(item.value)}]
+                                                                    dispatch(updateCouponPriceMerchant(data))
                                                                             navigate('/my-cart/' + localStorage.getItem('idOrder'))
-                                                                    //     })
-                                                                    // })
                                                                     swal("coupon has been selected!", {
                                                                         icon: "success",
                                                                     });
