@@ -1,7 +1,7 @@
 import {Link, useNavigate, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {deleteOrderDetail, showCart} from "../../service/orderService";
+import {count, deleteOrderDetail, resetPrice, showCart} from "../../service/orderService";
 import swal from "sweetalert";
 import {myCoupon} from "../../service/couponService";
 
@@ -19,12 +19,14 @@ export default function Cart() {
             list: state.orders.order,
             sum: money
         }
+        console.log(obj.list)
         return obj
     })
 
     useEffect(() => {
         dispatch(showCart(id))
-    }, [])
+        dispatch(count(localStorage.getItem('idOrder')))
+    }, [foods.sum])
 
     return (
         <>
@@ -84,7 +86,7 @@ export default function Cart() {
                                                                 </div>
                                                             </div>
                                                         </td>
-                                                        <td className="cart__price">${item.price}</td>
+                                                        <td className="cart__price">${item.price !== undefined && item.price.toFixed(2)}</td>
                                                         <td className="cart__close">
                                                         <span className="icon_close"
                                                               onClick={() => {
@@ -118,47 +120,79 @@ export default function Cart() {
                                                         paddingBottom: 0,
                                                         paddingTop: 0
                                                     }}>
-                                                        <td>
-                                                            <div className="dT5fMv" style={{
-                                                                display: 'flex',
-                                                                alignItems: 'center'
-                                                            }}>
-                                                                <div className="jxfDh3" style={{
+                                                        {item.priceOne === item.priceMerchantCoupon &&
+                                                            <td>
+                                                                <div className="dT5fMv" style={{
                                                                     display: 'flex',
-                                                                    alignItems: 'center',
+                                                                    alignItems: 'center'
                                                                 }}>
-                                                                    <div className="">
-                                                                        <div>
-                                                                            <Link
-                                                                                to={'/users/merchant-coupon/' + localStorage.getItem('MerchantId')}
-                                                                                style={{
-                                                                                    color: '#ee4d2d',
-                                                                                    textDecoration: 'none'
+                                                                    <div className="jxfDh3" style={{
+                                                                        display: 'flex',
+                                                                        alignItems: 'center',
+                                                                    }}>
+                                                                        <div className="">
+                                                                            <div>
+                                                                                <Link
+                                                                                    to={'/users/merchant-coupon/' + localStorage.getItem('MerchantId')}
+                                                                                    style={{
+                                                                                        color: '#ee4d2d',
+                                                                                        textDecoration: 'none'
+                                                                                    }} onClick={() => {
+                                                                                    localStorage.setItem('OrderDetails', item.id_Food)
                                                                                 }}>Merchant Coupon</Link>
-                                                                        </div>
+                                                                            </div>
 
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                        </td>
-                                                        <td colSpan={2}>
-                                                            <div className="AYBwMK" style={{
-                                                                display: 'flex',
-                                                                alignItems: 'center',
-                                                                padding: '1.25rem 0 1.25rem 2.5rem',
+                                                            </td>
+                                                        }
+                                                        {item.priceOne === item.priceAdminCoupon &&
+                                                            <td colSpan={2}>
+                                                                <div className="AYBwMK" style={{
+                                                                    display: 'flex',
+                                                                    alignItems: 'center',
+                                                                    padding: '1.25rem 0 1.25rem 2.5rem',
 
-                                                            }}>
-                                                                <div className="hYG2mu" style={{
-                                                                    marginLeft: '0.9375rem',
                                                                 }}>
-                                                                    <Link to={'/users/system-coupon'} style={{
-                                                                        color: '#ee4d2d',
-                                                                        textDecoration: 'none'
-                                                                    }}>System coupon</Link>
+                                                                    <div className="hYG2mu" style={{
+                                                                        marginLeft: '0.9375rem',
+                                                                    }}>
+                                                                        <Link to={'/users/system-coupon'} style={{
+                                                                            color: '#ee4d2d',
+                                                                            textDecoration: 'none'
+                                                                        }} onClick={() => {
+                                                                            localStorage.setItem('OrderDetails', item.id_Food)
+                                                                        }}>System coupon</Link>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </td>
+                                                            </td>
+                                                        }
+                                                        {(item.priceOne != item.priceAdminCoupon || item.priceOne !== item.priceMerchantCoupon) &&
+                                                            <td colSpan={1}>
+                                                                <div className="AYBwMK" style={{
+                                                                    display: 'flex',
+                                                                    alignItems: 'center',
+                                                                    padding: '1.25rem 0 1.25rem 2.5rem',
 
+                                                                }}>
+                                                                    <div className="hYG2mu" style={{
+                                                                        marginLeft: '0.9375rem',
+                                                                    }}>
+                                                                        <div style={{
+                                                                            color: '#ee4d2d',
+                                                                            textDecoration: 'none',
+                                                                            cursor: 'pointer'
+                                                                        }} onClick={() => {
+                                                                            let data = [item.id_Food, id]
+                                                                            dispatch(resetPrice(data))
+                                                                        }}>Reset
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+
+                                                        }
                                                     </tr>
 
                                                 </>
@@ -191,7 +225,7 @@ export default function Cart() {
                             <div className="cart__total">
                                 <h6>Cart total</h6>
                                 <ul>
-                                    <li>Total <span>$ {foods.sum}</span></li>
+                                    <li>Total <span>$ {foods.sum.toFixed(2)}</span></li>
                                 </ul>
                                 <Link to={'/check-out/' + id}><a href="" className="primary-btn">Proceed to checkout</a></Link>
 

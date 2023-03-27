@@ -17,6 +17,13 @@ export const createCoupon = createAsyncThunk(
         return res.data;
     }
 )
+export const createCouponDetail = createAsyncThunk(
+    'coupon/createCouponDetail',
+    async (data) =>{
+        const res = await customAxios.post("/coupons/detail", data);
+        return res.data;
+    }
+)
 
 export const deleteCoupon = createAsyncThunk(
     'coupon/deleteCoupon',
