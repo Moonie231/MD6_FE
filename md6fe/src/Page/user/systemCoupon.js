@@ -1,20 +1,19 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {myCoupon} from "../../service/couponService";
 import swal from "sweetalert";
+import {adminCoupon} from "../../service/couponService";
 
-export default function MerchantCoupon() {
-    const {idMerchant} = useParams()
+export default function SystemCoupon() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const coupon = useSelector((state) => {
-        console.log(state)
+        console.log(state.coupons.coupons)
         return state.coupons.coupons
     })
 
     useEffect(() => {
-        dispatch(myCoupon(idMerchant))
+        dispatch(adminCoupon())
     }, [])
     return (
         <>
@@ -93,7 +92,7 @@ export default function MerchantCoupon() {
                                                                 if (willChoose) {
                                                                     // await dispatch(setStatus(item.idMerchant)).then(async ()=>{
                                                                     //     await dispatch(getMerchantActive()).then(()=>{
-                                                                            navigate('/my-cart/' + localStorage.getItem('idOrder'))
+                                                                    navigate('/my-cart/' + localStorage.getItem('idOrder'))
                                                                     //     })
                                                                     // })
                                                                     swal("coupon has been selected!", {
