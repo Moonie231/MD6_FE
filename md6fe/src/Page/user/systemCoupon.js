@@ -91,7 +91,7 @@ export default function SystemCoupon() {
                                                         })
                                                             .then(async (willChoose) => {
                                                                 if (willChoose) {
-                                                                    let data = [localStorage.getItem('OrderDetails'), {value: Number(item.value)}]
+                                                                    let data = [localStorage.getItem('OrderDetails'), {value: Number(item.value)},localStorage.getItem('idOrder')]
                                                                      dispatch(updateCouponPriceAdmin(data))
                                                                     navigate('/my-cart/' + localStorage.getItem('idOrder'))
 

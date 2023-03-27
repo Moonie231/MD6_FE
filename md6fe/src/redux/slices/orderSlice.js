@@ -62,8 +62,10 @@ const orderSlice = createSlice({
         builder.addCase(setStatusSuccess.fulfilled, (state, action) => {
         });
         builder.addCase(updateCouponPriceMerchant.fulfilled, (state, action) => {
+            state.order=action.payload
         });
         builder.addCase(updateCouponPriceAdmin.fulfilled, (state, action) => {
+            state.order=action.payload
         });
         builder.addCase(resetPrice.fulfilled, (state, action) => {
             state.order=action.payload
