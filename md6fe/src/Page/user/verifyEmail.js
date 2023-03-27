@@ -2,10 +2,10 @@ import {useDispatch} from "react-redux";
 import {verifyEmail} from "../../service/userService";
 import {Link} from "react-router-dom";
 
-export default function VerifyEmail(){
-    const dispatch=useDispatch()
-   dispatch(verifyEmail())
-    return(
+export default function VerifyEmail() {
+    const dispatch = useDispatch()
+    dispatch(verifyEmail())
+    return (
         <>
             <section className="h-100 gradient-form" style={{backgroundColor: ''}}>
                 <div className="container py-5 h-100">
