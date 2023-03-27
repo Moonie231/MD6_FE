@@ -27,15 +27,6 @@ export default function Merchant() {
                                 <h5><i className="fa-solid fa-envelope"></i> {merchant.email}</h5>
                                 <p><i className="fa-solid fa-location-dot"></i> {merchant.address}</p>
                                 <p><i className="fa-solid fa-phone"></i> {merchant.phone}</p>
-                                <div className="product__details__option">
-                                    <div className="quantity">
-                                        <div className="pro-qty">
-                                            <input type="text" value="2"/>
-                                        </div>
-                                    </div>
-                                    <a href="#" className="primary-btn">Add to cart</a>
-                                    <a href="#" className="heart__btn"><span className="icon_heart_alt"></span></a>
-                                </div>
                             </div>
                         </div>
                     </div>

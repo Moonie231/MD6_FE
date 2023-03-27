@@ -27,6 +27,10 @@ import ManagerOrder from "./Page/merchant/managerOrder";
 import StatisticsByTime from "./Page/shopMerchant/statisticsByTime";
 import OrderDetail from "./Page/user/orderDetail";
 import OrderDetailMerchant from "./Page/merchant/orderDetail";
+import MyCoupon from "./Page/merchant/myCoupon";
+import Coupon from "./Page/admin/coupon";
+import MerchantCoupon from "./Page/user/merchantCoupon";
+import SystemCoupon from "./Page/user/systemCoupon";
 
 
 function App() {
@@ -56,17 +60,21 @@ function App() {
                     <Route path={'statistics/:id'} element={<StatisticsByUser/>}></Route>
                     <Route path={'statistics-by-time/:id'} element={<StatisticsByTime/>}></Route>
                     <Route path={'orderDetail/:idOrder'} element={<OrderDetailMerchant/>}></Route>
+                    <Route path={'my-coupon/:idMerchant'} element={<MyCoupon/>}></Route>
                 </Route>
                 <Route path={'users'}>
                     <Route path={`:idUser`} element={<ProfileUser></ProfileUser>}></Route>
                     <Route path={`my-order/:idUser`} element={<MyOrder></MyOrder>}></Route>
                     <Route path={`address/:idUser`} element={<Address></Address>}></Route>
                     <Route path={'orderDetail/:idOrder'} element={<OrderDetail/>}></Route>
+                    <Route path={'merchant-coupon/:idMerchant'} element={<MerchantCoupon/>}></Route>
+                    <Route path={'system-coupon'} element={<SystemCoupon/>}></Route>
                 </Route>
                 <Route path={'admin'}>
                     <Route path={'merchant-active'} element={<MerchantActive></MerchantActive>}></Route>
                     <Route path={'merchant-pending'} element={<MerchantPending></MerchantPending>}></Route>
                     <Route path={'merchant/:idMerchant'} element={<Merchant></Merchant>}></Route>
+                    <Route path={'coupon'} element={<Coupon></Coupon>}></Route>
                 </Route>
                 <Route path={'*'} element={<Home/>}></Route>
             </Routes>

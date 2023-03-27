@@ -135,11 +135,11 @@ export default function StatisticsByTime() {
         },
         responsive: true,
         maintainAspectRatio: false,
-        barThickness: 150
+        barThickness: 70
     }
     return (
         <>
-            <div style={{textAlign: 'center', marginTop: 10}}>
+            <div style={{textAlign: 'center', marginTop: 80}}>
                 <button className="btn btn-dark" onClick={() => {
                     setStatusWeek(!statusWeek)
                     setStatusMonth(false)
@@ -175,7 +175,7 @@ export default function StatisticsByTime() {
                 </button>
             </div>
             {statusWeek &&
-                <div className="container">
+                <div className="container" style={{height:630}}>
                     <h4>Statistics Week</h4>
                     <h4>Total:{statisticsWeek.sum}</h4>
                     <h4>Month:
@@ -203,7 +203,7 @@ export default function StatisticsByTime() {
 
             }
             {statusMonth &&
-                <div className="container">
+                <div className="container" style={{height:630}}>
                     <h4>Statistics Precious</h4>
                     <h4>Total:{statisticsMonth.sum}</h4>
                     <h4>Year: <select onChange={handleMonth}>
@@ -223,7 +223,7 @@ export default function StatisticsByTime() {
 
             }
             {statusYear &&
-                <div className="container">
+                <div className="container" style={{height:630}}>
                     <h4>Statistics Year</h4>
                     <h4>Total:{statisticsYear.sum}</h4>
                     <div>

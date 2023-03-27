@@ -5,6 +5,7 @@ import {editOrder, showCart, updateQuantity} from "../../service/orderService";
 import {addAddress, editProfile, getAddress, getProfile} from "../../service/userService";
 import {Field, Form, Formik} from "formik";
 import swal from "sweetalert";
+import {saveNotification} from "../../service/notificationService";
 
 export default function Checkout(){
     const navigate=useNavigate()
@@ -40,6 +41,12 @@ export default function Checkout(){
             id
         ]
         dispatch(editOrder(data)).then(()=>{
+            let data={
+                id_User:localStorage.getItem('idUser'),
+                id_Order:id,
+                setStatus:'pending',
+            }
+             dispatch(saveNotification(data))
             dispatch(updateQuantity(id))
             let infoOne={
                 username: value.username,
@@ -49,7 +56,7 @@ export default function Checkout(){
             let info=[{...infoOne},user.idUser]
             dispatch(editProfile(info))
             swal("Order Success !!!");
-                navigate('/')
+                navigate('/users/my-order/'+localStorage.getItem('idUser'))
             }
         )
 
@@ -115,11 +122,10 @@ export default function Checkout(){
                                                     id="id_Address"
                                                     style={{width:'95%', float:'left'}}
                                                 >
-
+                                                    <option selected>Address</option>
                                                     {address !== undefined &&
                                                         address.map((item, index) => (
                                                             <>
-                                                                <option selected>{item.nameAddress}</option>
                                                                 <option  value={item.idAddress}>
                                                                     {item.nameAddress}
                                                                 </option>
@@ -183,11 +189,11 @@ export default function Checkout(){
                                         <div className="checkout__order__products">Product <span>Total</span></div>
                                         <ul className="checkout__total__products">
                                             {foods!==undefined && foods.list.map((item,index)=>(
-                                                <li><samp>{index+1}.</samp> {item.nameFood} <span>$ {item.price}</span></li>
+                                                <li><samp>{index+1}.</samp> {item.nameFood} <span>$ {item.price !== undefined && item.price.toFixed(2)}</span></li>
                                             ))}
                                         </ul>
                                         <ul className="checkout__total__all">
-                                            <li>Total <span>${foods.sum}</span></li>
+                                            <li>Total <span>${foods.sum.toFixed(2)}</span></li>
                                         </ul>
                                         <div className="checkout__input__checkbox">
                                             <label htmlFor="acc-or">

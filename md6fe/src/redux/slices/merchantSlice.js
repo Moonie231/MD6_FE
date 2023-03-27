@@ -38,7 +38,6 @@ const merchantSlice = createSlice({
     extraReducers: builder => {
         builder.addCase(login.fulfilled, (state, action) => {
             state.currentMerchant = action.payload
-            console.log(typeof action.payload)
             localStorage.setItem("access-token", action.payload.token)
             localStorage.setItem("idMerchant",action.payload.idMerchant)
             localStorage.setItem("merchant", JSON.stringify(action.payload))
@@ -62,6 +61,7 @@ const merchantSlice = createSlice({
         builder.addCase(logout.fulfilled, (state, action) => {
             state.status=false
             localStorage.clear()
+            localStorage.setItem('user',null)
         });
         builder.addCase(getMerchantActive.fulfilled, (state, action) => {
             state.merchant = action.payload;

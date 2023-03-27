@@ -14,7 +14,7 @@ export const showCart = createAsyncThunk(
     async (data) => {
         const res = await customAxios.get('orders/show-cart/' + data);
         if (res.data.length === 0) {
-            localStorage.setItem('idMerchant', null)
+            localStorage.setItem('MerchantId', null)
         }
         return res.data;
     }
@@ -46,7 +46,7 @@ export const deleteOrderDetail = createAsyncThunk(
     'orders/deleteOrderDetail',
     async (data) => {
         console.log(data)
-        const res = await customAxios.delete('orders/delete-cart/' +data);
+        const res = await customAxios.delete('orders/delete-cart/' + data);
         return res.data;
     }
 )
@@ -54,7 +54,8 @@ export const deleteOrderDetail = createAsyncThunk(
 export const myOrder = createAsyncThunk(
     'orders/myOrder',
     async (data) => {
-        const res = await customAxios.get('orders/my-order/' + data)
+        console.log(data)
+        const res = await customAxios.get('orders/my-order/' + data[0] + '?page=' + data[1])
         return res.data
     }
 )
@@ -100,7 +101,7 @@ export const setStatusSuccess = createAsyncThunk(
 export const searchOrder = createAsyncThunk(
     "orders/searchOrder",
     async (data) => {
-        const res = await customAxios.post('/orders/find-by-order', [data])
+        const res = await customAxios.get('/orders/find-by-order/' + data[1] + '?value=' + data[0])
         return res.data;
     })
 
@@ -115,5 +116,75 @@ export const updateQuantity = createAsyncThunk(
     'order/updateQuantity',
     async (data) => {
         const res = await customAxios.put('foods/quantity/' + data)
+        return res.data
+    })
+export const findOrderByPending = createAsyncThunk(
+    'order/findOrderByPending',
+    async (data) => {
+        const res = await customAxios.get('orders/find-by-order-pending/' + data)
+        return res.data
+    })
+export const findOrderSuccess = createAsyncThunk(
+    'order/findOrderSuccess',
+    async (data) => {
+        const res = await customAxios.get('orders/find-by-order-success/' + data)
+        return res.data
+    })
+export const findOrderByCancelled = createAsyncThunk(
+    'order/findOrderByCancelled',
+    async (data) => {
+        const res = await customAxios.get('orders/find-by-order-cancelled/' + data)
+        return res.data
+    })
+export const findOrderByDelivery = createAsyncThunk(
+    'order/findOrderByDelivery',
+    async (data) => {
+        const res = await customAxios.get('orders/find-by-order-delivery/' + data)
+        return res.data
+    })
+export const countOrderByDelivery = createAsyncThunk(
+    'order/CountOrderByDelivery',
+    async (data) => {
+        const res = await customAxios.get('orders/count-order-delivery/' + data)
+        return res.data
+    })
+export const countOrderByPending = createAsyncThunk(
+    'order/CountOrderByPending',
+    async (data) => {
+        const res = await customAxios.get('orders/count-order-pending/' + data)
+        return res.data
+    })
+export const countOrderBySuccess = createAsyncThunk(
+    'order/CountOrderBySuccess',
+    async (data) => {
+        const res = await customAxios.get('orders/count-order-success/' + data)
+        return res.data
+    })
+export const countOrderByCancelled = createAsyncThunk(
+    'order/CountOrderByCancelled',
+    async (data) => {
+        const res = await customAxios.get('orders/coupon-price-admin/' + data)
+        return res.data
+    })
+export const updateCouponPriceMerchant = createAsyncThunk(
+    'order/updateCouponPriceMerchant',
+    async (data) => {
+        console.log(data)
+         await customAxios.put('orders/coupon-price-merchant/' + data[0], data[1])
+        const res = await customAxios.get('orders/show-cart/' + data[2]);
+        return res.data
+    })
+export const updateCouponPriceAdmin = createAsyncThunk(
+    'order/updateCouponPriceAdmin',
+    async (data) => {
+        await customAxios.put('orders/coupon-price-admin/' + data[0], data[1])
+        const res = await customAxios.get('orders/show-cart/' + data[2]);
+        return res.data
+    })
+export const resetPrice = createAsyncThunk(
+    'order/resetPrice',
+    async (data) => {
+        await customAxios.put('orders/reset-price/' + data[0])
+        const res = await customAxios.get('orders/show-cart/' + data[1]);
         return res.data
     })
