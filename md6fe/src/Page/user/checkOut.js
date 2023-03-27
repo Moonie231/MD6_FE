@@ -189,11 +189,11 @@ export default function Checkout(){
                                         <div className="checkout__order__products">Product <span>Total</span></div>
                                         <ul className="checkout__total__products">
                                             {foods!==undefined && foods.list.map((item,index)=>(
-                                                <li><samp>{index+1}.</samp> {item.nameFood} <span>$ {item.price}</span></li>
+                                                <li><samp>{index+1}.</samp> {item.nameFood} <span>$ {item.price !== undefined && item.price.toFixed(2)}</span></li>
                                             ))}
                                         </ul>
                                         <ul className="checkout__total__all">
-                                            <li>Total <span>${foods.sum}</span></li>
+                                            <li>Total <span>${foods.sum.toFixed(2)}</span></li>
                                         </ul>
                                         <div className="checkout__input__checkbox">
                                             <label htmlFor="acc-or">

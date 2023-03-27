@@ -170,13 +170,15 @@ export const updateCouponPriceMerchant = createAsyncThunk(
     'order/updateCouponPriceMerchant',
     async (data) => {
         console.log(data)
-        const res = await customAxios.put('orders/coupon-price-merchant/' + data[0], data[1])
+         await customAxios.put('orders/coupon-price-merchant/' + data[0], data[1])
+        const res = await customAxios.get('orders/show-cart/' + data[2]);
         return res.data
     })
 export const updateCouponPriceAdmin = createAsyncThunk(
     'order/updateCouponPriceAdmin',
     async (data) => {
-        const res = await customAxios.put('orders/coupon-price-admin/' + data[0], data[1])
+        await customAxios.put('orders/coupon-price-admin/' + data[0], data[1])
+        const res = await customAxios.get('orders/show-cart/' + data[2]);
         return res.data
     })
 export const resetPrice = createAsyncThunk(

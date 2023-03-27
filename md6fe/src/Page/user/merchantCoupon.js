@@ -97,7 +97,7 @@ export default function MerchantCoupon() {
                                                                         id_Coupon:item.idCoupon
                                                                     }
                                                                     dispatch(createCouponDetail(infoDetails))
-                                                                    let data=[localStorage.getItem('OrderDetails'),{value:Number(item.value)}]
+                                                                    let data = [localStorage.getItem('OrderDetails'), {value: Number(item.value)},localStorage.getItem('idOrder')]
                                                                     dispatch(updateCouponPriceMerchant(data))
                                                                             navigate('/my-cart/' + localStorage.getItem('idOrder'))
                                                                     swal("coupon has been selected!", {
