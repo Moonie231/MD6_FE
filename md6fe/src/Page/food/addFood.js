@@ -46,16 +46,8 @@ export default function AddFood() {
     const handleChange = (e) => {
         for (let i = 0; i < e.target.files.length; i++) {
             const newImage = e.target.files[i];
-            if (!newImage) {
-                console.log('image is required');
-                return false;
-            }
-            if (!newImage.name.match(/\.(jpg|jpeg|png|gif)$/)) {
-                console.log('select valid image.');
-                return false;
-                newImage["id"] = Math.random();
-                setImages((prevState) => [...prevState, newImage]);
-            }
+            newImage["id"] = Math.random();
+            setImages((prevState) => [...prevState, newImage]);
         }
     };
 
@@ -97,7 +89,7 @@ export default function AddFood() {
 
     return (
         <>
-            <div className="container" style={{backgroundColor: 'lightgray', marginTop: 40}}>
+            <div className="container" style={{marginTop: 40}}>
             <div className="row">
                 <div className="container-xxl py-5">
                     <div className="container">
@@ -191,17 +183,17 @@ export default function AddFood() {
                                                         onChange={handleChange}
                                                     />
                                                 </div>
-                                                <div className="col-md-6" style={{marginTop: 30}}>
+                                                <div className="col-md-6" style={{marginTop: 20}}>
                                                     <button
                                                         type="button"
-                                                        className="btn btn-info"
+                                                        className="btn btn-warning"
                                                         onClick={() => dispatch(handleUpload)}
                                                     >
                                                         Up
                                                     </button>
                                                 </div>
                                                 <div className="col-12" style={{marginTop: 10}}>
-                                                    <button className="btn btn-info" type="submit">Add</button>
+                                                    <button className="btn btn-warning" type="submit">Add</button>
                                                 </div>
                                             </div>
                                         </Form>

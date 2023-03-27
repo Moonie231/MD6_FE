@@ -39,7 +39,7 @@ export default function Shop() {
                         <div className="row">
                             <div className="col-lg-6 col-md-6 col-sm-6">
                                 <div className="breadcrumb__text">
-                                    <h2>Shop</h2>
+                                    <h3>Shop</h3>
                                 </div>
                             </div>
                             <div className="col-lg-6 col-md-6 col-sm-6">

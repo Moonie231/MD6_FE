@@ -64,7 +64,7 @@ export default function ManagerOrder() {
 
     return (
         <>
-            <div className="container" style={{backgroundColor: 'lightgray', marginTop: 40}}>
+            <div className="container" style={{marginTop: 40}}>
                 <div className="row">
                     <div className="col-lg-3 col-md-6 col-sm-6">
                         <div className="breadcrumb__text">

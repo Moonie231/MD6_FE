@@ -97,7 +97,7 @@ export default function EditFood() {
 
     return (
         <>
-            <div className="container" style={{backgroundColor: 'lightgray', marginTop: 40}}>
+            <div className="container" style={{marginTop: 40}}>
                 <div className="row">
                     <div className="container-xxl py-5">
                                 <div className="container">
@@ -125,6 +125,7 @@ export default function EditFood() {
                                                         values.img = urls[0]
                                                         handleEdit(values);
                                                     }}
+                                                    enableReinitialize={true}
                                                 >
                                                     <Form>
                                                         <div className="row g-3">
@@ -196,17 +197,17 @@ export default function EditFood() {
                                                                     onChange={handleChange}
                                                                 />
                                                             </div>
-                                                            <div className="col-md-6"style={{marginTop: 30}}>
+                                                            <div className="col-md-6"style={{marginTop: 20}}>
                                                                 <button
                                                                     type="button"
-                                                                    className="btn btn-info"
+                                                                    className="btn btn-warning"
                                                                     onClick={() => dispatch(handleUpload)}
                                                                 >
                                                                     Up
                                                                 </button>
                                                             </div>
                                                             <div className="col-12"  style={{marginTop: 10}}>
-                                                                <button className="btn btn-info "
+                                                                <button className="btn btn-warning "
                                                                         type="submit">Update
                                                                 </button>
                                                             </div>
@@ -220,70 +221,6 @@ export default function EditFood() {
                     </div>
                 </div>
             </div>
-        {/*    <div className="row">*/}
-        {/*        <div className="offset-3 col-6 mt-5">*/}
-        {/*            <h1 style={{textAlign: 'center'}}>Edit Food</h1>*/}
-        {/*            <Formik*/}
-        {/*                initialValues={{*/}
-        {/*                    idFood: idFood,*/}
-        {/*                    nameFood: foods.nameFood,*/}
-        {/*                    description: foods.description,*/}
-        {/*                    price: foods.price,*/}
-        {/*                    id_Category: foods.id_Category,*/}
-        {/*                }}*/}
-        {/*                onSubmit={(values) => {*/}
-        {/*                    values.img = urls[0]*/}
-        {/*                    handleEdit(values)*/}
-
-        {/*                }}*/}
-        {/*                enableReinitialize={true}*/}
-        {/*            >*/}
-        {/*                <Form>*/}
-        {/*                    <div className="mb-3">*/}
-        {/*                        <label htmlFor="exampleInput" className="form-label">NameFood</label>*/}
-        {/*                        <Field type="text" className="form-control" id="exampleInput" name={'nameFood'}/>*/}
-        {/*                    </div>*/}
-        {/*                    <div className="mb-3">*/}
-        {/*                        <label htmlFor="exampleInput" className="form-label">Description</label>*/}
-        {/*                        <Field type="text" className="form-control" id="exampleInput" name={'description'}/>*/}
-        {/*                    </div>*/}
-        {/*                    <div className="mb-3">*/}
-        {/*                        <label htmlFor="exampleInput" className="form-label">Price</label>*/}
-        {/*                        <Field type="text" className="form-control" id="exampleInput" name={'price'}/>*/}
-        {/*                    </div>*/}
-        {/*                    <div className="ml-3 form-group">*/}
-        {/*                        <label htmlFor="exampleInputPassword">Image</label>*/}
-        {/*                        <br/>*/}
-        {/*                                <img src={urls} alt={urls} style={{width:400, height: 400}}/>*/}
-
-        {/*                        <br/>*/}
-        {/*                        <input type='file' onChange={handleChange}>*/}
-        {/*                        </input>*/}
-        {/*                        <button className="btn btn-info" style={{marginLeft: 10}} type='button'*/}
-        {/*                                onClick={handleUpload}>Up*/}
-        {/*                        </button>*/}
-        {/*                    </div>*/}
-        {/*                    <div className="col-12">*/}
-        {/*                        <Field*/}
-        {/*                            as="select"*/}
-        {/*                            name={"id_Category"}*/}
-        {/*                            className="form-control"*/}
-        {/*                            id="id_Category"*/}
-        {/*                        >*/}
-        {/*                            <option selected>Category</option>*/}
-        {/*                            {categories !== undefined &&*/}
-        {/*                                categories.map((item, index) => (*/}
-        {/*                                    <option value={item.idCategory}>*/}
-        {/*                                        {item.nameCategory}*/}
-        {/*                                    </option>*/}
-        {/*                                ))}*/}
-        {/*                        </Field>*/}
-        {/*                    </div>*/}
-        {/*                    <button type="submit" className="btn btn-info" style={{marginLeft: "40%"}}>Save</button>*/}
-        {/*                </Form>*/}
-        {/*            </Formik>*/}
-        {/*        </div>*/}
-        {/*    </div>*/}
         </>
     )
 }
