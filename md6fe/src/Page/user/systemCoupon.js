@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import swal from "sweetalert";
 import {adminCoupon} from "../../service/couponService";
+import {updateCouponPriceAdmin} from "../../service/orderService";
 
 export default function SystemCoupon() {
     const navigate = useNavigate()
@@ -88,13 +89,12 @@ export default function SystemCoupon() {
                                                             buttons: true,
                                                             dangerMode: true,
                                                         })
-                                                            .then( async (willChoose) => {
+                                                            .then(async (willChoose) => {
                                                                 if (willChoose) {
-                                                                    // await dispatch(setStatus(item.idMerchant)).then(async ()=>{
-                                                                    //     await dispatch(getMerchantActive()).then(()=>{
+                                                                    let data = [localStorage.getItem('OrderDetails'), {value: Number(item.value)}]
+                                                                     dispatch(updateCouponPriceAdmin(data))
                                                                     navigate('/my-cart/' + localStorage.getItem('idOrder'))
-                                                                    //     })
-                                                                    // })
+
                                                                     swal("coupon has been selected!", {
                                                                         icon: "success",
                                                                     });
