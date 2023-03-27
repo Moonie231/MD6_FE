@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 
-export default function Coupon () {
+export default function Coupon() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const coupon = useSelector((state) => {
@@ -15,7 +15,7 @@ export default function Coupon () {
     useEffect(() => {
         dispatch(getCoupon())
     }, [])
-    return(
+    return (
         <>
             <div className="container">
                 <div className="xMDeox" style={{
@@ -123,12 +123,12 @@ export default function Coupon () {
                                                     position: 'relative',
                                                     paddingLeft: '55px',
                                                     paddingBottom: 20
-                                                }} >
+                                                }}>
                                                     <div
                                                         className="vc_Card_container vc_my-wallet-page-vouchers_pc vc_my-wallet-page-vouchers_shopeeVoucher"
                                                         style={{
                                                             width: 'var(--vc-card-width,28.375rem)',
-
+                                                            backgroundImage: 'url(https://firebasestorage.googleapis.com/v0/b/blog-825b4.appspot.com/o/images%2Fz4208192846814_eed40058b74e34f87fd4633088f2bbb8.jpg?alt=media&token=76f34cda-68b2-4c36-94be-5ecf8db124ed)'
                                                         }}>
                                                         <div className="vc_Card_card" style={{
                                                             height: 'var(--vc-card-height,7.375rem)',
@@ -176,32 +176,38 @@ export default function Coupon () {
                                                                          overflow: 'hidden',
                                                                          paddingLeft: '0.75rem',
                                                                          position: 'relative'
-                                                                     }} onClick={() => {
-                                                                    swal("Edit Your Coupon", {
-                                                                        content: "input",
-                                                                        inputValue: '132',
-                                                                        showCancelButton: true,
-                                                                        confirmButtonText: 'Lưu',
-                                                                        cancelButtonText: 'Hủy',
-                                                                    })
-                                                                        .then(async (result) => {
-                                                                            if (result) {
-                                                                                let data = [{value: result}, item.idCoupon]
-                                                                                console.log(data)
-                                                                                await dispatch(updateCoupon(data)).then(async () =>{
-                                                                                    await dispatch(getCoupon()).then(() => {
-                                                                                        navigate('/admin/coupon')
-                                                                                    })
+                                                                     }}
+                                                                     onClick={() => {
+                                                                         if (item.role === 2) {
+                                                                             swal('Unauthorized')
+                                                                         } else {
+                                                                             swal("Edit Your Coupon", {
+                                                                                 content: "input",
+                                                                                 inputValue: '132',
+                                                                                 showCancelButton: true,
+                                                                                 confirmButtonText: 'Lưu',
+                                                                                 cancelButtonText: 'Hủy',
+                                                                             })
+                                                                                 .then(async (result) => {
+                                                                                     if (result) {
+                                                                                         let data = [{value: result}, item.idCoupon]
+                                                                                         console.log(data)
+                                                                                         await dispatch(updateCoupon(data)).then(async () => {
+                                                                                             await dispatch(getCoupon()).then(() => {
+                                                                                                 navigate('/admin/coupon')
+                                                                                             })
 
-                                                                                });
-                                                                                swal("Edit ok!", {
-                                                                                    icon: "success",
-                                                                                });
-                                                                            } else {
-                                                                                swal("Your address is safe!");
-                                                                            }
-                                                                        });
-                                                                }}>
+                                                                                         });
+                                                                                         swal("Edit ok!", {
+                                                                                             icon: "success",
+                                                                                         });
+                                                                                     } else {
+                                                                                         swal("Your address is safe!");
+                                                                                     }
+                                                                                 });
+                                                                         }
+
+                                                                     }}>
                                                                     <div className="vc_MainTitle_mainTitle" style={{
                                                                         display: 'flex'
                                                                     }}>
@@ -213,7 +219,8 @@ export default function Coupon () {
                                                                                 fontSize: 'var(--vc-main-title-font-size,1rem)',
                                                                                 fontWeight: 500,
                                                                                 lineHeight: 'var(--vc-main-title-line-height,1.25rem)'
-                                                                            }}>Discount {item.value + "%"}
+                                                                            }}
+                                                                        >Discount {item.value}%
                                                                         </div>
                                                                     </div>
                                                                     <div
@@ -235,37 +242,39 @@ export default function Coupon () {
                                                                             cursor: 'pointer',
                                                                             display: 'inline'
                                                                         }}>
-                                                                            <a className="vc_UseLink_link" style={{
-                                                                                color: '#ee4d2d',
-                                                                                fontSize: '1 rem',
-                                                                                marginRight: '0.75rem',
-                                                                                position: 'relative',
-                                                                                textDecoration: 'none'
-                                                                            }} onClick={() => {
-                                                                                swal({
-                                                                                    title: "Are you sure?",
-                                                                                    text: "Once deleted, you will not be able to recover this imaginary file!",
-                                                                                    icon: "warning",
-                                                                                    buttons: true,
-                                                                                    dangerMode: true,
-                                                                                })
-                                                                                    .then((willDelete) => {
-                                                                                        if (willDelete) {
-                                                                                            swal("Poof! Your imaginary file has been deleted!", {
-                                                                                                icon: "success",
-                                                                                            });
-                                                                                            dispatch(deleteCoupon(item.idCoupon)).then(() => {
-                                                                                                navigate('/admin/coupon')
-                                                                                                dispatch(getCoupon()).then(() => {
-                                                                                                })
+                                                                            {item.role === 1 && <>
+                                                                                <a className="vc_UseLink_link" style={{
+                                                                                    color: 'white',
+                                                                                    fontSize: '1 rem',
+                                                                                    marginRight: '0.75rem',
+                                                                                    position: 'relative',
+                                                                                    textDecoration: 'none'
+                                                                                }} onClick={() => {
+                                                                                    swal({
+                                                                                        title: "Are you sure?",
+                                                                                        text: "Once deleted, you will not be able to recover this imaginary file!",
+                                                                                        icon: "warning",
+                                                                                        buttons: true,
+                                                                                        dangerMode: true,
+                                                                                    })
+                                                                                        .then((willDelete) => {
+                                                                                            if (willDelete) {
+                                                                                                swal("Poof! Your imaginary file has been deleted!", {
+                                                                                                    icon: "success",
+                                                                                                });
+                                                                                                dispatch(deleteCoupon(item.idCoupon)).then(() => {
+                                                                                                    navigate('/admin/coupon')
+                                                                                                    dispatch(getCoupon()).then(() => {
+                                                                                                    })
 
-                                                                                            })
-                                                                                        } else {
-                                                                                            swal("Your imaginary file is safe!");
-                                                                                        }
-                                                                                    });
-                                                                            }}><i
-                                                                                className="fa-solid fa-delete-left"></i></a>
+                                                                                                })
+                                                                                            } else {
+                                                                                                swal("Your imaginary file is safe!");
+                                                                                            }
+                                                                                        });
+                                                                                }}><i
+                                                                                    className="fa-solid fa-delete-left"></i></a>
+                                                                            </>}
                                                                         </div>
                                                                     </div>
 
