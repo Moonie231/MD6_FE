@@ -189,9 +189,9 @@ export default function MyCoupon() {
                                                                             if (result) {
                                                                                 let data = [{value: result}, item.idCoupon]
                                                                                 console.log(data)
-                                                                                await dispatch(updateCoupon(data)).then(async () =>{
+                                                                                await dispatch(updateCoupon(data)).then(async () => {
                                                                                     await dispatch(myCoupon(idMerchant)).then(() => {
-                                                                                        navigate('/merchants/my-coupon/'+idMerchant)
+                                                                                        navigate('/merchants/my-coupon/' + idMerchant)
                                                                                     })
 
                                                                                 });
@@ -278,9 +278,12 @@ export default function MyCoupon() {
                                             </div>
                                         ))}
                                     </div>
-                                    <div>
-                                        <div></div>
-                                    </div>
+                                    {/*<div style={{display:'flex'}}>*/}
+                                    {/*    <div style={{width:'46%', border:'1px solid', height:'200px', margin:'2%'}}>*/}
+                                    {/*        */}
+                                    {/*    </div>*/}
+                                    {/*    <div style={{width:'46%', border:'1px solid', height:'200px', margin:'2%'}}></div>*/}
+                                    {/*</div>*/}
                                 </div>
                             </div>
                         </div>

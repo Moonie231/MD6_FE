@@ -5,8 +5,8 @@ import {
     editOrder,
     findByIdOrder, findOrderByCancelled, findOrderByDelivery, findOrderByPending, findOrderSuccess, getOrder,
     myOrder, orderDetail,
-    orderFood, searchOrder, setStatusCancelled, setStatusConfirm, setStatusSuccess,
-    showCart, updateQuantity
+    orderFood, resetPrice, searchOrder, setStatusCancelled, setStatusConfirm, setStatusSuccess,
+    showCart, updateCouponPriceAdmin, updateCouponPriceMerchant, updateQuantity
 } from "../../service/orderService";
 
 const initialState = {
@@ -60,6 +60,13 @@ const orderSlice = createSlice({
         builder.addCase(setStatusCancelled.fulfilled, (state, action) => {
         });
         builder.addCase(setStatusSuccess.fulfilled, (state, action) => {
+        });
+        builder.addCase(updateCouponPriceMerchant.fulfilled, (state, action) => {
+        });
+        builder.addCase(updateCouponPriceAdmin.fulfilled, (state, action) => {
+        });
+        builder.addCase(resetPrice.fulfilled, (state, action) => {
+            state.order=action.payload
         });
         builder.addCase(searchOrder.fulfilled, (state, action) => {
             state.orders = action.payload;

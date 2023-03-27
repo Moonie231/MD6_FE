@@ -322,9 +322,10 @@ export default function ManagerOrder() {
                                                                      id_Order: item.idOrder,
                                                                      setStatus: 'delivery'
                                                                  }
+                                                                 navigate('/merchants/manager-order/4')
+
                                                                  await dispatch(saveNotification(data))
                                                                  await dispatch(getOrder(idMerchant)).then(() => {
-                                                                     navigate('/merchants/manager-order/' + idMerchant)
                                                                  })
                                                              })
                                                              swal("Your account has been active!", {
@@ -366,9 +367,9 @@ export default function ManagerOrder() {
                                                         await dispatch(saveNotification(data))
                                                         await dispatch(setStatusCancelled(item.idOrder)).then(async () => {
                                                             await dispatch(getOrder(idMerchant)).then(() => {
-                                                                navigate('/merchants/manager-order/' + idMerchant)
                                                             })
                                                         })
+                                                        navigate('/merchants/manager-order/4')
                                                         swal("Your account has been active!", {
                                                             icon: "success",
                                                         });

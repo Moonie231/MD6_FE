@@ -1,21 +1,20 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
-import {createCouponDetail, myCoupon} from "../../service/couponService";
 import swal from "sweetalert";
-import {updateCouponPriceMerchant} from "../../service/orderService";
+import {adminCoupon} from "../../service/couponService";
+import {updateCouponPriceAdmin} from "../../service/orderService";
 
-export default function MerchantCoupon() {
-    const {idMerchant} = useParams()
+export default function SystemCoupon() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const coupon = useSelector((state) => {
-        console.log(state)
+        console.log(state.coupons.coupons)
         return state.coupons.coupons
     })
 
     useEffect(() => {
-        dispatch(myCoupon(idMerchant))
+        dispatch(adminCoupon())
     }, [])
     return (
         <>
@@ -90,16 +89,12 @@ export default function MerchantCoupon() {
                                                             buttons: true,
                                                             dangerMode: true,
                                                         })
-                                                            .then( async (willChoose) => {
+                                                            .then(async (willChoose) => {
                                                                 if (willChoose) {
-                                                                    let infoDetails= {
-                                                                        id_Food:localStorage.getItem('OrderDetails'),
-                                                                        id_Coupon:item.idCoupon
-                                                                    }
-                                                                    dispatch(createCouponDetail(infoDetails))
-                                                                    let data=[localStorage.getItem('OrderDetails'),{value:Number(item.value)}]
-                                                                    dispatch(updateCouponPriceMerchant(data))
-                                                                            navigate('/my-cart/' + localStorage.getItem('idOrder'))
+                                                                    let data = [localStorage.getItem('OrderDetails'), {value: Number(item.value)}]
+                                                                     dispatch(updateCouponPriceAdmin(data))
+                                                                    navigate('/my-cart/' + localStorage.getItem('idOrder'))
+
                                                                     swal("coupon has been selected!", {
                                                                         icon: "success",
                                                                     });
