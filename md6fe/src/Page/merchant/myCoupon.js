@@ -188,7 +188,6 @@ export default function MyCoupon() {
                                                                         .then(async (result) => {
                                                                             if (result) {
                                                                                 let data = [{value: result}, item.idCoupon]
-                                                                                console.log(data)
                                                                                 await dispatch(updateCoupon(data)).then(async () => {
                                                                                     await dispatch(myCoupon(idMerchant)).then(() => {
                                                                                         navigate('/merchants/my-coupon/' + idMerchant)
