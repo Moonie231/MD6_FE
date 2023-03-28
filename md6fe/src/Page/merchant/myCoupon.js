@@ -87,22 +87,28 @@ export default function MyCoupon() {
                                                     cancelButtonText: 'Hủy',
                                                 })
                                                     .then(async (result) => {
-                                                        if (result) {
-                                                            let data = {
-                                                                value: result,
-                                                                id_Merchant: localStorage.getItem('idMerchant')
-                                                            }
-                                                            await dispatch(createCoupon(data)).then(async () => {
-                                                                await dispatch(myCoupon(idMerchant)).then(() => {
-                                                                    navigate('/merchants/my-coupon/' + idMerchant)
-                                                                })
-
-                                                            });
-                                                            swal("Add ok!", {
-                                                                icon: "success",
-                                                            });
+                                                        if (result >= 100) {
+                                                            swal('Coupons range from 1 to 99', {
+                                                                icon: 'warning'
+                                                            })
                                                         } else {
-                                                            swal("No coupon!");
+                                                            if (result) {
+                                                                let data = {
+                                                                    value: result,
+                                                                    id_Merchant: localStorage.getItem('idMerchant')
+                                                                }
+                                                                await dispatch(createCoupon(data)).then(async () => {
+                                                                    await dispatch(myCoupon(idMerchant)).then(() => {
+                                                                        navigate('/merchants/my-coupon/' + idMerchant)
+                                                                    })
+
+                                                                });
+                                                                swal("Add ok!", {
+                                                                    icon: "success",
+                                                                });
+                                                            } else {
+                                                                swal("No coupon!");
+                                                            }
                                                         }
                                                     });
                                             }}>New Coupon
@@ -186,19 +192,26 @@ export default function MyCoupon() {
                                                                         cancelButtonText: 'Hủy',
                                                                     })
                                                                         .then(async (result) => {
-                                                                            if (result) {
-                                                                                let data = [{value: result}, item.idCoupon]
-                                                                                await dispatch(updateCoupon(data)).then(async () => {
-                                                                                    await dispatch(myCoupon(idMerchant)).then(() => {
-                                                                                        navigate('/merchants/my-coupon/' + idMerchant)
-                                                                                    })
-
-                                                                                });
-                                                                                swal("Edit ok!", {
-                                                                                    icon: "success",
-                                                                                });
+                                                                            if (result >= 100) {
+                                                                                swal('Coupons range from 1 to 99', {
+                                                                                    icon: 'warning',
+                                                                                })
                                                                             } else {
-                                                                                swal("Your address is safe!");
+                                                                                if (result) {
+                                                                                    let data = [{value: result}, item.idCoupon]
+                                                                                    console.log(data)
+                                                                                    await dispatch(updateCoupon(data)).then(async () => {
+                                                                                        await dispatch(myCoupon(idMerchant)).then(() => {
+                                                                                            navigate('/merchants/my-coupon/' + idMerchant)
+                                                                                        })
+
+                                                                                    });
+                                                                                    swal("Edit ok!", {
+                                                                                        icon: "success",
+                                                                                    });
+                                                                                } else {
+                                                                                    swal("Your address is safe!");
+                                                                                }
                                                                             }
                                                                         });
                                                                 }}>

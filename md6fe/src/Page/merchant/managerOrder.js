@@ -64,7 +64,7 @@ export default function ManagerOrder() {
 
     return (
         <>
-            <div className="container" style={{backgroundColor: 'lightgray', marginTop: 40}}>
+            <div className="container" style={{backgroundColor: 'white', marginTop: 40}}>
                 <div className="row">
                     <div className="col-lg-3 col-md-6 col-sm-6">
                         <div className="breadcrumb__text">
@@ -320,7 +320,8 @@ export default function ManagerOrder() {
                                                                  let data = {
                                                                      id_User: item.idUser,
                                                                      id_Order: item.idOrder,
-                                                                     setStatus: 'delivery'
+                                                                     setStatus: 'delivery',
+                                                                     time:new Date().toISOString()
                                                                  }
                                                                  navigate('/merchants/manager-order/4')
 
@@ -363,6 +364,7 @@ export default function ManagerOrder() {
                                                             id_User: item.idUser,
                                                             id_Order: item.idOrder,
                                                             setStatus: 'cancelled',
+                                                            time:new Date().toISOString()
                                                         }
                                                         await dispatch(saveNotification(data))
                                                         await dispatch(setStatusCancelled(item.idOrder)).then(async () => {

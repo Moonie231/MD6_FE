@@ -18,7 +18,7 @@ export default function OrderDetail() {
     }, [])
     return (
         <>
-            <div className="container" style={{backgroundColor: 'lightgray'}}>
+            <div className="container" style={{backgroundColor: 'white',marginTop:10,marginBottom:10}}>
                 <div className="xMDeox" style={{
                     position: 'relative',
                     flexGrow: 1,
@@ -31,8 +31,8 @@ export default function OrderDetail() {
                     borderRadius: '0.125rem',
                 }}>
                     <div className="GBcYbK" style={{
-                        minHeight: 740,
-                        background: '#f5f5f5',
+                        minHeight: 200,
+                        background: 'white',
                         boxShadow: '0 0 0 2px #f5f5f5'
                     }}>
 
@@ -48,7 +48,7 @@ export default function OrderDetail() {
                                 justifyContent: 'space-between',
                                 alignItems: 'center'
                             }}><Link to={'/users/my-order/' + localStorage.getItem('idUser')}><h4><i
-                                className="fa-solid fa-arrow-rotate-left"></i> Back</h4></Link>
+                                className="fa-solid fa-arrow-left"></i> Back</h4></Link>
                                 <div className="K8h4Ws" style={{
                                     color: 'rgba(0,0,0,.54)'
                                 }}>

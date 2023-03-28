@@ -33,7 +33,7 @@ const foodsSlice = createSlice({
             })
 
             builder.addCase(deleteFood.fulfilled, (state, action) => {
-                state.myFood.splice(action.payload)
+                state.myFood = action.payload;
             })
             builder.addCase(editFood.fulfilled, (state, action) => {
                 for (let i =0; i<state.foods.length; i++) {

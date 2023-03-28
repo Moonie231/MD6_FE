@@ -31,7 +31,6 @@ export default function Home() {
     return (
         <>
             <body>
-
             <div className="categories">
                 <div className="container">
                     <div className="row">
