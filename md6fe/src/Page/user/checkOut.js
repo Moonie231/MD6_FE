@@ -45,6 +45,7 @@ export default function Checkout(){
                 id_User:localStorage.getItem('idUser'),
                 id_Order:id,
                 setStatus:'pending',
+                time:new Date().toISOString()
             }
              dispatch(saveNotification(data))
             dispatch(updateQuantity(id))

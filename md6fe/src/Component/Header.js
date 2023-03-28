@@ -141,7 +141,7 @@ export default function Header() {
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li onMouseEnter={handleMouseEnter} style={{width: 300}}>
+                                        <li onMouseEnter={handleMouseEnter} style={{width: 400}}>
                                             <i className="fa-regular fa-bell">
                                                 {countUser !== undefined && countUser > 0 && <>
                                                     <span className="notification-count" style={{color: "red", fontSize: 12}}>
@@ -160,9 +160,9 @@ export default function Header() {
                                                     {notificationsMerchant.map((item) => (
                                                         <Link to={'/merchants/orderDetail/' + item.idOrder}>
                                                             <li style={{background: "white", color: 'black'}}><i
-                                                                className="fa-solid fa-circle"></i> Order whose id
-                                                                is {item.idOrder} of {item.email} have
-                                                                been {item.setStatus} </li>
+                                                                className="fa-solid fa-circle"></i>{new Date(item.time).toLocaleString()} : Order whose id  is {item.idOrder} of {item.email} have
+                                                                been {item.setStatus}
+                                                                </li>
                                                         </Link>
                                                     ))}
                                                 </>}
@@ -170,7 +170,7 @@ export default function Header() {
                                                     {notificationsUser.map((item) => (
                                                         <Link to={'/users/orderDetail/' + item.idOrder}>
                                                             <li style={{background: "white", color: 'black'}}><i
-                                                                className="fa-solid fa-circle"></i> Order whose id
+                                                                className="fa-solid fa-circle"></i>{new Date(item.time).toLocaleString()} : Order whose id
                                                                 is {item.idOrder} of Store {item.nameMerchant} have
                                                                 been {item.setStatus} </li>
                                                         </Link>

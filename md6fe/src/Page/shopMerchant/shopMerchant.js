@@ -74,8 +74,9 @@ export default function ShopMerchant() {
                                                                   swal("Poof! Your imaginary file has been deleted!", {
                                                                       icon: "success",
                                                                   });
-                                                                  dispatch(deleteFood(item.idFood)).then(() => {
-                                                                      navigate('/')
+                                                                  let data=[item.idFood,localStorage.getItem("idMerchant")]
+                                                                  dispatch(deleteFood(data)).then(() => {
+                                                                      navigate('/merchants/my-shop/'+localStorage.getItem('idMerchant'))
                                                                       dispatch(getFood()).then(() => {
                                                                       })
 

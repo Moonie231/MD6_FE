@@ -41,8 +41,9 @@ export const addFood = createAsyncThunk(
 export const deleteFood = createAsyncThunk(
     'foods/removeFood',
     async (data)=>{
-        const res = await customAxios.delete('foods/'+data);
-        return data
+          await customAxios.delete('foods/'+data[0]);
+        const res = await customAxios.get('foods/my-foods/'+data[1]);
+        return res.data;
     }
 )
 export const editFood = createAsyncThunk(

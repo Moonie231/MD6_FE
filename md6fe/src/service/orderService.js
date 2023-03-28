@@ -163,7 +163,7 @@ export const countOrderBySuccess = createAsyncThunk(
 export const countOrderByCancelled = createAsyncThunk(
     'order/CountOrderByCancelled',
     async (data) => {
-        const res = await customAxios.get('orders/coupon-price-admin/' + data)
+        const res = await customAxios.get('orders/count-order-cancelled/' + data)
         return res.data
     })
 export const updateCouponPriceMerchant = createAsyncThunk(

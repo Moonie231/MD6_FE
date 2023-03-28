@@ -29,7 +29,7 @@ export default function MyOrder() {
     }, [])
     return (
         <>
-            <div className="container" style={{backgroundColor: 'lightgray'}}>
+            <div className="container" style={{backgroundColor: 'white'}}>
                 {order!==undefined && order.map((item, index) => (
                     <div key={index} className="" style={{
                         margin: '12px 0',
@@ -136,6 +136,7 @@ export default function MyOrder() {
                                                         id_User:localStorage.getItem('idUser'),
                                                         id_Order:item.idOrder,
                                                         setStatus:'cancelled',
+                                                        time:new Date().toISOString()
                                                     }
                                                     await dispatch(saveNotification(data))
                                                     await dispatch(setStatusCancelled(item.idOrder)).then(async () => {
@@ -179,6 +180,8 @@ export default function MyOrder() {
                                                         id_User:localStorage.getItem('idUser'),
                                                         id_Order:item.idOrder,
                                                         setStatus:'success',
+                                                        time:new Date().toISOString(),
+
                                                     }
                                                     await dispatch(saveNotification(data))
                                                     await dispatch(setStatusSuccess(item.idOrder)).then(async () => {

@@ -4,7 +4,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate, useParams} from "react-router-dom";
 import {ErrorMessage, Field, Form, Formik, useFormik} from "formik";
-import {addFood} from "../../service/foodsService";
+import {addFood, myFood} from "../../service/foodsService";
 import {getCategories} from "../../service/categoryService";
 import swal from "sweetalert";
 import * as Yup from "yup";
@@ -34,7 +34,9 @@ export default function AddFood() {
     const handleAdd = async (values) => {
         let data = {...values};
         dispatch(addFood(data));
-        navigate('/merchants/my-shop/'+localStorage.getItem('idMerchant'))
+        dispatch(myFood(localStorage.getItem('idMerchant'))).then(() =>{
+            navigate('/merchants/my-shop/'+localStorage.getItem('idMerchant'))
+        })
     }
     const categories = useSelector((state) => {
         return state.categories.categories;
@@ -46,16 +48,8 @@ export default function AddFood() {
     const handleChange = (e) => {
         for (let i = 0; i < e.target.files.length; i++) {
             const newImage = e.target.files[i];
-            if (!newImage) {
-                console.log('image is required');
-                return false;
-            }
-            if (!newImage.name.match(/\.(jpg|jpeg|png|gif)$/)) {
-                console.log('select valid image.');
-                return false;
-                newImage["id"] = Math.random();
-                setImages((prevState) => [...prevState, newImage]);
-            }
+            newImage["id"] = Math.random();
+            setImages((prevState) => [...prevState, newImage]);
         }
     };
 
@@ -97,121 +91,120 @@ export default function AddFood() {
 
     return (
         <>
-            <div className="container" style={{backgroundColor: 'lightgray', marginTop: 40}}>
-            <div className="row">
-                <div className="container-xxl py-5">
-                    <div className="container">
-                        <div className="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s"
-                             style={{maxWidth: "600px"}}>
-                            <h2 className="mb-3">Add Food</h2>
-                        </div>
-                        <div className="row g-4">
-                            <div className="col-md-4 wow fadeInUp" data-wow-delay="0.1s" style={{height:360,marginTop:30}}>
-                                <img className="position-relative rounded w-100 h-100" src={urls[0]} alt={urls[0]}/>
+            <div className="container" style={{marginTop: 40}}>
+                <div className="row">
+                    <div className="container-xxl py-5">
+                        <div className="container">
+                            <div className="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s"
+                                 style={{maxWidth: "600px"}}>
                             </div>
-                            <div className="col-md-8">
-                                <div className="wow fadeInUp" data-wow-delay="0.5s">
-                                    <Formik
-                                        initialValues={{
-                                            nameFood: "",
-                                            description: "",
-                                            price: "",
-                                            quantityFood: "",
-                                            id_Category: "",
-                                            id_Merchant: localStorage.getItem('idMerchant')
-                                        }}
-                                         validationSchema={validateSchema}
-                                        onSubmit={(values) => {
-                                            values.img = urls[0]
-                                            handleAdd(values);
-                                        }}
-                                    >
-                                        <Form>
-                                            <div className="row g-3">
-                                                <div className="col-12">
-                                                    <div className="form-floating">
-                                                        <label htmlFor="nameFood">NameFood</label>
-                                                        <Field type="text" class="form-control" name={'nameFood'}
-                                                               id="nameFood" placeholder=""/>
-                                                        <alert className="text-danger">
-                                                            <ErrorMessage name={"nameFood"}></ErrorMessage>
-                                                        </alert>
+                            <div className="row g-4">
+                                <div className="col-md-4 wow fadeInUp" data-wow-delay="0.1s" style={{height:360,marginTop:30}}>
+                                    <img className="position-relative rounded w-100 h-100" src={urls[0]} alt={urls[0]}/>
+                                </div>
+                                <div className="col-md-8">
+                                    <div className="wow fadeInUp" data-wow-delay="0.5s">
+                                        <Formik
+                                            initialValues={{
+                                                nameFood: "",
+                                                description: "",
+                                                price: "",
+                                                quantityFood: "",
+                                                id_Category: "",
+                                                id_Merchant: localStorage.getItem('idMerchant')
+                                            }}
+                                            validationSchema={validateSchema}
+                                            onSubmit={(values) => {
+                                                values.img = urls[0]
+                                                handleAdd(values);
+                                            }}
+                                        >
+                                            <Form>
+                                                <div className="row g-3">
+                                                    <div className="col-12">
+                                                        <div className="form-floating">
+                                                            <label htmlFor="nameFood">NameFood</label>
+                                                            <Field type="text" class="form-control" name={'nameFood'}
+                                                                   id="nameFood" placeholder=""/>
+                                                            <alert className="text-danger">
+                                                                <ErrorMessage name={"nameFood"}></ErrorMessage>
+                                                            </alert>
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-12">
+                                                        <div className="form-floating">
+                                                            <label htmlFor="price">Price</label>
+                                                            <Field type="number" class="form-control" name={'price'}
+                                                                   id="price" placeholder=""/>
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-12">
+                                                        <div className="form-floating">
+                                                            <label htmlFor="description">Description</label>
+                                                            <Field as={'textarea'} class="form-control" name={'description'}
+                                                                   id="description" placeholder=""
+                                                                   style={{height: '150px'}}/>
+                                                            <alert className="text-danger">
+                                                                <ErrorMessage name={"description"}></ErrorMessage>
+                                                            </alert>
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-12">
+                                                        <div className="form-floating">
+                                                            <label htmlFor="quantityFood">Quantity Food</label>
+                                                            <Field type="number" class="form-control" name={'quantityFood'}
+                                                                   id="quantityFood" placeholder=""/>
+                                                        </div>
+                                                    </div>
+                                                    <div className="col-12">
+                                                        <label htmlFor="category">Category</label>
+                                                        <Field
+                                                            as="select"
+                                                            name={"id_Category"}
+                                                            className="form-control"
+                                                            id="id_Category"
+                                                        >
+                                                            <option selected>Category</option>
+                                                            {categories !== undefined &&
+                                                                categories.map((item, index) => (
+                                                                    <option value={item.idCategory}>
+                                                                        {item.nameCategory}
+                                                                    </option>
+                                                                ))}
+                                                        </Field>
+                                                    </div>
+                                                    <div className="col-md-6" style={{height:-100}}>
+                                                        <label htmlFor="exampleFormControlFile1">
+                                                        </label>
+                                                        <input
+                                                            type="file"
+                                                            className="form-control-file"
+                                                            id="exampleFormControlFile1"
+                                                            multiple
+                                                            onChange={handleChange}
+                                                        />
+                                                    </div>
+                                                    <div className="col-md-6" style={{marginTop: 20}}>
+                                                        <button
+                                                            type="button"
+                                                            className="btn btn-info"
+                                                            onClick={() => dispatch(handleUpload)}
+                                                        >
+                                                            Up
+                                                        </button>
+                                                    </div>
+                                                    <div className="col-12" style={{marginTop: 10}}>
+                                                        <button className="btn btn-info" type="submit">Add</button>
                                                     </div>
                                                 </div>
-                                                <div className="col-12">
-                                                    <div className="form-floating">
-                                                        <label htmlFor="price">Price</label>
-                                                        <Field type="number" class="form-control" name={'price'}
-                                                               id="price" placeholder=""/>
-                                                    </div>
-                                                </div>
-                                                <div className="col-12">
-                                                    <div className="form-floating">
-                                                        <label htmlFor="description">Description</label>
-                                                        <Field as={'textarea'} class="form-control" name={'description'}
-                                                               id="description" placeholder=""
-                                                               style={{height: '150px'}}/>
-                                                        <alert className="text-danger">
-                                                            <ErrorMessage name={"description"}></ErrorMessage>
-                                                        </alert>
-                                                    </div>
-                                                </div>
-                                                <div className="col-12">
-                                                    <div className="form-floating">
-                                                        <label htmlFor="quantityFood">Quantity Food</label>
-                                                        <Field type="number" class="form-control" name={'quantityFood'}
-                                                               id="quantityFood" placeholder=""/>
-                                                    </div>
-                                                </div>
-                                                <div className="col-12">
-                                                    <label htmlFor="category">Category</label>
-                                                    <Field
-                                                        as="select"
-                                                        name={"id_Category"}
-                                                        className="form-control"
-                                                        id="id_Category"
-                                                    >
-                                                        <option selected>Category</option>
-                                                        {categories !== undefined &&
-                                                            categories.map((item, index) => (
-                                                                <option value={item.idCategory}>
-                                                                    {item.nameCategory}
-                                                                </option>
-                                                            ))}
-                                                    </Field>
-                                                </div>
-                                                <div className="col-md-6" style={{height:-100}}>
-                                                    <label htmlFor="exampleFormControlFile1">
-                                                    </label>
-                                                    <input
-                                                        type="file"
-                                                        className="form-control-file"
-                                                        id="exampleFormControlFile1"
-                                                        multiple
-                                                        onChange={handleChange}
-                                                    />
-                                                </div>
-                                                <div className="col-md-6" style={{marginTop: 30}}>
-                                                    <button
-                                                        type="button"
-                                                        className="btn btn-info"
-                                                        onClick={() => dispatch(handleUpload)}
-                                                    >
-                                                        Up
-                                                    </button>
-                                                </div>
-                                                <div className="col-12" style={{marginTop: 10}}>
-                                                    <button className="btn btn-info" type="submit">Add</button>
-                                                </div>
-                                            </div>
-                                        </Form>
-                                    </Formik>
+                                            </Form>
+                                        </Formik>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
         </>
     )
